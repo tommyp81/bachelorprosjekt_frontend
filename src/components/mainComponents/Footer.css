@@ -1,0 +1,15 @@
+.Footer {
+    background-color: #0b2c63;
+    color: white;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 15%;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+.nav-active {
+    font-weight: bold;
+}

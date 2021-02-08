@@ -1,0 +1,89 @@
+body {
+}
+
+@media (max-width: 1024px) {
+    body {
+        background-color: #0b2c63;
+    }
+  }
+
+.Login {
+    top: 20%;
+    position: absolute;
+}
+
+@media (max-width: 1024px) {
+    .con2 {
+        display:block;
+        margin:auto;
+    }
+  }
+
+.con2 {
+    margin-left: 50px;
+    float: right;
+    background-color: #0b2c63;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    align-content: center;
+    width: 30rem;
+    height: 34rem;
+}
+
+.con2 h2 {
+    padding-top: 80px;
+    font-size: 2.7em;
+}
+
+.con2 form {
+    padding-top: 60px;
+    padding-bottom: 30px;
+    margin: auto;
+    align-content: center;
+    width: 60%;
+}
+
+.con2 button {
+    width: 10rem;
+    margin-top: 20px;
+}
+
+.con2 p {
+}
+
+@media (max-width: 1024px) {
+    .con1 {
+    }
+  }
+
+
+.con1 {
+    margin-right: 50px;
+    width: 29rem;
+    float: left;
+}
+
+.con1 .logo {
+    max-width: 100%;
+    width: 325px;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+.con1 h1 {
+    font-size: 3em;
+    font-weight: bolder;
+}
+
+.con1 p {
+    font-size: 1.5em;
+    text-align: right;
+}
+
+@media (max-width: 1024px) {
+    .con1 {
+      display: none !important;
+    }
+  }
