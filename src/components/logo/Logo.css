@@ -1,0 +1,15 @@
+.Logo {
+  background-color: white;
+  height: 5%;
+  position: fixed;
+  margin-left: 30px;
+  margin-right: 10px;
+  display: inline;
+  padding: 1px;
+  left: 0;
+  object-fit: cover;
+}
+
+.Logo img {
+  height: 100%;
+}
