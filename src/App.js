@@ -18,6 +18,9 @@ import Forum from "./components/forumComponents/Forum.js";
 import NewComment from "./components/forumComponents/NewComment.js";
 import Post from "./components/forumComponents/Post.js";
 
+//add npm i styled-components
+import styled from "styled-components";
+import { Navbar } from "./components/navigation/navbar/navbar";
 
 // https://webforum.azurewebsites.net/posts
 // https://webforum.azurewebsites.net/answers
@@ -92,6 +95,18 @@ const App = () => {
     return data
   }
 
+
+  const AppContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(15, 15, 15, 1);
+  color: #fff;
+`;
+
+
   //Putt komponentene hver for seg i diven fpr nå. De er ikke skapt for å brukes sammen helt enda :D
   //Akkurat nå er det kun post-komponenten som er synlig!
   return (
@@ -105,6 +120,11 @@ const App = () => {
         <Home />
       } */}
       <div className="App">
+        {/* related to the navbar and hamburgerMenu*/}
+        <AppContainer>
+          <Navbar />
+        </AppContainer>
+
         <Switch>
           <Route path="/" render={props => <Login {...props} logIn = {logIn} />} exact={true} />
           <Route path="/hjem" component={Home} />

@@ -23,7 +23,7 @@ function Login({ logIn }) {
 
     const onLoginSubmit = () => {
       console.log("HEI")
-      history.push("/hjem")
+      history.push("./hjem")
       logIn()
     }
 
