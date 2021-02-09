@@ -1,4 +1,3 @@
-//
 import React from 'react';
 import blogo from '../../assets/images/BadmintonClubLogo.png';
 import './Logo.css';

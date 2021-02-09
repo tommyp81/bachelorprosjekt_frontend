@@ -1,4 +1,4 @@
-//codes in Here are related to the pop-up menu .
+//codes in Here are related to the pop-up menu.
 
 //npm i --save @fortawesome/free-solid-svg-icons
 //npm i --save @fortawesome/fontawesome-svg-core
