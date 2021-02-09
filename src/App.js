@@ -120,7 +120,7 @@ const App = () => {
         <Home />
       } */}
       <div className="App">
-        {/* related to the navbar and hamburgerMenu*/}
+        {/* related to the navigationbar*/}
         <AppContainer>
           <Navbar />
         </AppContainer>
