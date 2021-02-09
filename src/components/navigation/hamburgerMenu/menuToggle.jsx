@@ -1,4 +1,4 @@
-//the code here related to the hamburger button
+//the code here related to the hamburger buttonn
 
 import { motion } from "framer-motion";
 import React from "react";

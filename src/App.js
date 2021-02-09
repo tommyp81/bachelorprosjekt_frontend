@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from "react-bootstrap";
 import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
 
-//Importing main components
+//Importing main components.
 
 //Header og footer kan dere bare ignorere for nå
 import Footer from "./components/mainComponents/Footer.js";

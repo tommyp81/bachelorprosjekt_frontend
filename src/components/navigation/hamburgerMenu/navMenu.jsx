@@ -1,4 +1,4 @@
-//nav menu (home,forum) on the pop-up box of hamburgerMenu
+//nav menu (home,forum) on the pop-up box of hamburgerMenu.
 //npm install framer-motion --save
 import { motion } from "framer-motion";
 import React from "react";
