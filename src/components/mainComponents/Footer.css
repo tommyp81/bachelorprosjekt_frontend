@@ -1,14 +1,15 @@
 .Footer {
     background-color: #0b2c63;
     color: white;
+    position: absolute;
     left: 0;
     bottom: 0;
     height: 15%;
-    padding-top: 20px;
-    font-size: 14px;
-    padding-right: 0;
-    padding-left: 0;
-    margin-top: 90px;
-    margin-right: auto;
-    margin-left: auto;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+.nav-active {
+    font-weight: bold;
 }
