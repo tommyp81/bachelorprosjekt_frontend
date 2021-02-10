@@ -1,0 +1,41 @@
+.Forum .top {
+    padding-bottom: 20px;
+    font-size: 1.1vw;
+}
+
+@media (max-width: 1024px) {
+    .Forum .top {
+        font-size: 14px;
+    }
+
+    .Forum .top h1 {
+        font-size: 30px !important;
+    }
+}
+
+.Forum .top h1 {
+    font-size: 2.8vw;
+}
+
+
+
+.Forum .main {
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 10px;
+    margin-top: 30px;
+}
+
+@media (max-width: 1024px) {
+.Forum .main {
+    border-radius: 0px;
+    border: none;
+    border-top: 1px solid rgb(209, 209, 209);;
+}
+}
+
+.Forum .card {
+    border: none;
+    border-radius: 0px;
+
+    border-bottom: 1px solid rgb(209, 209, 209);
+}

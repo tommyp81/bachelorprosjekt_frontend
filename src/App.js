@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from "react-bootstrap";
-import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
+//import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 //Importing main components
-
 //Header og footer kan dere bare ignorere for nå
 import Footer from "./components/mainComponents/Footer.js";
 import Header from "./components/mainComponents/Header.js";
@@ -16,125 +15,53 @@ import Home from "./components/homeComponents/Home.js";
 //Bruk disse hver for seg!
 import Forum from "./components/forumComponents/Forum.js";
 import NewComment from "./components/forumComponents/NewComment.js";
+import NewPost from "./components/forumComponents/NewPost.js";
 import Post from "./components/forumComponents/Post.js";
+import ForumCategories from "./components/forumComponents/ForumCategories.js";
 
-//add npm i styled-components
-import styled from "styled-components";
-import { Navbar } from "./components/navigation/navbar/navbar";
+//Importing infocomponents
+import Info from "./components/infoComponents/Info.js";
 
-// https://webforum.azurewebsites.net/posts
-// https://webforum.azurewebsites.net/answers
-// https://webforum.azurewebsites.net/users
-
-const App = () => {
+class App extends Component {
  
-  // state = {
-  //   post: [],
-  //   comment: [],
-  //   user: []
-  // }
-
-  const [post, setPost] = useState([])
-  const [comment, setComment] = useState([])
-  const [users, setUsers] = useState([])
-
-  // const [user, setUser] = useState("")
-  const [loggedIn, setLoggedIn] = useState(false)
-
-
-  
-
-  const logIn = () => {
-
-    
-
-    setLoggedIn(true);
-    console.log(loggedIn)
-    
+  state = {
+    post: [],
+    comment: []
   }
 
-  useEffect(() => {
-    const getPosts = async () => {
-      const postsFromServer = await fetchPosts()
-      setPost(postsFromServer)
+  componentDidMount() {
+    fetch("https://webforum.azurewebsites.net/posts")
+    .then(res => res.json())
+    .then((data) => {
+      this.setState({ post: data })
+    })
+    .catch(console.log)
+
+    fetch("https://webforum.azurewebsites.net/answers")
+    .then(res => res.json())
+    .then((data) => {
+      this.setState({comment: data})
     }
-    getPosts()
-  }, [post])
-
-  useEffect(() => {
-    const getComments = async () => {
-      const commentsFromServer = await fetchComments()
-      setComment(commentsFromServer)
-    }
-    getComments()
-  }, [comment])
-
-  useEffect(() => {
-    const getUsers = async () => {
-      const usersFromServer = await fetchUsers()
-      setUsers(usersFromServer)
-    }
-    getUsers()
-  }, [users])
-
-  const fetchPosts = async () => {
-    const res = await fetch("https://localhost:44387/Posts")
-    const data = await res.json()
-    return data
+    )
   }
-
-  const fetchComments = async () => {
-    const res = await fetch("https://localhost:44387/answers")
-    const data = await res.json()
-    return data
-  }
-
-  const fetchUsers = async () => {
-    const res = await fetch("https://localhost:44387/users")
-    const data = await res.json()
-    return data
-  }
-
-
-  const AppContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: rgba(15, 15, 15, 1);
-  color: #fff;
-`;
-
 
   //Putt komponentene hver for seg i diven fpr nå. De er ikke skapt for å brukes sammen helt enda :D
   //Akkurat nå er det kun post-komponenten som er synlig!
-  return (
-    <BrowserRouter>
-      {/* {!loggedIn ? <Login logIn={logIn} /> : 
-      // <Post 
-      //   users = {users}
-      //   post = {post} 
-      //   comment = {comment}
-      //   />
-        <Home />
-      } */}
+  render() {
+    return (
       <div className="App">
-        {/* related to the navigationbar.*/}
-        <AppContainer>
-          <Navbar />
-        </AppContainer>
-
-        <Switch>
-          <Route path="/" render={props => <Login {...props} logIn = {logIn} />} exact={true} />
-          <Route path="/hjem" component={Home} />
-          <Route exact from="/forum" render={props => <Post {...props} users = {users} post = {post} comment = {comment}/>} />
-
-        </Switch>
-      </div>
-    </BrowserRouter>   
-    
-  )
+        {/*
+        <Post 
+        post = {this.state.post} 
+        comment = {this.state.comment}
+        />
+        */}
+        <Header />
+          <NewPost />
+        <Footer />
+        </div>
+    )
+  }
 }
 
 export default App;
