@@ -1,6 +1,5 @@
 import React from "react";
 import { Image } from "react-bootstrap";
-// import logo from "C:/Users/Tobia/kunnskapsportalen_badminton/src/nbf_logo_farger-02.png";
 
 import "./Login.css";
 
