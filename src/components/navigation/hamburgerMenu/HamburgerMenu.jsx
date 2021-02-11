@@ -11,9 +11,10 @@ import { motion } from "framer-motion";
 import React  from "react";
 import { useState } from "react";
 import styled from "styled-components";
-import Login from "../../loginComponents/Login";
+import BLogin from "../../loginComponents/Login";
 import { MenuToggle } from "./menuToggle";
 import { NavMenu } from "./navMenu";
+
 
 
 
@@ -89,7 +90,10 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 1em;
+  }
 `;
+
+
 
 //animation for opening and closing the HamburgerMenu.
 //we have to have translatex in the manuContainer in the css-style
@@ -124,6 +128,7 @@ const commonVariants = {
   },
 };
 
+
 const commonTransition = { type: "spring", duration: 0.05 };
 
 export function HamburgerMenu(props) {
@@ -152,7 +157,8 @@ export function HamburgerMenu(props) {
             <IconContainer>
               <FontAwesomeIcon icon={faUserCircle} />
             </IconContainer>
-            Logg Inn
+              <a href="/Login" component={BLogin}>Logg Inn</a>
+             
           </LoginButton>
           <LoginButton
             initial={false}

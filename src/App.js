@@ -120,15 +120,19 @@ const App = () => {
         <Home />
       } */}
       <div className="App">
+              
+        <Switch>
+          <Route path="/Login" render={props => <Login {...props} logIn = {logIn} />} exact={true} />
+        </Switch>
+
         {/* related to the navigationbar.*/}
         <AppContainer>
           <Navbar />
         </AppContainer>
-
         <Switch>
-          <Route path="/" render={props => <Login {...props} logIn = {logIn} />} exact={true} />
-          <Route path="/hjem" component={Home} />
-          <Route exact from="/forum" render={props => <Post {...props} users = {users} post = {post} comment = {comment}/>} />
+    
+          <Route path="/" exact component={Home} />
+          <Route exact from="/Forum" render={props => <Post {...props} users = {users} post = {post} comment = {comment}/>} />
 
         </Switch>
       </div>
