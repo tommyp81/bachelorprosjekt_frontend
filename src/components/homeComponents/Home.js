@@ -3,10 +3,11 @@ import { Container, Row, Col } from "react-bootstrap";
 import Feed from "./Feed.js";
 import "./Home.css";
 import Footer from '../mainComponents/Footer'
-import Header from '../mainComponents/Header'
+//import Header from '../mainComponents/Header'
 
 
 import { Link } from 'react-router-dom'
+import { Navbar } from "../navigation/navbar/navbar.jsx";
 
 class Home extends Component {
 
@@ -26,7 +27,8 @@ class Home extends Component {
     render () {
     return (
       <div className="Home">
-        <Header />
+       
+        
           <Container>
               <Row><h5>Siste poster i forumet</h5></Row>
               <Row xs={1} sm={1} lg={2}>

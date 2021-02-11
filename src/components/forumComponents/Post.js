@@ -2,9 +2,10 @@ import React from 'react'
 import { Card } from "react-bootstrap";
 import moment from 'moment'
 
-import Header from '../mainComponents/Header'
+//import Header from '../mainComponents/Header'
 
 import { Container } from 'react-bootstrap'
+import { Navbar } from '../navigation/navbar/navbar';
 
 const Post = ({ post, comment, users }) => {
 
@@ -12,7 +13,7 @@ const Post = ({ post, comment, users }) => {
   // user.filter(u => (u.id === filteredComment.userId))[0].username
   return (
     <Container style={{display: 'flex', flexDirection: 'column'}}>
-      <Header />
+      <Navbar />
       {post.map((post, i) => (
         <Card key={i}>
           <Card.Header>{users && users.length && users.find(u => (u.id === post.userId)).username} - {moment(post.date).calendar()}</Card.Header>
