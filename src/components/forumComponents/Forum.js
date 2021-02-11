@@ -3,11 +3,40 @@ import { Card, Container } from "react-bootstrap";
 import ForumCategories from "./ForumCategories.js";
 import NewPost from "./NewPost.js"
 import "./Forum.css";
+import { Component } from 'react';
 
-const Forum = ({ post }) => {
+class Forum extends Component {
+
+  state = {
+    topics: [],
+    subtopics: []
+    }
+
+componentDidMount() {
+fetch("https://webforum.azurewebsites.net/Topics")
+.then(res => res.json())
+.then((data) => {
+this.setState({ topics: data })
+})
+.catch(console.log)
+}
+
+componentDidMount() {
+fetch("https://webforum.azurewebsites.net/SubTopics")
+.then(res => res.json())
+.then((data) => {
+this.setState({ subtopics: data })
+})
+.catch(console.log)
+}
+
+  render () {
     return (
       <div className="Forum">
-        <ForumCategories />
+        <ForumCategories 
+        topics = {this.state.topics}
+        subtopics = {this.state.subtopics}
+        />
         <Container className="top">
           <h1>Underkategori</h1>
           <div className="float-left">
@@ -68,6 +97,7 @@ const Forum = ({ post }) => {
             </Container>
                 </div>
         );
+    }
 }
   
 export default Forum;
