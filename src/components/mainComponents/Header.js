@@ -2,7 +2,7 @@ import { Nav, Navbar, Container } from "react-bootstrap";
 import React from "react";
 import "react-bootstrap";
 import "./Header.css";
-import logo from "../../assets/images/nbf_logo_farger-02.png";
+import logo from "../../assets/images/BadmintonClubLogo.png";
 
 function Header() {
     return (
