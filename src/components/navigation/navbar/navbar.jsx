@@ -4,7 +4,7 @@ import { HamburgerMenu } from "../hamburgerMenu/HamburgerMenu";
 import Brand from '../../brand/Brand';
 import Logo from '../../logo/Logo';  
 
-// row-revers to have hamburger icon at the right side..
+// row-revers to have hamburger icon at the right side.
 const NavbarContainer = styled.div`
   width: 100%;
   height: 80px;
