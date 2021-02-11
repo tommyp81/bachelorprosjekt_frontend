@@ -1,6 +1,5 @@
 body {
     background-color: white;
-
 }
 
 .Home {
@@ -16,4 +15,12 @@ body {
 
 .forumcon {
     text-align: left;
+}
+
+.forumcon h5, .infocon h5 {
+    color: black;
+}
+
+.textcol a:hover {
+    text-decoration: none;
 }

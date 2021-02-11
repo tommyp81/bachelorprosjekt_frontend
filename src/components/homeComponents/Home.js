@@ -44,7 +44,7 @@ class Home extends Component {
                   <Container className="forumcon">
                   <h1>Slå av en prat</h1>
                   <p>I forumet finner du mange likesinnede mennesker som ønsker å dele kunnskap, opplevelser og erfaringer fra badmintonsporten.</p>
-                  <Link to="/forum">Til forumet</Link>
+                  <Link to="/forum"><h5>Til forumet</h5></Link>
                   </Container>
                 </Col>
               </Row>
