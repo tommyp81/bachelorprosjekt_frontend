@@ -22,7 +22,7 @@ function validateForm() {
         + Ny post i Underkategori
         </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>Ny post i Underkategori</Modal.Title>
         </Modal.Header>
@@ -32,7 +32,7 @@ function validateForm() {
 
             <Form.Control 
                 as="textarea" 
-                rows={3}
+                rows={5}
                 name="newPost"
                 value={newPost}
                 onChange={(e) => setNewPost(e.target.value)}
