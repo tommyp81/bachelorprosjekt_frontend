@@ -21,6 +21,7 @@ import Post from "./components/forumComponents/Post.js";
 //add npm i styled-components
 import styled from "styled-components";
 import { Navbar } from "./components/navigation/navbar/navbar";
+import Feed from './components/homeComponents/Feed.js';
 
 // https://webforum.azurewebsites.net/posts
 // https://webforum.azurewebsites.net/answers
@@ -120,7 +121,7 @@ const App = () => {
         <Home />
       } */}
       <div className="App">
-              
+        {/* Login is up here becuase it does not have navbar*/}
         <Switch>
           <Route path="/Login" render={props => <Login {...props} logIn = {logIn} />} exact={true} />
         </Switch>
@@ -135,6 +136,7 @@ const App = () => {
           <Route exact from="/Forum" render={props => <Post {...props} users = {users} post = {post} comment = {comment}/>} />
 
         </Switch>
+       
       </div>
     </BrowserRouter>   
     

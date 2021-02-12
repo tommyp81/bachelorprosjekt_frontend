@@ -5,7 +5,7 @@ import WelcomeLogo from './WelcomeLogo';
 
 import { useHistory } from 'react-router-dom'
 
-// import "./Login.css";
+import "./Login.css";
 
 function Login({ logIn }) {
     const [email, setEmail] = useState("");
