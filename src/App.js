@@ -26,6 +26,16 @@ import { Navbar } from "./components/navigation/navbar/navbar";
 // https://webforum.azurewebsites.net/answers
 // https://webforum.azurewebsites.net/users
 
+const AppContainer = styled.div`
+width: 100%;
+height: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+background-color: rgba(15, 15, 15, 1);
+color: #fff;
+`;
+
 const App = () => {
  
   // state = {
@@ -34,10 +44,6 @@ const App = () => {
   //   user: []
   // }
 
-  const [post, setPost] = useState([])
-  const [comment, setComment] = useState([])
-  const [users, setUsers] = useState([])
-
   // const [user, setUser] = useState("")
   const [loggedIn, setLoggedIn] = useState(false)
 
@@ -45,85 +51,16 @@ const App = () => {
   
 
   const logIn = () => {
-
-    
-
     setLoggedIn(true);
     console.log(loggedIn)
-    
   }
-
-  useEffect(() => {
-    const getPosts = async () => {
-      const postsFromServer = await fetchPosts()
-      setPost(postsFromServer)
-    }
-    getPosts()
-  }, [post])
-
-  useEffect(() => {
-    const getComments = async () => {
-      const commentsFromServer = await fetchComments()
-      setComment(commentsFromServer)
-    }
-    getComments()
-  }, [comment])
-
-  useEffect(() => {
-    const getUsers = async () => {
-      const usersFromServer = await fetchUsers()
-      setUsers(usersFromServer)
-    }
-    getUsers()
-  }, [users])
-
-  const fetchPosts = async () => {
-    const res = await fetch("https://localhost:44387/Posts")
-    const data = await res.json()
-    return data
-  }
-
-  const fetchComments = async () => {
-    const res = await fetch("https://localhost:44387/answers")
-    const data = await res.json()
-    return data
-  }
-
-  const fetchUsers = async () => {
-    const res = await fetch("https://localhost:44387/users")
-    const data = await res.json()
-    return data
-  }
-
-
-  const AppContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: rgba(15, 15, 15, 1);
-  color: #fff;
-`;
 
 
   //Putt komponentene hver for seg i diven fpr nå. De er ikke skapt for å brukes sammen helt enda :D
   //Akkurat nå er det kun post-komponenten som er synlig!
   return (
     <BrowserRouter>
-      {/* {!loggedIn ? <Login logIn={logIn} /> : 
-      // <Post 
-      //   users = {users}
-      //   post = {post} 
-      //   comment = {comment}
-      //   />
-        <Home />
-      } */}
       <div className="App">
-              
-        <Switch>
-          <Route path="/Login" render={props => <Login {...props} logIn = {logIn} />} exact={true} />
-        </Switch>
 
         {/* related to the navigationbar.*/}
         <AppContainer>
@@ -131,10 +68,13 @@ const App = () => {
         </AppContainer>
         <Switch>
     
-          <Route path="/" exact component={Home} />
-          <Route exact from="/Forum" render={props => <Post {...props} users = {users} post = {post} comment = {comment}/>} />
+          <Route exact path="/" component={Home} />
+          <Route path="/Login" render={props => <Login {...props} logIn = {logIn} />} />
+          {/* <Route exact from="/Forum" render={props => <Post {...props} users = {users} post = {post} comment = {comment}/>} /> */}
+          <Route exact from="/Forum" render={props => <Forum {...props} />} />
 
         </Switch>
+        {/* <Forum /> */}
       </div>
     </BrowserRouter>   
     
