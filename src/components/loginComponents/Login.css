@@ -1,89 +1,47 @@
-body {
+.WelcomeLogo {
 }
 
-@media (max-width: 1024px) {
-    body {
-        background-color: #0b2c63;
-    }
-  }
+.WelcomeLogo .img {
+    align-items: center;
+}
+
+.WelcomeLogo p {
+    text-align: right;
+}
 
 .Login {
-    top: 20%;
-    position: absolute;
+    position: fixed;
+    top: 25%;
+    left: 25%;
 }
 
-@media (max-width: 1024px) {
-    .con2 {
-        display:block;
-        margin:auto;
-    }
-  }
+.Login .container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-.con2 {
-    margin-left: 50px;
-    float: right;
+.Login .logo {
+
+}
+
+.Login .login {
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
     background-color: #0b2c63;
     border-radius: 10px;
     color: white;
     text-align: center;
     align-content: center;
-    width: 30rem;
-    height: 34rem;
+    padding: 20px;
 }
 
-.con2 h2 {
-    padding-top: 80px;
-    font-size: 2.7em;
-}
-
-.con2 form {
-    padding-top: 60px;
+.Login form {
+    padding-top: 30px;
     padding-bottom: 30px;
     margin: auto;
     align-content: center;
     width: 60%;
 }
-
-.con2 button {
-    width: 10rem;
-    margin-top: 20px;
-}
-
-.con2 p {
-}
-
-@media (max-width: 1024px) {
-    .con1 {
-    }
-  }
-
-
-.con1 {
-    margin-right: 50px;
-    width: 29rem;
-    float: left;
-}
-
-.con1 .logo {
-    max-width: 100%;
-    width: 325px;
-    height: auto;
-    display: block;
-    margin: auto;
-}
-
-.con1 h1 {
-    font-size: 3em;
-    font-weight: bolder;
-}
-
-.con1 p {
-    font-size: 1.5em;
-    text-align: right;
-}
-
-@media (max-width: 1024px) {
-    .con1 {
-      display: none !important;
-    }
-  }

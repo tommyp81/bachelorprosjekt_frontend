@@ -1,11 +1,10 @@
 import React, { useState } from "react"; 
 import { Form, Button, Container, Col, Row } from "react-bootstrap";
-// import logo from "C:/Users/Tobia/kunnskapsportalen_badminton/src/nbf_logo_farger-02.png";
 import WelcomeLogo from './WelcomeLogo';
 
 import { useHistory } from 'react-router-dom'
 
-//import "./Login.css";
+import "./Login.css";
 
 function Login({ logIn }) {
     const [email, setEmail] = useState("");
@@ -30,15 +29,15 @@ function Login({ logIn }) {
 
   
   return (
-    
-    <Container fluid="md" style={{minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+  <div className="Login">
+    <Container fluid="md">
         <Row className="">
-          <Col sm={6}>
+          <Col className="logo" sm={6}>
             <WelcomeLogo />
           </Col>
-          <Col sm={6} style={{ display: 'flex', flexDirection: "column", justifyContent: 'center', maxWidth: 400, minWidth: 300}}>
+          <Col className="login" sm={6}>
             <h2>Logg inn med idrettens ID</h2>
-            <div style={{height: '5vh'}}  />
+            <p>Ny bruker?</p>
             <Form>
                 <Form.Group controlId="formBasicEmail" onSubmit={handleSubmit}>
                     <Form.Control 
@@ -69,12 +68,11 @@ function Login({ logIn }) {
                     Logg inn
                 </Button>
             </Form>
-            <div style={{height: '5vh'}}  />
             <p>Glemt passord?</p>
           </Col>
         </Row>
       </Container>
-      
+    </div> 
     
   );
 }

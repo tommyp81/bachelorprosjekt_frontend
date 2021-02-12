@@ -1,6 +1,5 @@
 import React from "react";
 import { Image } from "react-bootstrap";
-
 import "./Login.css";
 
 export default function WelcomeLogo () {
