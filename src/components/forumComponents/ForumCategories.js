@@ -2,7 +2,8 @@ import React from 'react';
 import { Container, Row, Button, Accordion, Card } from "react-bootstrap";
 import "./ForumCategories.css";
 
-const ForumCategories = ({ topics, subtopics }) => {
+const ForumCategories = ({ topics, subtopics, subClick }) => {
+
     return (
         <div className="ForumCategories">
             <Container>
@@ -12,7 +13,7 @@ const ForumCategories = ({ topics, subtopics }) => {
                         <Row>
                             <Card> 
                                 <Card.Header>
-                                    <Accordion.Toggle as={Button} variant="success" size="lg" eventKey={topics.id}>
+                                    <Accordion.Toggle as={Button} variant="success" size="lg" eventKey={topics.id} onClick={subClick} value={topics.title}>
                                         {topics.title}
                                     </Accordion.Toggle>
                                 </Card.Header>
@@ -21,7 +22,7 @@ const ForumCategories = ({ topics, subtopics }) => {
                         <Row>
                             {subtopics.filter(subtopics => (subtopics.topicId === topics.id)).map((filteredSubtopics, i) => (
                             <Accordion.Collapse key={i} eventKey={filteredSubtopics.topicId}>
-                                <Card.Body><Button>{filteredSubtopics.title}</Button></Card.Body>
+                                <Card.Body><Button value={filteredSubtopics.title} onClick={subClick} >{filteredSubtopics.title}</Button></Card.Body>
                             </Accordion.Collapse>))}
                         </Row>
                     </Accordion>
