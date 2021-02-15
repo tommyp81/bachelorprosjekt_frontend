@@ -1,5 +1,5 @@
 import React, { useState } from "react"; 
-import { Form, Button, Container, Modal } from "react-bootstrap";
+import { Form, Button, Container, Modal, Dropdown } from "react-bootstrap";
 
 function NewPost () {
 
@@ -19,7 +19,7 @@ function validateForm() {
     return (
     <div className="NewPost">
         <Button variant="primary" onClick={handleShow}>
-        + Ny post i Underkategori
+        + Ny post
         </Button>
 
       <Modal show={show} onHide={handleClose} centered>

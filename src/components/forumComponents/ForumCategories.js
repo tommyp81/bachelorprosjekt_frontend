@@ -23,10 +23,10 @@ const ForumCategories = ({ topics, subtopics, subClick }) => {
                             {subtopics.filter(subtopics => (subtopics.topicId === topics.id)).map((filteredSubtopics, i) => (
                             <Accordion.Collapse key={i} eventKey={filteredSubtopics.topicId}>
                                 <Card.Body><Button value={filteredSubtopics.title} onClick={subClick} >{filteredSubtopics.title}</Button></Card.Body>
-                            </Accordion.Collapse>))}
+                            </Accordion.Collapse>
+                            ))}
                         </Row>
                     </Accordion>
-                    
                 ))}
             </Container>
         </div>
