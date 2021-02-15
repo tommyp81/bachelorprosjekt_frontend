@@ -1,6 +1,7 @@
 .Forum .top {
     padding-bottom: 20px;
     font-size: 1.1vw;
+    text-align: center;
 }
 
 @media (max-width: 1024px) {

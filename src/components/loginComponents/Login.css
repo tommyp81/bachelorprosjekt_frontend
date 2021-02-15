@@ -45,3 +45,9 @@
     align-content: center;
     width: 60%;
 }
+
+@media (max-width: 1024px) {
+    body {
+        background-color: #0b2c63;
+    }
+  }
