@@ -1,4 +1,4 @@
-.top {
+.Header .top {
     height: 100px;
     width: 100%;
     background-color: #0b2c63;
@@ -10,16 +10,16 @@
     display: inline;
 }
 
-.logo {
+.Header .logo {
     float: left;
 }
 
-.top h1 {
+.Header .top h1 {
     color: white;
     font-size: 1.8vw;
 }
 
-.menu {
+.Header .menu {
     position: fixed;
     top: 0;
     right: -25%;
@@ -30,21 +30,21 @@
     text-align: left;
     
   }
-  .menu.active {
+.Header .menu.active {
     right: 0;
   }
 
-  .menu h1 {
+  .Header .menu h1 {
       color: white;
       text-align: center;
       font-size: 1.8vw;
   }
   
-  .menu ul {
+  .Header .menu ul {
     margin: 0;
     padding: 0;
   }
-  .menu li {
+  .Header .menu li {
     padding-left: 10%;
     padding-bottom: 10px;
     list-style: none;
@@ -53,28 +53,28 @@
     display: block;
     color: #fff;
   }
-  .menu li a {
+  .Header .menu li a {
     text-decoration: none;
     color: white;
   }
 
 @media (max-width: 1024px) {
-    .menu {
+  .Header .menu {
         right: -65%;
         width: 65%;
     }
 
-    .menu li {
+    .Header .menu li {
         font-size: 22px;
     }
 
-    .menu h1 {
+    .Header .menu h1 {
         font-size: 30px;
     }
 }
 
 
-  .hamburger {
+.Header .hamburger {
     border: none;
     outline: 0;
     width: 50px;
@@ -84,9 +84,9 @@
     background-color: transparent;
   }
   
-  .hamburger:after,
-  .hamburger:before,
-  .hamburger div {
+  .Header .hamburger:after,
+  .Header .hamburger:before,
+  .Header .hamburger div {
     background-color: white;
     height: 5px;
     margin: 7px 0;
@@ -96,12 +96,12 @@
     transition: all 300ms ease-in-out;
   }
 
-  .menu.active .hamburger:before {
+  .Header .menu.active .hamburger:before {
     transform: translateY(12px) rotate(135deg);
   }
-  .menu.active .hamburger::after {
+  .Header .menu.active .hamburger::after {
     transform: translateY(-12px) rotate(-135deg);
   }
-  .menu.active .hamburger div {
+  .Header .menu.active .hamburger div {
     transform: scale(0);
   }

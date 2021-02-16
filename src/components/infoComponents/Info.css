@@ -1,13 +1,13 @@
 .Info {
 }
 
-.kat1 { 
+.Info .kat1 { 
 }
 
-h1 {
+.Info h1 {
     text-align: center;
 }
 
-p {
+.Info .p {
     font-size: 1.2em;
 }

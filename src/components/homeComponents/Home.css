@@ -6,7 +6,7 @@ body {
     margin-top: 10rem;
 }
 
-.feedcol {
+.Home .feedcol {
     border: 1px solid rgb(209, 209, 209);
     border-radius: 10px;
 }
@@ -22,7 +22,7 @@ body {
 }
 
 @media (max-width: 768px) {
-    .feedcol {
+    .Home .feedcol {
         border-radius: 0px;
         border: none;
         border-top: 1px solid rgb(209, 209, 209);
@@ -35,23 +35,23 @@ body {
 
 }
 
-.textcol {
+.Home .textcol {
     margin-top: 40px;
 }
 
-.infocon {
+.Home .infocon {
     text-align: right;
 }
 
-.forumcon {
+.Home .forumcon {
     text-align: left;
 }
 
-.forumcon h5, .infocon h5 {
+.Home .forumcon h5, .infocon h5 {
     color: black;
 }
 
-.textcol a:hover {
+.Home .textcol a:hover {
     text-decoration: none;
 }
 
