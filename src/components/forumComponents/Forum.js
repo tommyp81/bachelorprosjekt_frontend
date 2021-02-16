@@ -1,10 +1,11 @@
 import React from 'react'
 import { Card, Container } from "react-bootstrap";
-import ForumCategories from "./ForumCategories.js";
+import Topics from "./Topics.js";
 import NewPost from "./NewPost.js"
 import "./Forum.css";
 import { Component } from 'react';
 import moment from 'moment'
+
 
 class Forum extends Component {
 
@@ -68,7 +69,7 @@ class Forum extends Component {
 
     return (
       <div className="Forum">
-        <ForumCategories 
+        <Topics 
         topics = {this.state.topics}
         subtopics = {this.state.subtopics}
         subClick = {this.onSubCatClick}

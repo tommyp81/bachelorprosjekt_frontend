@@ -1,35 +1,35 @@
-.ForumCategories {
+.Topics {
     text-align: center;
     align-content: center;
     margin-top: 50px;
 }
 
-.ForumCategories .row {
+.Topics .row {
     justify-content: center;
 }
 
 @media (max-width: 1024px) {
-    .ForumCategories .card-header {
+    .Topics .card-header {
     }
 }
 
-.ForumCategories .card {
+.Topics .card {
     border: 0;
     margin-bottom: 20px;
 }
 
-.ForumCategories .card-header {
+.Topics .card-header {
     background-color: white;
     border: 0;
     margin-bottom: 10px;
     margin: -8px;
 }
 
-.ForumCategories .card-body {
+.Topics .card-body {
     margin-top: -20px;
 }
 
-.ForumCategories .card-body .btn {
+.Topics .card-body .btn {
     margin-right: 15px;
     margin-bottom: 15px;
 }

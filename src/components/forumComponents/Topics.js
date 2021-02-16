@@ -1,11 +1,11 @@
 import React from 'react';
 import { Container, Row, Button, Accordion, Card } from "react-bootstrap";
-import "./ForumCategories.css";
+import "./Topics.css";
 
-const ForumCategories = ({ topics, subtopics, subClick }) => {
+const Topics = ({ topics, subtopics, subClick }) => {
 
     return (
-        <div className="ForumCategories">
+        <div className="Topics">
             <Container>
                 {topics.map((topics, i) => (
                     
@@ -33,4 +33,4 @@ const ForumCategories = ({ topics, subtopics, subClick }) => {
     );
 }
 
-export default ForumCategories;
+export default Topics;
