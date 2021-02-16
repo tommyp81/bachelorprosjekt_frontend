@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "./App.css";
 import { Container } from "react-bootstrap";
 import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
 
