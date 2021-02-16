@@ -1,35 +1,35 @@
-import { Nav, Navbar, Container } from "react-bootstrap";
-import React from "react";
-import "react-bootstrap";
+import { Nav, Button, Image } from "react-bootstrap";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Header.css";
 import logo from "../../assets/images/BadmintonClubLogo.png";
 
-function Header() {
-    return (
+function Header () {
+  const [menu, setMenu] = useState(false);
+  const showMenu = () => setMenu(!menu);
+  return (
       <div className="Header">
-        <Container>
-          <Navbar>
-            <Navbar.Brand href="">
-            <img src={logo} 
-            alt="Logo"
-            width="80"
-            height="75"
-            className="d-inline-block"
-            />
-            Norges Badmintonforbund
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Nav className="d-flex justify-content-end">
-                    <Nav.Link href="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" className="bi bi-person" viewBox="0 0 16 16">
-  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-</svg>
-                    </Nav.Link>
-                </Nav>
-          </Navbar>
-          </Container>
+      <div className="top">
+        <div className="logo">
+            <Image 
+            src={logo}
+            width="50"
+            height="50">
+            </Image>
+        </div>
+        <h1>Norges Badmintonforbund</h1>
       </div>
-    );
-  }
-  
-  export default Header;
+      <Nav className={menu ? "menu active" : "menu"}>
+          <Button className="hamburger" type="button" onClick={showMenu}>
+          <div></div>
+          </Button>
+          <h1>Meny</h1>
+          <ul onClick={showMenu}>
+              <li><Link to="/">Hjem</Link></li>
+          </ul>
+      </Nav>
+      </div>
+  )
+}
+
+export default Header;
