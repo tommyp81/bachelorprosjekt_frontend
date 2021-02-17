@@ -1,33 +1,62 @@
-import React from 'react';
-import { Container, Row, Button, Accordion, Card } from "react-bootstrap";
+import { faBorderNone } from '@fortawesome/free-solid-svg-icons';
+import React, { createRef } from 'react';
+import { Container, Row, Col, Button, Accordion, Card, ButtonGroup, Tabs, Tab } from "react-bootstrap";
 import "./Topics.css";
 
-const Topics = ({ topics, subtopics, subClick }) => {
-
-    return (
-        <div className="Topics">
-            
+const Topics = ({ topics, subtopics, subClick, focus }) => {
+	
+	return (
+		<div className="Topics" >
+            <Tabs variant="pills" className="tabs">
             {topics.map((topics, i) => (
-                
-                <Accordion key={i}>
-                    <Card> 
-                        <Card.Header>
-                            <Accordion.Toggle as={Button} variant="success" size="lg" eventKey={topics.id} onClick={subClick} value={topics.title}>
-                                {topics.title}
-                            </Accordion.Toggle>
-                        </Card.Header>
-                        {subtopics.filter(subtopics => (subtopics.topicId === topics.id)).map((filteredSubtopics, i) => (
-                        <Accordion.Collapse key={i} eventKey={filteredSubtopics.topicId}>
-                            <Card.Body><Button value={filteredSubtopics.title} onClick={subClick} >{filteredSubtopics.title}</Button></Card.Body>
-                        </Accordion.Collapse>
-                        ))}
-                        
-                    </Card>
-                </Accordion>
+                <Tab eventKey={topics.id} onClick={subClick} value={topics.title} title={topics.title} className="tab">
+                    {subtopics.filter(subtopics => (subtopics.topicId === topics.id)).map((filteredSubtopics, i) => (
+                    <Button key={i} value={filteredSubtopics.title} onClick={subClick}>{filteredSubtopics.title}</Button>
+                ))}
+                </Tab>
             ))}
-            
-        </div>
-    );
+            </Tabs>
+
+
+
+
+				
+			{/* <Accordion animation={false}>
+					{topics.map((topics, i) => (
+						<Card key={i}>
+							<Card.Header>
+								<Accordion.Toggle as={Button} variant="success" size="lg" eventKey={topics.id} onClick={subClick} value={topics.title}>
+									{topics.title}
+								</Accordion.Toggle>
+							</Card.Header>
+							<Accordion.Collapse eventKey={topics.id} animation={false}>
+								<Card.Body>
+									<ButtonGroup>
+										{subtopics.filter(subtopics => (subtopics.topicId === topics.id)).map((filteredSubtopics, i) => (
+											<Button key={i} value={filteredSubtopics.title} onClick={subClick} >{filteredSubtopics.title}</Button>
+										))}
+									</ButtonGroup>
+								</Card.Body>
+							</Accordion.Collapse>
+						</Card>
+					))}
+				</Accordion><>
+				<ButtonGroup>
+					{topics.map(topic => (
+						<Button key={topic.id} value={topic.title} onClick={subClick} variant="success">{topic.title}</Button>
+					))}
+				</ButtonGroup>
+				{topics.map(topic => (
+					<div className={`group${topic.id}`} >
+						{subtopics.filter(subtopics => (subtopics.topicId === topic.id)).map((filteredSubtopics, i) => (
+							<Button key={i} value={filteredSubtopics.title} onClick={subClick} >{filteredSubtopics.title}</Button>
+						))}
+					</div>
+				))}
+			</> */}
+			
+		</div>
+	);
 }
 
 export default Topics;
