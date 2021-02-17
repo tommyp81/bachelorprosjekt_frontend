@@ -16,7 +16,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    fetch("https://webforum.azurewebsites.net/GetPosts")
+    fetch("https://localhost:44319/GetPosts")
     .then(res => res.json())
     .then((data) => {
       this.setState({ post: data })
@@ -33,7 +33,7 @@ class Home extends Component {
               <Row><h5>Siste poster i forumet</h5></Row>
               <Row xs={1} sm={1} lg={2}>
                 <Col md={6} className="feedcol">
-                  <Feed post = {this.state.post} />
+                  <Feed post = {this.state.post} maxLength={4}/>
                 </Col>
                 <Col md={6} className="textcol">
                   <Container className="infocon">
