@@ -1,12 +1,13 @@
 import React, { useState } from "react"; 
 import { Form, Button, Container, Modal, Dropdown } from "react-bootstrap";
 
-function NewPost () {
+function NewPost ({subtopic}) {
 
 const [newPost, setNewPost] = useState("");
 const [show, setShow] = useState(false);
 const handleClose = () => setShow(false);
 const handleShow = () => setShow(true);
+
 
 function validateForm() {
     return newPost.length > 0;
@@ -18,13 +19,13 @@ function validateForm() {
 
     return (
     <div className="NewPost">
-        <Button variant="primary" onClick={handleShow}>
+        <Button variant="primary" onClick={handleShow} disabled={!subtopic}>
         + Ny post
         </Button>
 
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Ny post i Underkategori</Modal.Title>
+          <Modal.Title>Ny post i {subtopic}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
            <Form>
