@@ -5,7 +5,7 @@ import "./Topics.css";
 const Topics = ({ topics, subtopics, subClick }) => {
 
     return (
-        <div className="Topics" style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly"}}>
+        <div className="Topics">
             
             {topics.map((topics, i) => (
                 
@@ -21,6 +21,7 @@ const Topics = ({ topics, subtopics, subClick }) => {
                             <Card.Body><Button value={filteredSubtopics.title} onClick={subClick} >{filteredSubtopics.title}</Button></Card.Body>
                         </Accordion.Collapse>
                         ))}
+                        
                     </Card>
                 </Accordion>
             ))}

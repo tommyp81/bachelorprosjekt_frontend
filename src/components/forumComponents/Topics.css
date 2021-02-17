@@ -1,11 +1,10 @@
 .Topics {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
     text-align: center;
     align-content: center;
-    margin-top: 50px;
-}
-
-.Topics .row {
-    justify-content: center;
+    margin: auto;
 }
 
 @media (max-width: 1024px) {
@@ -14,8 +13,13 @@
 }
 
 .Topics .card {
+    margin-top: 100px;
     border: 0;
     margin-bottom: 20px;
+}
+
+.Topics .card-header .btn {
+    margin-left: 10px;
 }
 
 .Topics .card-header {
@@ -30,7 +34,5 @@
 }
 
 .Topics .card-body .btn {
-    margin-right: 15px;
-    margin-bottom: 15px;
 }
 

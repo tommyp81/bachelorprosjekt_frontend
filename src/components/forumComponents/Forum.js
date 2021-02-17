@@ -15,26 +15,27 @@ class Forum extends Component {
     subtopics: [],
     posts: [],
     filteredPosts: [], 
+    topicFocus: "",
     subtopicFocus: ""
   }
 
 
   componentDidMount() {
-    fetch("https://localhost:44319/Topics")
+    fetch("https://webforum.azurewebsites.net/Topics")
     .then(res => res.json())
     .then((data) => {
     this.setState({ topics: data })
     })
     .catch(console.log)
 
-    fetch("https://localhost:44319/SubTopics")
+    fetch("https://webforum.azurewebsites.net/SubTopics")
     .then(res => res.json())
     .then((data) => {
       this.setState({ subtopics: data })
     })
     .catch(console.log)
 
-    fetch("https://localhost:44319/GetPosts")
+    fetch("https://webforum.azurewebsites.net/GetPosts")
     .then(res => res.json())
     .then(data => {
       this.setState({ posts: data, filteredPosts: data })
@@ -46,10 +47,12 @@ class Forum extends Component {
     let cat = e.target.value
     let fp = []
     if (cat.match(/^(Konkurranse|Kompetanse|Utvikling|Toppidrett)$/)) {
+      //this.setState({topicFocus: ""})
       this.setState({subtopicFocus: ""})
       fp = this.state.posts
     } else {
       this.setState({subtopicFocus: cat})
+      //fp = this.state.topics.filter(subtopics => subtopics.topicId === cat)
       fp = this.state.posts.filter(post => post.subTopic_Title === cat)
     }
     this.setState({filteredPosts: fp})
@@ -78,8 +81,8 @@ class Forum extends Component {
         subClick = {this.onSubCatClick}
         />
         <Container className="top">
-          <h4>Kategori</h4>
-          <h1>{!this.state.subtopicFocus ? "Underkategori" : this.state.subtopicFocus}</h1>
+          {/*<h4>{!this.state.topicFocus ? "Kategori" : this.state.topicFocus}</h4>*/}
+          <h1>{!this.state.subtopicFocus ? "" : this.state.subtopicFocus}</h1>
           <div className="float-left">
             <NewPost subtopic={this.state.subtopicFocus}/>
           </div>
