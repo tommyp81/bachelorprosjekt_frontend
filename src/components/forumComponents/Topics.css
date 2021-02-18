@@ -1,29 +1,47 @@
 .Topics {
     margin: auto;
     width: 50%;
+    padding-top: 30px;
 }
 
 @media (max-width: 1024px) {
+    .Topics {
+        width: 80%;
+    }
 }
 
 .Topics .tabs {
-    border-bottom: 1px solid rgb(209, 209, 209);   
-    
+    border-bottom: 1px solid rgb(209, 209, 209); 
 }
 
-.Topics .tabs .nav-item {
+.Topics .tabs .nav-item{
     background-color: rgb(30, 131, 47);
     color: white;
-    text-align: center;
-    align-content: center;
     margin: 5px;
-    
+    font-size: 20px;
 }
+
+.Topics .tabs .nav-item:hover {
+    background-color: rgb(47, 158, 66);
+}
+
+
+
+.Topics .tabs .nav-item:focus:active {
+    background-color: rgb(47, 158, 66);
+}
+
+.Topics .tabs .nav-item:focus {
+    background-color: rgb(47, 158, 66);
+}
+
+
 
 .Topics .tab {
     text-align: center;
     align-content: center;
-    margin: auto;
+    margin: auto; 
+    padding-bottom: 30px;
 }
 
 .Topics .tab .btn {

@@ -6,6 +6,8 @@ import "./Forum.css";
 import { Component } from 'react';
 import moment from 'moment'
 import Feed from '../homeComponents/Feed.js';
+import { faXRay } from '@fortawesome/free-solid-svg-icons';
+import SortPosts from './SortPosts.js';
 
 
 class Forum extends Component {
@@ -43,17 +45,34 @@ class Forum extends Component {
     .catch(console.log)
   }
 
-  onSubCatClick = (e) => {
-    let cat = e.target.value
+
+
+//Denne må mappes fra post.subTopic_Title til subtopics.title til subtopics.topic_Id === topics.id på en eller annen måte.
+/*
+  onTopClick = (e) => {
+    let top = e.target.value
     let fp = []
-    if (cat.match(/^(Konkurranse|Kompetanse|Utvikling|Toppidrett)$/)) {
-      //this.setState({topicFocus: ""})
+
+    if (top.match(this.state.topics.filter(topics => topics.title))) {
+      this.setState({topicFocus: ""})
+      fp = this.state.posts
+    } else {
+      this.setState({topicFocus: top})
+      fp = this.state.posts.filter(post => det er her jeg stopper opp lol
+    }
+    this.setState({filteredPosts: fp})
+  }
+*/
+  
+  onSubClick = (e) => {
+    let subtop = e.target.value
+    let fp = []
+    if (subtop.match(this.state.topics.filter(topics => topics.title))) {
       this.setState({subtopicFocus: ""})
       fp = this.state.posts
     } else {
-      this.setState({subtopicFocus: cat})
-      //fp = this.state.topics.filter(subtopics => subtopics.topicId === cat)
-      fp = this.state.posts.filter(post => post.subTopic_Title === cat)
+      this.setState({subtopicFocus: subtop})
+      fp = this.state.posts.filter(post => post.subTopic_Title === subtop)
     }
     this.setState({filteredPosts: fp})
   } 
@@ -78,16 +97,19 @@ class Forum extends Component {
         <Topics 
         topics = {this.state.topics}
         subtopics = {this.state.subtopics}
-        subClick = {this.onSubCatClick}
+        //Her
+        catClick = {this.onTopClick}
+        subClick = {this.onSubClick}
         />
         <Container className="top">
-          {/*<h4>{!this.state.topicFocus ? "Kategori" : this.state.topicFocus}</h4>*/}
+          {/* og her */}
+          <h4>{!this.state.topicFocus ? "" : this.state.topicFocus}</h4>
           <h1>{!this.state.subtopicFocus ? "" : this.state.subtopicFocus}</h1>
           <div className="float-left">
             <NewPost subtopic={this.state.subtopicFocus}/>
           </div>
           <div className="float-right">
-          Sorter: Nyeste til eldste
+            <SortPosts />
           </div>
         </Container>
 
