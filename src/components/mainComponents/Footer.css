@@ -1,15 +1,44 @@
 .Footer {
-    background-color: #0b2c63;
-    color: white;
-    left: 0;
-    bottom: 0;
-    height: 15%;
-    padding-top: 20px;
-    font-size: 14px;
-    padding-right: 0;
-    padding-left: 0;
-    margin-top: 90px;
-    margin-right: auto;
-    margin-left: auto;
-    font-size: 16px;
+  background-color: #0b2c63;
+  color: white;
+  left: 0;
+  bottom: 0;
+  height: 15%;
+  padding-top: 20px;
+  font-size: 14px;
+  padding-right: 0;
+  padding-left: 0;
+  margin-top: 90px;
+  margin-right: auto;
+  margin-left: auto;
+  font-size: 16px;
+}
+
+.social {
+  padding: 40px 0;
+  text-align: center;
+}
+.social p {
+  padding-bottom: 40px;
+  font-size: x-large;
+}
+.social a {
+  margin: 3px 5px;
+  padding: 15px;
+  color: aliceblue;
+  border-radius: 50%;
+  border: 2px dotted aliceblue;
+}
+.social a:hover {
+  background-color: aliceblue;
+  color: #e3e1e1;
+}
+.link a {
+  color: white;
+}
+.textRight {
+  text-align: right;
+}
+.personvern {
+  text-align: center;
 }
