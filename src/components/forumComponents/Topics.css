@@ -2,42 +2,35 @@
     margin: auto;
     width: 50%;
     padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 @media (max-width: 1024px) {
     .Topics {
-        width: 80%;
+        width: 90%;
     }
 }
 
-.Topics .tabs {
-    border-bottom: 1px solid rgb(209, 209, 209); 
+.Topics .justify-content-center {
+    border-bottom: 1px solid rgb(209, 209, 209);
+    padding-bottom: 2px;
 }
 
-.Topics .tabs .nav-item{
-    background-color: rgb(30, 131, 47);
+.Topics .justify-content-center .nav-item{
+    background-color: #28a745;
     color: white;
     margin: 5px;
     font-size: 20px;
 }
 
-.Topics .tabs .nav-item:hover {
-    background-color: rgb(47, 158, 66);
-}
-
-
-
-.Topics .tabs .nav-item:focus:active {
-    background-color: rgb(47, 158, 66);
-}
-
-.Topics .tabs .nav-item:focus {
-    background-color: rgb(47, 158, 66);
+.Topics .justify-content-center .nav-item:hover, .Topics .tabs .nav-item:focus:active, .Topics .tabs .nav-item:focus  {
+    background-color: #1b8b35;
 }
 
 
 
 .Topics .tab {
+    padding-top: 2px;
     text-align: center;
     align-content: center;
     margin: auto; 
@@ -46,13 +39,13 @@
 
 .Topics .tab .btn {
     margin: 5px;
-    background-color: rgb(47, 158, 66);
+    background-color: #007bff;
     border: none;
     box-shadow: none;
 }
 
 .Topics .tab .btn:hover {
-    background-color: rgb(76, 194, 95);
+    background-color: #005fc4;
 }
 
 .Topics .tab .btn:focus:active {
@@ -62,5 +55,5 @@
 
 .Topics .tab .btn:focus {
     box-shadow: none;
-    background-color: rgb(76, 194, 95);
+    background-color: #005fc4;
 }

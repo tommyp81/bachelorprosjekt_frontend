@@ -1,5 +1,5 @@
 import React from 'react'
-import "./Home.css";
+import "./Feed.css";
 import { Card } from "react-bootstrap";
 import moment from 'moment'
 

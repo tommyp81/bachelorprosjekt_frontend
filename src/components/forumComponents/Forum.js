@@ -103,6 +103,7 @@ class Forum extends Component {
         />
         <Container className="top">
           {/* og her */}
+          <p>{!this.state.subtopicFocus ? "Velg en underkategori for lage en ny post" : ""}</p>
           <h4>{!this.state.topicFocus ? "" : this.state.topicFocus}</h4>
           <h1>{!this.state.subtopicFocus ? "" : this.state.subtopicFocus}</h1>
           <div className="float-left">

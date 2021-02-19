@@ -4,30 +4,43 @@
     text-align: center;
 }
 
-@media (max-width: 1024px) {
-    .Forum .top {
-        font-size: 15px;
-    }
-
-    .Forum .top h1 {
-        font-size: 30px !important;
-    }
-
-    .Forum .top h4 {
-        font-size: 22px !important;
-    }
+.Forum .top p {
+    margin-top: -40px;
+    font-size: 1vw;
+    color: gray;
 }
-
-.Forum .top h1 {
-    font-size: 2.8vw;
-}
-
 .Forum .top h4 {
     font-size: 2vw;
     color: gray;
 }
 
+.Forum .top h1 {
+    font-size: 2.7vw;
+}
 
+
+
+@media (max-width: 1024px) {
+    .Forum .top {
+        font-size: 18px;    
+    }
+
+    .Forum .top p {
+        font-size: 18px;
+        color: gray;
+    }
+
+    .Forum .top h4 {
+        font-size: 22px !important;
+    }
+
+    .Forum .top h1 {
+        font-size: 30px !important;
+        margin-bottom: 40px;
+    }
+
+    
+}
 
 .Forum .main {
     border: 1px solid rgb(209, 209, 209);

@@ -1,0 +1,23 @@
+.Feed .card {
+    border: none;
+    border-radius: 0px;
+    border-bottom: 1px solid rgb(209, 209, 209);
+}
+
+.Feed .card:last-child {
+    border-bottom: none;
+}
+
+@media (max-width: 768px) {
+    .Home .feedcol {
+        border-radius: 0px;
+        border: none;
+        border-top: 1px solid rgb(209, 209, 209);
+        margin-bottom: 30px;
+    }
+
+    .Feed .card:last-child {
+        border-bottom: 1px solid rgb(209, 209, 209);;
+    }
+
+}

@@ -7,7 +7,7 @@ const Topics = ({ topics, subtopics, subClick, topClick, focus }) => {
 	
 	return (
 		<div className="Topics" >
-            <Tabs variant="pills" className="tabs" defaultActiveKey="0">  
+            <Tabs variant="pills" className="justify-content-center">  
             {topics.map((topics, i) => (
                 <Tab eventKey={topics.id} onClick={topClick} value={topics.id} title={topics.title} className="tab">
                     {subtopics.filter(subtopics => (subtopics.topicId === topics.id)).map((filteredSubtopics, i) => (
