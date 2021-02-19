@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Card, Container } from "react-bootstrap";
 import Topics from "./Topics.js";
 import NewPost from "./NewPost.js"
@@ -6,60 +6,95 @@ import "./Forum.css";
 import { Component } from 'react';
 import moment from 'moment'
 import Feed from '../homeComponents/Feed.js';
+import { useHistory } from 'react-router-dom';
+
+ 
+
+const Forum = (props) => {
+
+  // state = {
+  //   topics: [],
+  //   subtopics: [],
+  //   posts: [],
+  //   filteredPosts: [], 
+  //   topicFocus: "",
+  //   subtopicFocus: ""
+  // }
+
+  const [topics, setTopics] = useState([...props.topics]);
+  const [subtopics, setSubtopics] = useState([...props.subtopics]);
+  const [posts, setPosts] = useState([...props.posts]);
+  const [filteredPosts, setFilteredPosts] = useState([...props.posts]);
+  // const [topicFocus, setTopicFocus] = useState("");
+  const [subtopicFocus, setSubTopicFocus] = useState("");
+
+  const history = useHistory();
 
 
-class Forum extends Component {
+  
+  useEffect(() => {
+    setTopics(props.topics)
+  }, [props.topics])
+  useEffect(() => {
+    setSubtopics(props.subtopics)
+  }, [props.subtopics])
+  useEffect(() => {
+    setPosts(props.posts)
+  }, [props.posts])
+  useEffect(() => {
+    setFilteredPosts(posts)
+  }, [])
+    
+  
 
-  state = {
-    topics: [],
-    subtopics: [],
-    posts: [],
-    filteredPosts: [], 
-    topicFocus: "",
-    subtopicFocus: ""
-  }
-
-
-  componentDidMount() {
-    fetch("https://webforum.azurewebsites.net/Topics")
-    .then(res => res.json())
-    .then((data) => {
-    this.setState({ topics: data })
-    })
-    .catch(console.log)
-
-    fetch("https://webforum.azurewebsites.net/SubTopics")
-    .then(res => res.json())
-    .then((data) => {
-      this.setState({ subtopics: data })
-    })
-    .catch(console.log)
-
-    fetch("https://webforum.azurewebsites.net/GetPosts")
-    .then(res => res.json())
-    .then(data => {
-      this.setState({ posts: data, filteredPosts: data })
-    })
-    .catch(console.log)
-  }
-
-  onSubCatClick = (e) => {
+  const onSubCatClick = (e) => {
     let cat = e.target.value
     let fp = []
-    if (cat.match(/^(Konkurranse|Kompetanse|Utvikling|Toppidrett)$/)) {
-      //this.setState({topicFocus: ""})
-      this.setState({subtopicFocus: ""})
-      fp = this.state.posts
-    } else {
-      this.setState({subtopicFocus: cat})
-      //fp = this.state.topics.filter(subtopics => subtopics.topicId === cat)
-      fp = this.state.posts.filter(post => post.subTopic_Title === cat)
-    }
-    this.setState({filteredPosts: fp})
+
+    // if (cat.match(/^(Konkurranse|Kompetanse|Utvikling|Toppidrett)$/)) {
+    //   //this.setState({topicFocus: ""})
+    //   // setSubTopicFocus("")
+    //   fp = posts
+    // } else {
+    //   console.log("NOOOOOOO")
+    //   // this.setState({subtopicFocus: cat})
+    //   setSubTopicFocus(cat)
+    //   //fp = this.state.topics.filter(subtopics => subtopics.topicId === cat)
+    //   fp = topics.filter(post => post.subTopicId === cat)
+      
+    // }
+    setSubTopicFocus(cat)
+    console.log(posts.filter(p => p.subTopicId == Number(cat)))
+    fp = posts.filter(post => post.subTopicId === Number(cat))
+    
+    // console.log(fp)
+    
+    setFilteredPosts(fp)
   } 
 
-  render () {
-    // const renderPosts = this.state.filteredPosts.map((post) => (
+  const addPost = async (post) => {
+    const res = await fetch('https://localhost:44319/posts', {
+      method: 'POST', 
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(post)
+    })
+
+    const data = await res.json()
+
+    // this.setState({posts: [...this.state.posts, data]})
+    setPosts([...posts, data])
+    setFilteredPosts([...filteredPosts, data])
+    console.log(posts)
+
+    // history.push(`/forum/${data.id}`)
+  }
+
+
+
+
+  // const renderPosts = this.state.filteredPosts.map((post) => (
     //   <Card key={post.postId}>
     //     <Card.Body>
     //       <Card.Title>{post.post_Title}<i><small> i {post.subTopic_Title}</small></i></Card.Title>
@@ -73,31 +108,34 @@ class Forum extends Component {
     //   </Card>
     // ))
 
-    return (
-      <div className="Forum">
-        <Topics 
-        topics = {this.state.topics}
-        subtopics = {this.state.subtopics}
-        subClick = {this.onSubCatClick}
-        />
-        <Container className="top">
-          {/*<h4>{!this.state.topicFocus ? "Kategori" : this.state.topicFocus}</h4>*/}
-          <h1>{!this.state.subtopicFocus ? "" : this.state.subtopicFocus}</h1>
-          <div className="float-left">
-            <NewPost subtopic={this.state.subtopicFocus}/>
-          </div>
-          <div className="float-right">
-          Sorter: Nyeste til eldste
-          </div>
-        </Container>
 
-        <Container className="main">
-          {/* {renderPosts} */}
-          <Feed post={this.state.filteredPosts} maxLength={10}/>
-        </Container>
-      </div>
-        );
-    }
+
+  
+  return (
+    <div className="Forum">
+      <Topics 
+      topics = {topics}
+      subtopics = {subtopics}
+      subClick = {onSubCatClick}
+      />
+      <Container className="top">
+        {/*<h4>{!this.state.topicFocus ? "Kategori" : this.state.topicFocus}</h4>*/}
+        <h1>{!subtopicFocus ? "" : subtopicFocus}</h1>
+        <div className="float-left">
+          <NewPost subtopic={subtopicFocus} add={addPost} user={props.user}/>
+        </div>
+        <div className="float-right">
+        Sorter: Nyeste til eldste
+        </div>
+      </Container>
+
+      <Container className="main">
+        {/* {renderPosts} */}
+        <Feed post={filteredPosts} maxLength={10}/>
+      </Container>
+    </div>
+      );
+    
 }
   
 export default Forum;

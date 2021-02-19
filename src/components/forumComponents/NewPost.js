@@ -1,20 +1,24 @@
 import React, { useState } from "react"; 
 import { Form, Button, Container, Modal, Dropdown } from "react-bootstrap";
+import moment from 'moment'
 
-function NewPost ({subtopic}) {
+function NewPost ({subtopic, add, user}) {
 
-const [newPost, setNewPost] = useState("");
-const [show, setShow] = useState(false);
-const handleClose = () => setShow(false);
-const handleShow = () => setShow(true);
+  const [title, setTitle] = useState("")
+  const [content, setContent] = useState("");
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
 
 function validateForm() {
-    return newPost.length > 0;
+    return content.length > 0;
   }
 
   function handleSubmit(event) {
     event.preventDefault();
+
+    add({ title, content, date: moment().toISOString(), userId: user.id, subTopicId: Number(subtopic)})
   }
 
     return (
@@ -28,27 +32,37 @@ function validateForm() {
           <Modal.Title>Ny post i {subtopic}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-           <Form>
+           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="exampleForm.ControlTextarea1" onSubmit={handleSubmit}>
 
-            <Form.Control 
-                as="textarea" 
-                rows={5}
-                name="newPost"
-                value={newPost}
-                onChange={(e) => setNewPost(e.target.value)}
-                />
+              <Form.Control
+                type="text"
+                rows={1}
+                name="title"
+                value={title}
+                onChange={e => setTitle(e.target.value)}
+              />
+
+              <Form.Control 
+                  as="textarea" 
+                  rows={5}
+                  name="content"
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+              />
+              <Button variant="secondary" onClick={handleClose}>
+                Avbryt
+              </Button>
+              <Button type="submit" variant="success" onClick={handleClose} disabled={!validateForm()}>
+                Send inn
+              </Button>
+
             </Form.Group>
 
         </Form> 
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Avbryt
-          </Button>
-          <Button variant="success" onClick={handleClose} disabled={!validateForm()}>
-            Send inn
-          </Button>
+          
         </Modal.Footer>
       </Modal>
     </div>

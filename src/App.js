@@ -47,16 +47,56 @@ const App = () => {
   //   user: []
   // }
 
-  // const [user, setUser] = useState("")
+  const [user, setUser] = useState({id: 6, username: "test"})
+
+
   const [loggedIn, setLoggedIn] = useState(false)
-
-
   
+  const [topics, setTopics] = useState([]);
+  const [subtopics, setSubtopics] = useState([]);
+  const [posts, setPosts] = useState([]);
+
+
+  const testId = 22;
 
   const logIn = () => {
     setLoggedIn(true);
     console.log(loggedIn)
   }
+
+  useEffect(() => {
+
+    fetch("https://localhost:44319/Topics")
+    .then(res => res.json())
+    .then((data) => {
+      setTopics(data)
+    })
+    .catch(console.log)
+
+    fetch("https://localhost:44319/SubTopics")
+    .then(res => res.json())
+    .then((data) => {
+      setSubtopics(data)
+    })
+    .catch(console.log)
+
+    fetch("https://localhost:44319/posts")
+    .then(res => res.json())
+    .then(data => {
+      setPosts(data)
+      // setFilteredPosts(data)
+    })
+    .catch(console.log)
+
+  }, [])
+
+  // const fetchUser = async (id) => {
+  //   const res = await fetch(`https://localhost:44319/users${id}`)
+  //   const data = await res.json()
+
+  //   return data
+  // }
+
 
 
   //Putt komponentene hver for seg i diven fpr nå. De er ikke skapt for å brukes sammen helt enda :D
@@ -74,8 +114,10 @@ const App = () => {
           <Route exact path="/" component={Home} />
           <Route path="/Login" render={props => <Login {...props} logIn = {logIn} />} />
           {/* <Route exact from="/Forum" render={props => <Post {...props} users = {users} post = {post} comment = {comment}/>} /> */}
-          <Route exact from="/Forum" render={props => <Forum {...props} />} />
+          <Route exact from="/Forum" render={props => <Forum {...props} posts={posts} topics={topics} subtopics={subtopics} user={user}/>} />
           <Route exact from="/Kunnskasportalen" render={props => <Kunnskapsportalen {...props} />} />
+          <Route exact path="/Forum/:id" render={props => <Post {...props}  
+            post={posts.find(p => p.id === parseInt(props.match.params.id))}/>} />
 
         </Switch>
         {/* <Forum /> */}
