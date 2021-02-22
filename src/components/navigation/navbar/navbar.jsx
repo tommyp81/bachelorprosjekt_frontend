@@ -5,6 +5,8 @@ import Brand from '../../brand/Brand';
 import Logo from '../../logo/Logo';  
 
 // row-revers to have hamburger icon at the right side.
+//make the navbar sticky position: fixed; top: 0; left: 0;
+//z-index: 110; for taking sidenav over content 
 const NavbarContainer = styled.div`
   width: 100%;
   height: 80px;
@@ -12,12 +14,15 @@ const NavbarContainer = styled.div`
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
-  
+  z-index: 110;
+  position: sticky;
+  top: 0;
+ 
 `;
 
 export function Navbar(props) {
   return (
-    <NavbarContainer>
+    <NavbarContainer >
       <Logo />
       <Brand/>
       <HamburgerMenu />

@@ -49,6 +49,8 @@ const MenuContainer = styled(motion.div)`
   transform: translateX(4em);
   user-select: none;
   padding: 1em 2.5em;
+  
+ 
 
 `;
 
@@ -90,6 +92,7 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 1em;
+  
   }
 `;
 

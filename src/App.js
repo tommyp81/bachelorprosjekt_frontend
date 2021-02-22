@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import { Container } from "react-bootstrap";
+import "./App.css";
 import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
 
 //Importing main components.
@@ -18,7 +19,6 @@ import Home from "./components/homeComponents/Home.js";
 import Forum from "./components/forumComponents/Forum.js";
 import NewComment from "./components/forumComponents/NewComment.js";
 import Post from "./components/forumComponents/Post.js";
-
 //add npm i styled-components
 import styled from "styled-components";
 import { Navbar } from "./components/navigation/navbar/navbar";
@@ -39,6 +39,7 @@ align-items: center;
 background-color: rgba(15, 15, 15, 1);
 color: #fff;
 `;
+
 
 const App = () => {
  
@@ -70,6 +71,8 @@ const App = () => {
         <AppContainer>
           <Navbar />
         </AppContainer>
+        
+      
         <Switch>
     
           <Route exact path="/" component={Home} />
