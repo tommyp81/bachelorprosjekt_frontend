@@ -22,14 +22,23 @@ import Post from "./components/forumComponents/Post.js";
 //add npm i styled-components
 import styled from "styled-components";
 import { Navbar } from "./components/navigation/navbar/navbar";
-
+//add npm i styled-components
+import styled from "styled-components";
 import Kunnskapsportalen from "./components/infoComponents/Kunnskapsportalen.js";
 
 // https://webforum.azurewebsites.net/posts
 // https://webforum.azurewebsites.net/answers
 // https://webforum.azurewebsites.net/users
 
-
+const AppContainer = styled.div`
+width: 100%;
+height: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+background-color: rgba(15, 15, 15, 1);
+color: #fff;
+`;
 
 const App = () => {
  
@@ -58,9 +67,9 @@ const App = () => {
       <div className="App">
 
         {/* related to the navigationbar.*/}
-      
+        <AppContainer>
           <Navbar />
-        
+        </AppContainer>
         <Switch>
     
           <Route exact path="/" component={Home} />
