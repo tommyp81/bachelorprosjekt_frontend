@@ -1,11 +1,25 @@
-import React from 'react'
+import { React, Component} from 'react'
 import "./Feed.css";
 import { Card } from "react-bootstrap";
 import moment from 'moment'
 
-const Feed = ({ post, maxLength }) => {
+class Feed extends Component {
+
+  
+
+  render() {
+    //const { post, loading } = this.props;
+
+   // if (loading) {
+        //return <h2>Laster inn...</h2>
+    //}
+    const {post} = this.props;
+    const {maxLength} = this.props;
+
     return (
+      
       <div className="Feed">
+        {/*{post.map(post => (*/}
         {post.sort((p1, p2) => (moment(p2.post_Date).diff(moment(p1.post_Date)))).slice(0, maxLength).map((post, i) => (
             <Card key={i}>
               <Card.Body>
@@ -21,7 +35,9 @@ const Feed = ({ post, maxLength }) => {
             </Card>
             ))}
       </div>
+      
         );
+  }
 }
   
 export default Feed;
