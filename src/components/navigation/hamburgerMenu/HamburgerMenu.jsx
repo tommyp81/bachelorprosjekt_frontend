@@ -170,7 +170,7 @@ export function HamburgerMenu(props) {
             transition={commonTransition}
             
           >
-            Ny Bruker
+            <a>Ny Bruker?</a>
           </LoginButton>
         </TopContainer>
         <ContentContainer>
