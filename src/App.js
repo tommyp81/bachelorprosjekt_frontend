@@ -29,15 +29,7 @@ import Kunnskapsportalen from "./components/infoComponents/Kunnskapsportalen.js"
 // https://webforum.azurewebsites.net/answers
 // https://webforum.azurewebsites.net/users
 
-const AppContainer = styled.div`
-width: 100%;
-height: 100%;
-display: flex;
-flex-direction: column;
-align-items: center;
-background-color: rgba(15, 15, 15, 1);
-color: #fff;
-`;
+
 
 const App = () => {
  
@@ -66,9 +58,9 @@ const App = () => {
       <div className="App">
 
         {/* related to the navigationbar.*/}
-        <AppContainer>
+      
           <Navbar />
-        </AppContainer>
+        
         <Switch>
     
           <Route exact path="/" component={Home} />
