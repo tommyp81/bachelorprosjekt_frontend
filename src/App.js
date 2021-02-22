@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
-import { Container } from "react-bootstrap";
+
 import "./App.css";
 import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
 
@@ -19,26 +19,16 @@ import Home from "./components/homeComponents/Home.js";
 import Forum from "./components/forumComponents/Forum.js";
 import NewComment from "./components/forumComponents/NewComment.js";
 import Post from "./components/forumComponents/Post.js";
-//add npm i styled-components
-import styled from "styled-components";
+
 import { Navbar } from "./components/navigation/navbar/navbar";
-//add npm i styled-components
-import styled from "styled-components";
+
 import Kunnskapsportalen from "./components/infoComponents/Kunnskapsportalen.js";
 
 // https://webforum.azurewebsites.net/posts
 // https://webforum.azurewebsites.net/answers
 // https://webforum.azurewebsites.net/users
 
-const AppContainer = styled.div`
-width: 100%;
-height: 100%;
-display: flex;
-flex-direction: column;
-align-items: center;
-background-color: rgba(15, 15, 15, 1);
-color: #fff;
-`;
+
 
 
 const App = () => {
@@ -66,11 +56,11 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="App">
-
+     
         {/* related to the navigationbar.*/}
-        <AppContainer>
+    
           <Navbar />
-        </AppContainer>
+ 
         
       
         <Switch>
@@ -82,7 +72,7 @@ const App = () => {
           <Route exact from="/Kunnskasportalen" render={props => <Kunnskapsportalen {...props} />} />
 
         </Switch>
-        {/* <Forum /> */}
+        
       </div>
     </BrowserRouter>   
     
