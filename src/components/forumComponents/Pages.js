@@ -13,7 +13,7 @@ class Pages extends Component {
         return (
             <div className="Page">
             <Pagination className="justify-content-center">
-                <Pagination.Prev
+                <Pagination.Prev 
                 href="#" 
                 onClick={() => prevPage()}
                 />

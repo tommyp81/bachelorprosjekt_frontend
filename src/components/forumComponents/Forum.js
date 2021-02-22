@@ -116,7 +116,7 @@ class Forum extends Component {
     const {currentPage, postsPerPage, posts, loading} = this.state;
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts = this.state.filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
 
     const paginate = pageNum => this.setState({ currentPage: pageNum });
     const nextPage = () => this.setState({ currentPage: currentPage + 1 });
@@ -146,12 +146,12 @@ class Forum extends Component {
 
         <Container className="main">
           {/* {renderPosts} */}
-          <Feed post={this.state.filteredPosts} loading={loading}/>
+          <Feed post={currentPosts} loading={loading}/>
           
         </Container>
 
         <Container>
-          {/* Pages funker, men kun når <Feed post={this.state.currentPosts} */}
+          {/* Denne funker, men har ikke nok poster til å være helt funksjonell enda */}
           <Pages postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} nextPage={nextPage} prevPage={prevPage} />
         </Container>
       </div>

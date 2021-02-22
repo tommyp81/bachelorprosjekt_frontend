@@ -8,18 +8,15 @@ class Feed extends Component {
   
 
   render() {
-    //const { post, loading } = this.props;
+    const {post, loading, maxLength} = this.props;
 
-   // if (loading) {
-        //return <h2>Laster inn...</h2>
-    //}
-    const {post} = this.props;
-    const {maxLength} = this.props;
-
+    if (loading) {
+            return <h2>Laster inn...</h2>
+        }
+        
     return (
       
       <div className="Feed">
-        {/*{post.map(post => (*/}
         {post.sort((p1, p2) => (moment(p2.post_Date).diff(moment(p1.post_Date)))).slice(0, maxLength).map((post, i) => (
             <Card key={i}>
               <Card.Body>
