@@ -21,6 +21,7 @@ body {
     border-bottom: none;
 }
 
+
 @media (max-width: 768px) {
     .Home .feedcol {
         border-radius: 0px;

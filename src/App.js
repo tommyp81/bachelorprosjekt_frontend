@@ -52,8 +52,8 @@ const App = () => {
 
   const [loggedIn, setLoggedIn] = useState(false)
   
-  const [topics, setTopics] = useState([]);
-  const [subtopics, setSubtopics] = useState([]);
+  // const [topics, setTopics] = useState([]);
+  // const [subtopics, setSubtopics] = useState([]);
   const [posts, setPosts] = useState([]);
 
 
@@ -66,19 +66,7 @@ const App = () => {
 
   useEffect(() => {
 
-    fetch("https://localhost:44319/Topics")
-    .then(res => res.json())
-    .then((data) => {
-      setTopics(data)
-    })
-    .catch(console.log)
-
-    fetch("https://localhost:44319/SubTopics")
-    .then(res => res.json())
-    .then((data) => {
-      setSubtopics(data)
-    })
-    .catch(console.log)
+    
 
     fetch("https://localhost:44319/posts")
     .then(res => res.json())
@@ -88,15 +76,33 @@ const App = () => {
     })
     .catch(console.log)
 
-  }, [])
+  }, [posts])
 
-  // const fetchUser = async (id) => {
-  //   const res = await fetch(`https://localhost:44319/users${id}`)
+  // const fetchPost = async (id) => {
+  //   const res = await fetch(`https://localhost:44319/posts/${id}`)
   //   const data = await res.json()
 
   //   return data
   // }
 
+  const addPost = async (post) => {
+    const res = await fetch('https://localhost:44319/posts', {
+      method: 'POST', 
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(post)
+    })
+
+    const data = await res.json()
+
+    // this.setState({posts: [...this.state.posts, data]})
+    setPosts(current => [...current, data])
+    // setFilteredPosts(current => [...current, data])
+    console.log(posts)
+
+    // history.push(`/forum/${data.id}`)
+  }
 
 
   //Putt komponentene hver for seg i diven fpr nå. De er ikke skapt for å brukes sammen helt enda :D
@@ -114,10 +120,13 @@ const App = () => {
           <Route exact path="/" component={Home} />
           <Route path="/Login" render={props => <Login {...props} logIn = {logIn} />} />
           {/* <Route exact from="/Forum" render={props => <Post {...props} users = {users} post = {post} comment = {comment}/>} /> */}
-          <Route exact from="/Forum" render={props => <Forum {...props} posts={posts} topics={topics} subtopics={subtopics} user={user}/>} />
+          <Route exact from="/Forum" render={props => <Forum {...props} posts={posts} user={user} addPost={addPost}/>} />
           <Route exact from="/Kunnskasportalen" render={props => <Kunnskapsportalen {...props} />} />
           <Route exact path="/Forum/:id" render={props => <Post {...props}  
-            post={posts.find(p => p.id === parseInt(props.match.params.id))}/>} />
+            // post={posts.find(p => p.id === parseInt(props.match.params.id))} 
+            postId = {parseInt(props.match.params.id)}
+            user={user}/>}
+          />
 
         </Switch>
         {/* <Forum /> */}

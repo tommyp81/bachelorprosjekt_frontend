@@ -1,15 +1,17 @@
-import React, { useState } from "react"; 
-import { Form, Button, Container, Modal, Dropdown } from "react-bootstrap";
-import moment from 'moment'
+import React, { useEffect, useState } from 'react'
+import { Form, Button, Modal } from "react-bootstrap";
 
-function NewPost ({subtopic, add, user}) {
+const EditComment = ({comment, edit}) => {
+  const [content, setContent] = useState("")
 
-  const [title, setTitle] = useState("")
-  const [content, setContent] = useState("");
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+
+  useEffect(() => {
+    setContent(comment.content)
+  }, [comment])
 
   function validateForm() {
     return content.length > 0;
@@ -17,36 +19,33 @@ function NewPost ({subtopic, add, user}) {
 
   function handleSubmit(event) {
     event.preventDefault();
-
-    add({ title, content, date: moment().toISOString(), userId: user.id, subTopicId: Number(subtopic)})
+    edit({ 
+      id: comment.id, 
+      content, 
+      date: comment.date, 
+      userId: comment.userId, 
+      postId: comment.postId
+    })
   }
 
-    return (
-    <div className="NewPost">
-        <Button variant="primary" onClick={handleShow} disabled={!subtopic}>
-        + Ny post
-        </Button>
-
+  return (
+    <>
+      <Button variant="secondary" onClick={handleShow} >
+        Edit
+      </Button>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Ny post i {subtopic}</Modal.Title>
+          <Modal.Title>Rediger comment</Modal.Title>
         </Modal.Header>
         <Modal.Body>
            <Form onSubmit={handleSubmit}>
             <Form.Group controlId="exampleForm.ControlTextarea1" onSubmit={handleSubmit}>
 
-              <Form.Control
-                type="text"
-                rows={1}
-                name="title"
-                value={title}
-                onChange={e => setTitle(e.target.value)}
-              />
-
               <Form.Control 
                   as="textarea" 
                   rows={5}
                   name="content"
+                  
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
               />
@@ -65,8 +64,8 @@ function NewPost ({subtopic, add, user}) {
           
         </Modal.Footer>
       </Modal>
-    </div>
-    );
+    </>
+  )
 }
 
-export default NewPost;
+export default EditComment

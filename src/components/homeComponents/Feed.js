@@ -4,6 +4,8 @@ import { Card } from "react-bootstrap";
 import moment from 'moment'
 import { Link } from 'react-router-dom';
 
+import './Home.css'
+
 //Viser en "preview" av forumpostene
 //Vil gjerne bare vise de 3-4 første postene!!!!!!!!!!!1
 const Feed = ({ post, maxLength }) => {
@@ -22,7 +24,7 @@ const Feed = ({ post, maxLength }) => {
         {post.sort((p1, p2) => (moment(p2.date).diff(moment(p1.date)))).slice(0, maxLength).map((post, i) => (
           
             <Card key={i}>
-              <Link to={`/forum/${post.id}`} style={{textDecoration: 'none'}}>
+              <Link to={`/forum/${post.id}`} style={{textDecoration: 'none', color: '#000000'}}>
                 <Card.Body>
                   <Card.Title>{post.title}</Card.Title>
                   <Card.Text>{moment(post.date).calendar()} av ID:{post.userId}</Card.Text>

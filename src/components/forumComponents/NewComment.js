@@ -1,37 +1,33 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import moment from 'moment'
 
-function NewComment() {
+function NewComment({createNew, pId, user}) {
 
-  const [newComment, setNewComment] = useState("");
+  const [content, setContent] = useState("");
 
   function validateForm() {
-    return newComment.length > 0;
+    return content.length > 0;
   }
 
-  function handleSubmit(event) {
+  function submitComment(event) {
     event.preventDefault();
+
+    createNew({content, date: moment().toISOString(), userId: user.id, postId: pId})
+    setContent("")
+    
   }
+
 
   return (
     <div className="NewComment">
-      <Form>
-        <Form.Group controlId="exampleForm.ControlTextarea1" onSubmit={handleSubmit}>
-          <Form.Label>Skriv en kommentar</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={3}
-            name="newComment"
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-          />
+      <Form onSubmit={submitComment}>
+        <Form.Group >
+          <Form.Control as="textarea" rows={3} name="comment" value={content} onChange={e => setContent(e.target.value)}/>
         </Form.Group>
-        <Button
-          variant="success"
-          type="submit"
-          disabled={!validateForm()}>
-          Send inn
-        </Button>
+        <Form.Group>
+          <Button disabled={!validateForm()} type="submit" className="float-left" variant="success" >Comment</Button>
+        </Form.Group>
       </Form>
 
     </div>

@@ -21,29 +21,38 @@ const Forum = (props) => {
   //   subtopicFocus: ""
   // }
 
-  const [topics, setTopics] = useState([...props.topics]);
-  const [subtopics, setSubtopics] = useState([...props.subtopics]);
+  const [topics, setTopics] = useState([]);
+  const [subtopics, setSubtopics] = useState([]);
   const [posts, setPosts] = useState([...props.posts]);
-  const [filteredPosts, setFilteredPosts] = useState([...props.posts]);
+  // const [filteredPosts, setFilteredPosts] = useState([...props.posts]);
   // const [topicFocus, setTopicFocus] = useState("");
   const [subtopicFocus, setSubTopicFocus] = useState("");
 
-  const history = useHistory();
+  // const history = useHistory();
 
 
   
   useEffect(() => {
-    setTopics(props.topics)
-  }, [props.topics])
-  useEffect(() => {
-    setSubtopics(props.subtopics)
-  }, [props.subtopics])
+    fetch("https://localhost:44319/Topics")
+    .then(res => res.json())
+    .then((data) => {
+      setTopics(data)
+    })
+    .catch(console.log)
+
+    fetch("https://localhost:44319/SubTopics")
+    .then(res => res.json())
+    .then((data) => {
+      setSubtopics(data)
+    })
+    .catch(console.log)
+  }, [])
   useEffect(() => {
     setPosts(props.posts)
   }, [props.posts])
-  useEffect(() => {
-    setFilteredPosts(posts)
-  }, [])
+  // useEffect(() => {
+  //   setFilteredPosts(props.posts)
+  // }, [])
     
   
 
@@ -64,32 +73,32 @@ const Forum = (props) => {
       
     // }
     setSubTopicFocus(cat)
-    console.log(posts.filter(p => p.subTopicId == Number(cat)))
-    fp = posts.filter(post => post.subTopicId === Number(cat))
+    // console.log(filteredPosts.filter(p => p.subTopicId == Number(cat)))
+    // fp = filteredPosts.filter(post => post.subTopicId === Number(cat))
     
-    // console.log(fp)
+    // // console.log(fp)
     
-    setFilteredPosts(fp)
+    // setFilteredPosts(fp)
   } 
 
-  const addPost = async (post) => {
-    const res = await fetch('https://localhost:44319/posts', {
-      method: 'POST', 
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify(post)
-    })
+  // const addPost = async (post) => {
+  //   const res = await fetch('https://localhost:44319/posts', {
+  //     method: 'POST', 
+  //     headers: {
+  //       'Content-type': 'application/json',
+  //     },
+  //     body: JSON.stringify(post)
+  //   })
 
-    const data = await res.json()
+  //   const data = await res.json()
 
-    // this.setState({posts: [...this.state.posts, data]})
-    setPosts([...posts, data])
-    setFilteredPosts([...filteredPosts, data])
-    console.log(posts)
+  //   // this.setState({posts: [...this.state.posts, data]})
+  //   setPosts(current => [...current, data])
+  //   // setFilteredPosts(current => [...current, data])
+  //   console.log(posts)
 
-    // history.push(`/forum/${data.id}`)
-  }
+  //   // history.push(`/forum/${data.id}`)
+  // }
 
 
 
@@ -122,7 +131,7 @@ const Forum = (props) => {
         {/*<h4>{!this.state.topicFocus ? "Kategori" : this.state.topicFocus}</h4>*/}
         <h1>{!subtopicFocus ? "" : subtopicFocus}</h1>
         <div className="float-left">
-          <NewPost subtopic={subtopicFocus} add={addPost} user={props.user}/>
+          <NewPost subtopic={subtopicFocus} add={props.addPost} user={props.user}/>
         </div>
         <div className="float-right">
         Sorter: Nyeste til eldste
@@ -131,7 +140,7 @@ const Forum = (props) => {
 
       <Container className="main">
         {/* {renderPosts} */}
-        <Feed post={filteredPosts} maxLength={10}/>
+        <Feed post={posts} maxLength={10}/>
       </Container>
     </div>
       );
