@@ -76,7 +76,7 @@ const App = () => {
     })
     .catch(console.log)
 
-  }, [posts])
+  }, [])
 
   // const fetchPost = async (id) => {
   //   const res = await fetch(`https://localhost:44319/posts/${id}`)
@@ -99,7 +99,7 @@ const App = () => {
     // this.setState({posts: [...this.state.posts, data]})
     setPosts(current => [...current, data])
     // setFilteredPosts(current => [...current, data])
-    console.log(posts)
+    // console.log(posts)
 
     // history.push(`/forum/${data.id}`)
   }

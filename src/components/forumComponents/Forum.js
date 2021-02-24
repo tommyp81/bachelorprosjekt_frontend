@@ -8,18 +8,11 @@ import moment from 'moment'
 import Feed from '../homeComponents/Feed.js';
 import { useHistory } from 'react-router-dom';
 
+import Pages from './Pages'
+
  
 
 const Forum = (props) => {
-
-  // state = {
-  //   topics: [],
-  //   subtopics: [],
-  //   posts: [],
-  //   filteredPosts: [], 
-  //   topicFocus: "",
-  //   subtopicFocus: ""
-  // }
 
   const [topics, setTopics] = useState([]);
   const [subtopics, setSubtopics] = useState([]);
@@ -29,6 +22,17 @@ const Forum = (props) => {
   const [subtopicFocus, setSubTopicFocus] = useState("");
 
   // const history = useHistory();
+
+  const postsPerPage = 8
+  const [currentPage, setCurrentPage] = useState(1)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = pageNum => setCurrentPage(pageNum)
+  const nextPage = () => setCurrentPage(currentPage + 1)
+  const prevPage = () => setCurrentPage(currentPage - 1)
 
 
   
@@ -141,6 +145,10 @@ const Forum = (props) => {
       <Container className="main">
         {/* {renderPosts} */}
         <Feed post={posts} maxLength={10}/>
+      </Container>
+
+      <Container>
+        <Pages postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} nextPage={nextPage} prevPage={prevPage} />
       </Container>
     </div>
       );
