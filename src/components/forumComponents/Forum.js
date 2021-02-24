@@ -30,6 +30,9 @@ class Forum extends Component {
 
 
   componentDidMount() {
+    
+    this.setState({ loading: true })
+
     fetch("https://webforum.azurewebsites.net/Users")
     .then(res => res.json())
     .then((data) => {
@@ -61,7 +64,6 @@ class Forum extends Component {
     .catch(console.log)
     */
     
-
     fetch("https://webforum.azurewebsites.net/GetPosts")
     .then(res => res.json())
     .then(data => {
@@ -121,6 +123,9 @@ class Forum extends Component {
     const paginate = pageNum => this.setState({ currentPage: pageNum });
     const nextPage = () => this.setState({ currentPage: currentPage + 1 });
     const prevPage = () => this.setState({ currentPage: currentPage - 1 });
+    //const firstPage = 
+    //const lastPage = 
+  
 
     return (
       <div className="Forum">
@@ -152,7 +157,7 @@ class Forum extends Component {
 
         <Container>
           {/* Denne funker, men har ikke nok poster til å være helt funksjonell enda */}
-          <Pages postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} nextPage={nextPage} prevPage={prevPage} />
+          <Pages postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} nextPage={nextPage} prevPage={prevPage} /*firstPage={} lastPage={}*//>
         </Container>
       </div>
         );

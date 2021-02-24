@@ -4,11 +4,13 @@ import { Pagination } from "react-bootstrap";
 class Pages extends Component {
    
     render() {
-        const { postsPerPage, totalPosts, paginate, nextPage, prevPage } = this.props;
+        const { postsPerPage, totalPosts, paginate, nextPage, prevPage, firstPage, lastPage } = this.props;
         const pageNumbers = [];
         for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
             pageNumbers.push(i);
         }
+
+
 
         return (
             <div className="Page">
@@ -26,11 +28,12 @@ class Pages extends Component {
                 {num}    
                 </Pagination.Item>
                 ))}
-
+                
                 <Pagination.Next 
                 href="#" 
                 onClick={() => nextPage()}
                 />
+                
             </Pagination>
             </div>
         )

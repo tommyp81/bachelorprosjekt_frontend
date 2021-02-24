@@ -9,7 +9,7 @@ const handleClose = () => setShow(false);
 const handleShow = () => setShow(true);
 
 function validateForm() {
-    return newPost.length > 0;
+    return newPost.length > 0 && newPost.length <= 4000;
   }
 
 function handleSubmit(event) {

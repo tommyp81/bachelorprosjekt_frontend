@@ -11,7 +11,7 @@ class Feed extends Component {
     const {post, loading, maxLength} = this.props;
 
     if (loading) {
-            return <h2>Laster inn...</h2>
+            return <h2 className="justify-content-center">Laster inn...</h2>
         }
         
     return (
