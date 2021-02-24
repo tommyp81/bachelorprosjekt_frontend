@@ -6,16 +6,16 @@ import "./Topics.css";
 const Topics = ({ topics, subtopics, subClick, topClick, focus }) => {
 	
 	return (
-		<div className="Topics" >
-            <Tabs variant="pills" className="justify-content-center">  
-            {topics.map((topics, i) => (
-                <Tab eventKey={topics.id} onClick={topClick} value={topics.id} title={topics.title} className="tab">
-                    {subtopics.filter(subtopics => (subtopics.topicId === topics.id)).map((filteredSubtopics, i) => (
-                    <Button key={i} value={filteredSubtopics.title} onClick={subClick}>{filteredSubtopics.title}</Button>
-                ))}
-                </Tab>
-            ))}
-            </Tabs>
+		<div className="Topics">
+			<Tabs variant="pills" className="justify-content-center">
+				{topics.map((topics, i) => (
+					<Tab key={i} eventKey={topics.id}  value={topics.title} title={topics.title} className="tab">
+						{subtopics.filter(subtopics => (subtopics.topicId === topics.id)).map((filteredSubtopics, i) => (
+						<Button key={i} value={filteredSubtopics.id} onClick={subClick}>{filteredSubtopics.title}</Button>
+					))}
+					</Tab>
+				))}
+			</Tabs>
 		</div>
 	);
 }

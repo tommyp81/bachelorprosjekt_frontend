@@ -16,7 +16,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    fetch("https://webforum.azurewebsites.net/GetPosts")
+    fetch("https://localhost:44319/posts")
     .then(res => res.json())
     .then((data) => {
       this.setState({ post: data })

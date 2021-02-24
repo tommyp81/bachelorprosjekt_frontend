@@ -1,38 +1,45 @@
-import React, { useState } from "react"; 
-import { Form, Button, Container, Modal, Dropdown } from "react-bootstrap";
-import moment from 'moment'
+import React, { useEffect, useState } from 'react'
+import { Form, Button, Modal } from "react-bootstrap";
 
-function NewPost ({subtopic, add, user}) {
-
+const EditPost = ({post, edit}) => {
+  const [content, setContent] = useState("")
   const [title, setTitle] = useState("")
-  const [content, setContent] = useState("");
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
 
+  useEffect(() => {
+    setContent(post.content || "")
+    setTitle(post.title || "")
+  }, [post])
+
   function validateForm() {
-    return content.length > 0;
+    return title.length && content.length > 0;
   }
 
-function handleSubmit(event) {
+
+  function handleSubmit(event) {
     event.preventDefault();
-
-    add({ title, content, date: moment().toISOString(), userId: user.id, subTopicId: Number(subtopic)})
+    edit({ 
+      id: post.id, 
+      title, 
+      content, 
+      date: post.date, 
+      userId: post.userId, 
+      subTopicId: post.subTopicId
+    })
   }
 
-    return (
-    <div className="NewPost">
-        <Button 
-        variant="primary" 
-        onClick={handleShow} 
-        disabled={!subtopic}>
-        + Ny post
-        </Button>
-
+  return (
+    <>
+      <Button variant="secondary" onClick={handleShow} >
+        Edit
+      </Button>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Ny post i {subtopic}</Modal.Title>
+          <Modal.Title>Rediger Post</Modal.Title>
         </Modal.Header>
         <Modal.Body>
            <Form onSubmit={handleSubmit}>
@@ -42,6 +49,7 @@ function handleSubmit(event) {
                 type="text"
                 rows={1}
                 name="title"
+                
                 value={title}
                 onChange={e => setTitle(e.target.value)}
               />
@@ -50,6 +58,7 @@ function handleSubmit(event) {
                   as="textarea" 
                   rows={5}
                   name="content"
+                  
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
               />
@@ -68,8 +77,8 @@ function handleSubmit(event) {
           
         </Modal.Footer>
       </Modal>
-    </div>
-    );
+    </>
+  )
 }
 
-export default NewPost;
+export default EditPost
