@@ -40,14 +40,14 @@ const Forum = (props) => {
 
   
   useEffect(() => {
-    fetch("https://localhost:44319/Topics")
+    fetch("https://webforum.azurewebsites.net/Topics")
     .then(res => res.json())
     .then((data) => {
       setTopics(data)
     })
     .catch(console.log)
 
-    fetch("https://localhost:44319/SubTopics")
+    fetch("https://webforum.azurewebsites.net/SubTopics")
     .then(res => res.json())
     .then((data) => {
       setSubtopics(data)

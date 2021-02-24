@@ -60,7 +60,7 @@ const App = () => {
 
     
 
-    fetch("https://localhost:44319/posts")
+    fetch("https://webforum.azurewebsites.net/posts")
     .then(res => res.json())
     .then(data => {
       setPosts(data)
@@ -78,7 +78,7 @@ const App = () => {
   // }
 
   const addPost = async (post) => {
-    const res = await fetch('https://localhost:44319/posts', {
+    const res = await fetch('https://webforum.azurewebsites.net/posts', {
       method: 'POST', 
       headers: {
         'Content-type': 'application/json',
