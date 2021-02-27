@@ -17,25 +17,17 @@ const Forum = (props) => {
 
   const [topics, setTopics] = useState([]);
   const [subtopics, setSubtopics] = useState([]);
+  
   // const [posts, setPosts] = useState([...props.posts]);
   const [filteredPosts, setFilteredPosts] = useState([]);
   // const [topicFocus, setTopicFocus] = useState("");
   const [subtopicFocus, setSubTopicFocus] = useState("");
 
+  const [users, setUsers] = useState([]);
+  const [loading, setloading] = useState(false);
   // const history = useHistory();
 
-  const postsPerPage = 8
-  const [currentPage, setCurrentPage] = useState(1)
-  
- 
- 
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
 
-  const paginate = pageNum => setCurrentPage(pageNum)
-  const nextPage = () => setCurrentPage(currentPage + 1)
-  const prevPage = () => setCurrentPage(currentPage - 1)
 
 
   
@@ -47,13 +39,27 @@ const Forum = (props) => {
     })
     .catch(console.log)
 
+
     fetch("https://webforum.azurewebsites.net/SubTopics")
     .then(res => res.json())
     .then((data) => {
       setSubtopics(data)
     })
     .catch(console.log)
+    
+  fetch("https://webforum.azurewebsites.net/Users")
+  .then(res => res.json())
+  .then((data) => {
+    setUsers(data)
+  })
+  .catch(console.log)
+
   }, [])
+
+  
+
+
+
   useEffect(() => {
     // setPosts(props.posts)
     setFilteredPosts(props.posts)
@@ -86,6 +92,16 @@ const Forum = (props) => {
     setSubTopicFocus(subTop)
   }
 
+  const postsPerPage = 8
+  const [currentPage, setCurrentPage] = useState(1)
+ 
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = pageNum => setCurrentPage(pageNum)
+  const nextPage = () => setCurrentPage(currentPage + 1)
+  const prevPage = () => setCurrentPage(currentPage - 1)
   // onSubClick = (e) => {
   //   let subtop = e.target.value
   //   let fp = []
@@ -119,7 +135,7 @@ const Forum = (props) => {
 
       <Container className="main">
         {/* {renderPosts} */}
-        <Feed post={currentPosts} maxLength={props.posts.length}/>
+        <Feed post={currentPosts} user={users} subtopic={subtopics} maxLength={props.posts.length}/>
       </Container>
 
       <Container>

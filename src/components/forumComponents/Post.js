@@ -122,6 +122,7 @@ const Post = ({postId, user}) => {
         <Card.Body >
           <Card.Title>{post.title}</Card.Title>
           <Card.Text>{post.content}</Card.Text>
+          <NewComment createNew={addComment} user={user} pId={post.id}/>
           {comments.filter(comment => (comment.postId === post.id)).map((filteredComment, i) => (
               <Card key={i}>
                   <Card.Header>
@@ -139,7 +140,7 @@ const Post = ({postId, user}) => {
           ))}
         </Card.Body>
       </Card>
-      <NewComment createNew={addComment} user={user} pId={post.id}/>
+      
       {/* { !editingPost ? <EditPost post={post} edit={editPost}/> : <></>} */}
     </Container>
   )
