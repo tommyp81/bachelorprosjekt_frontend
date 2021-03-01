@@ -20,6 +20,7 @@ import NewComment from "./components/forumComponents/NewComment.js";
 import Post from "./components/forumComponents/Post.js";
 
 import { Navbar } from "./components/navigation/navbar/navbar";
+import Register from './components/registerComponent/Register';
 
 // https://webforum.azurewebsites.net/posts
 // https://webforum.azurewebsites.net/answers
@@ -64,7 +65,7 @@ const App = () => {
     
           <Route exact path="/" component={Home} />
           <Route path="/Login" render={props => <Login {...props} logIn = {logIn} />} />
-          
+          <Route path="/Register" render={props => <Register {...props} /> } />
       
           {/* <Route exact from="/Forum" render={props => <Post {...props} users = {users} post = {post} comment = {comment}/>} /> */}
           <Route exact from="/Forum" render={props => <Forum {...props} />} />
