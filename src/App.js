@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "./App.css";
 
 import "./App.css";
 import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
@@ -20,7 +21,8 @@ import NewComment from "./components/forumComponents/NewComment.js";
 import Post from "./components/forumComponents/Post.js";
 
 import { Navbar } from "./components/navigation/navbar/navbar";
-import Register from './components/registerComponent/Register';
+
+import Kunnskapsportalen from "./components/infoComponents/Kunnskapsportalen.js";
 
 // https://webforum.azurewebsites.net/posts
 // https://webforum.azurewebsites.net/answers
@@ -37,15 +39,61 @@ const App = () => {
   //   user: []
   // }
 
-  // const [user, setUser] = useState("")
+  const [user, setUser] = useState({id: 6, username: "test"})
+
+
   const [loggedIn, setLoggedIn] = useState(false)
-
-
   
+  // const [topics, setTopics] = useState([]);
+  // const [subtopics, setSubtopics] = useState([]);
+  const [posts, setPosts] = useState([]);
+
+
+  const testId = 22;
 
   const logIn = () => {
     setLoggedIn(true);
     console.log(loggedIn)
+  }
+
+  useEffect(() => {
+
+    
+
+    fetch("https://webforum.azurewebsites.net/posts")
+    .then(res => res.json())
+    .then(data => {
+      setPosts(data)
+      // setFilteredPosts(data)
+    })
+    .catch(console.log)
+
+  }, [])
+
+  // const fetchPost = async (id) => {
+  //   const res = await fetch(`https://localhost:44319/posts/${id}`)
+  //   const data = await res.json()
+
+  //   return data
+  // }
+
+  const addPost = async (post) => {
+    const res = await fetch('https://webforum.azurewebsites.net/posts', {
+      method: 'POST', 
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(post)
+    })
+
+    const data = await res.json()
+
+    // this.setState({posts: [...this.state.posts, data]})
+    setPosts(current => [...current, data])
+    // setFilteredPosts(current => [...current, data])
+    // console.log(posts)
+
+    // history.push(`/forum/${data.id}`)
   }
 
 
@@ -54,24 +102,28 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="App">
-
-        {/* related to the navigationbar.*/}
-  
-          <Navbar />
      
+        {/* related to the navigationbar.*/}
+    
+          <Navbar />
+ 
         
       
         <Switch>
     
           <Route exact path="/" component={Home} />
           <Route path="/Login" render={props => <Login {...props} logIn = {logIn} />} />
-          <Route path="/Register" render={props => <Register {...props} /> } /> 
-     
           {/* <Route exact from="/Forum" render={props => <Post {...props} users = {users} post = {post} comment = {comment}/>} /> */}
-          <Route exact from="/Forum" render={props => <Forum {...props} />} />
+          <Route exact from="/Forum" render={props => <Forum {...props} posts={posts} user={user} addPost={addPost}/>} />
+          <Route exact from="/Kunnskasportalen" render={props => <Kunnskapsportalen {...props} />} />
+          <Route exact path="/Forum/:id" render={props => <Post {...props}  
+            // post={posts.find(p => p.id === parseInt(props.match.params.id))} 
+            postId = {parseInt(props.match.params.id)}
+            user={user}/>}
+          />
 
         </Switch>
-        {/* <Forum /> */}
+        
       </div>
     </BrowserRouter>   
     
