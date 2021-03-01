@@ -1,10 +1,9 @@
 import React from 'react'
-import "./Home.css";
 import { Card } from "react-bootstrap";
 import moment from 'moment'
 import { Link } from 'react-router-dom';
 
-import './Home.css'
+import './Feed.css'
 
 //Viser en "preview" av forumpostene
 //Vil gjerne bare vise de 3-4 første postene!!!!!!!!!!!1

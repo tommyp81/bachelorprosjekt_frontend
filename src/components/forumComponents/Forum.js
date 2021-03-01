@@ -20,7 +20,8 @@ const Forum = (props) => {
   
   // const [posts, setPosts] = useState([...props.posts]);
   const [filteredPosts, setFilteredPosts] = useState([]);
-  // const [topicFocus, setTopicFocus] = useState("");
+  
+  const [topicFocus, setTopicFocus] = useState("");
   const [subtopicFocus, setSubTopicFocus] = useState("");
 
   const [users, setUsers] = useState([]);
@@ -86,9 +87,19 @@ const Forum = (props) => {
   }
   */
 
+  const onTopClick = (e) => {
+    let top = e.target.value 
+    
+    setTopicFocus(top)
+  }
+
   const onSubClick = (e) => {
     let subTop = e.target.value
-    
+    /*let fp = []
+    if (subTop.match(subtopics.filter(subtopics => subtopics.title))) {
+      fp = filteredPosts 
+    }
+    setFilteredPosts(fp)*/
     setSubTopicFocus(subTop)
   }
 
@@ -120,16 +131,17 @@ const Forum = (props) => {
       <Topics 
       topics = {topics}
       subtopics = {subtopics}
+      topClick = {onTopClick}
       subClick = {onSubClick}
       />
       <Container className="top">
-        <p>{!subtopicFocus ? "Velg en underkategori for lage en ny post" : ""}</p>
-        <h1>{!subtopicFocus ? "" : subtopicFocus}</h1>
+        <h3>{!topicFocus ? "" : topicFocus}</h3>
+        <h1>{!subtopicFocus ? <p>Velg en underkategori for lage en ny post</p> : subtopicFocus}</h1>
         <div className="float-left">
           <NewPost subtopic={subtopicFocus} add={props.addPost} user={props.user}/>
         </div>
         <div className="float-right">
-          <SortPosts />
+          <SortPosts/>
         </div>
       </Container>
 

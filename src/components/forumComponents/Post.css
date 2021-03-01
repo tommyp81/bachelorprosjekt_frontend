@@ -1,0 +1,13 @@
+.Post .card {
+    border: none;
+    border-radius: 0px;
+
+    border-bottom: 1px solid rgb(209, 209, 209);
+}
+
+.Post .card-title {
+}
+
+.Post .card:last-child {
+    border-bottom: none;
+}

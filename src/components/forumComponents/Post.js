@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, Form } from "react-bootstrap";
 import moment from 'moment'
 import {useHistory} from 'react-router-dom'
+import "./Post.css";
 
 //import Header from '../mainComponents/Header'
 
@@ -111,18 +112,21 @@ const Post = ({postId, user}) => {
   return (
     <Container style={{display: 'flex', flexDirection: 'column'}}> 
       <Card>
-        <Card.Header>
-          {post.id} - {moment(post.date).calendar()}
-          <div className="float-right">
-            {/* <Button variant="secondary" onClick={handleEditPost}>Edit</Button> */}
+        <Card.Body >{post.id} - {moment(post.date).calendar()}
+          <Card.Title>
+            <h2 className="float-left">{post.title}</h2>
+            <div className="float-right">{/* <Button variant="secondary" onClick={handleEditPost}>Edit</Button> */}
             <EditPost post={post} edit={editPost}/>
-            <Button variant="danger" onClick={deletePost} value={post.id}>Delete</Button>
-          </div>  
-        </Card.Header>
-        <Card.Body >
-          <Card.Title>{post.title}</Card.Title>
+            <Button variant="danger" onClick={deletePost} value={post.id}>Delete</Button></div>
+          </Card.Title>
+          <br />
+          <br />
           <Card.Text>{post.content}</Card.Text>
-          <NewComment createNew={addComment} user={user} pId={post.id}/>
+
+
+
+
+          <NewComment createNew={addComment} user={user} pId={post.id}/> <br/><br/>
           {comments.filter(comment => (comment.postId === post.id)).map((filteredComment, i) => (
               <Card key={i}>
                   <Card.Header>
