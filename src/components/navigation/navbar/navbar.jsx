@@ -1,31 +1,17 @@
-import React from "react";
-import styled from "styled-components";
+import React  from "react";
+
 import { HamburgerMenu } from "../hamburgerMenu/HamburgerMenu";
 import Brand from '../../brand/Brand';
 import Logo from '../../logo/Logo';  
+import "./navbar.css"
 
-// row-revers to have hamburger icon at the right side.
-//make the navbar sticky position: fixed; top: 0; left: 0;
-//z-index: 110; for taking sidenav over content 
-const NavbarContainer = styled.div`
-  width: 100%;
-  height: 80px;
-  background-color: #0b2c63;
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  z-index: 110;
-  position: sticky;
-  top: 0;
- 
-`;
 
 export function Navbar(props) {
   return (
-    <NavbarContainer >
+    <div className="navbarContainerstyle" >
       <Logo />
       <Brand/>
       <HamburgerMenu />
-    </NavbarContainer>
+    </div>
   );
 }
