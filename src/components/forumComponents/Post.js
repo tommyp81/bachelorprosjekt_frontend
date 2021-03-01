@@ -112,7 +112,7 @@ const Post = ({postId, user}) => {
   return (
     <Container style={{display: 'flex', flexDirection: 'column'}}> 
       <Card>
-        <Card.Body >{post.id} - {moment(post.date).calendar()}
+        <Card.Body >{moment(post.date).calendar()}
           <Card.Title>
             <h2 className="float-left">{post.title}</h2>
             <div className="float-right">{/* <Button variant="secondary" onClick={handleEditPost}>Edit</Button> */}
@@ -130,7 +130,7 @@ const Post = ({postId, user}) => {
           {comments.filter(comment => (comment.postId === post.id)).map((filteredComment, i) => (
               <Card key={i}>
                   <Card.Header>
-                    {moment(filteredComment.date).calendar()}
+                    Postet av <b>{user.username}</b> {moment(filteredComment.date).calendar()}
                     <div className="float-right">
                       {/* <Button variant="secondary"  >Edit</Button> */}
                       <EditComment comment={filteredComment} edit={editComment}/>

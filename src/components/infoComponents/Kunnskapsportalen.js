@@ -1,67 +1,66 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import Topics from "../../components/forumComponents/Topics.js";
 import {Row, Col, Container, Tabs, Tab} from "react-bootstrap";
 import "./Kunnskapsportalen.css";
  
-class Info extends Component {
+const Kunnskapsportalen = () => {
 
-    state = {
-        topics: [],
-        subtopics: [],
-        posts: [],
-        filteredPosts: [], 
-        currentFilter: ""
-      }
+  const [topics, setTopics] = useState([]);
+  const [subtopics, setSubtopics] = useState([]);
+  const [topicFocus, setTopicFocus] = useState("");
+  const [subtopicFocus, setSubTopicFocus] = useState("");
     
     
-      componentDidMount() {
-        fetch("https://webforum.azurewebsites.net/Topics")
-        .then(res => res.json())
-        .then((data) => {
-        this.setState({ topics: data })
-        })
-        .catch(console.log)
-    
-        fetch("https://webforum.azurewebsites.net/SubTopics")
-        .then(res => res.json())
-        .then((data) => {
-          this.setState({ subtopics: data })
-        })
-        .catch(console.log)
-    
-        fetch("https://webforum.azurewebsites.net/GetPosts")
-        .then(res => res.json())
-        .then(data => {
-          this.setState({ posts: data, filteredPosts: data })
-        })
-        .catch(console.log)
-      }
-    
-      onSubCatClick = (e) => {
-        let cat = e.target.value
-        let fp = []
-        if (cat.match(/^(Konkurranse|Kompetanse|Utvikling|Toppidrett)$/)) {
-          fp = this.state.posts
-        } else {
-          fp = this.state.posts.filter(post => post.subTopic_Title === cat)
-        }
-        this.setState({filteredPosts: fp})
-      } 
+  useEffect(() => {
+    fetch("https://webforum.azurewebsites.net/Topics")
+    .then(res => res.json())
+    .then((data) => {
+      setTopics(data)
+    })
+    .catch(console.log)
 
-      render () {
+
+    fetch("https://webforum.azurewebsites.net/SubTopics")
+    .then(res => res.json())
+    .then((data) => {
+      setSubtopics(data)
+    })
+    .catch(console.log)
+  }, [])
+    
+  const onTopClick = (e) => {
+    let top = e.target.value
+    
+    setTopicFocus(top)
+  }
+
+  const onSubClick = (e) => {
+    let subTop = e.target.value
+    /*
+    let fp = []
+    if (subTop.match(filteredPosts.filter(filteredPosts => filteredPosts.subTopicId))) {
+      setSubTopicFocus("")
+      fp = filteredPosts;
+    } else {
+      setSubTopicFocus(subTop)
+      fp = filteredPosts.filter(filteredPosts => filteredPosts.subTopicId === subTop)
+    }
+    setFilteredPosts(fp)*/
+    setSubTopicFocus(subTop)
+  } 
         return (
             <div className="Info">
                 
                 <Container>
                 <Topics 
-                topics = {this.state.topics}
-                subtopics = {this.state.subtopics}
-                subClick = {this.onSubCatClick}
+                topics = {topics}
+                subtopics = {subtopics}
+                subClick = {onSubClick}
+                topClick = {onTopClick}
                 />
                 </Container>
             </div>
     );
-    }
 }
 
-export default Info;
+export default Kunnskapsportalen;

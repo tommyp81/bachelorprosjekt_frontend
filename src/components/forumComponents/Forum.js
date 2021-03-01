@@ -28,7 +28,8 @@ const Forum = (props) => {
   const [loading, setloading] = useState(false);
   // const history = useHistory();
 
-
+  const [topicTitle, setTopicTitle] = useState("")
+  const [subTopicTitle, setSubTopicTitle] = useState("")
 
 
   
@@ -88,19 +89,28 @@ const Forum = (props) => {
   */
 
   const onTopClick = (e) => {
-    let top = e.target.value 
-    
+    let top = e.target.value
+    let title = e.target.getAttribute("title")
+    setTopicTitle(title)
     setTopicFocus(top)
   }
 
   const onSubClick = (e) => {
     let subTop = e.target.value
-    /*let fp = []
-    if (subTop.match(subtopics.filter(subtopics => subtopics.title))) {
-      fp = filteredPosts 
+    let title = e.target.getAttribute("title")
+    setSubTopicTitle(title)
+    setSubTopicFocus(subTop)    
+    /*
+    let fp = []
+    if (subTop.match(filteredPosts.filter(filteredPosts => filteredPosts.subTopicId))) {
+      setSubTopicFocus("")
+      fp = filteredPosts;
+    } else {
+      setSubTopicFocus(subTop)
+      fp = filteredPosts.filter(filteredPosts => filteredPosts.subTopicId === subTop)
     }
     setFilteredPosts(fp)*/
-    setSubTopicFocus(subTop)
+    
   }
 
   const postsPerPage = 8
@@ -135,8 +145,8 @@ const Forum = (props) => {
       subClick = {onSubClick}
       />
       <Container className="top">
-        <h3>{!topicFocus ? "" : topicFocus}</h3>
-        <h1>{!subtopicFocus ? <p>Velg en underkategori for lage en ny post</p> : subtopicFocus}</h1>
+        <h3>{!topicTitle ? "" : topicTitle}</h3>
+        <h1>{!subTopicTitle ? <p>Velg en underkategori for lage en ny post</p> : subTopicTitle}</h1>
         <div className="float-left">
           <NewPost subtopic={subtopicFocus} add={props.addPost} user={props.user}/>
         </div>
