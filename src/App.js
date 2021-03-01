@@ -65,8 +65,8 @@ const App = () => {
     
           <Route exact path="/" component={Home} />
           <Route path="/Login" render={props => <Login {...props} logIn = {logIn} />} />
-          <Route path="/Register" render={props => <Register {...props} /> } />
-      
+          <Route path="/Register" render={props => <Register {...props} /> } /> 
+     
           {/* <Route exact from="/Forum" render={props => <Post {...props} users = {users} post = {post} comment = {comment}/>} /> */}
           <Route exact from="/Forum" render={props => <Forum {...props} />} />
 
