@@ -12,6 +12,7 @@ import React  from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import BLogin from "../../loginComponents/Login";
+import Register from "../../registerComponent/Register";
 import { MenuToggle } from "./menuToggle";
 import { NavMenu } from "./navMenu";
 
@@ -170,7 +171,7 @@ export function HamburgerMenu(props) {
             transition={commonTransition}
             
           >
-            Ny Bruker
+            <a href="/Register" component={Register}>Melde Seg</a>
           </LoginButton>
         </TopContainer>
         <ContentContainer>
