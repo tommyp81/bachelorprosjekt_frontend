@@ -112,33 +112,44 @@ const Post = ({postId, user}) => {
   return (
     <Container style={{display: 'flex', flexDirection: 'column'}}> 
       <Card>
-        <Card.Body >{moment(post.date).calendar()}
-          <Card.Title>
-            <h2 className="float-left">{post.title}</h2>
-            <div className="float-right">{/* <Button variant="secondary" onClick={handleEditPost}>Edit</Button> */}
-            <EditPost post={post} edit={editPost}/>
-            <Button variant="danger" onClick={deletePost} value={post.id}>Delete</Button></div>
+        <Card.Body>
+          <div className="float-left">
+            Postet av <b>{user.username}</b> {moment(post.date).calendar()}
+          </div>
+          
+          <Card.Title><br /><br />
+          <h2>{post.title}</h2>
           </Card.Title>
+          <Card.Text>
+            {post.content}
+            <div className="float-right">
+              <EditPost post={post} edit={editPost}/>
+              <Button variant="danger" onClick={deletePost} value={post.id}>Delete</Button>
+            </div>
+          </Card.Text>
           <br />
-          <br />
-          <Card.Text>{post.content}</Card.Text>
 
 
 
 
-          <NewComment createNew={addComment} user={user} pId={post.id}/> <br/><br/>
+          <NewComment createNew={addComment} user={user} pId={post.id}/> <br/><br/><br />
+          <h4>Kommentarer</h4>
           {comments.filter(comment => (comment.postId === post.id)).map((filteredComment, i) => (
               <Card key={i}>
-                  <Card.Header>
-                    Postet av <b>{user.username}</b> {moment(filteredComment.date).calendar()}
+                  <Card.Body>
+                    <div className="float-left">
+                    {/*user.filter(user => (user.id === comment.Userid)).map((filteredUser) => (*/
+                    <p>Postet av <b>{user.username}</b>{/*filteredUser.username*/} {moment(filteredComment.date).calendar()}</p>
+                    /*))*/}
+                    </div>
+                    
+                    <Card.Text><br /><br />
+                    {filteredComment.content}
                     <div className="float-right">
-                      {/* <Button variant="secondary"  >Edit</Button> */}
                       <EditComment comment={filteredComment} edit={editComment}/>
                       <Button variant="danger" onClick={deleteComment} value={filteredComment.id}>Delete</Button>
                     </div>  
-                  </Card.Header>
-                  <Card.Body>
-                    <Card.Text>{filteredComment.content}</Card.Text>
+                    </Card.Text>
                   </Card.Body>
               </Card>
           ))}

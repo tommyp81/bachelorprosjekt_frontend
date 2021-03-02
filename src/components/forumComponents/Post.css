@@ -11,3 +11,7 @@
 .Post .card:last-child {
     border-bottom: none;
 }
+
+.Post .card .card-body .float-left {
+    color: gray;
+}

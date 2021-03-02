@@ -26,7 +26,7 @@ function NewComment({createNew, pId, user}) {
           <Form.Control as="textarea" rows={3} name="comment" value={content} onChange={e => setContent(e.target.value)}/>
         </Form.Group>
         <Form.Group>
-          <Button disabled={!validateForm()} type="submit" className="float-left" variant="success" >Comment</Button>
+          <Button disabled={!validateForm()} type="submit" className="float-right" variant="success" >Comment</Button>
         </Form.Group>
       </Form>
 
