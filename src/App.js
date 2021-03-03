@@ -22,8 +22,9 @@ import Post from "./components/forumComponents/Post.js";
 
 import { Navbar } from "./components/navigation/navbar/navbar";
 
-import Kunnskapsportalen from "./components/infoComponents/Kunnskapsportalen.js";
-
+import Kunnskapsportalen from "./components/infoComponents/Kunnskapsportalen";
+// import Kunnskapsportalen from "./components/infoComponents/Info";
+import Register from './components/registerComponent/Register';
 // https://webforum.azurewebsites.net/posts
 // https://webforum.azurewebsites.net/answers
 // https://webforum.azurewebsites.net/users
@@ -113,6 +114,7 @@ const App = () => {
     
           <Route exact path="/" component={Home} />
           <Route path="/Login" render={props => <Login {...props} logIn = {logIn} />} />
+          <Route path="/Register" render={props => <Register {...props} Register = {Register} />} />
           {/* <Route exact from="/Forum" render={props => <Post {...props} users = {users} post = {post} comment = {comment}/>} /> */}
           <Route exact from="/Forum" render={props => <Forum {...props} posts={posts} user={user} addPost={addPost}/>} />
           <Route exact from="/Kunnskasportalen" render={props => <Kunnskapsportalen {...props} />} />
