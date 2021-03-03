@@ -88,16 +88,36 @@ const Forum = (props) => {
   }
   */
 
-  const onTopClick = (e) => {
-    let top = e.target.value
-    let title = e.target.getAttribute("title")
-    setTopicTitle(title)
-    setTopicFocus(top)
+  const onTopClick = (key) => {
+    if (key) {
+      setSubTopicTitle("")
+      let value = topics.find(t => t.id === Number(key)).title
+      console.log(value)
+      
+      console.log(props.posts.filter(fp => fp.topicId === Number(key)))
+      setFilteredPosts(props.posts.filter(fp => fp.topicId === Number(key)))
+    
+      console.log(props.posts)
+      
+      
+      
+      
+      
+      setTopicTitle(value)
+      // setTopicFocus(key)
+    }
+    
+    // setTopicTitle(value)
+    // setTopicFocus(value)
+
+    
   }
 
   const onSubClick = (e) => {
     let subTop = e.target.value
     let title = e.target.getAttribute("title")
+    console.log(title)
+    console.log(subTop)
     setSubTopicTitle(title)
     setSubTopicFocus(subTop)    
     /*
@@ -110,6 +130,8 @@ const Forum = (props) => {
       fp = filteredPosts.filter(filteredPosts => filteredPosts.subTopicId === subTop)
     }
     setFilteredPosts(fp)*/
+    setFilteredPosts(props.posts.filter(fp => fp.subTopicId === Number(subTop)))
+
     
   }
 
@@ -137,7 +159,7 @@ const Forum = (props) => {
   // } 
 
   return (
-    <div className="Forum">
+    <div className="Forum mt-5">
       <Topics 
       topics = {topics}
       subtopics = {subtopics}
