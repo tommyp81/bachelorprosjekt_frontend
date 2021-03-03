@@ -3,6 +3,7 @@ import { Form, Button, Container, Col, Row } from "react-bootstrap";
 import WelcomeLogo from './WelcomeLogo';
 
 import { useHistory } from 'react-router-dom'
+import Register from '../registerComponent/Register';
 
 import "./Login.css";
 
@@ -37,7 +38,7 @@ function Login({ logIn }) {
           </Col>
           <Col className="login" sm={6}>
             <h2>Logg inn med idrettens ID</h2>
-            <p>Ny bruker?</p>
+            <a href="/Register">Ny bruker?</a>
             <Form>
                 <Form.Group controlId="formBasicEmail" onSubmit={handleSubmit}>
                     <Form.Control 
