@@ -22,8 +22,8 @@ import Post from "./components/forumComponents/Post.js";
 
 import { Navbar } from "./components/navigation/navbar/navbar";
 
-//import Kunnskapsportalen from "./components/infoComponents/Kunnskapsportalen";
-import Kunnskapsportalen from "./components/infoComponents/Info";
+import Kunnskapsportalen from "./components/infoComponents/Kunnskapsportalen";
+// import Kunnskapsportalen from "./components/infoComponents/Info";
 import Register from './components/registerComponent/Register';
 // https://webforum.azurewebsites.net/posts
 // https://webforum.azurewebsites.net/answers
