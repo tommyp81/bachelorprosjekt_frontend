@@ -1,17 +1,23 @@
-.Post .card {
-    border: none;
-    border-radius: 0px;
-
-    border-bottom: 1px solid rgb(209, 209, 209);
+.Post {
+    padding-top: 120px;
 }
 
-.Post .card-title {
-}
-
-.Post .card:last-child {
-    border-bottom: none;
+.Post .main .card {
+    margin-bottom: 20px;
+    
 }
 
 .Post .card .card-body .float-left {
     color: gray;
+}
+
+.Post .comments {
+    margin-bottom: 20px;
+}
+
+.Post .comments .card {
+    margin-bottom: 10px;
+}
+
+.EditComment .btn {
 }

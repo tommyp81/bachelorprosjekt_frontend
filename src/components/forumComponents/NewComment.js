@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import moment from 'moment'
+import "./Post.css";
 
 function NewComment({createNew, pId, user}) {
 
@@ -23,10 +24,10 @@ function NewComment({createNew, pId, user}) {
     <div className="NewComment">
       <Form onSubmit={submitComment}>
         <Form.Group >
-          <Form.Control as="textarea" rows={3} name="comment" value={content} onChange={e => setContent(e.target.value)}/>
+          <Form.Control as="textarea" rows={3} name="comment" value={content} placeholder="Legg til en kommentar..." onChange={e => setContent(e.target.value)}/>
         </Form.Group>
         <Form.Group>
-          <Button disabled={!validateForm()} type="submit" className="float-right" variant="success" >Comment</Button>
+          <Button disabled={!validateForm()} type="submit" className="float-right" variant="success" >Send inn</Button>
         </Form.Group>
       </Form>
 

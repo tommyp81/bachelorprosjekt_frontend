@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Form, Button, Modal } from "react-bootstrap";
+import "./Post.css";
 
 const EditPost = ({post, edit}) => {
   const [content, setContent] = useState("")
@@ -34,12 +35,12 @@ const EditPost = ({post, edit}) => {
 
   return (
     <>
-      <Button variant="secondary" onClick={handleShow} >
-        Edit
+      <Button variant="primary" size="sm" onClick={handleShow} >
+        Rediger
       </Button>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Rediger Post</Modal.Title>
+          <Modal.Title>Rediger post</Modal.Title>
         </Modal.Header>
         <Modal.Body>
            <Form onSubmit={handleSubmit}>

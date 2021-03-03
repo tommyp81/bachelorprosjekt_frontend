@@ -9,7 +9,7 @@ const Pages = ({postsPerPage, totalPosts, paginate, nextPage, prevPage}) => {
   }
 
   return (
-    <div className="Page">
+    <div className="Page" style={{marginTop:"20px"}}>
       <Pagination className="justify-content-center">
         <Pagination.Prev 
         href="#" 

@@ -30,12 +30,12 @@ const EditComment = ({comment, edit}) => {
 
   return (
     <>
-      <Button variant="secondary" onClick={handleShow} >
-        Edit
+      <Button variant="primary" size="sm" onClick={handleShow} >
+        Rediger
       </Button>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Rediger comment</Modal.Title>
+          <Modal.Title>Rediger kommentar</Modal.Title>
         </Modal.Header>
         <Modal.Body>
            <Form onSubmit={handleSubmit}>

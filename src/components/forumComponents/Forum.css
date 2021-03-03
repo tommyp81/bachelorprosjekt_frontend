@@ -6,36 +6,30 @@
 
 .Forum .top p {
     margin-top: -40px;
-    font-size: 1vw;
+    font-size: 20px;
     color: gray;
 }
+
 .Forum .top h4 {
-    font-size: 2vw;
+    margin-top: -40px;
+    font-size: 1.8vw;
     color: gray;
 }
 
 .Forum .top h1 {
-    font-size: 2.7vw;
+    font-size: 2.5vw;
 }
 
 
 
 @media (max-width: 1024px) {
-    .Forum .top {
-        font-size: 18px;    
-    }
-
-    .Forum .top p {
-        font-size: 18px;
-        color: gray;
-    }
 
     .Forum .top h4 {
-        font-size: 22px !important;
+        font-size: 24px !important;
     }
 
     .Forum .top h1 {
-        font-size: 30px !important;
+        font-size: 34px !important;
         margin-bottom: 40px;
     }
 
@@ -54,15 +48,4 @@
     border: none;
     border-top: 1px solid rgb(209, 209, 209);;
 }
-}
-
-.Forum .card {
-    border: none;
-    border-radius: 0px;
-
-    border-bottom: 1px solid rgb(209, 209, 209);
-}
-
-.Forum .card:last-child {
-    border-bottom: none;
 }
