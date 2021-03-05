@@ -29,7 +29,8 @@ const EditPost = ({post, edit}) => {
       content, 
       date: post.date, 
       userId: post.userId, 
-      subTopicId: post.subTopicId
+      subTopicId: post.subTopicId,
+      topicId: post.topicId
     })
   }
 

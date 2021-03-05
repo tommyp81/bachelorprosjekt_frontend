@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Button, Container, Modal, Dropdown } from "react-bootstrap";
 import moment from 'moment'
 
-function NewPost ({subtopic, add, user}) {
+function NewPost ({subtopic, topicFocus,  add, user}) {
 
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("");
@@ -18,7 +18,7 @@ function NewPost ({subtopic, add, user}) {
 function handleSubmit(event) {
     event.preventDefault();
 
-    add({ title, content, date: moment().toISOString(), userId: user.id, subTopicId: Number(subtopic)})
+    add({ title, content, date: moment().toISOString(), userId: user.id, subTopicId: Number(subtopic), topicId: topicFocus})
   }
 
     return (
