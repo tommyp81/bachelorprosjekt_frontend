@@ -8,16 +8,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //npm install framer-motion --save
 import { motion } from "framer-motion";
-import React  from "react";
+import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import BLogin from "../../loginComponents/Login";
 import Register from "../../registerComponent/Register";
 import { MenuToggle } from "./menuToggle";
 import { NavMenu } from "./navMenu";
-
-
-
 
 //main wrapper that holds hamburger icon
 const HamburgerMenuContainer = styled.div`
@@ -27,12 +24,11 @@ const HamburgerMenuContainer = styled.div`
 
 //Hamburger icon
 const HamburgerIcon = styled.div`
-    color: ${({ reverseColor }) => (reverseColor ? "#000" : "#fff")};
-    cursor: pointer;
-    z-index: 99;
-    transition: all 250ms ease-in-out;
-    flex-direction: row-reverse;
-    
+  color: ${({ reverseColor }) => (reverseColor ? "#000" : "#fff")};
+  cursor: pointer;
+  z-index: 99;
+  transition: all 250ms ease-in-out;
+  flex-direction: row-reverse;
 `;
 // min-width for working good in mobile devices
 
@@ -50,13 +46,10 @@ const MenuContainer = styled(motion.div)`
   transform: translateX(4em);
   user-select: none;
   padding: 1em 2.5em;
-  
- 
-
 `;
 
 //for the loggin and sign up part on the hamburgerMenu pop-up box
-//loggin on the pop-up menu 
+//loggin on the pop-up menu
 const TopContainer = styled.div`
   display: flex;
   width: 100%;
@@ -97,8 +90,6 @@ const ContentContainer = styled.div`
   }
 `;
 
-
-
 //animation for opening and closing the HamburgerMenu.
 //we have to have translatex in the manuContainer in the css-style
 const menuVariants = {
@@ -132,7 +123,6 @@ const commonVariants = {
   },
 };
 
-
 const commonTransition = { type: "spring", duration: 0.05 };
 
 export function HamburgerMenu(props) {
@@ -161,17 +151,19 @@ export function HamburgerMenu(props) {
             <IconContainer>
               <FontAwesomeIcon icon={faUserCircle} />
             </IconContainer>
-              <a href="/Login" component={BLogin}>Logg Inn</a>
-             
+            <a href="/Login" component={BLogin}>
+              Logg Inn
+            </a>
           </LoginButton>
           <LoginButton
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={commonVariants}
             transition={commonTransition}
-            
           >
-            <a href="/Register" component={Register}>Melde Seg</a>
+            <a href="/Register" component={Register}>
+              Registrer Deg
+            </a>
           </LoginButton>
         </TopContainer>
         <ContentContainer>
