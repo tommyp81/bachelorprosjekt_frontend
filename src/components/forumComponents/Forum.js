@@ -104,7 +104,7 @@ const Forum = (props) => {
       
       
       setTopicTitle(value)
-      // setTopicFocus(key)
+      setTopicFocus(key)
     }
     
     // setTopicTitle(value)
@@ -170,7 +170,7 @@ const Forum = (props) => {
         <h4>{!topicTitle ? "" : topicTitle}</h4>
         <h1>{!subTopicTitle ? <p>Velg en underkategori for lage en ny post</p> : subTopicTitle}</h1>
         <div className="float-left">
-          <NewPost subtopic={subtopicFocus} add={props.addPost} user={props.user}/>
+          <NewPost subtopic={subtopicFocus} topicFocus={topicFocus} add={props.addPost} user={props.user}/>
         </div>
         <div className="float-right">
           <SortPosts/>
