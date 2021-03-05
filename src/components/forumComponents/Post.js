@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Form } from "react-bootstrap";
+import { Breadcrumb, Card, Form } from "react-bootstrap";
 import moment from 'moment'
 import {useHistory} from 'react-router-dom'
 import "./Post.css";
@@ -17,6 +17,8 @@ const Post = ({postId, user}) => {
   // const [post, setPosts] = useState([])
   const [comments, setComments] = useState([])
   const [post, setPost] = useState([])
+  const [subtopics, setSubtopics] = useState([])
+  const [topics, setTopics] = useState([])
 
   
 
@@ -37,6 +39,20 @@ const Post = ({postId, user}) => {
     fetch(`https://webforum.azurewebsites.net/posts/${postId}`)
     .then(res => res.json())
     .then(data => setPost(data))
+    .catch(console.log)
+
+    fetch("https://webforum.azurewebsites.net/SubTopics")
+    .then(res => res.json())
+    .then((data) => {
+      setSubtopics(data)
+    })
+    .catch(console.log)
+
+    fetch("https://webforum.azurewebsites.net/Topics")
+    .then(res => res.json())
+    .then((data) => {
+      setTopics(data)
+    })
     .catch(console.log)
   }, [])
 
@@ -114,10 +130,21 @@ const Post = ({postId, user}) => {
       
     <Container style={{display: 'flex', flexDirection: 'column'}}> 
     <div className="main">
+      <Breadcrumb>
+        <Breadcrumb.Item href="/forum">
+        Tilbake
+        </Breadcrumb.Item>
+      </Breadcrumb>
       <Card>
         <Card.Body>
           <div className="float-left">
-            Postet av <b>{user.username}</b> {moment(post.date).calendar()}
+          {topics.filter(topics =>(topics.id === post.topicId)).map((filteredTopics) => (
+            <p>Postet av <b>{user.username}</b> {moment(post.date).calendar()} i {filteredTopics.title} {"> "}
+            {subtopics.filter(subtopics => (subtopics.id === post.subTopicId)).map((filteredSubtopics) => ( 
+           filteredSubtopics.title
+        ))}
+            </p>
+            ))}
           </div>
           <div className="float-right">
               <EditPost post={post} edit={editPost}/> &nbsp;

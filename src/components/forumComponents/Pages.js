@@ -1,7 +1,8 @@
 import React from "react"
 import { Pagination } from "react-bootstrap"
+import "./Forum.css"
 
-const Pages = ({postsPerPage, totalPosts, paginate, nextPage, prevPage}) => {
+const Pages = ({postsPerPage, totalPosts, paginate, nextPage, prevPage, currentPage, firstPage, lastPage}) => {
 
   const pageNumbers = []
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
@@ -9,26 +10,24 @@ const Pages = ({postsPerPage, totalPosts, paginate, nextPage, prevPage}) => {
   }
 
   return (
-    <div className="Page" style={{marginTop:"20px"}}>
+    <div className="Pages" style={{marginTop:"20px"}}>
       <Pagination className="justify-content-center">
-        <Pagination.Prev 
+        <Pagination.Item
         href="#" 
-        onClick={() => prevPage()}
-        />
+        onClick={() => prevPage()}>
+          Forrige
+        </Pagination.Item>
+        
+        <Pagination.Item className="page">
+          Side {currentPage}
+        </Pagination.Item>
+        
 
-        {pageNumbers.map(num => (
-          <Pagination.Item
-          key={num}
-          onClick={() => paginate(num)} 
-          href="#">
-          {num}    
-          </Pagination.Item>
-        ))}
-
-        <Pagination.Next 
+        <Pagination.Item
         href="#" 
-        onClick={() => nextPage()}
-        />
+        onClick={() => nextPage()}>
+          Neste
+        </Pagination.Item>
       </Pagination>
       </div>
   )

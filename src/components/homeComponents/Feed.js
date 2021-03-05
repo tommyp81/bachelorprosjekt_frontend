@@ -7,7 +7,11 @@ import './Feed.css'
 
 //Viser en "preview" av forumpostene
 //Vil gjerne bare vise de 3-4 første postene!!!!!!!!!!!1
-const Feed = ({ post, user, subtopic, maxLength }) => {
+const Feed = ({ post, user, subtopic, maxLength, loading }) => {
+
+    if (loading) {
+      return <h2>Laster inn...</h2>
+    }
 
     return (
       <div className="Feed">

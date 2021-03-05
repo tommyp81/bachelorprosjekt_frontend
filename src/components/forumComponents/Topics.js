@@ -1,6 +1,5 @@
-import { faBorderNone } from '@fortawesome/free-solid-svg-icons';
-import React, { createRef } from 'react';
-import { Container, Row, Col, Button, Accordion, Card, ButtonGroup, Tabs, Tab } from "react-bootstrap";
+import React from 'react';
+import {Button, Tabs, Tab } from "react-bootstrap";
 import "./Topics.css";
 
 const Topics = ({ topics, subtopics, topClick, subClick }) => {

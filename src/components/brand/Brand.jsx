@@ -3,7 +3,7 @@ import './Brand.css';
 
 const brand = (props) => (
     <div className="Brand">
-        Norges Badmintonforbund
+        <a href="/" style={{textDecoration: 'none', color: 'white'}}>Norges Badmintonforbund</a>
     </div>
 
 ); 

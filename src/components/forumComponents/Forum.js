@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { Card, Container } from "react-bootstrap";
+import { Card, Container, Pagination } from "react-bootstrap";
 import Topics from "./Topics.js";
 import NewPost from "./NewPost.js"
 import Pages from "./Pages.js";
@@ -25,7 +25,7 @@ const Forum = (props) => {
   const [subtopicFocus, setSubTopicFocus] = useState("");
 
   const [users, setUsers] = useState([]);
-  const [loading, setloading] = useState(false);
+  const [loading, setLoading] = useState(false);
   // const history = useHistory();
 
   const [topicTitle, setTopicTitle] = useState("")
@@ -34,6 +34,7 @@ const Forum = (props) => {
 
   
   useEffect(() => {
+    setLoading(true)
     fetch("https://webforum.azurewebsites.net/Topics")
     .then(res => res.json())
     .then((data) => {
@@ -58,59 +59,49 @@ const Forum = (props) => {
 
   }, [])
 
-  
-
-
-
   useEffect(() => {
-    // setPosts(props.posts)
     setFilteredPosts(props.posts)
+    setLoading(false)
   }, [props.posts])
-  // useEffect(() => {
-  //   setFilteredPosts(props.posts)
-  // }, [])
-    
+  
+  const postsPerPage = 8
+  const [currentPage, setCurrentPage] = useState(1)
+ 
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const nextPage = () => setCurrentPage(currentPage + 1)
+  const prevPage = () => setCurrentPage(currentPage - 1)
 
-  //Denne må mappes fra post.subTopic_Title til subtopics.title til subtopics.topic_Id === topics.id på en eller annen måte.
 /*
-  onTopClick = (e) => {
-    let top = e.target.value
-    let fp = []
-
-    if (top.match(this.state.topics.filter(topics => topics.title))) {
-      this.setState({topicFocus: ""})
-      fp = this.state.posts2
+  const nextPage = () => {
+    if (currentPosts < postsPerPage) {
+      setCurrentPage(currentPage)
     } else {
-      this.setState({topicFocus: top})
-      fp = this.state.posts2.filter(posts2 => posts2.topicId === top)
+      setCurrentPage(currentPage + 1)
     }
-    this.setState({filteredPosts: fp})
   }
-  */
+
+  const prevPage = () => {
+    if (!indexOfFirstPost) {
+      setCurrentPage(currentPage - 1)
+    }
+  }*/
+
+  //const lastPage = currentPosts.length !== postsPerPage || indexOfLastPost === props.posts.length;
 
   const onTopClick = (key) => {
     if (key) {
+      setSubTopicFocus("")
       setSubTopicTitle("")
       let value = topics.find(t => t.id === Number(key)).title
       console.log(value)
-      
       console.log(props.posts.filter(fp => fp.topicId === Number(key)))
       setFilteredPosts(props.posts.filter(fp => fp.topicId === Number(key)))
-    
       console.log(props.posts)
-      
-      
-      
-      
-      
       setTopicTitle(value)
-      // setTopicFocus(key)
+      setCurrentPage(1);
     }
-    
-    // setTopicTitle(value)
-    // setTopicFocus(value)
-
-    
   }
 
   const onSubClick = (e) => {
@@ -120,43 +111,9 @@ const Forum = (props) => {
     console.log(subTop)
     setSubTopicTitle(title)
     setSubTopicFocus(subTop)    
-    /*
-    let fp = []
-    if (subTop.match(filteredPosts.filter(filteredPosts => filteredPosts.subTopicId))) {
-      setSubTopicFocus("")
-      fp = filteredPosts;
-    } else {
-      setSubTopicFocus(subTop)
-      fp = filteredPosts.filter(filteredPosts => filteredPosts.subTopicId === subTop)
-    }
-    setFilteredPosts(fp)*/
     setFilteredPosts(props.posts.filter(fp => fp.subTopicId === Number(subTop)))
-
-    
+    setCurrentPage(1);
   }
-
-  const postsPerPage = 8
-  const [currentPage, setCurrentPage] = useState(1)
- 
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
-
-  const paginate = pageNum => setCurrentPage(pageNum)
-  const nextPage = () => setCurrentPage(currentPage + 1)
-  const prevPage = () => setCurrentPage(currentPage - 1)
-  // onSubClick = (e) => {
-  //   let subtop = e.target.value
-  //   let fp = []
-  //   if (subtop.match(this.state.topics.filter(topics => topics.title))) {
-  //     this.setState({subtopicFocus: ""})
-  //     fp = this.state.posts
-  //   } else {
-  //     this.setState({subtopicFocus: subtop})
-  //     fp = this.state.posts.filter(post => post.subTopic_Title === subtop)
-  //   }
-  //   this.setState({filteredPosts: fp})
-  // } 
 
   return (
     <div className="Forum mt-5">
@@ -179,11 +136,11 @@ const Forum = (props) => {
 
       <Container className="main">
         {/* {renderPosts} */}
-        <Feed post={currentPosts} user={users} subtopic={subtopics} maxLength={props.posts.length}/>
+        <Feed post={currentPosts} user={users} subtopic={subtopics} maxLength={currentPosts.length} loading={loading}/>
       </Container>
 
       <Container>
-        <Pages postsPerPage={postsPerPage} totalPosts={props.posts.length} paginate={paginate} nextPage={nextPage} prevPage={prevPage} />
+        <Pages postsPerPage={postsPerPage} totalPosts={currentPosts.length} nextPage={nextPage} prevPage={prevPage} currentPage={currentPage}/>
       </Container>
     </div>
       );
