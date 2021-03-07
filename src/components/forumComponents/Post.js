@@ -13,13 +13,10 @@ import EditPost from './EditPost';
 import EditComment from './EditComment';
 import { UserContext } from '../../UserContext';
 
-const Post = () => {
+const Post = ( { subtopics, topics}) => {
 
-  // const [post, setPosts] = useState([])
   const [comments, setComments] = useState([])
   const [post, setPost] = useState([])
-  const [subtopics, setSubtopics] = useState([])
-  const [topics, setTopics] = useState([])
 
   const { postId } = useParams()
   const { user } = useContext(UserContext)
@@ -41,20 +38,6 @@ const Post = () => {
     fetch(`https://webforum.azurewebsites.net/posts/${postId}`)
     .then(res => res.json())
     .then(data => setPost(data))
-    .catch(console.log)
-
-    fetch("https://webforum.azurewebsites.net/SubTopics")
-    .then(res => res.json())
-    .then((data) => {
-      setSubtopics(data)
-    })
-    .catch(console.log)
-
-    fetch("https://webforum.azurewebsites.net/Topics")
-    .then(res => res.json())
-    .then((data) => {
-      setTopics(data)
-    })
     .catch(console.log)
   }, [])
 

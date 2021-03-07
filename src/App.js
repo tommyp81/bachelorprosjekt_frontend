@@ -45,9 +45,10 @@ const App = () => {
     localStorage.setItem('user', JSON.stringify(user))
   }, [user])
 
-  // const [topics, setTopics] = useState([]);
-  // const [subtopics, setSubtopics] = useState([]);
+  const [topics, setTopics] = useState([]);
+  const [subtopics, setSubtopics] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([])
 
 
 
@@ -56,6 +57,27 @@ const App = () => {
     .then(res => res.json())
     .then(data => {
       setPosts(data)
+    })
+    .catch(console.log)
+
+    fetch("https://webforum.azurewebsites.net/SubTopics")
+    .then(res => res.json())
+    .then((data) => {
+      setSubtopics(data)
+    })
+    .catch(console.log)
+
+    fetch("https://webforum.azurewebsites.net/Topics")
+    .then(res => res.json())
+    .then((data) => {
+      setTopics(data)
+    })
+    .catch(console.log)
+
+    fetch("https://webforum.azurewebsites.net/Users")
+    .then(res => res.json())
+    .then((data) => {
+      setUsers(data)
     })
     .catch(console.log)
 
@@ -90,11 +112,11 @@ const App = () => {
           <Navbar />
           <Switch>
             <Route path="/Login" component={Login} />
-            <ProtectedRoute exact path="/" component={Home} />
+            <ProtectedRoute exact path="/" component={Home} subtopic={subtopics} users={users} posts={posts}/>
             <ProtectedRoute path="/Register" component={Register} Register = {Register} />
-            <ProtectedRoute exact path="/Forum" component={Forum} posts={posts} addPost={addPost} />
+            <ProtectedRoute exact path="/Forum" component={Forum} posts={posts} addPost={addPost} subtopics={subtopics} topics={topics} users={users} />
             <ProtectedRoute exact from="/Kunnskasportalen" component={Kunnskapsportalen} />
-            <ProtectedRoute exact path="/Forum/:postId" component={Post} />
+            <ProtectedRoute exact path="/Forum/:postId" component={Post} subtopics={subtopics} topics={topics} />
           </Switch>
         </div>
       </UserContext.Provider>
