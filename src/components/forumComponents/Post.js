@@ -148,7 +148,7 @@ const Post = () => {
             </p>
             ))}
           </div>
-          <div className="float-right">
+          <div className="float-right" hidden={!(user.id === post.userId)}>
               <EditPost post={post} edit={editPost}/> &nbsp;
               <Button variant="danger" size="sm" onClick={deletePost} value={post.id}>Slett</Button>
             </div>
@@ -177,7 +177,7 @@ const Post = () => {
                     <p>Postet av <b>{user.username}</b>{/*filteredUser.username*/} {moment(filteredComment.date).calendar()}</p>
                     /*))*/}
                     </div>
-                    <div className="float-right">
+                    <div className="float-right" hidden={!(user.id === post.userId)}>
                       <EditComment comment={filteredComment} edit={editComment}/> &nbsp;
                       <Button variant="danger" size="sm" onClick={deleteComment} value={filteredComment.id}>Slett</Button>
                     </div>  
