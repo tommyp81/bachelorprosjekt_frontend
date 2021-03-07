@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import moment from 'moment'
 import "./Post.css";
+import { UserContext } from "../../UserContext";
 
-function NewComment({createNew, pId, user}) {
+function NewComment({createNew, pId}) {
+
+  const { user } = useContext(UserContext)
 
   const [content, setContent] = useState("");
 

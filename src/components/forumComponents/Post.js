@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Breadcrumb, Card, Form } from "react-bootstrap";
 import moment from 'moment'
-import {useHistory} from 'react-router-dom'
+import {useHistory, useParams} from 'react-router-dom'
 import "./Post.css";
 
 //import Header from '../mainComponents/Header'
@@ -11,16 +11,15 @@ import { Navbar } from '../navigation/navbar/navbar';
 import NewComment from './NewComment';
 import EditPost from './EditPost';
 import EditComment from './EditComment';
+import { UserContext } from '../../UserContext';
 
-const Post = ({postId, user}) => {
+const Post = ( { subtopics, topics, users }) => {
 
-  // const [post, setPosts] = useState([])
   const [comments, setComments] = useState([])
   const [post, setPost] = useState([])
-  const [subtopics, setSubtopics] = useState([])
-  const [topics, setTopics] = useState([])
 
-  
+  const { postId } = useParams()
+  const { user } = useContext(UserContext)
 
 
   const history = useHistory();
@@ -39,20 +38,6 @@ const Post = ({postId, user}) => {
     fetch(`https://webforum.azurewebsites.net/posts/${postId}`)
     .then(res => res.json())
     .then(data => setPost(data))
-    .catch(console.log)
-
-    fetch("https://webforum.azurewebsites.net/SubTopics")
-    .then(res => res.json())
-    .then((data) => {
-      setSubtopics(data)
-    })
-    .catch(console.log)
-
-    fetch("https://webforum.azurewebsites.net/Topics")
-    .then(res => res.json())
-    .then((data) => {
-      setTopics(data)
-    })
     .catch(console.log)
   }, [])
 
@@ -139,14 +124,14 @@ const Post = ({postId, user}) => {
         <Card.Body>
           <div className="float-left">
           {topics.filter(topics =>(topics.id === post.topicId)).map((filteredTopics) => (
-            <p>Postet av <b>{user.username}</b> {moment(post.date).calendar()} i {filteredTopics.title} {"> "}
+            <p>Postet av <b>{users && users.length && users.find(u => u.id === post.userId).username}</b> {moment(post.date).calendar()} i {filteredTopics.title} {"> "}
             {subtopics.filter(subtopics => (subtopics.id === post.subTopicId)).map((filteredSubtopics) => ( 
-           filteredSubtopics.title
-        ))}
+             filteredSubtopics.title
+            ))}
             </p>
             ))}
           </div>
-          <div className="float-right">
+          <div className="float-right" hidden={!(user.id === post.userId)}>
               <EditPost post={post} edit={editPost}/> &nbsp;
               <Button variant="danger" size="sm" onClick={deletePost} value={post.id}>Slett</Button>
             </div>
@@ -172,10 +157,10 @@ const Post = ({postId, user}) => {
                   <Card.Body>
                     <div className="float-left">
                     {/*user.filter(user => (user.id === comment.Userid)).map((filteredUser) => (*/
-                    <p>Postet av <b>{user.username}</b>{/*filteredUser.username*/} {moment(filteredComment.date).calendar()}</p>
+                    <p>Postet av <b>{users && users.length && users.find(u => u.id === filteredComment.userId).username}</b>{/*filteredUser.username*/} {moment(filteredComment.date).calendar()}</p>
                     /*))*/}
                     </div>
-                    <div className="float-right">
+                    <div className="float-right" hidden={!(user.id === post.userId)}>
                       <EditComment comment={filteredComment} edit={editComment}/> &nbsp;
                       <Button variant="danger" size="sm" onClick={deleteComment} value={filteredComment.id}>Slett</Button>
                     </div>  

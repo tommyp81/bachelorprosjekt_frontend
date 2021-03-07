@@ -1,4 +1,4 @@
-import React, { useState } from "react"; 
+import React, { useContext, useState } from "react"; 
 import { Form, Button, Container, Col, Row } from "react-bootstrap";
 import WelcomeLogo from './WelcomeLogo';
 
@@ -6,27 +6,55 @@ import { useHistory } from 'react-router-dom'
 import Register from '../registerComponent/Register';
 
 import "./Login.css";
+import { UserContext } from "../../UserContext";
 
-function Login({ logIn }) {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+const Login = () => {
+  const [uname, setUname] = useState("test");
+  // const [password, setPassword] = useState("");
 
-    const history = useHistory();
+
+  const history = useHistory();
+
+  const {setUser} = useContext(UserContext)
+
+  function validateForm() {
+    // return username.length > 0 && password.length > 0;
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log(uname)
+    switch (uname) {
+      case "test":
+        setUser({id: 6, username: "test", loggedIn: true})
+        break;
+      case "tommy":
+        setUser({id: 1, username: "tommy", loggedIn: true})
+        break;
+      case "henrik":
+        setUser({id: 2, username: "henrik", loggedIn: true})
+        break;
+      case "erik":
+        setUser({id: 3, username: "erik", loggedIn: true})
+        break;
+      case "pia": 
+        setUser({id: 4, username: "pia", loggedIn: true})
+        break;
+      case "sepita":
+        setUser({id: 5, username: "sepita", loggedIn: true})
+        break;
+      default:
+        break;
+    }
+
+    loginUser()
+  }
+
+  const loginUser = () => {
+    history.push("./")
+  }
+
   
-    function validateForm() {
-      return email.length > 0 && password.length > 0;
-    }
-  
-    function handleSubmit(event) {
-      event.preventDefault();
-    }
-
-    const onLoginSubmit = () => {
-      console.log("HEI")
-      history.push("./hjem")
-      logIn()
-    }
-
 
   
   return (
@@ -39,18 +67,18 @@ function Login({ logIn }) {
           <Col className="login" sm={6}>
             <h2>Logg inn med idrettens ID</h2>
             <a href="/Register">Ny bruker?</a>
-            <Form>
-                <Form.Group controlId="formBasicEmail" onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit}>
+                {/* <Form.Group controlId="formBasicEmail" >
                     <Form.Control 
-                    type="email"
-                    name="email"
-                    placeholder="E-post"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    type="text"
+                    name="username"
+                    placeholder="Brukernavn"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     />
                 </Form.Group>
 
-                <Form.Group controlId="formBasicPassword" onSubmit={handleSubmit}>
+                <Form.Group controlId="formBasicPassword">
                     <Form.Control 
                     type="password"
                     name="password"
@@ -58,13 +86,23 @@ function Login({ logIn }) {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     />
+                </Form.Group> */}
+                <Form.Group controlId="exampleForm.ControlSelect1">
+                  <Form.Label>Velg Bruker</Form.Label>
+                  <Form.Control as="select" onChange={e => setUname(e.target.value)}>
+                    <option value="test">test</option>
+                    <option value="tommy">tommy</option>
+                    <option value="henrik">henrik</option>
+                    <option value="erik">erik</option>
+                    <option value="pia">pia</option>
+                    <option value="sepita">sepita</option>
+                  </Form.Control>
                 </Form.Group>
                 
                 <Button 
                     variant="success" 
                     type="submit"
-                    disabled={!validateForm()}
-                    onClick={onLoginSubmit}
+                    // disabled={!validateForm()}
                 >
                     Logg inn
                 </Button>

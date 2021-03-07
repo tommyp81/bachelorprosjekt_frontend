@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { Card, Container, Pagination } from "react-bootstrap";
 import Topics from "./Topics.js";
 import NewPost from "./NewPost.js"
@@ -10,13 +10,12 @@ import Feed from '../homeComponents/Feed.js';
 import { useHistory } from 'react-router-dom';
 
 import SortPosts from './SortPosts'
+import { UserContext } from '../../UserContext'
 
  
 
-const Forum = (props) => {
+const Forum = ({ posts, addPost, topics, subtopics, users}) => {
 
-  const [topics, setTopics] = useState([]);
-  const [subtopics, setSubtopics] = useState([]);
   
   // const [posts, setPosts] = useState([...props.posts]);
   const [filteredPosts, setFilteredPosts] = useState([]);
@@ -24,45 +23,19 @@ const Forum = (props) => {
   const [topicFocus, setTopicFocus] = useState("");
   const [subtopicFocus, setSubTopicFocus] = useState("");
 
-  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   // const history = useHistory();
 
   const [topicTitle, setTopicTitle] = useState("")
   const [subTopicTitle, setSubTopicTitle] = useState("")
 
-
+  const {user} = useContext(UserContext)
   
-  useEffect(() => {
-    setLoading(true)
-    fetch("https://webforum.azurewebsites.net/Topics")
-    .then(res => res.json())
-    .then((data) => {
-      setTopics(data)
-    })
-    .catch(console.log)
-
-
-    fetch("https://webforum.azurewebsites.net/SubTopics")
-    .then(res => res.json())
-    .then((data) => {
-      setSubtopics(data)
-    })
-    .catch(console.log)
-    
-  fetch("https://webforum.azurewebsites.net/Users")
-  .then(res => res.json())
-  .then((data) => {
-    setUsers(data)
-  })
-  .catch(console.log)
-
-  }, [])
 
   useEffect(() => {
-    setFilteredPosts(props.posts)
+    setFilteredPosts(posts)
     setLoading(false)
-  }, [props.posts])
+  }, [posts])
   
   const postsPerPage = 8
   const [currentPage, setCurrentPage] = useState(1)
@@ -82,9 +55,9 @@ const Forum = (props) => {
       setSubTopicTitle("")
       let value = topics.find(t => t.id === Number(key)).title
       console.log(value)
-      console.log(props.posts.filter(fp => fp.topicId === Number(key)))
-      setFilteredPosts(props.posts.filter(fp => fp.topicId === Number(key)))
-      console.log(props.posts)
+      console.log(posts.filter(fp => fp.topicId === Number(key)))
+      setFilteredPosts(posts.filter(fp => fp.topicId === Number(key)))
+      console.log(posts)
       setTopicTitle(value)
       setCurrentPage(1);
       setTopicFocus(key)
@@ -98,7 +71,7 @@ const Forum = (props) => {
     console.log(subTop)
     setSubTopicTitle(title)
     setSubTopicFocus(subTop)    
-    setFilteredPosts(props.posts.filter(fp => fp.subTopicId === Number(subTop)))
+    setFilteredPosts(posts.filter(fp => fp.subTopicId === Number(subTop)))
     setCurrentPage(1);
   }
 
@@ -114,7 +87,7 @@ const Forum = (props) => {
         <h4>{!topicTitle ? "" : topicTitle}</h4>
         <h1>{!subTopicTitle ? <p>Velg en underkategori for lage en ny post</p> : subTopicTitle}</h1>
         <div className="float-left">
-          <NewPost subtopic={subtopicFocus} topicFocus={topicFocus} add={props.addPost} user={props.user}/>
+          <NewPost subtopic={subtopicFocus} topicFocus={topicFocus} add={addPost}/>
         </div>
         <div className="float-right">
           <SortPosts/>
@@ -123,7 +96,7 @@ const Forum = (props) => {
 
       <Container className="main">
         {/* {renderPosts} */}
-        <Feed post={currentPosts} user={users} subtopic={subtopics} maxLength={currentPosts.length} loading={loading}/>
+        <Feed posts={currentPosts} users={users} subtopic={subtopics} maxLength={currentPosts.length} loading={loading}/>
       </Container>
 
       <Container>
