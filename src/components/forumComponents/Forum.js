@@ -110,7 +110,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users}) => {
 
       <Container className="main">
         {/* {renderPosts} */}
-        <Feed post={currentPosts} users={users} subtopic={subtopics} maxLength={currentPosts.length} loading={loading}/>
+        <Feed posts={currentPosts} users={users} subtopic={subtopics} maxLength={currentPosts.length} loading={loading}/>
       </Container>
 
       <Container>

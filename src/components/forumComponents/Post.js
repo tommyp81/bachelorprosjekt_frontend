@@ -13,7 +13,7 @@ import EditPost from './EditPost';
 import EditComment from './EditComment';
 import { UserContext } from '../../UserContext';
 
-const Post = ( { subtopics, topics}) => {
+const Post = ( { subtopics, topics, users }) => {
 
   const [comments, setComments] = useState([])
   const [post, setPost] = useState([])
@@ -124,10 +124,10 @@ const Post = ( { subtopics, topics}) => {
         <Card.Body>
           <div className="float-left">
           {topics.filter(topics =>(topics.id === post.topicId)).map((filteredTopics) => (
-            <p>Postet av <b>{user.username}</b> {moment(post.date).calendar()} i {filteredTopics.title} {"> "}
+            <p>Postet av <b>{users && users.length && users.find(u => u.id === post.userId).username}</b> {moment(post.date).calendar()} i {filteredTopics.title} {"> "}
             {subtopics.filter(subtopics => (subtopics.id === post.subTopicId)).map((filteredSubtopics) => ( 
-           filteredSubtopics.title
-        ))}
+             filteredSubtopics.title
+            ))}
             </p>
             ))}
           </div>
@@ -157,7 +157,7 @@ const Post = ( { subtopics, topics}) => {
                   <Card.Body>
                     <div className="float-left">
                     {/*user.filter(user => (user.id === comment.Userid)).map((filteredUser) => (*/
-                    <p>Postet av <b>{user.username}</b>{/*filteredUser.username*/} {moment(filteredComment.date).calendar()}</p>
+                    <p>Postet av <b>{users && users.length && users.find(u => u.id === filteredComment.userId).username}</b>{/*filteredUser.username*/} {moment(filteredComment.date).calendar()}</p>
                     /*))*/}
                     </div>
                     <div className="float-right" hidden={!(user.id === post.userId)}>

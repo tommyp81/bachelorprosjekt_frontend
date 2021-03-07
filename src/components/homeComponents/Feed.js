@@ -7,7 +7,7 @@ import './Feed.css'
 
 //Viser en "preview" av forumpostene
 //Vil gjerne bare vise de 3-4 første postene!!!!!!!!!!!1
-const Feed = ({ post, users, subtopic, maxLength, loading }) => {
+const Feed = ({ posts, users, subtopic, maxLength, loading }) => {
 
     if (loading) {
       return <h2>Laster inn...</h2>
@@ -15,7 +15,7 @@ const Feed = ({ post, users, subtopic, maxLength, loading }) => {
 
     return (
       <div className="Feed">
-        {post.sort((p1, p2) => (moment(p2.date).diff(moment(p1.date)))).slice(0, maxLength).map((post, i) => (
+        {posts.sort((p1, p2) => (moment(p2.date).diff(moment(p1.date)))).slice(0, maxLength).map((post, i) => (
           
             <Card key={i}>
               <Link to={`/forum/${post.id}`} style={{textDecoration: 'none', color: '#000000'}}>

@@ -116,7 +116,7 @@ const App = () => {
             <ProtectedRoute path="/Register" component={Register} Register = {Register} />
             <ProtectedRoute exact path="/Forum" component={Forum} posts={posts} addPost={addPost} subtopics={subtopics} topics={topics} users={users} />
             <ProtectedRoute exact from="/Kunnskasportalen" component={Kunnskapsportalen} />
-            <ProtectedRoute exact path="/Forum/:postId" component={Post} subtopics={subtopics} topics={topics} />
+            <ProtectedRoute exact path="/Forum/:postId" component={Post} subtopics={subtopics} topics={topics} users={users} />
           </Switch>
         </div>
       </UserContext.Provider>

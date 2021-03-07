@@ -18,7 +18,7 @@ const Home = ({ posts, subtopic, users}) =>  {
         <Row><h5>Siste poster i forumet</h5></Row>
         <Row xs={1} sm={1} lg={2}>
           <Col md={6} className="feedcol">
-            <Feed post = {posts} users={users} subtopic={subtopic} maxLength={4}/>
+            <Feed posts = {posts} users={users} subtopic={subtopic} maxLength={4}/>
           </Col>
           <Col md={6} className="textcol">
             <Container className="infocon">
