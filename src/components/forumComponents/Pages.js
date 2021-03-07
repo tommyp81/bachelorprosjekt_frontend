@@ -1,5 +1,5 @@
 import React from "react"
-import { Pagination } from "react-bootstrap"
+import { Pagination, Dropdown } from "react-bootstrap"
 import "./Forum.css"
 
 const Pages = ({postsPerPage, totalPosts, paginate, nextPage, prevPage, currentPage, firstPage, lastPage}) => {
@@ -13,20 +13,30 @@ const Pages = ({postsPerPage, totalPosts, paginate, nextPage, prevPage, currentP
     <div className="Pages" style={{marginTop:"20px"}}>
       <Pagination className="justify-content-center">
         <Pagination.Item
-        href="#" 
-        onClick={() => prevPage()}>
-          Forrige
+        onClick={() => prevPage()}
+        disabled={firstPage}>
+          {"<"}
         </Pagination.Item>
-        
-        <Pagination.Item className="page">
-          Side {currentPage}
-        </Pagination.Item>
-        
+
+        <Dropdown>
+          <Dropdown.Toggle className="page">
+            Side {currentPage}
+          </Dropdown.Toggle>
+          
+          <Dropdown.Menu>
+            {pageNumbers.map(num => (
+            <Dropdown.Item onClick={() => paginate(num)} key={num}>
+              Side {num}
+            </Dropdown.Item> 
+            ))}
+          </Dropdown.Menu>
+         
+        </Dropdown>
 
         <Pagination.Item
-        href="#" 
-        onClick={() => nextPage()}>
-          Neste
+        onClick={() => nextPage()}
+        disabled={lastPage}>
+          {">"}
         </Pagination.Item>
       </Pagination>
       </div>

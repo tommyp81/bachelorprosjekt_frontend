@@ -6,7 +6,11 @@ const Topics = ({ topics, subtopics, topClick, subClick }) => {
 	
 	return (
 		<div className="Topics">
-			<Tabs variant="pills" className="justify-content-center" onSelect={topClick}>
+			<Tabs 
+			variant="pills" 
+			className="justify-content-center" 
+			onSelect={topClick} 
+			defaultActiveKey="0">
 				{topics.map((topics, i) => (
 					<Tab key={i} eventKey={topics.id} title={topics.title} className="tab">
 						{subtopics.filter(subtopics => (subtopics.topicId === topics.id)).map((filteredSubtopics, i) => (
@@ -16,6 +20,7 @@ const Topics = ({ topics, subtopics, topClick, subClick }) => {
 				))}
 			</Tabs>
 		</div>
+			
 	);
 }
 

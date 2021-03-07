@@ -32,6 +32,7 @@ const SortPosts = ({post}) => {
       <Dropdown.Menu>
         <Dropdown.Item href="" /*onSelect={}*/>Nyeste til eldste</Dropdown.Item>
         <Dropdown.Item href="">Flest kommentarer</Dropdown.Item>
+        <Dropdown.Item href="">Ingen kommentarer</Dropdown.Item>
       </Dropdown.Menu>
 
     </Dropdown>

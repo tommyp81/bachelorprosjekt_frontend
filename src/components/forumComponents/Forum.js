@@ -70,25 +70,11 @@ const Forum = (props) => {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNum => setCurrentPage(pageNum)
   const nextPage = () => setCurrentPage(currentPage + 1)
   const prevPage = () => setCurrentPage(currentPage - 1)
-
-/*
-  const nextPage = () => {
-    if (currentPosts < postsPerPage) {
-      setCurrentPage(currentPage)
-    } else {
-      setCurrentPage(currentPage + 1)
-    }
-  }
-
-  const prevPage = () => {
-    if (!indexOfFirstPost) {
-      setCurrentPage(currentPage - 1)
-    }
-  }*/
-
-  //const lastPage = currentPosts.length !== postsPerPage || indexOfLastPost === props.posts.length;
+  const lastPage = currentPosts.length !== postsPerPage || indexOfLastPost === props.posts.length;
+  const firstPage = currentPage === 1;
 
   const onTopClick = (key) => {
     if (key) {
@@ -141,7 +127,7 @@ const Forum = (props) => {
       </Container>
 
       <Container>
-        <Pages postsPerPage={postsPerPage} totalPosts={currentPosts.length} nextPage={nextPage} prevPage={prevPage} currentPage={currentPage}/>
+        <Pages postsPerPage={postsPerPage} paginate={paginate} totalPosts={currentPosts.length} nextPage={nextPage} prevPage={prevPage} currentPage={currentPage} firstPage={firstPage} lastPage={lastPage}/>
       </Container>
     </div>
       );
