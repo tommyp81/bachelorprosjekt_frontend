@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import Feed from "./Feed.js";
+import Feed from "../forumComponents/Feed.js";
 import "./Home.css";
 import Footer from '../mainComponents/Footer'
 //import Header from '../mainComponents/Header'

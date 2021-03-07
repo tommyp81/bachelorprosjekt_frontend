@@ -6,7 +6,7 @@ import Pages from "./Pages.js";
 import "./Forum.css";
 import { Component } from 'react';
 import moment from 'moment'
-import Feed from '../homeComponents/Feed.js';
+import Feed from './Feed.js';
 import { useHistory } from 'react-router-dom';
 
 import SortPosts from './SortPosts'
@@ -23,7 +23,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users}) => {
   const [topicFocus, setTopicFocus] = useState("");
   const [subtopicFocus, setSubTopicFocus] = useState("");
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   // const history = useHistory();
 
   const [topicTitle, setTopicTitle] = useState("")
@@ -43,10 +43,12 @@ const Forum = ({ posts, addPost, topics, subtopics, users}) => {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+
   const paginate = pageNum => setCurrentPage(pageNum)
   const nextPage = () => setCurrentPage(currentPage + 1)
   const prevPage = () => setCurrentPage(currentPage - 1)
-  const lastPage = currentPosts.length !== postsPerPage || indexOfLastPost === props.posts.length;
+
+  const lastPage = currentPosts.length !== postsPerPage || indexOfLastPost === posts.length;
   const firstPage = currentPage === 1;
 
   const onTopClick = (key) => {
