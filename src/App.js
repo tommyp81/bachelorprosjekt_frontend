@@ -25,6 +25,8 @@ import { Navbar } from "./components/navigation/navbar/navbar";
 import Kunnskapsportalen from "./components/infoComponents/Kunnskapsportalen";
 // import Kunnskapsportalen from "./components/infoComponents/Info";
 import Register from './components/registerComponent/Register';
+import { UserContext } from './UserContext'
+import ProtectedRoute from './ProtectedRoute'
 // https://webforum.azurewebsites.net/posts
 // https://webforum.azurewebsites.net/answers
 // https://webforum.azurewebsites.net/users
@@ -33,50 +35,31 @@ import Register from './components/registerComponent/Register';
 
 
 const App = () => {
- 
-  // state = {
-  //   post: [],
-  //   comment: [],
-  //   user: []
-  // }
 
-  const [user, setUser] = useState({id: 6, username: "test"})
-
-
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [user, setUser] = useState(() => {
+    const localUser = localStorage.getItem('user');
+    return localUser ? JSON.parse(localUser) : {}
+  })
   
+  useEffect(() => {
+    localStorage.setItem('user', JSON.stringify(user))
+  }, [user])
+
   // const [topics, setTopics] = useState([]);
   // const [subtopics, setSubtopics] = useState([]);
   const [posts, setPosts] = useState([]);
 
 
-  const testId = 22;
-
-  const logIn = () => {
-    setLoggedIn(true);
-    console.log(loggedIn)
-  }
 
   useEffect(() => {
-
-    
-
     fetch("https://webforum.azurewebsites.net/posts")
     .then(res => res.json())
     .then(data => {
       setPosts(data)
-      // setFilteredPosts(data)
     })
     .catch(console.log)
 
   }, [])
-
-  // const fetchPost = async (id) => {
-  //   const res = await fetch(`https://localhost:44319/posts/${id}`)
-  //   const data = await res.json()
-
-  //   return data
-  // }
 
   const addPost = async (post) => {
     const res = await fetch('https://webforum.azurewebsites.net/posts', {
@@ -102,31 +85,19 @@ const App = () => {
   //Akkurat nå er det kun post-komponenten som er synlig!
   return (
     <BrowserRouter>
-      <div className="App">
-     
-        {/* related to the navigationbar.*/}
-    
+      <UserContext.Provider value={{user, setUser}} >
+        <div className="App">
           <Navbar />
- 
-        
-      
-        <Switch>
-    
-          <Route exact path="/" component={Home} />
-          <Route path="/Login" render={props => <Login {...props} logIn = {logIn} />} />
-          <Route path="/Register" render={props => <Register {...props} Register = {Register} />} />
-          {/* <Route exact from="/Forum" render={props => <Post {...props} users = {users} post = {post} comment = {comment}/>} /> */}
-          <Route exact from="/Forum" render={props => <Forum {...props} posts={posts} user={user} addPost={addPost}/>} />
-          <Route exact from="/Kunnskasportalen" render={props => <Kunnskapsportalen {...props} />} />
-          <Route exact path="/Forum/:id" render={props => <Post {...props}  
-            // post={posts.find(p => p.id === parseInt(props.match.params.id))} 
-            postId = {parseInt(props.match.params.id)}
-            user={user}/>}
-          />
-
-        </Switch>
-        
-      </div>
+          <Switch>
+            <Route path="/Login" component={Login} />
+            <ProtectedRoute exact path="/" component={Home} />
+            <ProtectedRoute path="/Register" component={Register} Register = {Register} />
+            <ProtectedRoute exact path="/Forum" component={Forum} posts={posts} addPost={addPost} />
+            <ProtectedRoute exact from="/Kunnskasportalen" component={Kunnskapsportalen} />
+            <ProtectedRoute exact path="/Forum/:postId" component={Post} />
+          </Switch>
+        </div>
+      </UserContext.Provider>
     </BrowserRouter>   
     
   )

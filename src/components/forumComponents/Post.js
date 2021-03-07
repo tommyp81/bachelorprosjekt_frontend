@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Breadcrumb, Card, Form } from "react-bootstrap";
 import moment from 'moment'
-import {useHistory} from 'react-router-dom'
+import {useHistory, useParams} from 'react-router-dom'
 import "./Post.css";
 
 //import Header from '../mainComponents/Header'
@@ -11,8 +11,9 @@ import { Navbar } from '../navigation/navbar/navbar';
 import NewComment from './NewComment';
 import EditPost from './EditPost';
 import EditComment from './EditComment';
+import { UserContext } from '../../UserContext';
 
-const Post = ({postId, user}) => {
+const Post = () => {
 
   // const [post, setPosts] = useState([])
   const [comments, setComments] = useState([])
@@ -20,7 +21,8 @@ const Post = ({postId, user}) => {
   const [subtopics, setSubtopics] = useState([])
   const [topics, setTopics] = useState([])
 
-  
+  const { postId } = useParams()
+  const { user } = useContext(UserContext)
 
 
   const history = useHistory();

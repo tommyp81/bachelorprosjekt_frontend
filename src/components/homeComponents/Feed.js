@@ -7,7 +7,7 @@ import './Feed.css'
 
 //Viser en "preview" av forumpostene
 //Vil gjerne bare vise de 3-4 første postene!!!!!!!!!!!1
-const Feed = ({ post, user, subtopic, maxLength, loading }) => {
+const Feed = ({ post, users, subtopic, maxLength, loading }) => {
 
     if (loading) {
       return <h2>Laster inn...</h2>
@@ -26,7 +26,7 @@ const Feed = ({ post, user, subtopic, maxLength, loading }) => {
                   ))}
                   
                   
-                  {user.filter(user => (user.id === post.userId)).map((filteredUser, i) => (
+                  {users.filter(user => (user.id === post.userId)).map((filteredUser, i) => (
                   <Card.Text>
                     <div className="float-left">{moment(post.date).calendar()} av {filteredUser.username}</div>
                     <div className="float-right">{post.comment_Count} &nbsp;

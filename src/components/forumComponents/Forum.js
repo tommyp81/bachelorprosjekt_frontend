@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { Card, Container, Pagination } from "react-bootstrap";
 import Topics from "./Topics.js";
 import NewPost from "./NewPost.js"
@@ -10,6 +10,7 @@ import Feed from '../homeComponents/Feed.js';
 import { useHistory } from 'react-router-dom';
 
 import SortPosts from './SortPosts'
+import { UserContext } from '../../UserContext'
 
  
 
@@ -31,7 +32,7 @@ const Forum = (props) => {
   const [topicTitle, setTopicTitle] = useState("")
   const [subTopicTitle, setSubTopicTitle] = useState("")
 
-
+  const {user} = useContext(UserContext)
   
   useEffect(() => {
     setLoading(true)
@@ -128,7 +129,7 @@ const Forum = (props) => {
         <h4>{!topicTitle ? "" : topicTitle}</h4>
         <h1>{!subTopicTitle ? <p>Velg en underkategori for lage en ny post</p> : subTopicTitle}</h1>
         <div className="float-left">
-          <NewPost subtopic={subtopicFocus} topicFocus={topicFocus} add={props.addPost} user={props.user}/>
+          <NewPost subtopic={subtopicFocus} topicFocus={topicFocus} add={props.addPost}/>
         </div>
         <div className="float-right">
           <SortPosts/>
@@ -137,7 +138,7 @@ const Forum = (props) => {
 
       <Container className="main">
         {/* {renderPosts} */}
-        <Feed post={currentPosts} user={users} subtopic={subtopics} maxLength={currentPosts.length} loading={loading}/>
+        <Feed post={currentPosts} users={users} subtopic={subtopics} maxLength={currentPosts.length} loading={loading}/>
       </Container>
 
       <Container>

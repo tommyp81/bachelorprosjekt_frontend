@@ -14,7 +14,7 @@ class Home extends Component {
   state = {
     post: [],
     subtopic: [],
-    user: []
+    users: []
   }
 
   componentDidMount() {
@@ -35,7 +35,7 @@ class Home extends Component {
     fetch("https://webforum.azurewebsites.net/Users")
     .then(res => res.json())
     .then((data) => {
-      this.setState({ user: data })
+      this.setState({ users: data })
     })
     .catch(console.log)
   }
@@ -49,7 +49,7 @@ class Home extends Component {
               <Row><h5>Siste poster i forumet</h5></Row>
               <Row xs={1} sm={1} lg={2}>
                 <Col md={6} className="feedcol">
-                  <Feed post = {this.state.post} user={this.state.user} subtopic={this.state.subtopic} maxLength={4}/>
+                  <Feed post = {this.state.post} users={this.state.users} subtopic={this.state.subtopic} maxLength={4}/>
                 </Col>
                 <Col md={6} className="textcol">
                   <Container className="infocon">
