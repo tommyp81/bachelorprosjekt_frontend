@@ -21,7 +21,6 @@ const Login = ({ history }) => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(uname)
     switch (uname) {
       case "test":
         setUser({id: 6, username: "test", loggedIn: true})

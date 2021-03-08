@@ -164,7 +164,7 @@ export function HamburgerMenu(props) {
             variants={commonVariants}
             transition={commonTransition}
           >
-            <a href="/Login" component={BLogin}>
+            <a href="/Login" component={BLogin} onClick={() => localStorage.clear()}>
               Bytt Bruker
             </a>
           </LoginButton>

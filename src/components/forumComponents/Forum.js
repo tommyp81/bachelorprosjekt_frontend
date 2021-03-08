@@ -50,27 +50,20 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
   const firstPage = currentPage === 1;
 
   const onTopClick = (key) => {
-    console.log(currentPage, currentPosts)
     if (key) {
       setSubTopicFocus("")
       setSubTopicTitle("")
       let value = topics.find(t => t.id === Number(key)).title
-      console.log(value)
-      console.log(posts.filter(fp => fp.topicId === Number(key)))
       setFilteredPosts(posts.filter(fp => fp.topicId === Number(key)))
-      console.log(posts)
       setTopicTitle(value)
       setCurrentPage(1);
       setTopicFocus(key)
     }
-    console.log(moment().calendar())
   }
 
   const onSubClick = (e) => {
     let subTop = e.target.value
     let title = e.target.getAttribute("title")
-    console.log(title)
-    console.log(subTop)
     setSubTopicTitle(title)
     setSubTopicFocus(subTop)    
     setFilteredPosts(posts.filter(fp => fp.subTopicId === Number(subTop)))
