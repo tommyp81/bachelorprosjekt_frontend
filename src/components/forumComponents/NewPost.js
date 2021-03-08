@@ -35,8 +35,7 @@ function handleSubmit(event) {
 
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          
-          <Modal.Title>Ny post i {subtopic}</Modal.Title>
+            <Modal.Title>Ny post i {subtopic.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
            <Form onSubmit={handleSubmit}>

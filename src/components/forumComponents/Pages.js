@@ -18,6 +18,12 @@ const Pages = ({postsPerPage, totalPosts, paginate, nextPage, prevPage, currentP
           {"<"}
         </Pagination.Item>
 
+        <Pagination.Item>
+          Side {currentPage}
+        </Pagination.Item>
+        
+        {/* 
+        </Pagination.Item>
         <Dropdown>
           <Dropdown.Toggle className="page">
             Side {currentPage}
@@ -31,7 +37,7 @@ const Pages = ({postsPerPage, totalPosts, paginate, nextPage, prevPage, currentP
             ))}
           </Dropdown.Menu>
          
-        </Dropdown>
+        </Dropdown>*/}
 
         <Pagination.Item
         onClick={() => nextPage()}
