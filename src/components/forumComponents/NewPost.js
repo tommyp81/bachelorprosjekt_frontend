@@ -22,6 +22,8 @@ function handleSubmit(event) {
     event.preventDefault();
 
     add({ title, content, date: moment().toISOString(), userId: user.id, subTopicId: Number(subtopic), topicId: topicFocus})
+    setTitle("")
+    setContent("")
   }
 
     return (

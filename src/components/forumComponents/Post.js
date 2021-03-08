@@ -196,7 +196,8 @@ const Post = ( { subtopics, topics, users }) => {
               </Card>
               
           ))}
-          <Pages postsPerPage={commentsPerPage} paginate={paginate} totalPosts={currentComments.length} nextPage={nextPage} prevPage={prevPage} currentPage={currentPage} firstPage={firstPage} lastPage={lastPage}/>
+          {/* 
+          <Pages postsPerPage={commentsPerPage} paginate={paginate} totalPosts={currentComments.length} nextPage={nextPage} prevPage={prevPage} currentPage={currentPage} firstPage={firstPage} lastPage={lastPage}/>*/}
           </div>
 
         
