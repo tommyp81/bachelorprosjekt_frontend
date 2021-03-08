@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card } from "react-bootstrap";
 import moment from 'moment'
+import 'moment/locale/nb'
 import { Link } from 'react-router-dom';
 
 import './Feed.css'

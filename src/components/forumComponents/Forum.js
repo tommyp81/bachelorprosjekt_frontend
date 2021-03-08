@@ -7,14 +7,13 @@ import "./Forum.css";
 import { Component } from 'react';
 import moment from 'moment'
 import Feed from './Feed.js';
-import { useHistory } from 'react-router-dom';
 
 import SortPosts from './SortPosts'
 import { UserContext } from '../../UserContext'
 
  
 
-const Forum = ({ posts, addPost, topics, subtopics, users}) => {
+const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
 
   
   // const [posts, setPosts] = useState([...props.posts]);
@@ -24,7 +23,6 @@ const Forum = ({ posts, addPost, topics, subtopics, users}) => {
   const [subtopicFocus, setSubTopicFocus] = useState("");
 
   const [loading, setLoading] = useState(true);
-  // const history = useHistory();
 
   const [topicTitle, setTopicTitle] = useState("")
   const [subTopicTitle, setSubTopicTitle] = useState("")
@@ -42,7 +40,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users}) => {
  
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = filteredPosts.sort((p1, p2) => (moment(p2.date).diff(moment(p1.date)))).slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = pageNum => setCurrentPage(pageNum)
   const nextPage = () => setCurrentPage(currentPage + 1)
@@ -56,10 +54,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users}) => {
       setSubTopicFocus("")
       setSubTopicTitle("")
       let value = topics.find(t => t.id === Number(key)).title
-      console.log(value)
-      console.log(posts.filter(fp => fp.topicId === Number(key)))
       setFilteredPosts(posts.filter(fp => fp.topicId === Number(key)))
-      console.log(posts)
       setTopicTitle(value)
       setCurrentPage(1);
       setTopicFocus(key)
@@ -69,8 +64,6 @@ const Forum = ({ posts, addPost, topics, subtopics, users}) => {
   const onSubClick = (e) => {
     let subTop = e.target.value
     let title = e.target.getAttribute("title")
-    console.log(title)
-    console.log(subTop)
     setSubTopicTitle(title)
     setSubTopicFocus(subTop)    
     setFilteredPosts(posts.filter(fp => fp.subTopicId === Number(subTop)))
@@ -89,7 +82,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users}) => {
         <h4>{!topicTitle ? "" : topicTitle}</h4>
         <h1>{!subTopicTitle ? <p>Velg en underkategori for lage en ny post</p> : subTopicTitle}</h1>
         <div className="float-left">
-          <NewPost subtopicTitle={subTopicTitle} subtopic={subtopicFocus} topicFocus={topicFocus} add={addPost}/>
+          <NewPost subtopicTitle={subTopicTitle} subtopic={subtopicFocus} topicFocus={topicFocus} add={addPost} history={history} />
         </div>
         <div className="float-right">
           <SortPosts post={currentPosts}/>

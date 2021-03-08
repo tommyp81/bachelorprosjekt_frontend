@@ -36,6 +36,8 @@ import ProtectedRoute from './ProtectedRoute'
 
 const App = () => {
 
+  const history = useHistory()
+
   const [user, setUser] = useState(() => {
     const localUser = localStorage.getItem('user');
     return localUser ? JSON.parse(localUser) : {}
@@ -98,8 +100,9 @@ const App = () => {
     setPosts(current => [...current, data])
     // setFilteredPosts(current => [...current, data])
     // console.log(posts)
-
-    // history.push(`/forum/${data.id}`)
+    // history.push(`/forum/${3}`)
+    // console.log(data.id)
+    return data.id
   }
 
 
@@ -111,12 +114,12 @@ const App = () => {
         <div className="App">
           <Navbar />
           <Switch>
-            <Route path="/Login" component={Login} />
+            <Route path="/Login" component={Login} history={history} />
             <ProtectedRoute exact path="/" component={Home} subtopic={subtopics} users={users} posts={posts}/>
             <ProtectedRoute path="/Register" component={Register} Register = {Register} />
-            <ProtectedRoute exact path="/Forum" component={Forum} posts={posts} addPost={addPost} subtopics={subtopics} topics={topics} users={users} />
+            <ProtectedRoute exact path="/Forum" component={Forum} posts={posts} addPost={addPost} subtopics={subtopics} topics={topics} users={users} history={history} />
             <ProtectedRoute exact from="/Kunnskasportalen" component={Kunnskapsportalen} />
-            <ProtectedRoute exact path="/Forum/:postId" component={Post} subtopics={subtopics} topics={topics} users={users} />
+            <ProtectedRoute exact path="/Forum/:postId" component={Post} subtopics={subtopics} topics={topics} users={users} history={history} />
           </Switch>
         </div>
       </UserContext.Provider>
