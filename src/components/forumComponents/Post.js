@@ -176,7 +176,7 @@ const Post = ( { subtopics, topics, users }) => {
       <h4>Kommentarer</h4>  
       {/*commentCount*/}
       <div className="comments">
-          {currentComments.filter(currentComments => (currentComments.postId === post.id)).map((filteredComment, i) => (
+          {comments.filter(currentComments => (currentComments.postId === post.id)).map((filteredComment, i) => (
               <Card key={i}>
                   <Card.Body>
                     <div className="float-left">
