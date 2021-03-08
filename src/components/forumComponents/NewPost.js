@@ -3,7 +3,7 @@ import { Form, Button, Container, Modal, Dropdown } from "react-bootstrap";
 import moment from 'moment'
 import { UserContext } from "../../UserContext";
 
-function NewPost ({subtopicTitle, subtopic, topicFocus, add}) {
+function NewPost ({ subtopicTitle, subtopic, topicFocus, add, history }) {
 
   const { user } = useContext(UserContext)
 
@@ -18,13 +18,27 @@ function NewPost ({subtopicTitle, subtopic, topicFocus, add}) {
     return content.length > 0;
   }
 
-function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    add({ title, content, date: moment().toISOString(), userId: user.id, subTopicId: Number(subtopic), topicId: topicFocus})
+    submitPost();
+    
     setTitle("")
     setContent("")
+    
   }
+
+  const submitPost = async () => {
+    let postId = await add({ 
+      title, 
+      content, 
+      date: moment().toISOString(), 
+      userId: user.id, 
+      subTopicId: Number(subtopic), 
+      topicId: topicFocus
+    })
+    history.push(`/Forum/${postId}`)
+  } 
 
     return (
     <div className="NewPost">

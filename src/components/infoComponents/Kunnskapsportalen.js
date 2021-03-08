@@ -12,7 +12,7 @@ const Kunnskapsportalen = () => {
     
     
   useEffect(() => {
-    fetch("https://webforum.azurewebsites.net/Topics")
+    fetch("https://localhost:44319/Topics")
     .then(res => res.json())
     .then((data) => {
       setTopics(data)
@@ -20,7 +20,7 @@ const Kunnskapsportalen = () => {
     .catch(console.log)
 
 
-    fetch("https://webforum.azurewebsites.net/SubTopics")
+    fetch("https://localhost:44319/SubTopics")
     .then(res => res.json())
     .then((data) => {
       setSubtopics(data)

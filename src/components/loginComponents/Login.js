@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"; 
+import React, { useContext, useEffect, useState } from "react"; 
 import { Form, Button, Container, Col, Row } from "react-bootstrap";
 import WelcomeLogo from './WelcomeLogo';
 
@@ -8,14 +8,13 @@ import Register from '../registerComponent/Register';
 import "./Login.css";
 import { UserContext } from "../../UserContext";
 
-const Login = () => {
+const Login = ({ history }) => {
   const [uname, setUname] = useState("test");
   // const [password, setPassword] = useState("");
 
 
-  const history = useHistory();
+  const  {setUser} = useContext(UserContext)
 
-  const {setUser} = useContext(UserContext)
 
   function validateForm() {
     // return username.length > 0 && password.length > 0;
