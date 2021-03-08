@@ -13,8 +13,7 @@ const Login = ({ history }) => {
   // const [password, setPassword] = useState("");
 
 
-  const  {setUser} = useContext(UserContext)
-
+  const { setUser } = useContext(UserContext)
 
   function validateForm() {
     // return username.length > 0 && password.length > 0;
