@@ -1,8 +1,11 @@
-import React, { useState } from "react"; 
+import React, { useContext, useState } from "react"; 
 import { Form, Button, Container, Modal, Dropdown } from "react-bootstrap";
 import moment from 'moment'
+import { UserContext } from "../../UserContext";
 
-function NewPost ({subtopic, topicFocus,  add, user}) {
+function NewPost ({subtopic, topicFocus, add}) {
+
+  const { user } = useContext(UserContext)
 
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("");
@@ -32,6 +35,7 @@ function handleSubmit(event) {
 
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
+          
           <Modal.Title>Ny post i {subtopic}</Modal.Title>
         </Modal.Header>
         <Modal.Body>

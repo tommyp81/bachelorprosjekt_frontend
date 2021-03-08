@@ -12,7 +12,6 @@
 }
 
 .Topics .justify-content-center {
-    border-bottom: 1px solid rgb(209, 209, 209);
     padding-bottom: 2px;
 }
 
@@ -30,6 +29,7 @@
 
 
 .Topics .tab {
+    border-top: 1px solid rgb(209, 209, 209);
     padding-top: 2px;
     text-align: center;
     align-content: center;
