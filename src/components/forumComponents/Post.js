@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Breadcrumb, Card, Form } from "react-bootstrap";
 import moment from 'moment'
-import {useHistory, useParams} from 'react-router-dom'
+import {useHistory, useParams, Link} from 'react-router-dom'
+import Pages from "./Pages.js"
 import "./Post.css";
 
 //import Header from '../mainComponents/Header'
@@ -108,6 +109,28 @@ const Post = ( { subtopics, topics, users }) => {
     setComments(current => [...current, data])
     
   }
+
+  const commentsPerPage = 10
+  const [currentPage, setCurrentPage] = useState(1)
+ 
+  const indexOfLastComment = currentPage * commentsPerPage;
+  const indexOfFirstComment = indexOfLastComment - commentsPerPage;
+  const currentComments = comments.slice(indexOfFirstComment, indexOfLastComment);
+
+  const paginate = pageNum => setCurrentPage(pageNum)
+  const nextPage = () => setCurrentPage(currentPage + 1)
+  const prevPage = () => setCurrentPage(currentPage - 1)
+
+  const lastPage = currentComments.length !== commentsPerPage || indexOfLastComment === comments.length;
+  const firstPage = currentPage === 1;
+ 
+  /*
+  const commentCount = () => {
+    if (currentComments === 0) {
+    return <h3>Ingen kommentarer enda.</h3>
+  }
+  }
+  */
   
 
   return (
@@ -115,11 +138,11 @@ const Post = ( { subtopics, topics, users }) => {
       
     <Container style={{display: 'flex', flexDirection: 'column'}}> 
     <div className="main">
-      <Breadcrumb>
-        <Breadcrumb.Item href="/forum">
-        Tilbake
-        </Breadcrumb.Item>
-      </Breadcrumb>
+    <h5><Link to="/Forum" style={{textDecoration: 'none', color: '#000000'}}>
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+    </svg>
+    &nbsp;Tilbake til forum</Link></h5> 
       <Card>
         <Card.Body>
           <div className="float-left">
@@ -150,15 +173,14 @@ const Post = ( { subtopics, topics, users }) => {
       
       <NewComment createNew={addComment} user={user} pId={post.id}/> 
       
-      <h4>Kommentarer</h4>   
+      <h4>Kommentarer</h4>  
+      {/*commentCount*/}
       <div className="comments">
-          {comments.filter(comment => (comment.postId === post.id)).map((filteredComment, i) => (
+          {currentComments.filter(currentComments => (currentComments.postId === post.id)).map((filteredComment, i) => (
               <Card key={i}>
                   <Card.Body>
                     <div className="float-left">
-                    {/*user.filter(user => (user.id === comment.Userid)).map((filteredUser) => (*/
                     <p>Postet av <b>{users && users.length && users.find(u => u.id === filteredComment.userId).username}</b>{/*filteredUser.username*/} {moment(filteredComment.date).calendar()}</p>
-                    /*))*/}
                     </div>
                     <div className="float-right" hidden={!(user.id === post.userId)}>
                       <EditComment comment={filteredComment} edit={editComment}/> &nbsp;
@@ -172,7 +194,9 @@ const Post = ( { subtopics, topics, users }) => {
                     </Card.Text>
                   </Card.Body>
               </Card>
+              
           ))}
+          <Pages postsPerPage={commentsPerPage} paginate={paginate} totalPosts={currentComments.length} nextPage={nextPage} prevPage={prevPage} currentPage={currentPage} firstPage={firstPage} lastPage={lastPage}/>
           </div>
 
         

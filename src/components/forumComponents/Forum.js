@@ -92,7 +92,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users}) => {
           <NewPost subtopic={subtopicFocus} topicFocus={topicFocus} add={addPost}/>
         </div>
         <div className="float-right">
-          <SortPosts/>
+          <SortPosts post={currentPosts}/>
         </div>
       </Container>
 
