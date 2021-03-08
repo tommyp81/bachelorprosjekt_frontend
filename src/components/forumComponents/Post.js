@@ -28,7 +28,7 @@ const Post = ( { subtopics, topics, users, history }) => {
 
   useEffect(() => {
     // let isMounted = true
-    fetch("https://localhost:44319/comments")
+    fetch("https://webforum.azurewebsites.net/comments")
     .then(res => res.json())
     .then((data) => {
       // if (isMounted)
@@ -36,14 +36,14 @@ const Post = ( { subtopics, topics, users, history }) => {
     })
     .catch(console.log)
 
-    fetch(`https://localhost:44319/posts/${postId}`)
+    fetch(`https://webforum.azurewebsites.net/posts/${postId}`)
     .then(res => res.json())
     .then(data => setPost(data))
     .catch(console.log)
   }, [])
 
   const deletePost = async () => {
-    const res = await fetch(`https://localhost:44319/posts/${post.id}`, {
+    const res = await fetch(`https://webforum.azurewebsites.net/posts/${post.id}`, {
       method: 'DELETE',
     })
     res.status === 200 ? history.push("/forum") : alert("Error")
@@ -52,7 +52,7 @@ const Post = ( { subtopics, topics, users, history }) => {
   }
 
   const editPost = async (post) => {
-    const res = await fetch(`https://localhost:44319/posts/${post.id}`, {
+    const res = await fetch(`https://webforum.azurewebsites.net/posts/${post.id}`, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json',
@@ -64,7 +64,7 @@ const Post = ( { subtopics, topics, users, history }) => {
     setPost(data)
   }
   const editComment = async (comment) => {
-    const res = await fetch(`https://localhost:44319/comments/${comment.id}`, {
+    const res = await fetch(`https://webforum.azurewebsites.net/comments/${comment.id}`, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json',
@@ -89,14 +89,14 @@ const Post = ( { subtopics, topics, users, history }) => {
 
   const deleteComment = async (e) => {
     let id = Number(e.target.value)
-    const res = await fetch(`https://localhost:44319/comments/${id}`, {
+    const res = await fetch(`https://webforum.azurewebsites.net/comments/${id}`, {
       method: 'DELETE'
     })
     res.status === 200 ? setComments(comments.filter(comment => comment.id !== id)) : alert("ERROR")
   }
 
   const addComment = async (comment) => {
-    const res = await fetch("https://localhost:44319/comments", {
+    const res = await fetch("https://webforum.azurewebsites.net/comments", {
       method: 'POST', 
       headers: {
         'Content-type': 'application/json',
