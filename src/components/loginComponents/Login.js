@@ -40,6 +40,8 @@ const Login = ({ history }) => {
       case "sepita":
         setUser({id: 5, username: "sepita", loggedIn: true})
         break;
+      case "charlotte":
+        setUser({id: 7, username: "charlotte", loggedIn: true})
       default:
         break;
     }
@@ -93,6 +95,7 @@ const Login = ({ history }) => {
                     <option value="erik">erik</option>
                     <option value="pia">pia</option>
                     <option value="sepita">sepita</option>
+                    <option value="charlotte">charlotte</option>
                   </Form.Control>
                 </Form.Group>
                 
