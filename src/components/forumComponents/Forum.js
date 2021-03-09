@@ -27,6 +27,8 @@ const Forum = ({ posts, addPost, topics, subtopics, users}) => {
   // const history = useHistory();
 
   const [topicTitle, setTopicTitle] = useState("")
+  const [topicDesc, setTopicDesc] = useState("")
+  const [subTopicDesc, setSubTopicDesc] = useState("")
   const [subTopicTitle, setSubTopicTitle] = useState("")
 
   const {user} = useContext(UserContext)
@@ -55,6 +57,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users}) => {
     if (key) {
       setSubTopicFocus("")
       setSubTopicTitle("")
+      setSubTopicDesc("")
       let value = topics.find(t => t.id === Number(key)).title
       console.log(value)
       console.log(posts.filter(fp => fp.topicId === Number(key)))
@@ -66,13 +69,16 @@ const Forum = ({ posts, addPost, topics, subtopics, users}) => {
     }
   }
 
-  const onSubClick = (e) => {
+  const onSubClick = (e, key) => {
     let subTop = e.target.value
     let title = e.target.getAttribute("title")
+    //let desc = subtopics.find(subtopics => s.id === Number(key)).description
+    //console.log(desc)
     console.log(title)
     console.log(subTop)
     setSubTopicTitle(title)
-    setSubTopicFocus(subTop)    
+    setSubTopicFocus(subTop)
+    //setSubTopicDesc("")
     setFilteredPosts(posts.filter(fp => fp.subTopicId === Number(subTop)))
     setCurrentPage(1);
   }
@@ -88,6 +94,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users}) => {
       <Container className="top">
         <h4>{!topicTitle ? "" : topicTitle}</h4>
         <h1>{!subTopicTitle ? <p>Velg en underkategori for lage en ny post</p> : subTopicTitle}</h1>
+        <p>{!subTopicDesc ? "" : subTopicDesc}</p>
         <div className="float-left">
           <NewPost subtopicTitle={subTopicTitle} subtopic={subtopicFocus} topicFocus={topicFocus} add={addPost}/>
         </div>
