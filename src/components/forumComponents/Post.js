@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Breadcrumb, Card, Form } from "react-bootstrap";
 import moment from 'moment'
-import {useHistory, useParams, Link} from 'react-router-dom'
+import 'moment/locale/nb'
+import {useParams, Link} from 'react-router-dom'
 import Pages from "./Pages.js"
 import "./Post.css";
 
@@ -14,7 +15,7 @@ import EditPost from './EditPost';
 import EditComment from './EditComment';
 import { UserContext } from '../../UserContext';
 
-const Post = ( { subtopics, topics, users }) => {
+const Post = ( { subtopics, topics, users, history }) => {
 
   const [comments, setComments] = useState([])
   const [post, setPost] = useState([])
@@ -23,7 +24,6 @@ const Post = ( { subtopics, topics, users }) => {
   const { user } = useContext(UserContext)
 
 
-  const history = useHistory();
 
 
   useEffect(() => {

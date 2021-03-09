@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/6acb5672-d498-4359-83ba-068a52ca5f83/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/badmintonforum",
+    "appService.deploySubpath": "."
+}

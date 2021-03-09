@@ -8,9 +8,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //npm install framer-motion --save
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import styled from "styled-components";
+import { UserContext } from "../../../UserContext";
 import BLogin from "../../loginComponents/Login";
 import Register from "../../registerComponent/Register";
 import { MenuToggle } from "./menuToggle";
@@ -128,6 +129,8 @@ const commonTransition = { type: "spring", duration: 0.05 };
 export function HamburgerMenu(props) {
   const [isOpen, setOpen] = useState(false);
 
+  const { user } = useContext(UserContext)
+
   const toggleMenu = () => {
     setOpen(!isOpen);
   };
@@ -152,7 +155,7 @@ export function HamburgerMenu(props) {
               <FontAwesomeIcon icon={faUserCircle} />
             </IconContainer>
             <a href="/Login" component={BLogin}>
-              Logg Inn
+              {user.loggedIn ? user.username : <p>Logg Inn</p>}
             </a>
           </LoginButton>
           <LoginButton
@@ -161,8 +164,8 @@ export function HamburgerMenu(props) {
             variants={commonVariants}
             transition={commonTransition}
           >
-            <a href="/Register" component={Register}>
-              Registrer Deg
+            <a href="/Login" component={BLogin} onClick={() => localStorage.clear()}>
+              Bytt Bruker
             </a>
           </LoginButton>
         </TopContainer>
