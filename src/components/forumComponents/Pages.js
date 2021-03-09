@@ -5,9 +5,15 @@ import "./Forum.css"
 const Pages = ({postsPerPage, totalPosts, paginate, nextPage, prevPage, currentPage, firstPage, lastPage}) => {
 
   const pageNumbers = []
-  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+  for (let i = 1; i <= currentPage + 2; i++) {
     pageNumbers.push(i);
   }
+
+  /*
+  const prevPgn = []
+    for (let i = currentPage; i <= currentPage + 1; i ++) {
+      prevPgn.push(i)
+  }*/
 
   return (
     <div className="Pages" style={{marginTop:"20px"}}>
@@ -18,26 +24,22 @@ const Pages = ({postsPerPage, totalPosts, paginate, nextPage, prevPage, currentP
           {"<"}
         </Pagination.Item>
 
-        <Pagination.Item>
-          Side {currentPage}
+        <Pagination.Item
+        onClick={() => prevPage()}
+        hidden={firstPage}>
+          {currentPage - 1}
         </Pagination.Item>
-        
-        {/* 
-        </Pagination.Item>
-        <Dropdown>
-          <Dropdown.Toggle className="page">
+
+          <Pagination.Item>
             Side {currentPage}
-          </Dropdown.Toggle>
-          
-          <Dropdown.Menu>
-            {pageNumbers.map(num => (
-            <Dropdown.Item onClick={() => paginate(num)} key={num}>
-              Side {num}
-            </Dropdown.Item> 
-            ))}
-          </Dropdown.Menu>
-         
-        </Dropdown>*/}
+          </Pagination.Item>
+
+          <Pagination.Item
+        onClick={() => nextPage()}
+        hidden={lastPage}>
+          {currentPage + 1}
+        </Pagination.Item>
+
 
         <Pagination.Item
         onClick={() => nextPage()}
