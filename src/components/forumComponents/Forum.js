@@ -37,6 +37,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
     setLoading(false)
   }, [posts])
   
+  
   const postsPerPage = 8
   const [currentPage, setCurrentPage] = useState(1)
  
@@ -64,20 +65,21 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
     }
   }
 
-  const onSubClick = (e, key) => {
+  const onSubClick = (e) => {
     let subTop = e.target.value
     let title = e.target.getAttribute("title")
-    //let desc = subtopics.find(subtopics => s.id === Number(key)).description
-    //console.log(desc)
+    let desc = subtopics.find(s => s.id === Number(subTop)).description
     console.log(title)
     console.log(subTop)
+    console.log(desc)
     setSubTopicTitle(title)
     setSubTopicFocus(subTop)
-    //setSubTopicDesc("")
+    setSubTopicDesc(desc)
     setFilteredPosts(posts.filter(fp => fp.subTopicId === Number(subTop)))
     setCurrentPage(1);
   }
 
+  
   return (
     <div className="Forum mt-5">
       <Topics 
@@ -89,7 +91,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
       <Container className="top">
         <h4>{!topicTitle ? "" : topicTitle}</h4>
         <h1>{!subTopicTitle ? <p>Velg en underkategori for lage en ny post</p> : subTopicTitle}</h1>
-        <p>{!subTopicDesc ? "" : subTopicDesc}</p>
+        <h5>{!subTopicDesc ? "" : subTopicDesc}</h5>
         <div className="float-left">
           <NewPost subtopicTitle={subTopicTitle} subtopic={subtopicFocus} topicFocus={topicFocus} add={addPost} history={history} />
         </div>

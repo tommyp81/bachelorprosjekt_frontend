@@ -15,12 +15,18 @@
 
 .Forum .top h4 {
     margin-top: -40px;
-    font-size: 1.8vw;
+    font-size: 1.6vw;
     color: gray;
 }
 
 .Forum .top h1 {
     font-size: 2.5vw;
+}
+
+.Forum .top h5 {
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: unset;
 }
 
 
@@ -34,6 +40,10 @@
     .Forum .top h1 {
         font-size: 34px !important;
         margin-bottom: 40px;
+    }
+
+    .Forum .top p {
+        font-size: 16px !important;
     }
 
     
