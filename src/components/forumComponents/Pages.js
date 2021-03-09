@@ -2,7 +2,7 @@ import React from "react"
 import { Pagination, Dropdown } from "react-bootstrap"
 import "./Forum.css"
 
-const Pages = ({postsPerPage, totalPosts, paginate, nextPage, prevPage, currentPage, firstPage, lastPage}) => {
+const Pages = ({postsPerPage, totalPosts, paginate, nextPage, prevPage, currentPage, firstPage, lastPage, goToFirst, goToLast}) => {
 
   const pageNumbers = []
   for (let i = 1; i <= currentPage + 2; i++) {
@@ -18,6 +18,12 @@ const Pages = ({postsPerPage, totalPosts, paginate, nextPage, prevPage, currentP
   return (
     <div className="Pages" style={{marginTop:"20px"}}>
       <Pagination className="justify-content-center">
+        <Pagination.Item
+        onClick={() => goToFirst()}
+        hidden={firstPage}>
+          {"<<"}
+        </Pagination.Item>
+      
         <Pagination.Item
         onClick={() => prevPage()}
         disabled={firstPage}>
@@ -46,6 +52,13 @@ const Pages = ({postsPerPage, totalPosts, paginate, nextPage, prevPage, currentP
         disabled={lastPage}>
           {">"}
         </Pagination.Item>
+
+        <Pagination.Item
+        onClick={() => goToLast()}
+        hidden={lastPage}>
+          {">>"}
+        </Pagination.Item>
+        
       </Pagination>
       </div>
   )

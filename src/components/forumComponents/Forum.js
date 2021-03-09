@@ -52,6 +52,9 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
   const lastPage = currentPosts.length !== postsPerPage || indexOfLastPost === posts.length;
   const firstPage = currentPage === 1;
 
+  const goToLast = () => setCurrentPage(Math.ceil(filteredPosts.length / postsPerPage))
+  const goToFirst = () => setCurrentPage(1)
+
   const onTopClick = (key) => {
     if (key) {
       setSubTopicFocus("")
@@ -106,7 +109,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
       </Container>
 
       <Container>
-        <Pages postsPerPage={postsPerPage} paginate={paginate} totalPosts={currentPosts.length} nextPage={nextPage} prevPage={prevPage} currentPage={currentPage} firstPage={firstPage} lastPage={lastPage}/>
+        <Pages postsPerPage={postsPerPage} paginate={paginate} totalPosts={currentPosts.length} nextPage={nextPage} prevPage={prevPage} currentPage={currentPage} firstPage={firstPage} lastPage={lastPage} goToFirst={goToFirst} goToLast={goToLast}/>
       </Container>
     </div>
       );
