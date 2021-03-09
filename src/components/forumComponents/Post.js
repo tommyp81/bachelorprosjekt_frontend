@@ -15,7 +15,7 @@ import EditPost from './EditPost';
 import EditComment from './EditComment';
 import { UserContext } from '../../UserContext';
 
-const Post = ( { subtopics, topics, users, history }) => {
+const Post = ( { subtopics, topics, users, history, updatePosts }) => {
 
   const [comments, setComments] = useState([])
   const [post, setPost] = useState([])
@@ -46,9 +46,13 @@ const Post = ( { subtopics, topics, users, history }) => {
     const res = await fetch(`https://webforum.azurewebsites.net/posts/${post.id}`, {
       method: 'DELETE',
     })
-    res.status === 200 ? history.push("/forum") : alert("Error")
-    //todo
-    // delete all comments for specific post
+
+    if(res.status === 200) {
+      updatePosts()
+      history.push("/Forum")
+    } else {
+      alert("ERROR")
+    }
   }
 
   const editPost = async (post) => {
@@ -108,6 +112,9 @@ const Post = ( { subtopics, topics, users, history }) => {
 
     setComments(current => [...current, data])
     
+    updatePosts()
+    
+    
   }
 
   const commentsPerPage = 10
@@ -140,7 +147,7 @@ const Post = ( { subtopics, topics, users, history }) => {
     <div className="main">
     <h5><Link to="/Forum" style={{textDecoration: 'none', color: '#000000'}}>
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+    <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
     </svg>
     &nbsp;Tilbake til forum</Link></h5> 
       <Card>

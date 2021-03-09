@@ -85,6 +85,12 @@ const App = () => {
 
   }, [])
 
+  const updatePosts = async () => {
+    const res = await fetch('https://webforum.azurewebsites.net/posts')
+    const data = await res.json()
+    setPosts(data)
+  }
+
   const addPost = async (post) => {
     const res = await fetch('https://webforum.azurewebsites.net/posts', {
       method: 'POST', 
@@ -119,7 +125,7 @@ const App = () => {
             <ProtectedRoute path="/Register" component={Register} Register = {Register} />
             <ProtectedRoute exact path="/Forum" component={Forum} posts={posts} addPost={addPost} subtopics={subtopics} topics={topics} users={users} history={history} />
             <ProtectedRoute exact from="/Kunnskasportalen" component={Kunnskapsportalen} />
-            <ProtectedRoute exact path="/Forum/:postId" component={Post} subtopics={subtopics} topics={topics} users={users} history={history} />
+            <ProtectedRoute exact path="/Forum/:postId" component={Post} subtopics={subtopics} topics={topics} users={users} history={history} updatePosts={updatePosts} />
           </Switch>
         </div>
       </UserContext.Provider>
