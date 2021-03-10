@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import { Card, Container, Pagination } from "react-bootstrap";
+import { Card, Col, Container, Pagination, Row } from "react-bootstrap";
 import Topics from "./Topics.js";
 import NewPost from "./NewPost.js"
 import Pages from "./Pages.js";
