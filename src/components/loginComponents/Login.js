@@ -41,6 +41,7 @@ const Login = ({ history }) => {
         break;
       case "charlotte":
         setUser({ id: 7, username: "charlotte", loggedIn: true });
+        break;
       default:
         break;
     }
