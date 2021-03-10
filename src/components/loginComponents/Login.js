@@ -93,7 +93,7 @@ const Login = ({ history }) => {
                   <option value="henrik">henrik</option>
                   <option value="erik">erik</option>
                   <option value="pia">pia</option>
-                  <option value="sepita">sepideh</option>
+                  <option value="sepideh">sepideh</option>
                   <option value="charlotte">charlotte</option>
                 </Form.Control>
               </Form.Group>
