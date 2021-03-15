@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import { Card, Col, Container, Pagination, Row } from "react-bootstrap";
+import { Card, Col, Container, Dropdown, Pagination, Row } from "react-bootstrap";
 import Topics from "./Topics.js";
 import NewPost from "./NewPost.js"
 import Pages from "./Pages.js";
@@ -38,7 +38,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
   }, [posts])
   
   
-  const postsPerPage = 8
+  const [postsPerPage, setPostsPerPage] = useState(10)
   const [currentPage, setCurrentPage] = useState(1)
  
   const indexOfLastPost = currentPage * postsPerPage;
@@ -108,8 +108,26 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
         <Feed posts={currentPosts} users={users} subtopic={subtopics} maxLength={currentPosts.length} loading={loading}/>
       </Container>
 
-      <Container>
-        <Pages postsPerPage={postsPerPage} paginate={paginate} totalPosts={currentPosts.length} nextPage={nextPage} prevPage={prevPage} currentPage={currentPage} firstPage={firstPage} lastPage={lastPage} goToFirst={goToFirst} goToLast={goToLast}/>
+      <Container className="bot">
+        <div className="float-mid">
+          <Pages postsPerPage={postsPerPage} paginate={paginate} totalPosts={currentPosts.length} nextPage={nextPage} prevPage={prevPage} currentPage={currentPage} firstPage={firstPage} lastPage={lastPage}/>
+        </div>
+        <div className="float-right">
+        <Dropdown>
+          
+          <Dropdown.Toggle variant="primary" id="dropdown-basic" >
+            {postsPerPage} per side:  
+          </Dropdown.Toggle>
+    
+          <Dropdown.Menu>
+            <Dropdown.Item href="" /*onSelect?*/ onClick={() => setPostsPerPage(10)}>Vis 10 poster per side</Dropdown.Item>
+            <Dropdown.Item href="" onClick={() => setPostsPerPage(25)}>Vis 25 poster per side</Dropdown.Item>
+            <Dropdown.Item href="" onClick={() => setPostsPerPage(50)}>Vis 50 poster per side</Dropdown.Item>
+            <Dropdown.Item href="" onClick={() => setPostsPerPage(100)}>Vis 100 poster per side</Dropdown.Item>
+          </Dropdown.Menu>
+    
+        </Dropdown>
+        </div>
       </Container>
     </div>
       );

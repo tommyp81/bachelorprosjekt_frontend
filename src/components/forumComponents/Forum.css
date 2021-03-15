@@ -50,6 +50,18 @@
     
 }
 
+.Forum .bot .float-mid {
+    float: left;
+    margin-left: 45%;
+}
+.Forum .bot .float-right {
+    margin-top: 20px;
+}
+/*
+.float-right og float-mid er del av react-bootstrap?
+Satte margin-top 20px fordi det er samme som Pages objektet
+*/
+
 .Forum .main {
     border: 1px solid rgb(209, 209, 209);
     border-radius: 10px;
