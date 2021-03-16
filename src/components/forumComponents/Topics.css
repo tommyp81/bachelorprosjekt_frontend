@@ -1,59 +1,136 @@
 .Topics {
-    margin: auto;
-    width: 50%;
-    padding-top: 100px;
-    padding-bottom: 30px;
+
 }
 
-@media (max-width: 1024px) {
-    .Topics {
-        width: 90%;
+/*Desktop*/
+@media (min-width: 1024px) {
+    .Topics .topics, .Topics .topics .tab, .Topics .topics .tab .btn, .Topics .topics .btn-primary {
+        display: none;
     }
 }
 
-.Topics .justify-content-center {
-    padding-bottom: 2px;
+.Topics .desktop {
+    margin-top: 20px;
+    text-align: center;
 }
 
-.Topics .justify-content-center .nav-item{
+/*Alle kategorier*/
+.Topics .accordion .btn-pills {
+    background-color: #28a745;
+    text-align: center;
+    width: 95%;
+    color: white;
+    margin: 2.5px;
+    font-size: 22px;
+}
+
+.Topics .accordion .btn-pills:hover, .Topics .accordion .btn-pills:focus, .Topics .accordion .btn-pills:target {
+    background-color: #1b8b35;
+
+}
+
+/*Bildeknapper*/
+.Topics .accordion .imgbtn {
+    background-color: unset;
+    border: none;
+    border-radius: 10px;
+    color: white;
+}
+
+.Topics .accordion .topicimg {
+    position: relative;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    width: 100%;
+    filter: opacity(45%);
+    border-radius: 10px;
+}
+
+.Topics .accordion .topicimg:hover, 
+.Topics .accordion .topicimg:active, 
+.Topics .accordion .topicimg:focus, 
+.Topics .accordion .topicimg:target{
+    filter: opacity(100%);
+}
+
+.Topics .accordion .imgtitle {
+    font-size: 22px;
+    background-color: rgba(112, 112, 112, 0.637);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding-right: 10px;
+    text-indent: 10px;
+    text-shadow: 0 1px 0 black;
+    text-align: left;
+    position: absolute;
+    margin-top: -22%;
+
+}
+
+/*Tilhørende knapper*/
+
+.Topics .accordion .btn-primary {
+    float: left;
+    font-size: 15px;
+    margin: 2.5px;
+    background-color: #007bff;
+}
+
+
+
+/*Mobile*/
+@media (max-width: 1023px) {
+    .Topics {
+        width: 90%;
+        margin: auto;
+        padding-bottom: 30px;
+    }
+
+    .Topics .topics {
+        justify-content: center;
+    }
+
+    .Topics .tab {
+        border-top: 1px solid rgb(209, 209, 209);
+        text-align: center;
+        align-content: center;
+    }
+
+    .Topics .desktop {
+        display:none;
+    }
+}
+
+.Topics .topics {
+    padding-bottom: 2px;
+    margin: auto;
+}
+
+.Topics .topics .nav-item{
+    
     background-color: #28a745;
     color: white;
-    margin: 5px;
-    font-size: 20px;
+    margin: 3px;
+    font-size: 18px;
 }
 
-.Topics .justify-content-center .nav-item:hover, .Topics .justify-content-center .nav-item:focus:active, .Topics .justify-content-center .nav-item:focus, .Topics .justify-content-center .nav-item:target {
+.Topics .topics .nav-item:hover, .Topics .topics .nav-item:focus, .Topics .topics .nav-item:target {
     background-color: #1b8b35;
 }
 
-
-
 .Topics .tab {
-    border-top: 1px solid rgb(209, 209, 209);
+    
     padding-top: 2px;
-    text-align: center;
-    align-content: center;
     margin: auto; 
-    padding-bottom: 30px;
+    padding-bottom: 10px;
 }
 
 .Topics .tab .btn {
-    margin: 5px;
+    margin: 3px;
     background-color: #007bff;
-    border: none;
-    box-shadow: none;
 }
 
-.Topics .tab .btn:hover {
+.Topics .tab .btn:hover, .Topics .tab .btn:focus {
     background-color: #005fc4;
 }
 
-.Topics .tab .btn:focus:active {
-    border: none;
-    box-shadow: none;
-}
-
-.Topics .tab .btn:focus {
-    box-shadow: none;
-    background-color: #005fc4;
-}

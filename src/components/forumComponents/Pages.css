@@ -1,0 +1,16 @@
+.Pages {
+}
+
+.Pages .pagination {
+    justify-content: center;
+}
+
+.Pages .pagination .page-item .page-link {
+    background-color: white;
+    font-size: 16px;
+    color: black;
+    margin: 1px;
+    border: none;
+    border-radius: 10px;
+}
+

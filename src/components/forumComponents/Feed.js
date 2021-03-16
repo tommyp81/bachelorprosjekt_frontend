@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom';
 
 import './Feed.css'
 
-//Viser en "preview" av forumpostene
-//Vil gjerne bare vise de 3-4 første postene!!!!!!!!!!!1
 const Feed = ({ posts, users, subtopic, maxLength, loading }) => {
 
     if (loading) {
@@ -21,15 +19,18 @@ const Feed = ({ posts, users, subtopic, maxLength, loading }) => {
             <Card key={i}>
               <Link to={`/forum/${post.id}`} style={{textDecoration: 'none', color: '#000000'}}>
                 <Card.Body>
+                  <Card.Text>Postet {moment(post.date).calendar()} </Card.Text>
                   
                   {subtopic.filter(subtopic => (subtopic.id === post.subTopicId)).map((filteredSubtopic, i) => 
-                  (<Card.Title>{post.title} i {filteredSubtopic.title} </Card.Title>
+                  (<Card.Title>
+                  {post.title} <i className="subtoptitle">i {filteredSubtopic.title}</i></Card.Title>
                   ))}
                   
                   
                   {users.filter(user => (user.id === post.userId)).map((filteredUser, i) => (
                   <Card.Text>
-                    <div className="float-left">{moment(post.date).calendar()} av {filteredUser.username}</div>
+                    <div className="float-left">av {filteredUser.username}</div>
+                    {/*post.content*/}
                     <div className="float-right">{post.comment_Count} &nbsp;
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left" viewBox="0 0 16 16">
                         <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>

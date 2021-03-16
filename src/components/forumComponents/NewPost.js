@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react"; 
 import { Form, Button, Container, Modal, Dropdown } from "react-bootstrap";
 import moment from 'moment'
+import "./Forum.css"
 import { UserContext } from "../../UserContext";
 
 function NewPost ({ subtopicTitle, subtopic, topicFocus, add, history }) {
@@ -13,9 +14,9 @@ function NewPost ({ subtopicTitle, subtopic, topicFocus, add, history }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-
   function validateForm() {
-    return content.length > 0;
+    return content.length > 0 && content.length <= 4000
+    && title.length > 0 && title.length <= 100;
   }
 
   async function handleSubmit(event) {
@@ -42,12 +43,15 @@ function NewPost ({ subtopicTitle, subtopic, topicFocus, add, history }) {
 
     return (
     <div className="NewPost">
+      {!subtopicTitle ? <p>Velg en underkategori for å opprette en ny post.</p> :
         <Button 
         variant="primary" 
         onClick={handleShow} 
-        disabled={!subtopic}>
+        disabled={!subtopic}
+        >
         + Ny post
         </Button>
+    }
 
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>

@@ -7,6 +7,7 @@ import "./Forum.css";
 import { Component } from 'react';
 import moment from 'moment'
 import Feed from './Feed.js';
+import SearchPosts from "./SearchPosts.js";
 
 import SortPosts from './SortPosts'
 import { UserContext } from '../../UserContext'
@@ -38,8 +39,9 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
   }, [posts])
   
   
-  const [postsPerPage, setPostsPerPage] = useState(10)
+  
   const [currentPage, setCurrentPage] = useState(1)
+  const [postsPerPage, setPostsPerPage] = useState(10)
  
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -57,6 +59,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
 
   const onTopClick = (key) => {
     if (key) {
+      setTopicTitle("Alle kategorier")
       setSubTopicFocus("")
       setSubTopicTitle("")
       setSubTopicDesc("")
@@ -65,52 +68,95 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
       setTopicTitle(value)
       setCurrentPage(1);
       setTopicFocus(key)
-    }
+    } 
   }
 
   const onSubClick = (e) => {
-    let subTop = e.target.value
-    let title = e.target.getAttribute("title")
-    let desc = subtopics.find(s => s.id === Number(subTop)).description
-    console.log(title)
-    console.log(subTop)
-    console.log(desc)
-    setSubTopicTitle(title)
-    setSubTopicFocus(subTop)
-    setSubTopicDesc(desc)
-    setFilteredPosts(posts.filter(fp => fp.subTopicId === Number(subTop)))
+      let subTop = e.target.value
+      let title = e.target.getAttribute("title")
+      let desc = subtopics.find(s => s.id === Number(subTop)).description
+      //let topTitle = subtopics.find(s => s.id === Number(topics.topicId)).title
+      //setTopicTitle(topTitle)
+      setSubTopicTitle(title)
+      setSubTopicFocus(subTop)
+      setSubTopicDesc(desc)
+      setFilteredPosts(posts.filter(fp => fp.subTopicId === Number(subTop)))
+      setCurrentPage(1);
+  }
+
+  const allTopics = (e) => {
+    let value = e.target.value
+    setSubTopicFocus("")
+    setSubTopicTitle("")
+    setSubTopicDesc("")
+    setTopicTitle(value)
     setCurrentPage(1);
+    setFilteredPosts(posts)
   }
 
   
   return (
     <div className="Forum mt-5">
-      <Topics 
-      topics = {topics}
-      subtopics = {subtopics}
-      topClick = {onTopClick}
-      subClick = {onSubClick}
-      />
-      <Container className="top">
-        <h4>{!topicTitle ? "" : topicTitle}</h4>
-        <h1>{!subTopicTitle ? <p>Velg en underkategori for lage en ny post</p> : subTopicTitle}</h1>
-        <h5>{!subTopicDesc ? "" : subTopicDesc}</h5>
+      <Container className="body">
+      <Row xs={1} sm={1} lg={2}>
+          <Col lg={3}>
+            
+            <div className="desktop">
+            <SearchPosts />
+            <NewPost 
+                subtopicTitle={subTopicTitle} 
+                subtopic={subtopicFocus} 
+                topicFocus={topicFocus} 
+                add={addPost} 
+                history={history} />
+            </div>
+            <Topics 
+              topics = {topics}
+              subtopics = {subtopics}
+              topClick = {onTopClick}
+              subClick = {onSubClick}
+              allTopics = {allTopics}/>
+          </Col>
+
+          <Col lg={9}>
+            <Container className="top">
+              <div className="topictext">
+              <h2>{!topicTitle ? "Alle kategorier" : topicTitle} 
+              {!subTopicTitle ? "" : <>&nbsp; 
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+              </svg>&nbsp;
+              {subTopicTitle}</>}</h2>
+              <p>{!subTopicDesc ? "" : subTopicDesc}</p>
+              </div>
+          
+              <div className="newpost">
+                <NewPost 
+                subtopicTitle={subTopicTitle} 
+                subtopic={subtopicFocus} 
+                topicFocus={topicFocus} 
+                add={addPost} 
+                history={history} />
+              </div>
+        
+              <div className="sortposts">
+                <SortPosts post={currentPosts}/>
+              </div>
+
+              <div className="mobilesearch">
+              <SearchPosts />
+              </div>
+            </Container>
+
+            <Container className="main">
+              {/* {renderPosts} */}
+             
+              <Feed posts={currentPosts} users={users} subtopic={subtopics} maxLength={currentPosts.length} loading={loading}/>
+            </Container>
+
+            <Container className="bot">
         <div className="float-left">
-          <NewPost subtopicTitle={subTopicTitle} subtopic={subtopicFocus} topicFocus={topicFocus} add={addPost} history={history} />
-        </div>
-        <div className="float-right">
-          <SortPosts post={currentPosts}/>
-        </div>
-      </Container>
-
-      <Container className="main">
-        {/* {renderPosts} */}
-        <Feed posts={currentPosts} users={users} subtopic={subtopics} maxLength={currentPosts.length} loading={loading}/>
-      </Container>
-
-      <Container className="bot">
-        <div className="float-mid">
-          <Pages postsPerPage={postsPerPage} paginate={paginate} totalPosts={currentPosts.length} nextPage={nextPage} prevPage={prevPage} currentPage={currentPage} firstPage={firstPage} lastPage={lastPage}/>
+          <Pages postsPerPage={postsPerPage} paginate={paginate} totalPosts={currentPosts.length} nextPage={nextPage} prevPage={prevPage} currentPage={currentPage} firstPage={firstPage} lastPage={lastPage} goToFirst={goToFirst} goToLast={goToLast}/>
         </div>
         <div className="float-right">
         <Dropdown>
@@ -128,7 +174,12 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
     
         </Dropdown>
         </div>
+        </Container>
+          </Col>
+      </Row>
       </Container>
+     
+      
     </div>
       );
     
