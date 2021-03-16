@@ -6,10 +6,11 @@
 }
 
 .Pages .pagination .page-item .page-link {
-    background-color: unset;
+    background-color: white;
     font-size: 16px;
-    color: white;
-    margin: 3px;
+    color: black;
+    margin: 1px;
+    border: none;
     border-radius: 10px;
 }
 
