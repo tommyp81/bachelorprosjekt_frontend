@@ -1,6 +1,6 @@
 import React from "react"
 import { Pagination, Dropdown } from "react-bootstrap"
-import "./Forum.css"
+import "./Pages.css";
 
 const Pages = ({postsPerPage, totalPosts, paginate, nextPage, prevPage, currentPage, firstPage, lastPage, goToFirst, goToLast}) => {
 
@@ -17,7 +17,7 @@ const Pages = ({postsPerPage, totalPosts, paginate, nextPage, prevPage, currentP
 
   return (
     <div className="Pages" style={{marginTop:"20px"}}>
-      <Pagination className="justify-content-center">
+      <Pagination>
         <Pagination.Item
         onClick={() => goToFirst()}
         hidden={firstPage}>
@@ -26,7 +26,7 @@ const Pages = ({postsPerPage, totalPosts, paginate, nextPage, prevPage, currentP
       
         <Pagination.Item
         onClick={() => prevPage()}
-        disabled={firstPage}>
+        hidden={firstPage}>
           {"<"}
         </Pagination.Item>
 
@@ -49,7 +49,7 @@ const Pages = ({postsPerPage, totalPosts, paginate, nextPage, prevPage, currentP
 
         <Pagination.Item
         onClick={() => nextPage()}
-        disabled={lastPage}>
+        hidden={lastPage}>
           {">"}
         </Pagination.Item>
 

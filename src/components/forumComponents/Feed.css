@@ -1,5 +1,4 @@
 .Feed {
-
 }
 
 .Feed .card {
@@ -7,15 +6,20 @@
     border-radius: 0px;
     border-bottom: 1px solid rgb(209, 209, 209);
     padding-bottom: 20px;
+    
 }
 
 .Feed .card:last-child {
     border-bottom: none;
 }
 
+.Feed .subtoptitle {
+    font-size: 16px;
+    color: grey;
+}
+
 @media (max-width: 768px) {
     
-
     .Feed .card-title {
         margin-left: -10px;
         font-size: 20px;

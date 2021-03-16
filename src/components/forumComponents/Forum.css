@@ -1,65 +1,107 @@
 .Forum {
+    padding-top: 100px;
+    
+}
+
+.Forum .body {
+    background-color: #0b2c63;
+    padding: 30px;
+    border-radius: 10px;
 }
 
 .Forum .top {
     padding-bottom: 20px;
-    font-size: 1.1vw;
-    text-align: center;
 }
 
-.Forum .top p {
-    padding-top: 20px;
-    font-size: 20px;
-    color: gray;
+.Forum .topictext {
+    color: white;
+    margin-bottom: -55px;
 }
 
-.Forum .top h4 {
-    margin-top: -40px;
-    font-size: 1.6vw;
-    color: gray;
+.Forum .topictext p {
+    text-indent: 5px;
 }
 
-.Forum .top h1 {
-    font-size: 2.5vw;
+.Forum .newpost {
+    float: left;
 }
 
-.Forum .top h5 {
-    font-size: 20px;
-    margin-top: 20px;
-    margin-bottom: 40px;
-    font-weight: unset;
-}
-
-
-
-@media (max-width: 1024px) {
-
-    .Forum .top h4 {
-        font-size: 24px !important;
-    }
-
-    .Forum .top h1 {
-        font-size: 34px !important;
-        margin-bottom: 40px;
-    }
-
-    .Forum .top p {
-        font-size: 16px !important;
-    }
-
-    
+.Forum .sortposts {
+    float: right;
 }
 
 .Forum .main {
     border: 1px solid rgb(209, 209, 209);
     border-radius: 10px;
     margin-top: 30px;
+    background-color:white;
 }
 
-@media (max-width: 1024px) {
-.Forum .main {
+@media (min-width: 1024px) {
+    .Forum .newpost {
+        display: none;
+    }
+
+    .Forum .mobilesearch {
+        display: none;
+    }
+    
+}
+
+
+
+@media (max-width: 1023px) {
+    .Forum .desktop {
+        display: none;
+    }
+    .Forum .main {
     border-radius: 0px;
     border: none;
-    border-top: 1px solid rgb(209, 209, 209);;
+    border-top: 1px solid rgb(209, 209, 209);
+    }
+
+    .Forum .topictext { 
+        padding-bottom: 60px;
+    }
+
+    .Forum .topictext h2 {
+        font-size: 20px;
+    }
+
+    .Forum .topictext p {
+        text-indent: unset;
+    }
+
+    .Forum .sortposts {
+        padding-bottom: 10px;
+    }
+
+    .Forum .top {
+        padding-bottom: 20px;
+    }
+
+    .Forum .mobilesearch {
+    }
+
+    .Forum .main {
+        margin-top: -20px;
+        border-radius: 10px;
+        
+    }
+
+    .NewPost p {
+        text-align: center;
+    }
 }
+
+
+
+
+.SearchPosts {
 }
+
+.NewPost p {
+    color: white;
+    text-align: left;
+}
+
