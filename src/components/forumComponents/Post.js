@@ -99,13 +99,16 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
     res.status === 200 ? setComments(comments.filter(comment => comment.id !== id)) : alert("ERROR")
   }
 
-  const addComment = async (comment) => {
+  const addComment = async (comment, file) => {
+    const formData = new FormData();
+    if (file)
+      formData.append('File', file)
+    for (let k in comment) {
+      formData.append(k, comment[k])
+    }
     const res = await fetch("https://webforum.azurewebsites.net/comments", {
       method: 'POST', 
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify(comment)
+      body: formData
     })
 
     const data = await res.json();
@@ -114,6 +117,8 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
     
     updatePosts()
     
+    // console.log(file)
+    // console.log(formData.getAll('File'))
     
   }
 
