@@ -77,28 +77,6 @@ function NewPost ({ subtopicTitle, subtopic, topicFocus, add, history }) {
     history.push(`/Forum/${postId}`)
   } 
 
-  const testtest = () => {
-    let post = { 
-      title, 
-      content, 
-      date: moment().toISOString(), 
-      userId: user.id, 
-      subTopicId: Number(subtopic), 
-      topicId: topicFocus
-    }
-    const formData = new FormData();
-    if (file)
-      formData.append('File', file)
-    for (let k in post) {
-      formData.append(k, post[k])
-    }
-    for (let key of formData.keys()){
-      console.log(key)
-    }
-    console.log(formData.getAll('title'))
-    console.log(file)
-  }
-
   // const handleDrop = acceptedFile => setFile(acceptedFile[0])
 
   // const handleAccept = () => setFileAccepted(true)
@@ -158,8 +136,6 @@ function NewPost ({ subtopicTitle, subtopic, topicFocus, add, history }) {
             </Form.Group>
 
         </Form> 
-
-        <Button onClick={testtest} > TEST </Button>
         </Modal.Body>
         <Modal.Footer>
           
