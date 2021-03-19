@@ -1,18 +1,53 @@
-import React, { useContext, useState } from "react"; 
+import React, { useContext, useState, useMemo } from "react"; 
 import { Form, Button, Container, Modal, Dropdown } from "react-bootstrap";
 import moment from 'moment'
 import "./Forum.css"
 import { UserContext } from "../../UserContext";
 
+import Dropzone from 'react-dropzone'
+import FileDrop from "../FileDrop";
+
+// const dropStyle = {
+//   textAlign: 'center',
+//   padding: '10px',
+//   borderWidth: '3px',
+//   borderColor: '#eeeeee',
+//   borderStyle: 'dashed',
+//   backgroundColor: '#fafafa',
+//   color: '#bdbdbd',
+//   margin: '5px'
+// }
+
+// const acceptDropStyle = {
+//   color: '#00e676'
+// }
+
 function NewPost ({ subtopicTitle, subtopic, topicFocus, add, history }) {
 
+
+  // const [fileAccepted, setFileAccepted] = useState(false)
+  // const style = useMemo(() => ({
+  //   ...dropStyle,
+  //   ...fileAccepted ? acceptDropStyle : {}
+  // }), [fileAccepted])
+
   const { user } = useContext(UserContext)
+
+  const [file, setFile] = useState();
 
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("");
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => {
+    // setFileAccepted(false)
+    setShow(false);
+  }
+  const handleShow = () => {
+    setFile(null);
+    setTitle("");
+    setContent("");
+    setShow(true);
+  }
 
   function validateForm() {
     return content.length > 0 && content.length <= 4000
@@ -26,6 +61,7 @@ function NewPost ({ subtopicTitle, subtopic, topicFocus, add, history }) {
     
     setTitle("")
     setContent("")
+    setFile(null)
     
   }
 
@@ -37,9 +73,13 @@ function NewPost ({ subtopicTitle, subtopic, topicFocus, add, history }) {
       userId: user.id, 
       subTopicId: Number(subtopic), 
       topicId: topicFocus
-    })
+    }, file)
     history.push(`/Forum/${postId}`)
   } 
+
+  // const handleDrop = acceptedFile => setFile(acceptedFile[0])
+
+  // const handleAccept = () => setFileAccepted(true)
 
     return (
     <div className="NewPost">
@@ -66,6 +106,7 @@ function NewPost ({ subtopicTitle, subtopic, topicFocus, add, history }) {
                 rows={1}
                 name="title"
                 value={title}
+                placeholder="Tittel"
                 onChange={e => setTitle(e.target.value)}
               />
 
@@ -76,6 +117,15 @@ function NewPost ({ subtopicTitle, subtopic, topicFocus, add, history }) {
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
               />
+              {/* <Dropzone onDrop={handleDrop} maxFiles={1} onDropAccepted={handleAccept}>
+                {({ getRootProps, getInputProps }) => (
+                  <div {...getRootProps({ style })}>
+                    <input {...getInputProps()} />
+                    {file ? <p>{file.name} &#10003;</p> : <p>Drag'n'drop fil, eller klikk for å velge en fil.</p> }
+                  </div>
+                )}
+              </Dropzone> */}
+              <FileDrop file={file} setFile={setFile} />
               <Button variant="secondary" onClick={handleClose}>
                 Avbryt
               </Button>

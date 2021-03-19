@@ -91,23 +91,21 @@ const App = () => {
     setPosts(data)
   }
 
-  const addPost = async (post) => {
+  const addPost = async (post, file) => {
+    const formData = new FormData();
+    if (file)
+      formData.append('File', file)
+    for (let k in post) {
+      formData.append(k, post[k])
+    }
     const res = await fetch('https://webforum.azurewebsites.net/posts', {
       method: 'POST', 
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify(post)
+      body: formData
     })
 
     const data = await res.json()
-
-    // this.setState({posts: [...this.state.posts, data]})
     setPosts(current => [...current, data])
-    // setFilteredPosts(current => [...current, data])
-    // console.log(posts)
-    // history.push(`/forum/${3}`)
-    // console.log(data.id)
+
     return data.id
   }
 
