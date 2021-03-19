@@ -45,7 +45,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
  
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = filteredPosts.sort((p1, p2) => (moment(p2.date).diff(moment(p1.date)))).slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = pageNum => setCurrentPage(pageNum)
   const nextPage = () => setCurrentPage(currentPage + 1)
@@ -143,7 +143,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
               </div>
         
               <div className="sortposts">
-                <SortPosts post={currentPosts}/>
+                <SortPosts post={filteredPosts} setFilteredPosts={setFilteredPosts} />
               </div>
 
               <div className="mobilesearch">
