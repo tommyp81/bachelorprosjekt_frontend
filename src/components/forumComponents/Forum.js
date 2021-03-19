@@ -97,6 +97,9 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
   
   return (
     <div className="Forum mt-5">
+      <Container>
+        <h1>Forum</h1>
+      </Container>
       <Container className="body">
       <Row xs={1} sm={1} lg={2}>
           <Col lg={3}>

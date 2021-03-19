@@ -22,7 +22,7 @@ import Post from "./components/forumComponents/Post.js";
 
 import { Navbar } from "./components/navigation/navbar/navbar";
 
-import Kunnskapsportalen from "./components/infoComponents/Kunnskapsportalen";
+import Kunnskapsportalen from "./components/infoComponents/Kunnskapsportalen.js";
 // import Kunnskapsportalen from "./components/infoComponents/Info";
 import Register from './components/registerComponent/Register';
 import { UserContext } from './UserContext'
@@ -124,7 +124,7 @@ const App = () => {
             <ProtectedRoute exact path="/" component={Home} subtopic={subtopics} users={users} posts={posts}/>
             <ProtectedRoute path="/Register" component={Register} Register = {Register} />
             <ProtectedRoute exact path="/Forum" component={Forum} posts={posts} addPost={addPost} subtopics={subtopics} topics={topics} users={users} history={history} />
-            <ProtectedRoute exact from="/Kunnskasportalen" component={Kunnskapsportalen} />
+            <ProtectedRoute exact path="/Kunnskapsportalen" component={Kunnskapsportalen} users={users}/>
             <ProtectedRoute exact path="/Forum/:postId" component={Post} subtopics={subtopics} topics={topics} users={users} history={history} updatePosts={updatePosts} />
           </Switch>
         </div>

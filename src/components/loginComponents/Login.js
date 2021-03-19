@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Form, Button, Container, Col, Row } from "react-bootstrap";
 import WelcomeLogo from "./WelcomeLogo";
 
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Register from "../registerComponent/Register";
 
 import "./Login.css";
@@ -55,14 +55,13 @@ const Login = ({ history }) => {
 
   return (
     <div className="Login">
-      <Container fluid="md">
-        <Row className="">
-          <Col className="logo" sm={6}>
+      <Container>
+        <Row xs={1} sm={1} lg={2}>
+          <Col className="logo" lg={7}>
             <WelcomeLogo />
           </Col>
-          <Col className="login" sm={6}>
-            <h2>Logg inn med idrettens ID</h2>
-            <a href="/Register">Ny bruker?</a>
+          <Col className="login" lg={5}>
+            <h2>Logg inn med <br />Idrettens ID</h2>
             <Form onSubmit={handleSubmit}>
               {/* <Form.Group controlId="formBasicEmail" >
                     <Form.Control 
@@ -84,7 +83,7 @@ const Login = ({ history }) => {
                     />
                 </Form.Group> */}
               <Form.Group controlId="exampleForm.ControlSelect1">
-                <Form.Label>Velg Bruker</Form.Label>
+                <Form.Label>Velg bruker</Form.Label>
                 <Form.Control
                   as="select"
                   onChange={(e) => setUname(e.target.value)}
@@ -107,7 +106,7 @@ const Login = ({ history }) => {
                 Logg inn
               </Button>
             </Form>
-            <p>Glemt passord?</p>
+            <a href="https://www.nif.buypass.no/nif-forgot-password/">Glemt passord?</a>
           </Col>
         </Row>
       </Container>

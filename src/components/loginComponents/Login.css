@@ -1,41 +1,44 @@
+.Login {
+    margin-top: 200px;
+}
+
+/*Logo og tekst*/
 .WelcomeLogo {
+    width: 80%;
 }
 
 .WelcomeLogo .img {
-    align-items: center;
+}
+
+.WelcomeLogo h1 {
+    font-size: 60px;
 }
 
 .WelcomeLogo p {
     text-align: right;
+    font-size: 22px;
 }
 
-.Login {
-    position: fixed;
-    top: 25%;
-    left: 25%;
+@media (max-width: 1024px) {
+    .Login .logo {
+        display: none;
+    }
 }
 
-.Login .container {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.Login .logo {
-
-}
+/*Login*/
 
 .Login .login {
-    display: flex; 
-    flex-direction: column;
-    justify-content: center;
+    width: 10%;
     background-color: #0b2c63;
     border-radius: 10px;
     color: white;
     text-align: center;
-    align-content: center;
-    padding: 20px;
+    padding: 10px;
+}
+
+.Login .login h2 {
+    padding-top: 80px;
+    font-size: 40px;
 }
 
 .Login form {
@@ -46,8 +49,17 @@
     width: 60%;
 }
 
-@media (max-width: 1024px) {
-    body {
+@media (max-width: 1025px) {
+    .WelcomeLogo h1 {
+        font-size: 46px;
+    }
+
+    html, body, .Login {
         background-color: #0b2c63;
+        margin-top: unset;
+    }
+
+    .Login .login h2 {
+        padding-top: 200px;
     }
   }
