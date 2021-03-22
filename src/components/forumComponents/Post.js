@@ -122,7 +122,7 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
     
   }
 
-  const commentsPerPage = 10
+  const commentsPerPage = 5
   const [currentPage, setCurrentPage] = useState(1)
  
   const indexOfLastComment = currentPage * commentsPerPage;
@@ -135,22 +135,16 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
 
   const lastPage = currentComments.length !== commentsPerPage || indexOfLastComment === comments.length;
   const firstPage = currentPage === 1;
- 
-  /*
-  const commentCount = () => {
-    if (currentComments === 0) {
-    return <h3>Ingen kommentarer enda.</h3>
-  }
-  }
-  */
   
+  const goToLast = () => setCurrentPage(Math.ceil(comments.length / commentsPerPage))
+  const goToFirst = () => setCurrentPage(1)
 
   return (
     <div className="Post">
       
     <Container style={{display: 'flex', flexDirection: 'column'}}> 
     <div className="main">
-    <h5><Link to="/Forum" style={{textDecoration: 'none', color: '#000000'}}>
+    <h5><Link to="/Forum" style={{textDecoration: 'none', color: 'white'}}>
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
     <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
     </svg>
@@ -185,10 +179,12 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
       
       <NewComment createNew={addComment} user={user} pId={post.id}/> 
       
-      <h4>Kommentarer</h4>  
+      
       {/*commentCount*/}
+      
       <div className="comments">
-          {comments.filter(currentComments => (currentComments.postId === post.id)).map((filteredComment, i) => (
+       {!post.comment_Count ? <h3>Ingen kommentarer</h3> : <h3>Kommentarer</h3> }
+          {comments.filter(currentComments => (currentComments.postId === post.id)).map((filteredComment, i) => ( 
               <Card key={i}>
                   <Card.Body>
                     <div className="float-left">
@@ -200,17 +196,16 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
                     </div>  
                     
                     <Card.Text><br /><br />
-                    
                     {filteredComment.content}
-                    
                     </Card.Text>
                   </Card.Body>
               </Card>
-              
           ))}
-          {/* 
-          <Pages postsPerPage={commentsPerPage} paginate={paginate} totalPosts={currentComments.length} nextPage={nextPage} prevPage={prevPage} currentPage={currentPage} firstPage={firstPage} lastPage={lastPage}/>*/}
-          </div>
+        
+          
+           {/* 
+          <Pages postsPerPage={commentsPerPage} paginate={paginate} totalPosts={currentComments.length} nextPage={nextPage} prevPage={prevPage} currentPage={currentPage} firstPage={firstPage} lastPage={lastPage} goToFirst={goToFirst} goToLast={goToLast}/>
+         */} </div>
 
         
       {/* { !editingPost ? <EditPost post={post} edit={editPost}/> : <></>} */}

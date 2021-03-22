@@ -17,8 +17,7 @@ const EditComment = ({comment, edit}) => {
     return content.length > 0;
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  function handleSubmit() {
     edit({ 
       id: comment.id, 
       content, 

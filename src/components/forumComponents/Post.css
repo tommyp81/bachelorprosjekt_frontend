@@ -1,10 +1,13 @@
-.Post {
-    padding-top: 120px;
+.Post .container {
+    background-color: #0b2c63;
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 120px;
 }
 
 .Post .main .card {
     margin-bottom: 20px;
-    
+    color: black;
 }
 
 .Post .card .card-body .float-left {
@@ -15,9 +18,25 @@
     margin-bottom: 20px;
 }
 
+.Post .comments h3{
+    color: white;
+}
+
 .Post .comments .card {
     margin-bottom: 10px;
 }
 
 .EditComment .btn {
+}
+
+.NewComment textarea {
+    
+}
+
+.NewComment .nav-tabs {
+    border-bottom: 0;
+}
+
+.NewComment .nav-item{
+    background-color: unset;
 }
