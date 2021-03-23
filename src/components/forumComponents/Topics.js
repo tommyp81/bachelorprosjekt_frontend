@@ -26,7 +26,7 @@ const Topics = ({ topics, subtopics, topClick, subClick, allTopics }) => {
 			<Accordion
 			onSelect={topClick}>
 				
-				<Accordion.Toggle 
+				<Accordion.Toggle
 				eventKey={topics.id}
 				className="imgbtn">
 					<Image 

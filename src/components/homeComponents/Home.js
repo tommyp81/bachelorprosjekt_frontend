@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Feed from "../forumComponents/Feed.js";
 import "./Home.css";
+import moment from 'moment'
+
 import Footer from '../mainComponents/Footer'
 //import Header from '../mainComponents/Header'
 
@@ -9,7 +11,7 @@ import Footer from '../mainComponents/Footer'
 import { Link } from 'react-router-dom'
 import { Navbar } from "../navigation/navbar/navbar.jsx";
 
-const Home = ({ posts, subtopic, users}) =>  {
+const Home = ({ posts, topic, subtopic, users}) =>  {
 
   
   return (
@@ -18,7 +20,7 @@ const Home = ({ posts, subtopic, users}) =>  {
         <Row><h5>Siste poster i forumet</h5></Row>
         <Row xs={1} sm={1} lg={2}>
           <Col md={6} className="feedcol">
-            <Feed posts = {posts} users={users} subtopic={subtopic} maxLength={3}/>
+            <Feed posts = {posts.slice(0).sort((d1, d2) => (moment(d2.date) - (moment(d1.date))))} users={users} topic={topic} subtopic={subtopic} maxLength={3}/>
           </Col>
           <Col md={6} className="textcol">
             <Container className="infocon">

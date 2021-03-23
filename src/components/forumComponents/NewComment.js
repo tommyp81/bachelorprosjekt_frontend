@@ -31,6 +31,9 @@ function NewComment({createNew, pId}) {
           <Form onSubmit={submitComment}>
             <Form.Group >
               <Form.Control as="textarea" rows={3} name="comment" value={content} placeholder="Legg til en kommentar..." onChange={e => setContent(e.target.value)}/>
+              {!file ? "" : 
+              <p className="float-left" style={{color: "white"}}>Filen <b>{file.name}</b> er lagt ved.</p>
+              }
             </Form.Group>
             <Form.Group>
               <Button disabled={!validateForm()} type="submit" className="float-right" variant="success" >Send inn</Button>
@@ -38,7 +41,7 @@ function NewComment({createNew, pId}) {
           </Form>
         </Tab>
         <Tab eventKey="2" title="Vedlegg">
-          <FileDrop file={file} setFile={setFile} />
+          <FileDrop file={file} setFile={setFile}/>
         </Tab>
       </Tabs>
       

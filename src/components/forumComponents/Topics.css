@@ -43,13 +43,10 @@
     margin-bottom: 2.5px;
     width: 100%;
     filter: opacity(45%);
-    border-radius: 10px;
 }
 
 .Topics .accordion .topicimg:hover, 
-.Topics .accordion .topicimg:active, 
-.Topics .accordion .topicimg:focus, 
-.Topics .accordion .topicimg:target{
+.Topics .accordion .topicimg:active{
     filter: opacity(100%);
 }
 
@@ -72,8 +69,13 @@
 .Topics .accordion .btn-primary {
     float: left;
     font-size: 15px;
-    margin: 2.5px;
+    margin: 2.5px 0px 2.5px 5px;
     background-color: #007bff;
+}
+
+.Topics .accordion .btn-primary:hover,
+.Topics .accordion .btn-primary:focus {
+    background-color: #005fc4;
 }
 
 

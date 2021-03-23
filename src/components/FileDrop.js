@@ -9,7 +9,8 @@ const dropStyle = {
   borderStyle: 'dashed',
   backgroundColor: '#fafafa',
   color: '#bdbdbd',
-  margin: '5px'
+  marginBottom: "20px",
+  borderRadius: "3px"
 }
 
 const acceptDropStyle = {
@@ -46,7 +47,7 @@ const FileDrop = ({ file, setFile }) => {
     } else if (fileRejected) {
       return <p>Filen er for stor &#10060;</p>
     } else {
-      return <p>Drag'n'drop fil, eller klikk for å velge en fil. (100MB MAX)</p>
+      return <p>Drag'n'drop, eller klikk for å velge en fil (Max 100 megabytes)</p>
     }
   }
 

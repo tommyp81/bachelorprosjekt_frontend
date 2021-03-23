@@ -28,6 +28,7 @@
 
 .Forum .sortposts {
     float: right;
+    margin: 5px;
 }
 
 .Forum .main {
@@ -61,10 +62,12 @@
     }
 
     .Forum .topictext { 
+       margin-left: 10px;
         padding-bottom: 60px;
     }
 
-    .Forum .topictext h2 {
+    .Forum .topictext h2 { 
+        
         font-size: 20px;
     }
 
@@ -114,10 +117,16 @@ Satte margin-top 20px fordi det er samme som Pages objektet
 
 
 .SearchPosts {
+    margin: 5px;
+}
+
+.NewPost {
+    margin: 5px;
 }
 
 .NewPost p {
     color: white;
     text-align: left;
+    margin: 5px;
 }
 

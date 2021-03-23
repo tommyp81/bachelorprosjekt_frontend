@@ -119,7 +119,7 @@ const App = () => {
           <Navbar />
           <Switch>
             <Route path="/Login" component={Login} history={history} />
-            <ProtectedRoute exact path="/" component={Home} subtopic={subtopics} users={users} posts={posts}/>
+            <ProtectedRoute exact path="/" component={Home} topic={topics} subtopic={subtopics} users={users} posts={posts}/>
             <ProtectedRoute path="/Register" component={Register} Register = {Register} />
             <ProtectedRoute exact path="/Forum" component={Forum} posts={posts} addPost={addPost} subtopics={subtopics} topics={topics} users={users} history={history} />
             <ProtectedRoute exact path="/Kunnskapsportalen" component={Kunnskapsportalen} users={users}/>
