@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Form, Button, Modal } from "react-bootstrap";
+import FileInfo from '../FileInfo';
+import FileDrop from '../FileDrop'
 import "./Post.css";
 
 const EditPost = ({post, edit}) => {
   const [content, setContent] = useState("")
   const [title, setTitle] = useState("")
+  const [file, setFile] = useState()
+
+  const isReplaced = Boolean(file)
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -31,7 +36,7 @@ const EditPost = ({post, edit}) => {
       userId: post.userId, 
       subTopicId: post.subTopicId,
       topicId: post.topicId
-    })
+    }, file)
   }
 
   return (
@@ -64,6 +69,8 @@ const EditPost = ({post, edit}) => {
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
               />
+              {post.documentId ? <FileInfo fileId={post.documentId} isReplaced={isReplaced} /> : ""}
+              <FileDrop file={file} setFile={setFile} />
               <Button variant="secondary" onClick={handleClose}>
                 Avbryt
               </Button>

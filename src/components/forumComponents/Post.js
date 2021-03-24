@@ -14,6 +14,7 @@ import NewComment from './NewComment';
 import EditPost from './EditPost';
 import EditComment from './EditComment';
 import { UserContext } from '../../UserContext';
+import FileLink from '../FileLink';
 
 const Post = ( { subtopics, topics, users, history, updatePosts }) => {
 
@@ -55,13 +56,16 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
     }
   }
 
-  const editPost = async (post) => {
+  const editPost = async (post, file) => {
+    const formData = new FormData();
+    if (file)
+      formData.append('File', file)
+    for (let k in post) {
+      formData.append(k, post[k])
+    }
     const res = await fetch(`https://webforum.azurewebsites.net/posts/${post.id}`, {
       method: 'PUT',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify(post)
+      body: formData
     })
     const data = await res.json();
 
@@ -170,7 +174,8 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
           </Card.Title>
           <Card.Text>
             {post.content}
-            
+            <br/>
+            {post.documentId ? <FileLink fileId={post.documentId} /> : ""}
           </Card.Text>
           <br />
           </Card.Body>
@@ -197,6 +202,8 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
                     
                     <Card.Text><br /><br />
                     {filteredComment.content}
+                    <br/>
+                    {filteredComment.documentId ? <FileLink fileId={filteredComment.documentId} /> : ""}
                     </Card.Text>
                   </Card.Body>
               </Card>
