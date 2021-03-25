@@ -45,6 +45,14 @@
     filter: opacity(45%);
 }
 
+.topicimgActive {
+    position: relative;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    width: 100%;
+    filter: opacity(100%);
+}
+
 .Topics .accordion .topicimg:hover, 
 .Topics .accordion .topicimg:active{
     filter: opacity(100%);

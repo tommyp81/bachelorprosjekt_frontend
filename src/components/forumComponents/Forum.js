@@ -118,7 +118,9 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
               subtopics = {subtopics}
               topClick = {onTopClick}
               subClick = {onSubClick}
-              allTopics = {allTopics}/>
+              allTopics = {allTopics}
+              topicFocus = {topicFocus}
+            />
           </Col>
 
           <Col lg={9}>

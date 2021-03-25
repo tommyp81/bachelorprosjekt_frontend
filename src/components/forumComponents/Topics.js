@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import {Button, Tabs, Tab, Accordion, Card, Image } from "react-bootstrap";
 import "./Topics.css";
 
-const Topics = ({ topics, subtopics, topClick, subClick, allTopics }) => {
+
+const Topics = ({ topics, subtopics, topClick, subClick, allTopics, topicFocus }) => {
 	
 	const [show, setShow] = useState(false)
 	const toggle = () => setShow(!show)
@@ -14,7 +15,7 @@ const Topics = ({ topics, subtopics, topClick, subClick, allTopics }) => {
 				<Accordion.Toggle
 				as={Button} 
 				variant="pills"
-				eventKey="1"
+				eventKey="0"
 				value="Alle kategorier"
 				onClick={allTopics}>
 					Alle kategorier
@@ -24,6 +25,7 @@ const Topics = ({ topics, subtopics, topClick, subClick, allTopics }) => {
 			{topics.map((topics, i) => (
 			
 			<Accordion
+			activeKey={topicFocus}
 			onSelect={topClick}>
 				
 				<Accordion.Toggle
@@ -31,7 +33,8 @@ const Topics = ({ topics, subtopics, topClick, subClick, allTopics }) => {
 				className="imgbtn">
 					<Image 
 					src={topics.imageUrl}
-					className="topicimg"></Image>
+					className={topicFocus === topics.id ? 'topicimgActive' : 'topicimg'}
+					/>
 					<div className="imgtitle">{topics.title}</div>
 				</Accordion.Toggle>
 
