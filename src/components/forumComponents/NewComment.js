@@ -16,7 +16,8 @@ function NewComment({createNew, pId}) {
     return content.length > 0;
   }
 
-  function submitComment() {
+  function submitComment(event) {
+    event.preventDefault();
     createNew({content, date: moment().toISOString(), userId: user.id, postId: pId}, file)
     setContent("")
     setFile(null)

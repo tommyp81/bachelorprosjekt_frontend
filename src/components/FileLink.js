@@ -6,13 +6,13 @@ const FileLink = ({fileId}) => {
 
 
   useEffect(async () => {
-    const res = await fetch(`https://webforum.azurewebsites.net/GetDocumentInfo/${fileId}`)
+    const res = await fetch(`https://localhost:44361/GetDocumentInfo/${fileId}`)
     const data = await res.json()
     setFileInfo(data)
-  }, [])
+  }, [fileId])
 
   return (
-    <a href={`https://webforum.azurewebsites.net/GetDocument/${fileId}`} >{fileInfo.fileName}</a>
+    <a href={`https://localhost:44361/GetDocument/${fileId}`} >{fileInfo.fileName}</a>
   )
 }
 

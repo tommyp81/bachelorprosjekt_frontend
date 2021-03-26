@@ -29,7 +29,7 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
 
   useEffect(() => {
     // let isMounted = true
-    fetch("https://webforum.azurewebsites.net/comments")
+    fetch("https://localhost:44361/comments")
     .then(res => res.json())
     .then((data) => {
       // if (isMounted)
@@ -37,14 +37,14 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
     })
     .catch(console.log)
 
-    fetch(`https://webforum.azurewebsites.net/posts/${postId}`)
+    fetch(`https://localhost:44361/posts/${postId}`)
     .then(res => res.json())
     .then(data => setPost(data))
     .catch(console.log)
   }, [])
 
   const deletePost = async () => {
-    const res = await fetch(`https://webforum.azurewebsites.net/posts/${post.id}`, {
+    const res = await fetch(`https://localhost:44361/posts/${post.id}`, {
       method: 'DELETE',
     })
 
@@ -57,13 +57,24 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
   }
 
   const editPost = async (post, file) => {
-    const formData = new FormData();
-    if (file)
+    let formData = new FormData();
+    if (file) {
       formData.append('File', file)
+      formData.append('postId', post.id)
+      formData.append('userId', post.userId)
+      const upres = await fetch('https://localhost:44361/UploadDocument', {
+        method: 'POST',
+        body: formData
+      })
+      const updata = await upres.json()
+      post.documentId = updata.id
+    }
+
+    formData = new FormData();
     for (let k in post) {
       formData.append(k, post[k])
     }
-    const res = await fetch(`https://webforum.azurewebsites.net/posts/${post.id}`, {
+    const res = await fetch(`https://localhost:44361/posts/${post.id}`, {
       method: 'PUT',
       body: formData
     })
@@ -71,13 +82,27 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
 
     setPost(data)
   }
-  const editComment = async (comment) => {
-    const res = await fetch(`https://webforum.azurewebsites.net/comments/${comment.id}`, {
+  const editComment = async (comment, file) => {
+    let formData = new FormData()
+    if (file) {
+      formData.append('File', file)
+      formData.append('commentId', comment.id)
+      formData.append('userId', comment.userId)
+      const upres = await fetch('https://localhost:44361/UploadDocument', {
+        method: 'POST',
+        body: formData
+      })
+      const updata = await upres.json()
+      comment.documentId = updata.id
+    }
+
+    formData = new FormData()
+    for (let k in comment) {
+      formData.append(k, comment[k])
+    }
+    const res = await fetch(`https://localhost:44361/comments/${comment.id}`, {
       method: 'PUT',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify(comment)
+      body: formData
     })
     const data = await res.json();
 
@@ -85,7 +110,8 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
       if (comment.id === data.id) {
         const updateComment = {
           ...comment,
-          content: data.content
+          content: data.content, 
+          documentId: data.documentId
         }
         return updateComment
       }
@@ -97,7 +123,7 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
 
   const deleteComment = async (e) => {
     let id = Number(e.target.value)
-    const res = await fetch(`https://webforum.azurewebsites.net/comments/${id}`, {
+    const res = await fetch(`https://localhost:44361/comments/${id}`, {
       method: 'DELETE'
     })
     res.status === 200 ? setComments(comments.filter(comment => comment.id !== id)) : alert("ERROR")
@@ -110,13 +136,13 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
     for (let k in comment) {
       formData.append(k, comment[k])
     }
-    const res = await fetch("https://webforum.azurewebsites.net/comments", {
+    const res = await fetch("https://localhost:44361/comments", {
       method: 'POST', 
       body: formData
     })
-
+    console.log(res)
     const data = await res.json();
-
+    console.log(data)
     setComments(current => [...current, data])
     
     updatePosts()

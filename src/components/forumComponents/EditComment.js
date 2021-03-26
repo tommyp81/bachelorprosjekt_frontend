@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { Form, Button, Modal } from "react-bootstrap";
+import FileDrop from '../FileDrop'
+import FileInfo from '../FileInfo'
 
 const EditComment = ({comment, edit}) => {
+
+  const [file, setFile] = useState()
   const [content, setContent] = useState("")
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const isReplaced = Boolean(file)
 
 
   useEffect(() => {
@@ -17,14 +23,16 @@ const EditComment = ({comment, edit}) => {
     return content.length > 0;
   }
 
-  function handleSubmit() {
+  function handleSubmit(event) {
+    event.preventDefault();
     edit({ 
       id: comment.id, 
       content, 
       date: comment.date, 
       userId: comment.userId, 
-      postId: comment.postId
-    })
+      postId: comment.postId,
+      documentId: comment.documentId
+    }, file)
   }
 
   return (
@@ -48,6 +56,8 @@ const EditComment = ({comment, edit}) => {
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
               />
+              {comment.documentId ? <FileInfo fileId={comment.documentId} isReplaced={isReplaced} /> : ""}
+              <FileDrop file={file} setFile={setFile} />
               <Button variant="secondary" onClick={handleClose}>
                 Avbryt
               </Button>

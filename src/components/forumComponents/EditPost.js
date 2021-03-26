@@ -35,7 +35,8 @@ const EditPost = ({post, edit}) => {
       date: post.date, 
       userId: post.userId, 
       subTopicId: post.subTopicId,
-      topicId: post.topicId
+      topicId: post.topicId,
+      documentId: post.documentId
     }, file)
   }
 
