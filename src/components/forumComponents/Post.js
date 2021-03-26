@@ -244,7 +244,7 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
                     <div className="float-left">
                     <p>Postet av <b>{users && users.length && users.find(u => u.id === filteredComment.userId).username}</b>{/*filteredUser.username*/} {moment(filteredComment.date).calendar()}</p>
                     </div>
-                    <div className="float-right" hidden={!(user.id === post.userId)}>
+                    <div className="float-right" hidden={!(user.id === filteredComment.userId)}>
                       <EditComment comment={filteredComment} edit={editComment}/> &nbsp;
                       <Button variant="danger" size="sm" onClick={deleteComment} value={filteredComment.id}>Slett</Button>
                     </div>  
