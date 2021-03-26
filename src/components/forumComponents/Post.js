@@ -14,6 +14,7 @@ import NewComment from './NewComment';
 import EditPost from './EditPost';
 import EditComment from './EditComment';
 import { UserContext } from '../../UserContext';
+import FileLink from '../FileLink';
 
 const Post = ( { subtopics, topics, users, history, updatePosts }) => {
 
@@ -55,25 +56,53 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
     }
   }
 
-  const editPost = async (post) => {
+  const editPost = async (post, file) => {
+    let formData = new FormData();
+    if (file) {
+      formData.append('File', file)
+      formData.append('postId', post.id)
+      formData.append('userId', post.userId)
+      const upres = await fetch('https://webforum.azurewebsites.net/UploadDocument', {
+        method: 'POST',
+        body: formData
+      })
+      const updata = await upres.json()
+      post.documentId = updata.id
+    }
+
+    formData = new FormData();
+    for (let k in post) {
+      formData.append(k, post[k])
+    }
     const res = await fetch(`https://webforum.azurewebsites.net/posts/${post.id}`, {
       method: 'PUT',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify(post)
+      body: formData
     })
     const data = await res.json();
 
     setPost(data)
   }
-  const editComment = async (comment) => {
+  const editComment = async (comment, file) => {
+    let formData = new FormData()
+    if (file) {
+      formData.append('File', file)
+      formData.append('commentId', comment.id)
+      formData.append('userId', comment.userId)
+      const upres = await fetch('https://webforum.azurewebsites.net/UploadDocument', {
+        method: 'POST',
+        body: formData
+      })
+      const updata = await upres.json()
+      comment.documentId = updata.id
+    }
+
+    formData = new FormData()
+    for (let k in comment) {
+      formData.append(k, comment[k])
+    }
     const res = await fetch(`https://webforum.azurewebsites.net/comments/${comment.id}`, {
       method: 'PUT',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify(comment)
+      body: formData
     })
     const data = await res.json();
 
@@ -81,7 +110,8 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
       if (comment.id === data.id) {
         const updateComment = {
           ...comment,
-          content: data.content
+          content: data.content, 
+          documentId: data.documentId
         }
         return updateComment
       }
@@ -110,9 +140,9 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
       method: 'POST', 
       body: formData
     })
-
+    console.log(res)
     const data = await res.json();
-
+    console.log(data)
     setComments(current => [...current, data])
     
     updatePosts()
@@ -184,7 +214,8 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
           </Card.Title>
           <Card.Text>
             {post.content}
-            
+            <br/>
+            {post.documentId ? <FileLink fileId={post.documentId} /> : ""}
           </Card.Text>
           <div className="float-right"> 0 &nbsp;
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
@@ -213,13 +244,15 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
                     <div className="float-left">
                     <p>Postet av <b>{users && users.length && users.find(u => u.id === filteredComment.userId).username}</b>{/*filteredUser.username*/} {moment(filteredComment.date).calendar()}</p>
                     </div>
-                    <div className="float-right" hidden={!(user.id === post.userId)}>
+                    <div className="float-right" hidden={!(user.id === filteredComment.userId)}>
                       <EditComment comment={filteredComment} edit={editComment}/> &nbsp;
                       <Button variant="danger" size="sm" onClick={deleteComment} value={filteredComment.id}>Slett</Button>
                     </div>  
                     
                     <Card.Text><br /><br />
                     {filteredComment.content}
+                    <br/>
+                    {filteredComment.documentId ? <FileLink fileId={filteredComment.documentId} /> : ""}
                     </Card.Text>
                   </Card.Body>
               </Card>
