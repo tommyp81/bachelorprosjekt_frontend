@@ -11,3 +11,14 @@
     position: absolute;
     top: 100px;
 }
+
+.InfoTopics .tabs {
+    display: inline;
+}
+
+.InfoTopics .tab {
+    float: left;
+}
+
+.InfoTopics .tab .btn {
+}

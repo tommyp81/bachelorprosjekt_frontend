@@ -21,7 +21,7 @@ const UploadFile = () => {
                     <Tab title="Video" eventKey="0">
                         <Modal.Body>
                             <Form>
-                                <h4>Lim inn URL</h4>
+                                <h4>Lim inn YouTube-URL</h4>
                                 <Form.Control type="input"></Form.Control>
                             </Form>
                         </Modal.Body>
