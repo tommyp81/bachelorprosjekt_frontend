@@ -1,0 +1,70 @@
+.toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #0b2c63;
+  height: 70px;
+  z-index: 100;
+}
+.tlogo {
+  margin-left: 1rem;
+}
+.tlogo a {
+  color: white;
+  text-decoration: none;
+  font-size: 5mm;
+  font-weight: bold;
+}
+
+.tlogo img {
+  margin: 8px;
+  background: white;
+  width: 40px;
+  left: 0;
+}
+.freeSpace {
+  flex: 1;
+}
+.tnavigation {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.tNavItems ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+.tNavItems li {
+  padding: 0 0.5rem;
+}
+.tNavItems a {
+  color: white;
+  text-decoration: none;
+}
+@media (max-width: 768px) {
+  .tNavItems {
+    display: none;
+  }
+  .t-toggle-btn {
+    margin-right: 15px;
+  }
+}
+@media (min-width: 769px) {
+  .t-toggle-btn {
+    display: none;
+  }
+
+  .tlogo {
+    margin-left: 0;
+  }
+}
+@media (min-width: 769px) {
+  .tlogo {
+    font-size: 0.5rem;
+  }
+}
