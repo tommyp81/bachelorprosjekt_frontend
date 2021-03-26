@@ -55,28 +55,28 @@ const App = () => {
 
 
   useEffect(() => {
-    fetch("https://localhost:44361/posts")
+    fetch("https://webforum.azurewebsites.net/posts")
     .then(res => res.json())
     .then(data => {
       setPosts(data)
     })
     .catch(console.log)
 
-    fetch("https://localhost:44361/SubTopics")
+    fetch("https://webforum.azurewebsites.net/SubTopics")
     .then(res => res.json())
     .then((data) => {
       setSubtopics(data)
     })
     .catch(console.log)
 
-    fetch("https://localhost:44361/Topics")
+    fetch("https://webforum.azurewebsites.net/Topics")
     .then(res => res.json())
     .then((data) => {
       setTopics(data)
     })
     .catch(console.log)
 
-    fetch("https://localhost:44361/Users")
+    fetch("https://webforum.azurewebsites.net/Users")
     .then(res => res.json())
     .then((data) => {
       setUsers(data)
@@ -86,7 +86,7 @@ const App = () => {
   }, [])
 
   const updatePosts = async () => {
-    const res = await fetch('https://localhost:44361/posts')
+    const res = await fetch('https://webforum.azurewebsites.net/posts')
     const data = await res.json()
     setPosts(data)
   }
@@ -98,7 +98,7 @@ const App = () => {
     for (let k in post) {
       formData.append(k, post[k])
     }
-    const res = await fetch('https://localhost:44361/posts', {
+    const res = await fetch('https://webforum.azurewebsites.net/posts', {
       method: 'POST', 
       body: formData
     })
