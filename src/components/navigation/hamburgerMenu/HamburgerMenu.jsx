@@ -1,3 +1,5 @@
+//Related to previous navbar and sidevbar should be removed later at the end of project.
+
 //codes in Here are related to the pop-up menu.
 
 //npm i --save @fortawesome/free-solid-svg-icons
@@ -129,7 +131,7 @@ const commonTransition = { type: "spring", duration: 0.05 };
 export function HamburgerMenu(props) {
   const [isOpen, setOpen] = useState(false);
 
-  const { user } = useContext(UserContext)
+  const { user } = useContext(UserContext);
 
   const toggleMenu = () => {
     setOpen(!isOpen);
@@ -164,7 +166,11 @@ export function HamburgerMenu(props) {
             variants={commonVariants}
             transition={commonTransition}
           >
-            <a href="/Login" component={BLogin} onClick={() => localStorage.clear()}>
+            <a
+              href="/Login"
+              component={BLogin}
+              onClick={() => localStorage.clear()}
+            >
               Bytt Bruker
             </a>
           </LoginButton>

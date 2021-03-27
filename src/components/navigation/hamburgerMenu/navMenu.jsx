@@ -1,3 +1,5 @@
+//Related to previous navbar and sidevbar should be removed later at the end of project.
+
 //nav menu (home,forum) on the pop-up box of hamburgerMenu
 //npm install framer-motion --save
 import { motion } from "framer-motion";
@@ -7,10 +9,8 @@ import { Route } from "react-router-dom";
 //npm i styled-components
 import styled from "styled-components";
 
-import Forum  from "../../forumComponents/Forum";
+import Forum from "../../forumComponents/Forum";
 import Home from "../../homeComponents/Home";
-
-
 
 const NavMenuContainer = styled.div`
   width: 100%;
@@ -74,7 +74,9 @@ export function NavMenu({ isOpen }) {
           }}
         >
           {/*<a href="/Home">Hjem</a>*/}
-          <a href="/" exact component={Home}>Home</a>
+          <a href="/" exact component={Home}>
+            Home
+          </a>
         </NavLink>
         <NavLink
           initial={false}
@@ -106,8 +108,9 @@ export function NavMenu({ isOpen }) {
             },
           }}
         >
-          <a href="/Forum" component={Forum}>Forum</a>
-          
+          <a href="/Forum" component={Forum}>
+            Forum
+          </a>
         </NavLink>
         <NavLink
           initial={false}
