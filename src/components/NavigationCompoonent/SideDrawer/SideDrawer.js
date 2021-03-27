@@ -2,10 +2,10 @@ import React from "react";
 import "./SideDrawer.css";
 
 const SideDrawer = (props) => {
-  let drawerClasses = "side-drawer";
+  let drawerClasses = "sideDrawer";
 
   if (props.show) {
-    drawerClasses = "side-drawer open";
+    drawerClasses = "sideDrawer open";
   }
 
   return (

@@ -45,6 +45,11 @@
 .tNavItems a {
   color: white;
   text-decoration: none;
+  display: block;
+  padding: 18px 20px;
+}
+.tNavItems li a:hover {
+  background-color: #072557;
 }
 @media (max-width: 768px) {
   .tNavItems {
@@ -52,6 +57,12 @@
   }
   .t-toggle-btn {
     margin-right: 15px;
+  }
+  .tlogo a {
+    font-size: small;
+  }
+  .tlogo img {
+    width: 35px;
   }
 }
 @media (min-width: 769px) {
@@ -61,10 +72,5 @@
 
   .tlogo {
     margin-left: 0;
-  }
-}
-@media (min-width: 769px) {
-  .tlogo {
-    font-size: 0.5rem;
   }
 }

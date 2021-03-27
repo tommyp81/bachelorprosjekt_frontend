@@ -2,7 +2,7 @@ import React from "react";
 import "./Toolbar.css";
 import logo from "../../../assets/images/BadmintonClubLogo.png";
 import ToggleButton from "../SideDrawer/ToggleButton";
-import Home from "../../homeComponents/Home";
+
 const ToolBar = (props) => {
   return (
     <header className="toolbar">
@@ -14,9 +14,7 @@ const ToolBar = (props) => {
           <a href="/">
             <img src={logo} alt="badmintonclub logo" />
           </a>
-          <a id="tbrand" href="/">
-            Norges Badmintonforbund
-          </a>
+          <a href="/">Norges Badmintonforbund</a>
         </div>
         <div className="freeSpace" />
         <div className="tNavItems">
