@@ -17,13 +17,14 @@ const UploadFile = () => {
   const handleShow = () => setShow(true);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const validate = (value) => {
+  const validateUrl = (value) => {
     if (validator.isURL(value)) {
-      setErrorMessage("Is Valid URL");
+      setErrorMessage("Gyldig URL");
     } else {
-      setErrorMessage("ikke gyldig URL");
+      setErrorMessage("Ugyldig URL");
     }
   };
+
   return (
     <div className="UploadFile">
       <Button onClick={handleShow} variant="primary">
@@ -37,11 +38,11 @@ const UploadFile = () => {
         <Tabs defaultActiveKey="0">
           <Tab title="Video" eventKey="0">
             <Modal.Body>
-              <Form onChange={(e) => validate(e.target.value)}>
-                <h4>Lim inn YouTube-URL</h4>
+              <Form onChange={(e) => validateUrl(e.target.value)}>
+                <Form.Label>Lim inn YouTube-URL *</Form.Label>
                 <Form.Control type="input"></Form.Control>
               </Form>
-              <span style={{ fontWeight: "bold", color: "red" }}>
+              <span style={{ fontSize: 11, fontWeight: "bold", color: "red" }}>
                 {errorMessage}
               </span>
             </Modal.Body>
