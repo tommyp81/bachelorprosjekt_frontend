@@ -5,8 +5,6 @@ import "./Topics.css";
 
 const Topics = ({ topics, subtopics, topClick, subClick, allTopics, topicFocus }) => {
 	
-	const [show, setShow] = useState(false)
-	const toggle = () => setShow(!show)
 
 	return (
 		<div className="Topics">
@@ -17,7 +15,8 @@ const Topics = ({ topics, subtopics, topClick, subClick, allTopics, topicFocus }
 				variant="pills"
 				eventKey="0"
 				value="Alle kategorier"
-				onClick={allTopics}>
+				onClick={allTopics}
+				>
 					Alle kategorier
 				</Accordion.Toggle>
 			</Accordion>
@@ -51,9 +50,8 @@ const Topics = ({ topics, subtopics, topClick, subClick, allTopics, topicFocus }
 			as={Button}
 			variant="pills" 
 			className="topics" 
-			onSelect={topClick} 
-			defaultActiveKey="Alle kategorier">
-				<Tab title="Alle kategorier" value="Alle kategorier" key="Alle kategorier" eventKey="Alle kategorier" className="tab"  onClick={allTopics}>
+			onSelect={topClick}>
+				<Tab title="Alle kategorier" value="Alle kategorier" key="0" eventKey="0" className="tab"  onClick={allTopics}>
 				</Tab>
 				{topics.map((topics, i) => (
 					<Tab key={i} eventKey={topics.id} title={topics.title} className="tab">

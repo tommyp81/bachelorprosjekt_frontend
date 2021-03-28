@@ -22,3 +22,7 @@
 
 .InfoTopics .tab .btn {
 }
+
+.UploadFile .modal-header .title {
+    color: aqua;
+}

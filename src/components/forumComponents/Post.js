@@ -173,7 +173,7 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
     <div className="Post">
       
     <Container style={{display: 'flex', flexDirection: 'column'}}> 
-    <div className="main">
+    
     <h5>
       <Link to="/Forum" style={{textDecoration: 'none', color: 'white'}}>
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
@@ -196,6 +196,7 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
           ))}
         </div>
       </h5> 
+      <div className="main">
       <Card>
         <Card.Body>
           <div className="float-left">

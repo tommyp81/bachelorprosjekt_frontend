@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {Button, Tabs, Tab, Accordion, Card, Image, Modal, Form } from "react-bootstrap";
 import FileDrop from '../FileDrop';
+import "./Kunnskapsportalen.css"
 
 const UploadFile = () => {
 
@@ -13,10 +14,15 @@ const UploadFile = () => {
         <div className="UploadFile">
             <Button onClick={handleShow} variant="primary">Last opp</Button>
             
-            <Modal show={show} onHide={handleClose} centered>
+            <Modal show={show} onHide={handleClose} centered >
                 <Modal.Header closeButton>
                     <Modal.Title>Last opp ny...</Modal.Title>
                 </Modal.Header>
+                <Form.Control 
+                type="input" 
+                className="title" 
+                placeholder="Angi tittel" 
+                style={{fontSize: "20px", marginBottom: "10px"}}/>
                 <Tabs defaultActiveKey="0">
                     <Tab title="Video" eventKey="0">
                         <Modal.Body>
