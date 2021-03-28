@@ -38,10 +38,10 @@ const UploadFile = () => {
           <Tab title="Video" eventKey="0">
             <Modal.Body>
               <Form onChange={(e) => validate(e.target.value)}>
-                <h4>Lim inn YouTube-URL</h4>
+                <h4>Lim inn YouTube-URL *</h4>
                 <Form.Control type="input"></Form.Control>
               </Form>
-              <span style={{ fontWeight: "bold", color: "red" }}>
+              <span style={{ fontSize: 11, fontWeight: "bold", color: "red" }}>
                 {errorMessage}
               </span>
             </Modal.Body>
