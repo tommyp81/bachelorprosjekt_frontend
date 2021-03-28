@@ -1,3 +1,5 @@
+//Related to previous navbar and sidevbar should be removed later at the end of project.
+
 //the code here related to the hamburger button
 
 import { motion } from "framer-motion";
@@ -19,7 +21,7 @@ const Path = (props) => (
 );
 
 const transition = { duration: 0.3 };
-//toggle between the open and close state and play animaytion. 
+//toggle between the open and close state and play animaytion.
 export function MenuToggle({ toggle, isOpen }) {
   return (
     <Button onClick={toggle}>

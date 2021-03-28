@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import "./App.css";
@@ -20,116 +20,161 @@ import Forum from "./components/forumComponents/Forum.js";
 import NewComment from "./components/forumComponents/NewComment.js";
 import Post from "./components/forumComponents/Post.js";
 
-import { Navbar } from "./components/navigation/navbar/navbar";
+//import { Navbar } from "./components/navigation/navbar/navbar";
 
 import Kunnskapsportalen from "./components/infoComponents/Kunnskapsportalen.js";
 // import Kunnskapsportalen from "./components/infoComponents/Info";
-import Register from './components/registerComponent/Register';
-import { UserContext } from './UserContext'
-import ProtectedRoute from './ProtectedRoute'
+import Register from "./components/registerComponent/Register";
+import { UserContext } from "./UserContext";
+import ProtectedRoute from "./ProtectedRoute";
+import Toolbar from "./components/NavigationCompoonent/Toolbar/Toolbar";
+import SideDrawer from "./components/NavigationCompoonent/SideDrawer/SideDrawer";
+import Backdrop from "./components/NavigationCompoonent/Backdrop/Backdrop";
 // https://webforum.azurewebsites.net/posts
 // https://webforum.azurewebsites.net/answers
 // https://webforum.azurewebsites.net/users
 
-
-
-
 const App = () => {
-
-  const history = useHistory()
+  const history = useHistory();
 
   const [user, setUser] = useState(() => {
-    const localUser = localStorage.getItem('user');
-    return localUser ? JSON.parse(localUser) : {}
-  })
-  
+    const localUser = localStorage.getItem("user");
+    return localUser ? JSON.parse(localUser) : {};
+  });
+
   useEffect(() => {
-    localStorage.setItem('user', JSON.stringify(user))
-  }, [user])
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
 
   const [topics, setTopics] = useState([]);
   const [subtopics, setSubtopics] = useState([]);
   const [posts, setPosts] = useState([]);
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([]);
+  const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
 
+  const handleDrawerToggleClick = () => {
+    setSideDrawerOpen((prevDrawerState) => !prevDrawerState);
+  };
+  const handleBackdropClick = () => {
+    setSideDrawerOpen(false);
+  };
 
+  let backdrop;
+
+  if (sideDrawerOpen) {
+    backdrop = <Backdrop click={handleBackdropClick} />;
+  }
 
   useEffect(() => {
     fetch("https://webforum.azurewebsites.net/posts")
-    .then(res => res.json())
-    .then(data => {
-      setPosts(data)
-    })
-    .catch(console.log)
+      .then((res) => res.json())
+      .then((data) => {
+        setPosts(data);
+      })
+      .catch(console.log);
 
     fetch("https://webforum.azurewebsites.net/SubTopics")
-    .then(res => res.json())
-    .then((data) => {
-      setSubtopics(data)
-    })
-    .catch(console.log)
+      .then((res) => res.json())
+      .then((data) => {
+        setSubtopics(data);
+      })
+      .catch(console.log);
 
     fetch("https://webforum.azurewebsites.net/Topics")
-    .then(res => res.json())
-    .then((data) => {
-      setTopics(data)
-    })
-    .catch(console.log)
+      .then((res) => res.json())
+      .then((data) => {
+        setTopics(data);
+      })
+      .catch(console.log);
 
     fetch("https://webforum.azurewebsites.net/Users")
-    .then(res => res.json())
-    .then((data) => {
-      setUsers(data)
-    })
-    .catch(console.log)
-
-  }, [])
+      .then((res) => res.json())
+      .then((data) => {
+        setUsers(data);
+      })
+      .catch(console.log);
+  }, []);
 
   const updatePosts = async () => {
-    const res = await fetch('https://webforum.azurewebsites.net/posts')
-    const data = await res.json()
-    setPosts(data)
-  }
+    const res = await fetch("https://webforum.azurewebsites.net/posts");
+    const data = await res.json();
+    setPosts(data);
+  };
 
   const addPost = async (post, file) => {
     const formData = new FormData();
-    if (file)
-      formData.append('File', file)
+    if (file) formData.append("File", file);
     for (let k in post) {
-      formData.append(k, post[k])
+      formData.append(k, post[k]);
     }
-    const res = await fetch('https://webforum.azurewebsites.net/posts', {
-      method: 'POST', 
-      body: formData
-    })
+    const res = await fetch("https://webforum.azurewebsites.net/posts", {
+      method: "POST",
+      body: formData,
+    });
 
-    const data = await res.json()
-    setPosts(current => [...current, data])
+    const data = await res.json();
+    setPosts((current) => [...current, data]);
 
-    return data.id
-  }
-
+    return data.id;
+  };
 
   //Putt komponentene hver for seg i diven fpr nå. De er ikke skapt for å brukes sammen helt enda :D
   //Akkurat nå er det kun post-komponenten som er synlig!
   return (
     <BrowserRouter>
-      <UserContext.Provider value={{user, setUser}} >
+      <UserContext.Provider value={{ user, setUser }}>
         <div className="App">
-          <Navbar />
+          <Toolbar handleDrawerToggleClick={handleDrawerToggleClick} />
+          <SideDrawer show={sideDrawerOpen} />
+          {backdrop}
           <Switch>
             <Route path="/Login" component={Login} history={history} />
-            <ProtectedRoute exact path="/" component={Home} topic={topics} subtopic={subtopics} users={users} posts={posts}/>
-            <ProtectedRoute path="/Register" component={Register} Register = {Register} />
-            <ProtectedRoute exact path="/Forum" component={Forum} posts={posts} addPost={addPost} subtopics={subtopics} topics={topics} users={users} history={history} />
-            <ProtectedRoute exact path="/Kunnskapsportalen" component={Kunnskapsportalen} users={users}/>
-            <ProtectedRoute exact path="/Forum/:postId" component={Post} subtopics={subtopics} topics={topics} users={users} history={history} updatePosts={updatePosts} />
+            <ProtectedRoute
+              exact
+              path="/"
+              component={Home}
+              topic={topics}
+              subtopic={subtopics}
+              users={users}
+              posts={posts}
+            />
+            <ProtectedRoute
+              path="/Register"
+              component={Register}
+              Register={Register}
+            />
+            <ProtectedRoute
+              exact
+              path="/Forum"
+              component={Forum}
+              posts={posts}
+              addPost={addPost}
+              subtopics={subtopics}
+              topics={topics}
+              users={users}
+              history={history}
+            />
+            <ProtectedRoute
+              exact
+              path="/Kunnskapsportalen"
+              component={Kunnskapsportalen}
+              users={users}
+            />
+            <ProtectedRoute
+              exact
+              path="/Forum/:postId"
+              component={Post}
+              subtopics={subtopics}
+              topics={topics}
+              users={users}
+              history={history}
+              updatePosts={updatePosts}
+            />
           </Switch>
         </div>
       </UserContext.Provider>
-    </BrowserRouter>   
-    
-  )
-}
+    </BrowserRouter>
+  );
+};
 
 export default App;
