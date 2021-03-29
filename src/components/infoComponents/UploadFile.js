@@ -1,5 +1,5 @@
-import  {React, useState } from 'react';
-import "./Kunnskapsportalen.css"
+import { React, useState } from "react";
+import "./Kunnskapsportalen.css";
 import {
   Button,
   Tabs,
@@ -21,9 +21,9 @@ const UploadFile = () => {
 
   const validate = (value) => {
     if (validator.isURL(value)) {
-      setErrorMessage("Is Valid URL");
+      setErrorMessage("Gyldig URL");
     } else {
-      setErrorMessage("ikke gyldig URL");
+      setErrorMessage("Ugyldig URL");
     }
   };
   return (
