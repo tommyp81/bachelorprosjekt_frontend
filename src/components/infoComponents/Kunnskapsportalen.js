@@ -6,7 +6,7 @@ import InfoTopics from "./InfoTopics.js";
 import UploadFile from "./UploadFile.js";
 import "./Kunnskapsportalen.css";
  
-const Kunnskapsportalen = ({users}) => {
+const Kunnskapsportalen = ({ infoTopics, videos, users }) => {
   
   const [content, setContent] = useState({});
   const [showMore, setShowMore] = useState(false);
@@ -18,24 +18,18 @@ const Kunnskapsportalen = ({users}) => {
     }
   }
 
-    const [infoTopics, setInfoTopics] = useState();
     const [showCategory, setShowCategory] = useState(false);
     const [showContent, setShowContent] = useState(false);
 
-    const showCat = () => setShowCategory(true)
+    const [showVideos, setShowVideos] = useState(false)
+
     const showCont = () => setShowContent(true)
+    const showVideoContent = () => setShowVideos(true)
+
     
-
-    const Category = () => {
-      
-        return <div className="">
-            <Button value="video" onClick={showCont}>Video</Button>
-            <Button value="dokument" onClick={showCont}>Dokument</Button>
-        </div>;
-    }
-
-    const Content = () => {
+    const VideoContent = () => {
         return <div className="content">
+          {videos.map((filteredVideos) => (
           <Card>
             <Card.Body>
               <Row>
@@ -44,7 +38,7 @@ const Kunnskapsportalen = ({users}) => {
               </svg></div>
               </Col>
               <Col lg={8}><p className="toptext">Delt DATO i KATEGORI</p>
-              <h3 className="title">Tittel</h3>
+              <h3 className="title">{filteredVideos.title}</h3>
               <p className="bottext">av ADMIN</p></Col>
               <Col lg={2}>
               <Button>Last ned</Button><br />
@@ -53,8 +47,32 @@ const Kunnskapsportalen = ({users}) => {
               </Row>
             </Card.Body>
             </Card>
+            ))}
       </div>
     }
+
+    const DocumentContent = () => {
+      return <div className="content">
+        
+        <Card>
+          <Card.Body>
+            <Row>
+              <Col lg={2}><div className="float-left"><svg xmlns="http://www.w3.org/2000/svg" width="125" height="125" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
+            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1h-4z"/>
+            </svg></div>
+            </Col>
+            <Col lg={8}><p className="toptext">Delt DATO i KATEGORI</p>
+            <h3 className="title">Tittel</h3>
+            <p className="bottext">av ADMIN</p></Col>
+            <Col lg={2}>
+            <Button>Last ned</Button><br />
+            <Link to="/Forum">Diskuter i forumet</Link>
+            </Col>
+            </Row>
+          </Card.Body>
+          </Card>
+    </div>
+  }
 
         return (
             <div className="Kunnskapsportalen">
@@ -70,12 +88,8 @@ const Kunnskapsportalen = ({users}) => {
                   <Row>
                     <Col lg={2}> Søk</Col>
                     <Col lg={8}>
-                      <div className="InfoTopics">
-                        <Button onClick={showCat} className="float-left">
-                            InfoTopic 1
-                        </Button>
-                        {showCategory ? <Category /> : null}
-                    </div>
+                      <InfoTopics infoTopics={infoTopics} videos={videos}/>
+                      <Button onClick={showVideoContent}>Vis video</Button>
                     </Col>
                     <Col lg={2}><UploadFile /></Col>
                    
@@ -83,24 +97,8 @@ const Kunnskapsportalen = ({users}) => {
                   <Row>
                     <Col lg={12}>
                     <div className="content">
-          <Card>
-            <Card.Body>
-              <Row>
-                <Col lg={2}><div className="float-left"><svg xmlns="http://www.w3.org/2000/svg" width="125" height="125" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
-              <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1h-4z"/>
-              </svg></div>
-              </Col>
-              <Col lg={8}><p className="toptext">Delt DATO i KATEGORI</p>
-              <h3 className="title">Tittel</h3>
-              <p className="bottext">av ADMIN</p></Col>
-              <Col lg={2}>
-              <Button>Last ned</Button><br />
-              <Link to="/Forum">Diskuter i forumet</Link>
-              </Col>
-              </Row>
-            </Card.Body>
-            </Card>
-            </div>
+                    {showVideos ? <VideoContent /> : null}
+                    </div>
                             
             </Col>
           </Row>

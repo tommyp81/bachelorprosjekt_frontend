@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-
-import "./App.css";
 import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
 
 //Importing main components.
@@ -50,6 +48,8 @@ const App = () => {
   const [subtopics, setSubtopics] = useState([]);
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
+  const [infoTopics, setInfoTopics] = useState([]);
+  const [videos, setVideos] = useState([])
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
 
   const handleDrawerToggleClick = () => {
@@ -93,6 +93,20 @@ const App = () => {
         setUsers(data);
       })
       .catch(console.log);
+
+      fetch("https://webforum.azurewebsites.net/InfoTopics")
+      .then((res) => res.json())
+      .then((data) => {
+        setInfoTopics(data);
+      })
+      .catch(console.log);
+
+      fetch("https://webforum.azurewebsites.net/Videos")
+      .then((res) => res.json())
+      .then((data) => {
+        setVideos(data);
+      })
+      .catch(console.log);
   }, []);
 
   const updatePosts = async () => {
@@ -118,8 +132,6 @@ const App = () => {
     return data.id;
   };
 
-  //Putt komponentene hver for seg i diven fpr nå. De er ikke skapt for å brukes sammen helt enda :D
-  //Akkurat nå er det kun post-komponenten som er synlig!
   return (
     <BrowserRouter>
       <UserContext.Provider value={{ user, setUser }}>
@@ -158,6 +170,8 @@ const App = () => {
               exact
               path="/Kunnskapsportalen"
               component={Kunnskapsportalen}
+              infoTopics={infoTopics}
+              videos={videos}
               users={users}
             />
             <ProtectedRoute

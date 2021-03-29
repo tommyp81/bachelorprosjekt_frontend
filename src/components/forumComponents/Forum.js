@@ -106,12 +106,6 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
             
             <div className="desktop">
             <SearchPosts />
-            <NewPost 
-                subtopicTitle={subTopicTitle} 
-                subtopic={subtopicFocus} 
-                topicFocus={topicFocus} 
-                add={addPost} 
-                history={history} />
             </div>
             <Topics 
               topics = {topics}
@@ -129,6 +123,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
               <h2>{!topicTitle ? "Alle kategorier" : topicTitle} 
               {!subTopicTitle ? "" : <>&nbsp;-&nbsp;{subTopicTitle}</>}</h2>
               <p>{!subTopicDesc ? "" : subTopicDesc}</p>
+              
               </div>
           
               <div className="newpost">

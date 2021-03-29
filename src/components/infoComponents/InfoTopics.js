@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import {Button, Tabs, Tab, Accordion, Card, Image } from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import "./Kunnskapsportalen.css";
 
 
-const InfoTopics = () => {
+const InfoTopics = ({ infoTopics, videos }) => { 
 	
-    const [infoTopics, setInfoTopics] = useState();
     const [showCategory, setShowCategory] = useState(false);
 
     const showCat = () => setShowCategory(true)
@@ -17,14 +16,14 @@ const InfoTopics = () => {
         </div>;
     }
     
-
 	return (
-        <div className="InfoTopics">
+        <div className="InfoTopics"> 
+            {infoTopics.map((mappedInfoTopics, i) => ( 
             <Button onClick={showCat} className="float-left">
-                InfoTopic 1
-            </Button>
+                {mappedInfoTopics.title}
+                
+            </Button> ))}
             {showCategory ? <Category /> : null}
-
         </div>
     )
 }
