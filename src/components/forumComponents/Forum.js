@@ -85,11 +85,11 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
   }
 
   const allTopics = (e) => {
-    let value = e.target.value
+    let title = e.target.getAttribute("title")
     setSubTopicFocus("")
     setSubTopicTitle("")
     setSubTopicDesc("")
-    setTopicTitle(value)
+    setTopicTitle(title)
     setCurrentPage(1);
     setFilteredPosts(posts)
   }

@@ -5,7 +5,13 @@
     margin-top: 120px;
 }
 
+@media (max-width: 768px) {
+    .Post {
+    }
+}
+
 .Post .main .card {
+    margin-top: 10px;
     margin-bottom: 20px;
     color: black;
 }

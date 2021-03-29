@@ -11,16 +11,16 @@
 
 .Topics .desktop {
     margin-top: 20px;
-    text-align: center;
 }
 
 /*Alle kategorier*/
 .Topics .accordion .btn-pills {
     background-color: #28a745;
     text-align: center;
+    justify-content: center;
     width: 95%;
     color: white;
-    margin: 2.5px;
+    margin: 2.5px 0px 2.5px 6px;
     font-size: 22px;
 }
 
@@ -75,9 +75,8 @@
 /*Tilhørende knapper*/
 
 .Topics .accordion .btn-primary {
-    float: left;
     font-size: 15px;
-    margin: 2.5px 0px 2.5px 5px;
+    margin: 2.5px 0px 2.5px 6px;
     background-color: #007bff;
 }
 
