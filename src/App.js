@@ -30,6 +30,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import Toolbar from "./components/NavigationCompoonent/Toolbar/Toolbar";
 import SideDrawer from "./components/NavigationCompoonent/SideDrawer/SideDrawer";
 import Backdrop from "./components/NavigationCompoonent/Backdrop/Backdrop";
+import { themes, ThemeContext } from "./ThemeContext";
 // https://webforum.azurewebsites.net/posts
 // https://webforum.azurewebsites.net/answers
 // https://webforum.azurewebsites.net/users
@@ -45,6 +46,12 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
+
+  const [theme, setTheme] = useState(themes.light)
+
+  const toggleTheme = () => {
+    setTheme(theme === themes.dark ? themes.light : themes.dark)
+  }
 
   const [topics, setTopics] = useState([]);
   const [subtopics, setSubtopics] = useState([]);
@@ -123,55 +130,57 @@ const App = () => {
   return (
     <BrowserRouter>
       <UserContext.Provider value={{ user, setUser }}>
-        <div className="App">
-          <Toolbar handleDrawerToggleClick={handleDrawerToggleClick} />
-          <SideDrawer show={sideDrawerOpen} />
-          {backdrop}
-          <Switch>
-            <Route path="/Login" component={Login} history={history} />
-            <ProtectedRoute
-              exact
-              path="/"
-              component={Home}
-              topic={topics}
-              subtopic={subtopics}
-              users={users}
-              posts={posts}
-            />
-            <ProtectedRoute
-              path="/Register"
-              component={Register}
-              Register={Register}
-            />
-            <ProtectedRoute
-              exact
-              path="/Forum"
-              component={Forum}
-              posts={posts}
-              addPost={addPost}
-              subtopics={subtopics}
-              topics={topics}
-              users={users}
-              history={history}
-            />
-            <ProtectedRoute
-              exact
-              path="/Kunnskapsportalen"
-              component={Kunnskapsportalen}
-              users={users}
-            />
-            <ProtectedRoute
-              exact
-              path="/Forum/:postId"
-              component={Post}
-              subtopics={subtopics}
-              topics={topics}
-              users={users}
-              history={history}
-              updatePosts={updatePosts}
-            />
-          </Switch>
-        </div>
+        <ThemeContext.Provider value={theme} >
+          <div className="App">
+            <Toolbar handleDrawerToggleClick={handleDrawerToggleClick} />
+            <SideDrawer show={sideDrawerOpen} />
+            {backdrop}
+            <Switch>
+              <Route path="/Login" component={Login} history={history} />
+              <ProtectedRoute
+                exact
+                path="/"
+                component={Home}
+                topic={topics}
+                subtopic={subtopics}
+                users={users}
+                posts={posts}
+              />
+              <ProtectedRoute
+                path="/Register"
+                component={Register}
+                Register={Register}
+              />
+              <ProtectedRoute
+                exact
+                path="/Forum"
+                component={Forum}
+                posts={posts}
+                addPost={addPost}
+                subtopics={subtopics}
+                topics={topics}
+                users={users}
+                history={history}
+              />
+              <ProtectedRoute
+                exact
+                path="/Kunnskapsportalen"
+                component={Kunnskapsportalen}
+                users={users}
+              />
+              <ProtectedRoute
+                exact
+                path="/Forum/:postId"
+                component={Post}
+                subtopics={subtopics}
+                topics={topics}
+                users={users}
+                history={history}
+                updatePosts={updatePosts}
+              />
+            </Switch>
+          </div>
+        </ThemeContext.Provider>
       </UserContext.Provider>
     </BrowserRouter>
   );

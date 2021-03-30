@@ -46,3 +46,8 @@
 .NewComment .nav-item{
     background-color: unset;
 }
+
+.like:hover {
+    cursor: pointer;
+    opacity: .5;
+}
