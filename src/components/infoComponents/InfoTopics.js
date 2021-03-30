@@ -3,25 +3,24 @@ import {Button} from "react-bootstrap";
 import "./Kunnskapsportalen.css";
 
 
-const InfoTopics = ({ infoTopics, videos }) => { 
+const InfoTopics = ({ infoTopics, showVideos, showDocuments }) => { 
 	
     const [showCategory, setShowCategory] = useState(false);
 
-    const showCat = () => setShowCategory(true)
+    const toggleCategory = () => setShowCategory(!showCategory)
 
     const Category = () => {
         return <div className="">
-            <Button id="video">Video</Button>
-            <Button id="dokument">Dokument</Button>
+            <Button onClick={showVideos}>Video</Button>
+            <Button onClick={showDocuments}>Dokument</Button>
         </div>;
     }
     
 	return (
         <div className="InfoTopics"> 
             {infoTopics.map((mappedInfoTopics, i) => ( 
-            <Button onClick={showCat} className="float-left">
+            <Button key={mappedInfoTopics.id} onClick={toggleCategory} className="float-left">
                 {mappedInfoTopics.title}
-                
             </Button> ))}
             {showCategory ? <Category /> : null}
         </div>
