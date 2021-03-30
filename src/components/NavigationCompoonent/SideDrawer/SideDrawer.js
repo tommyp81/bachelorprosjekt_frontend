@@ -1,5 +1,9 @@
 import React from "react";
 import "./SideDrawer.css";
+import { AiFillHome } from "react-icons/ai";
+import { BsChatDotsFill } from "react-icons/bs";
+import { BsPersonFill } from "react-icons/bs";
+import { HiAcademicCap } from "react-icons/hi";
 
 const SideDrawer = (props) => {
   let drawerClasses = "sideDrawer";
@@ -12,16 +16,24 @@ const SideDrawer = (props) => {
     <nav className={drawerClasses}>
       <ul>
         <li>
-          <a href="/">Hjem</a>
+          <a href="/">
+            <AiFillHome /> Hjem
+          </a>
         </li>
         <li>
-          <a href="/Forum">Forum</a>
+          <a href="/Forum">
+            <BsChatDotsFill /> Forum
+          </a>
         </li>
         <li>
-          <a href="/Kunnskapsportalen">Kunnskapsportalen</a>
+          <a href="/Kunnskapsportalen">
+            <HiAcademicCap /> Kunnskapsportalen
+          </a>
         </li>
         <li>
-          <a href="/Login">Logg inn</a>
+          <a href="/Login">
+            <BsPersonFill /> Logg inn
+          </a>
         </li>
       </ul>
     </nav>
