@@ -72,7 +72,6 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history }) => {
         setTopicTitle(value)
       }
       setCurrentPage(1);
-      console.log(key)
     }
   }
 
