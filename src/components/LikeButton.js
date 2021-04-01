@@ -12,17 +12,17 @@ const LikeButton = ({obj}) => {
     setLiked(!liked)
   }
 
-  useEffect( async () => {
-    const res = await fetch('https://localhost:44361/likes', {
-      method: 'GET',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({UserId: user.id, PostId: obj.id})
-    })
-    const data = await res.json()
-    console.log(data)
-  }, [])
+  // useEffect( async () => {
+  //   const res = await fetch('https://localhost:44361/likes', {
+  //     method: 'GET',
+  //     headers: {
+  //       'content-type': 'application/json'
+  //     },
+  //     body: JSON.stringify({UserId: user.id, PostId: obj.id})
+  //   })
+  //   const data = await res.json()
+  //   console.log(data)
+  // }, [])
 
   return (
     <span onClick={toggle} >

@@ -30,8 +30,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
   const [subTopicDesc, setSubTopicDesc] = useState("")
   const [subTopicTitle, setSubTopicTitle] = useState("")
 
-  const {user} = useContext(UserContext)
-  
+  const [searchFilter, setSearchFilter] = useState("")
 
   useEffect(() => {
     setFilteredPosts(posts)
@@ -45,7 +44,13 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
  
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = filteredPosts.filter(post => {
+    if (searchFilter === "") {
+      return post
+    } else if (post.title.toLowerCase().includes(searchFilter.toLowerCase())) {
+      return post
+    }
+  }).slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = pageNum => setCurrentPage(pageNum)
   const nextPage = () => setCurrentPage(currentPage + 1)
@@ -105,7 +110,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
           <Col lg={3}>
             
             <div className="desktop">
-            <SearchPosts />
+            <SearchPosts setSearchInput={setSearchFilter}/>
             <NewPost 
                 subtopicTitle={subTopicTitle} 
                 subtopic={subtopicFocus} 
@@ -145,7 +150,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history}) => {
               </div>
 
               <div className="mobilesearch">
-              <SearchPosts />
+              <SearchPosts setSearchInput={setSearchFilter}/>
               </div>
             </Container>
 
