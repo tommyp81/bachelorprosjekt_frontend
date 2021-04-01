@@ -248,7 +248,7 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
       </Card>
       </div>
       
-      <NewComment createNew={addComment} user={user} pId={post.id}/> 
+      
       
       
       {/*commentCount*/}
@@ -279,6 +279,9 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
             
           {/*<Pages postsPerPage={commentsPerPage} paginate={paginate} totalPosts={currentComments.length} 
           nextPage={nextPage} prevPage={prevPage} currentPage={currentPage} firstPage={firstPage} lastPage={lastPage} goToFirst={goToFirst} goToLast={goToLast}/>*/}
+         </div>
+         <div className="newcomment">
+           <NewComment createNew={addComment} user={user} pId={post.id}/> 
          </div>
 
         

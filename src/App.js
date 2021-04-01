@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-
-import "./App.css";
 import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
 
 //Importing main components.
@@ -57,6 +55,8 @@ const App = () => {
   const [subtopics, setSubtopics] = useState([]);
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
+  const [infoTopics, setInfoTopics] = useState([]);
+  const [videos, setVideos] = useState([])
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
 
   const handleDrawerToggleClick = () => {
@@ -100,6 +100,20 @@ const App = () => {
         setUsers(data);
       })
       .catch(console.log);
+
+      fetch("https://webforum.azurewebsites.net/InfoTopics")
+      .then((res) => res.json())
+      .then((data) => {
+        setInfoTopics(data);
+      })
+      .catch(console.log);
+
+      fetch("https://webforum.azurewebsites.net/Videos")
+      .then((res) => res.json())
+      .then((data) => {
+        setVideos(data);
+      })
+      .catch(console.log);
   }, []);
 
   const updatePosts = async () => {
@@ -125,62 +139,60 @@ const App = () => {
     return data.id;
   };
 
-  //Putt komponentene hver for seg i diven fpr nå. De er ikke skapt for å brukes sammen helt enda :D
-  //Akkurat nå er det kun post-komponenten som er synlig!
   return (
     <BrowserRouter>
       <UserContext.Provider value={{ user, setUser }}>
-        <ThemeContext.Provider value={theme} >
-          <div className="App">
-            <Toolbar handleDrawerToggleClick={handleDrawerToggleClick} />
-            <SideDrawer show={sideDrawerOpen} />
-            {backdrop}
-            <Switch>
-              <Route path="/Login" component={Login} history={history} />
-              <ProtectedRoute
-                exact
-                path="/"
-                component={Home}
-                topic={topics}
-                subtopic={subtopics}
-                users={users}
-                posts={posts}
-              />
-              <ProtectedRoute
-                path="/Register"
-                component={Register}
-                Register={Register}
-              />
-              <ProtectedRoute
-                exact
-                path="/Forum"
-                component={Forum}
-                posts={posts}
-                addPost={addPost}
-                subtopics={subtopics}
-                topics={topics}
-                users={users}
-                history={history}
-              />
-              <ProtectedRoute
-                exact
-                path="/Kunnskapsportalen"
-                component={Kunnskapsportalen}
-                users={users}
-              />
-              <ProtectedRoute
-                exact
-                path="/Forum/:postId"
-                component={Post}
-                subtopics={subtopics}
-                topics={topics}
-                users={users}
-                history={history}
-                updatePosts={updatePosts}
-              />
-            </Switch>
-          </div>
-        </ThemeContext.Provider>
+        <div className="App">
+          <Toolbar handleDrawerToggleClick={handleDrawerToggleClick} />
+          <SideDrawer show={sideDrawerOpen} />
+          {backdrop}
+          <Switch>
+            <Route path="/Login" component={Login} history={history} />
+            <ProtectedRoute
+              exact
+              path="/"
+              component={Home}
+              topic={topics}
+              subtopic={subtopics}
+              users={users}
+              posts={posts}
+            />
+            <ProtectedRoute
+              path="/Register"
+              component={Register}
+              Register={Register}
+            />
+            <ProtectedRoute
+              exact
+              path="/Forum"
+              component={Forum}
+              posts={posts}
+              addPost={addPost}
+              subtopics={subtopics}
+              topics={topics}
+              users={users}
+              history={history}
+            />
+            <ProtectedRoute
+              exact
+              path="/Kunnskapsportalen"
+              component={Kunnskapsportalen}
+              infoTopics={infoTopics}
+              videos={videos}
+              users={users}
+            />
+            <ProtectedRoute
+              exact
+              path="/Forum/:postId"
+              component={Post}
+              subtopics={subtopics}
+              topics={topics}
+              users={users}
+              history={history}
+              updatePosts={updatePosts}
+            />
+          </Switch>
+        </div>
       </UserContext.Provider>
     </BrowserRouter>
   );
