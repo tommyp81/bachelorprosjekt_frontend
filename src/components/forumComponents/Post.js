@@ -27,6 +27,7 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
   const { postId } = useParams()
   const { user } = useContext(UserContext)
 
+  const [liked, setLiked] = useState(false)
 
 
 
@@ -44,7 +45,7 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
     .then(res => res.json())
     .then(data => setPost(data))
     .catch(console.log)
-  }, [])
+  }, [liked])
 
   const deletePost = async () => {
     const res = await fetch(`https://localhost:44361/posts/${post.id}`, {
@@ -240,7 +241,7 @@ const Post = ( { subtopics, topics, users, history, updatePosts }) => {
             {post.documentId ? <FileLink fileId={post.documentId} /> : ""}
           </Card.Text>
             <div className="float-right"> 
-              {post.like_Count} <LikeButton obj={post}/>
+              {post.like_Count} <LikeButton postId={postId} liked={liked} setLiked={setLiked}/>
               {post.comment_Count} <FaRegComment size={18} className="ml-2 mr-2 mb-1"/>  
             </div>
           </Card.Body>
