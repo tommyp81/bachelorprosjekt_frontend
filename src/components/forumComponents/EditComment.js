@@ -10,14 +10,16 @@ const EditComment = ({comment, edit}) => {
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+  const handleShow = () => {
+    setFile(null);
+    setShow(true);
+  }
   const isReplaced = Boolean(file)
 
 
   useEffect(() => {
     setContent(comment.content)
-  }, [comment])
+  }, [])
 
   function validateForm() {
     return content.length > 0;
@@ -25,14 +27,21 @@ const EditComment = ({comment, edit}) => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    edit({ 
+    let editedComment = { 
       id: comment.id, 
       content, 
       date: comment.date, 
       userId: comment.userId, 
       postId: comment.postId,
-      documentId: comment.documentId
-    }, file)
+      like_Count: comment.like_Count
+    }
+    if (comment.documentId) {
+      editedComment = {
+        ...editedComment,
+        documentId: comment.documentId
+      }
+    }
+    edit(editedComment, file)
   }
 
   return (

@@ -16,7 +16,7 @@ import Home from "./components/homeComponents/Home.js";
 //Bruk disse hver for seg!
 import Forum from "./components/forumComponents/Forum.js";
 import NewComment from "./components/forumComponents/NewComment.js";
-import Post from "./components/forumComponents/Post.js";
+import Thread from "./components/forumComponents/Thread.js";
 
 //import { Navbar } from "./components/navigation/navbar/navbar";
 
@@ -184,7 +184,7 @@ const App = () => {
             <ProtectedRoute
               exact
               path="/Forum/:postId"
-              component={Post}
+              component={Thread}
               subtopics={subtopics}
               topics={topics}
               users={users}

@@ -2,10 +2,23 @@ import React, { useState, useEffect, useContext } from 'react'
 import { FaThumbsUp } from 'react-icons/fa'
 import { UserContext } from '../UserContext'
 
-const LikeButton = ({postId, liked, setLiked}) => {
+const LikeButton = ({id, liked, setLiked, isPost}) => {
 
   const { user } = useContext(UserContext)
 
+  const likeInfo = () => {
+    if (isPost) {
+      return {
+        PostId: id,
+        UserId: user.id
+      }
+    } else {
+      return {
+        CommentId: id,
+        UserId: user.id
+      }
+    }
+  }
   
   const likeColor = liked ? "blue" : "grey"
   const toggle = () => {
@@ -18,7 +31,7 @@ const LikeButton = ({postId, liked, setLiked}) => {
       headers: {
         'content-type': 'application/json'
       }, 
-      body: JSON.stringify({PostId: postId, UserId: user.id})
+      body: JSON.stringify(likeInfo())
     })
     if (res.status === 200)
       setLiked(true)
@@ -30,20 +43,19 @@ const LikeButton = ({postId, liked, setLiked}) => {
       headers: {
         'content-type': 'application/json'
       }, 
-      body: JSON.stringify({PostId: postId, UserId: user.id})
+      body: JSON.stringify(likeInfo())
     })
     if (res.status === 200)
       setLiked(false)
   }
 
   useEffect( async () => {
-    console.log(postId)
     const res = await fetch('https://localhost:44361/GetLike', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
       },
-      body: JSON.stringify({PostId: postId, UserId: user.id})
+      body: JSON.stringify(likeInfo())
     })
     try {
       if(res.status === 200)

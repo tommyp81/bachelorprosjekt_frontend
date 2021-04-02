@@ -28,16 +28,22 @@ const EditPost = ({post, edit}) => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    edit({ 
+    let editedPost = { 
       id: post.id, 
       title, 
       content, 
       date: post.date, 
       userId: post.userId, 
       subTopicId: post.subTopicId,
-      topicId: post.topicId,
-      documentId: post.documentId
-    }, file)
+      topicId: post.topicId
+    }
+    if (post.documentId) {
+      editedPost = {
+        ...editedPost,
+        documentId: post.documentId
+      }
+    }
+    edit(editedPost, file)
   }
 
   return (
