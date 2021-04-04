@@ -32,7 +32,7 @@ const FileDrop = ({ file, setFile }) => {
     onDrop,
     maxFiles: 1,
     maxSize: 15728640,
-    accept: " .txt ,.pdf, .jpg, .jpeg, .png, .doc, .docx, .xls, .xlsx",
+    accept: ".txt, .pdf, .doc, .docx, .xls, .xlsx",
   });
 
   const fileAccepted = Boolean(file);
@@ -51,7 +51,7 @@ const FileDrop = ({ file, setFile }) => {
     if (fileAccepted) {
       return <p>{file.name} &#10004;&#65039;</p>;
     } else if (fileRejected) {
-      return <p>Filen er for stor eller Filtypen er ugyldig &#10060;</p>;
+      return <p>Filen er for stor eller filtypen er ugyldig &#10060;</p>;
     } else {
       return (
         <p>Drag'n'drop, eller klikk for å velge en fil (Max 15 megabytes)</p>
@@ -60,12 +60,10 @@ const FileDrop = ({ file, setFile }) => {
   };
 
   return (
-    <div>
-      <div {...getRootProps({ style })}>
-        <input {...getInputProps()} />
-        {/* {file ? <p>{file.name} &#10003;</p> : <p>Drag'n'drop fil, eller klikk for å velge en fil.</p> } */}
-        {dropzoneMessage()}
-      </div>
+    <div {...getRootProps({ style })}>
+      <input {...getInputProps()} />
+      {/* {file ? <p>{file.name} &#10003;</p> : <p>Drag'n'drop fil, eller klikk for å velge en fil.</p> } */}
+      {dropzoneMessage()}
     </div>
   );
 };
