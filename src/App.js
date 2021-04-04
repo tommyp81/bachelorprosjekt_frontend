@@ -28,7 +28,6 @@ import ProtectedRoute from "./ProtectedRoute";
 import Toolbar from "./components/NavigationCompoonent/Toolbar/Toolbar";
 import SideDrawer from "./components/NavigationCompoonent/SideDrawer/SideDrawer";
 import Backdrop from "./components/NavigationCompoonent/Backdrop/Backdrop";
-import { themes, ThemeContext } from "./ThemeContext";
 // https://webforum.azurewebsites.net/posts
 // https://webforum.azurewebsites.net/answers
 // https://webforum.azurewebsites.net/users
@@ -45,11 +44,7 @@ const App = () => {
     localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
-  const [theme, setTheme] = useState(themes.light)
 
-  const toggleTheme = () => {
-    setTheme(theme === themes.dark ? themes.light : themes.dark)
-  }
 
   const [topics, setTopics] = useState([]);
   const [subtopics, setSubtopics] = useState([]);
