@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Card, Col, Container, Dropdown, Pagination, Row } from "react-bootstrap";
+import { Card, Col, Container, Dropdown, Pagination, Row, Spinner } from "react-bootstrap";
 import Topics from "./Topics.js";
 import NewPost from "./NewPost.js"
 import Pages from "./Pages.js";
@@ -14,7 +14,7 @@ import { UserContext } from '../../UserContext'
 
 
 
-const Forum = ({ posts, addPost, topics, subtopics, users, history }) => {
+const Forum = ({ posts, addPost, topics, subtopics, users, history, loading }) => {
 
 
   // const [posts, setPosts] = useState([...props.posts]);
@@ -22,8 +22,6 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history }) => {
 
   const [topicFocus, setTopicFocus] = useState("");
   const [subtopicFocus, setSubTopicFocus] = useState("");
-
-  const [loading, setLoading] = useState(true);
 
   const [topicTitle, setTopicTitle] = useState("")
   const [topicDesc, setTopicDesc] = useState("")
@@ -35,7 +33,6 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history }) => {
 
   useEffect(() => {
     setFilteredPosts(posts)
-    setLoading(false)
   }, [posts])
 
 
@@ -60,6 +57,9 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history }) => {
   const onTopClick = (key) => {
     if (key) {
       setTopicFocus(key)
+      setSubTopicFocus("")
+      setSubTopicTitle("")
+      setSubTopicDesc("")
       if (key === "0") {
         setTopicTitle("Alle kategorier")
         setSubTopicFocus("")
@@ -79,8 +79,6 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history }) => {
     let subTop = e.target.value
     let title = e.target.getAttribute("title")
     let desc = subtopics.find(s => s.id === Number(subTop)).description
-    //let topTitle = subtopics.find(s => s.id === Number(topics.topicId)).title
-    //setTopicTitle(topTitle)
     setSubTopicTitle(title)
     setSubTopicFocus(subTop)
     setSubTopicDesc(desc)
@@ -139,8 +137,9 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history }) => {
 
             <Container className="main">
               {/* {renderPosts} */}
-
-              <Feed posts={currentPosts} users={users} topic={topics} subtopic={subtopics} maxLength={currentPosts.length} loading={loading} />
+              {loading ? <Spinner /> :
+              <Feed posts={currentPosts} users={users} topic={topics} subtopic={subtopics} maxLength={currentPosts.length}/>
+              }
             </Container>
 
             <Container className="bot">

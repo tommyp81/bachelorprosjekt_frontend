@@ -1,28 +1,32 @@
 import React, { useState } from 'react';
-import {Button} from "react-bootstrap";
+import {Button, Tabs, Tab, Accordion, Form} from "react-bootstrap";
 import "./Kunnskapsportalen.css";
 
 
-const InfoTopics = ({ infoTopics, showVideos, showDocuments }) => { 
-	
-    const [showCategory, setShowCategory] = useState(false);
-
-    const toggleCategory = () => setShowCategory(!showCategory)
-
-    const Category = () => {
-        return <div className="">
-            <Button onClick={showVideos}>Video</Button>
-            <Button onClick={showDocuments}>Dokument</Button>
-        </div>;
-    }
-    
+const InfoTopics = ({ infoTopics, showVideos, showDocuments, filterContent, toggleCategory }) => { 
 	return (
         <div className="InfoTopics"> 
-            {infoTopics.map((mappedInfoTopics, i) => ( 
-            <Button key={mappedInfoTopics.id} onClick={toggleCategory} className="float-left">
+            <Button>Vis alt</Button>
+        {infoTopics.map((mappedInfoTopics, i) => ( 
+            <Button key={i} onClick={filterContent} value={mappedInfoTopics.title}>
                 {mappedInfoTopics.title}
             </Button> ))}
-            {showCategory ? <Category /> : null}
+            {/* 
+        <Tabs
+        as={Button}
+        variant="pills"
+        onSelect={filterContent}
+        >
+            
+            {infoTopics.map((mappedInfoTopics, i) => ( 
+            <Tab key={i} eventKey={mappedInfoTopics.id} title={mappedInfoTopics.title} className="tab">
+            </Tab>
+            ))}
+        </Tabs>*/}
+        
+        {/*
+            
+            {showCategory ? <Category /> : null}*/}
         </div>
     )
 }

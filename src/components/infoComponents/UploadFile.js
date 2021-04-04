@@ -11,7 +11,7 @@ import {
 } from "react-bootstrap";
 import FileDrop from "../FileDrop";
 import validator from "validator";
-const UploadFile = () => {
+const UploadFile = ({infoTopics}) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -53,6 +53,18 @@ const UploadFile = () => {
             </Modal.Body>
           </Tab>
         </Tabs>
+        <Modal.Body>
+          <Form>
+             <Form.Label>Tittel</Form.Label>
+            <Form.Control type="input"></Form.Control>
+            <Form.Label>Beskrivelse</Form.Label>
+            <Form.Control as="textarea" rows={3}></Form.Control>
+               <Form.Control as="select">{infoTopics.map((mappedInfoTopics) => (
+              <option>{mappedInfoTopics.title}</option> ))}
+            </Form.Control>
+           
+           
+          </Form></Modal.Body>
         <Modal.Footer>
           <Button variant="danger" onClick={handleClose}>
             Avbryt

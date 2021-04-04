@@ -3,7 +3,7 @@ import {Button, Row, Col, Card, Image, Modal} from "react-bootstrap";
 import {Link} from 'react-router-dom'
 import "./Kunnskapsportalen.css";
 
-const VideoContent = ({ videos, infoTopics }) => { 
+const VideoContent = ({ videos, infoTopics, content }) => { 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -16,11 +16,10 @@ const VideoContent = ({ videos, infoTopics }) => {
     return (
         <div className="content">
           {videos.map((filteredVideos) => (
-            
           <Card>
             <Card.Body>
               <Row>
-                <Col lg={2}>
+                <Col lg={3}>
                   <div className="float-left">
                     <Image src="https://img.youtube.com/vi/3NBPQ9RLOu0/0.jpg"
                     width="100%">
@@ -28,16 +27,15 @@ const VideoContent = ({ videos, infoTopics }) => {
                     </Image>
                   </div>
               </Col>
-              <Col lg={8}>
+              <Col lg={5}>
               {infoTopics.filter(infoTopics => (infoTopics.id === filteredVideos.infoTopicId)).map((filteredTopics, i) => (
               <p className="toptext">Delt i {filteredTopics.title}</p>))}
-              <h3 className="title">{filteredVideos.title}</h3>
-              <p className="bottext">av ADMIN</p></Col>
-              <Col lg={2}>
+              <h3 className="title">{filteredVideos.title}</h3></Col>
+              <Col lg={4}>
               <Button variant="primary" onClick={handleShow}>
                 Se video
               </Button>
-
+              
               <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header closeButton>
                   <Modal.Title>{filteredVideos.title}</Modal.Title>
@@ -59,6 +57,7 @@ const VideoContent = ({ videos, infoTopics }) => {
                   </Button>
                 </Modal.Footer>
               </Modal>
+              <br/><br/>
               <Link to="/Forum">Diskuter i forumet</Link>
               </Col>
               </Row>

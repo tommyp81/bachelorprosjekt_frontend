@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Image } from "react-bootstrap";
+import { Container, Row, Col, Image, Spinner } from "react-bootstrap";
 import Feed from "../forumComponents/Feed.js";
 import "./Home.css";
 import moment from 'moment'
@@ -13,16 +13,16 @@ import Footer from '../mainComponents/Footer'
 import { Link } from 'react-router-dom'
 import { Navbar } from "../navigation/navbar/navbar.jsx";
 
-const Home = ({ posts, topic, subtopic, users}) =>  {
-
+const Home = ({ posts, topic, subtopic, users, loading}) =>  {
   
   return (
     <div className="Home">
       <Container>
         <Row><h5 className="lastposts">Siste poster i forumet</h5></Row>
         <Row xs={1} sm={1} lg={2}>
-          <Col md={6} className="feedcol">
+          <Col md={6} className="feedcol">{loading ? <Spinner /> :
             <Feed posts = {posts.slice(0).sort((d1, d2) => (moment(d2.date) - (moment(d1.date))))} users={users} topic={topic} subtopic={subtopic} maxLength={3}/>
+            }
           </Col>
           <Col md={6} className="textcol"> 
           <Link to="/Kunnskapsportalen">

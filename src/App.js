@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 
 //Importing main components.
 
@@ -44,12 +45,14 @@ const App = () => {
     localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
+  const [loading, setLoading] = useState(true)
   const [topics, setTopics] = useState([]);
   const [subtopics, setSubtopics] = useState([]);
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
   const [infoTopics, setInfoTopics] = useState([]);
   const [videos, setVideos] = useState([])
+  const [documents, setDocuments] = useState([])
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
 
   const handleDrawerToggleClick = () => {
@@ -107,6 +110,14 @@ const App = () => {
         setVideos(data);
       })
       .catch(console.log);
+
+      fetch("https://webforum.azurewebsites.net/GetDocumentInfo/1")
+      .then((res) => res.json())
+      .then((data) => {
+        setDocuments(data);
+      })
+      .catch(console.log);
+      setLoading(false)
   }, []);
 
   const updatePosts = async () => {
@@ -149,6 +160,7 @@ const App = () => {
               subtopic={subtopics}
               users={users}
               posts={posts}
+              loading={loading}
             />
             <ProtectedRoute
               path="/Register"
@@ -165,6 +177,7 @@ const App = () => {
               topics={topics}
               users={users}
               history={history}
+              loading={loading}
             />
             <ProtectedRoute
               exact
@@ -172,6 +185,7 @@ const App = () => {
               component={Kunnskapsportalen}
               infoTopics={infoTopics}
               videos={videos}
+              documents={documents}
               users={users}
             />
             <ProtectedRoute

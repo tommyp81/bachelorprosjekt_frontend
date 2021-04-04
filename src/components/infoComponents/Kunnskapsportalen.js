@@ -8,18 +8,28 @@ import VideoContent from "./VideoContent.js"
 import DocumentContent from "./DocumentContent.js"
 import "./Kunnskapsportalen.css";
  
-const Kunnskapsportalen = ({ infoTopics, videos, users }) => {
+const Kunnskapsportalen = ({ infoTopics, videos, documents, users }) => {
+ 
+
+    const [content, setContent] = useState([])
+
+    const [title, setTitle] = useState("")
+
+    const [showContent, setShowContent] = useState("")
 
     const [showVideos, setShowVideos] = useState(false)
     const [showDocuments, setShowDocuments] = useState(false)
+   
+    const toggleVideoContent = () => setShowVideos(true)
 
-    const toggleVideoContent = () => setShowVideos(!showVideos)
+    const toggleDocumentContent = () => setShowDocuments(true)
 
-    const toggleDocumentContent = () => setShowDocuments(!showDocuments)
+    
 
-    const filterContent = (key) => {
-      if (key) {
-      }
+    const filterContent = (e) => {
+      let title = e.target.value;
+      setContent(videos.filter(videos => videos.infoTopicsId === infoTopics.id))
+      setTitle(title)
     }
 
     return (
@@ -34,21 +44,30 @@ const Kunnskapsportalen = ({ infoTopics, videos, users }) => {
                   et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti</p>
               </Row>
               <Row>
-                <Col lg={2}> Søk</Col>
-                <Col lg={8}>
-                  <InfoTopics infoTopics={infoTopics} videos={videos} showVideos={toggleVideoContent} showDocuments={toggleDocumentContent}/>
+                <Col lg={10}><InfoTopics infoTopics={infoTopics} filterContent={filterContent}/>
                 </Col>
-                <Col lg={2}><UploadFile /></Col>
+                <Col lg={2}><UploadFile infoTopics={infoTopics}/></Col>
                 
               </Row>
               <Row>
                 <Col lg={12}>
-                <div className="content">
-                {showVideos ? <VideoContent videos={videos} infoTopics={infoTopics}/> : null}
-                {showDocuments? <DocumentContent infoTopics={infoTopics}/> : null}
-                </div>
-                        
-        </Col>
+                  <Tabs as={Button} defaultActiveKey="visalt">
+                    <Tab eventKey="visalt" title="Vis alt">
+                      {!title ? "" : title}
+                      <Col lg={6}><VideoContent videos={content} infoTopics={infoTopics}/></Col>
+                      <Col lg={6}><DocumentContent documents={documents} infoTopics={infoTopics}/></Col>
+                    </Tab>
+                    <Tab eventKey="videoer" title="Videoer">
+                    {!title ? "" : title}
+                     <VideoContent videos={content} infoTopics={infoTopics}/>
+                    </Tab>
+                    <Tab eventKey="dokumenter" title="Dokumenter">
+                      <h3>{!title ? "" : title}</h3>
+                      <DocumentContent documents={documents} infoTopics={infoTopics}/>
+                    </Tab>
+                  </Tabs>
+                </Col>
+       
       </Row>
       </Container>
             </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Spinner } from "react-bootstrap";
 import moment from 'moment'
 import 'moment/locale/nb'
 import { Link } from 'react-router-dom';
@@ -9,11 +9,6 @@ import './Feed.css'
 const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
 
   const [likes, setLikes] = useState(0)
-
-    if (loading) {
-      return <h2>Laster inn...</h2>
-    }
-
 
     return (
       <div className="Feed">
