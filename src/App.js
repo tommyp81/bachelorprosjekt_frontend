@@ -16,7 +16,7 @@ import Home from "./components/homeComponents/Home.js";
 //Bruk disse hver for seg!
 import Forum from "./components/forumComponents/Forum.js";
 import NewComment from "./components/forumComponents/NewComment.js";
-import Post from "./components/forumComponents/Post.js";
+import Thread from "./components/forumComponents/Thread.js";
 
 //import { Navbar } from "./components/navigation/navbar/navbar";
 
@@ -43,6 +43,8 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
+
+
 
   const [topics, setTopics] = useState([]);
   const [subtopics, setSubtopics] = useState([]);
@@ -109,12 +111,13 @@ const App = () => {
       .catch(console.log);
   }, []);
 
-  const updatePosts = async () => {
-    const res = await fetch("https://webforum.azurewebsites.net/posts");
-    const data = await res.json();
-    setPosts(data);
-  };
+  // const updatePosts = async () => {
+  //   const res = await fetch("https://localhost:44361/posts");
+  //   const data = await res.json();
+  //   setPosts(data);
+  // };
 
+  // sends post to api/database and updates posts with new post
   const addPost = async (post, file) => {
     const formData = new FormData();
     if (file) formData.append("File", file);
@@ -131,6 +134,30 @@ const App = () => {
 
     return data.id;
   };
+
+  // search for specific post by id(number) in posts and returns said post
+  const getPost = (id) => {
+    return posts.find(post => post.id == id)
+  }
+
+
+  const setPost = (id, changes, isDelete) => {
+    if(!isDelete) {
+      const updatedPosts = posts.map(p => {
+        if(p.id == id) {
+          const updatedPost = {
+            ...p,
+            ...changes
+          }
+          return updatedPost
+        }
+        return p
+      })
+      setPosts(updatedPosts)
+    } else {
+      setPosts(posts.filter(p => p.id != id))
+    }
+  }
 
   return (
     <BrowserRouter>
@@ -177,12 +204,13 @@ const App = () => {
             <ProtectedRoute
               exact
               path="/Forum/:postId"
-              component={Post}
+              component={Thread}
               subtopics={subtopics}
               topics={topics}
               users={users}
               history={history}
-              updatePosts={updatePosts}
+              getPost={getPost}
+              setPost={setPost}
             />
           </Switch>
         </div>

@@ -40,9 +40,14 @@
 }
 
 .NewComment .nav-tabs {
-    border-bottom: 0;
+    /* border-bottom: 0; */
 }
 
 .NewComment .nav-item{
     background-color: unset;
+}
+
+.like:hover {
+    cursor: pointer;
+    opacity: .5;
 }
