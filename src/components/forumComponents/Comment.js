@@ -35,7 +35,7 @@ const Comment = ({users, initComment, deleteComment}) => {
       formData.append('File', file)
       formData.append('commentId', comment.id)
       formData.append('userId', comment.userId)
-      const upres = await fetch('https://localhost:44361/UploadDocument', {
+      const upres = await fetch('https://webforum.azurewebsites.net/UploadDocument', {
         method: 'POST',
         body: formData
       })
@@ -47,7 +47,7 @@ const Comment = ({users, initComment, deleteComment}) => {
     for (let k in comment) {
       formData.append(k, comment[k])
     }
-    const res = await fetch(`https://localhost:44361/comments/${comment.id}`, {
+    const res = await fetch(`https://webforum.azurewebsites.net/comments/${comment.id}`, {
       method: 'PUT',
       body: formData
     })

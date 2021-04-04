@@ -21,7 +21,7 @@ import LikeButton from '../LikeButton.js';
 import Post from './Post.js';
 import Comment from './Comment.js';
 
-const Thread = ( { subtopics, topics, users, history, getPost, setSinglePostLike, setPost }) => {
+const Thread = ( { subtopics, topics, users, history, getPost, setPost }) => {
 
   const [comments, setComments] = useState([])
 
@@ -31,7 +31,7 @@ const Thread = ( { subtopics, topics, users, history, getPost, setSinglePostLike
   const post = getPost(postId)
 
   useEffect(() => {
-    fetch("https://localhost:44361/comments")
+    fetch("https://webforum.azurewebsites.net/comments")
     .then(res => res.json())
     .then((data) => {
       setComments(data)
@@ -41,7 +41,7 @@ const Thread = ( { subtopics, topics, users, history, getPost, setSinglePostLike
 
 
   const deletePost = async () => {
-    const res = await fetch(`https://localhost:44361/posts/${post.id}`, {
+    const res = await fetch(`https://webforum.azurewebsites.net/posts/${post.id}`, {
       method: 'DELETE',
     })
 
@@ -97,7 +97,7 @@ const Thread = ( { subtopics, topics, users, history, getPost, setSinglePostLike
 
   const deleteComment = async (e) => {
     let id = Number(e.target.value)
-    const res = await fetch(`https://localhost:44361/comments/${id}`, {
+    const res = await fetch(`https://webforum.azurewebsites.net/comments/${id}`, {
       method: 'DELETE'
     })
     if (res.status === 200) {
@@ -115,7 +115,7 @@ const Thread = ( { subtopics, topics, users, history, getPost, setSinglePostLike
     for (let k in comment) {
       formData.append(k, comment[k])
     }
-    const res = await fetch("https://localhost:44361/comments", {
+    const res = await fetch("https://webforum.azurewebsites.net/comments", {
       method: 'POST', 
       body: formData
     })
