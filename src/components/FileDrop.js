@@ -60,12 +60,10 @@ const FileDrop = ({ file, setFile }) => {
   };
 
   return (
-    <div>
-      <div {...getRootProps({ style })}>
-        <input {...getInputProps()} />
-        {/* {file ? <p>{file.name} &#10003;</p> : <p>Drag'n'drop fil, eller klikk for å velge en fil.</p> } */}
-        {dropzoneMessage()}
-      </div>
+    <div {...getRootProps({ style })}>
+      <input {...getInputProps()} />
+      {/* {file ? <p>{file.name} &#10003;</p> : <p>Drag'n'drop fil, eller klikk for å velge en fil.</p> } */}
+      {dropzoneMessage()}
     </div>
   );
 };

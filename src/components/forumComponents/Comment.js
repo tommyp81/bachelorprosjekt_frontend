@@ -19,15 +19,15 @@ const Comment = ({users, initComment, deleteComment}) => {
 
   
 
-  useEffect( async () => {
-    if (initMount.current) {
-      initMount.current = false
-    } else {
-      const res = await fetch(`https://localhost:44361/comments/${comment.id}`)
-      const data = await res.json();
-      setComment(data)
-    }
-  }, [liked])
+  // useEffect( async () => {
+  //   if (initMount.current) {
+  //     initMount.current = false
+  //   } else {
+  //     const res = await fetch(`https://localhost:44361/comments/${comment.id}`)
+  //     const data = await res.json();
+  //     setComment(data)
+  //   }
+  // }, [liked])
 
   const editComment = async (comment, file) => {
     let formData = new FormData()
@@ -71,6 +71,14 @@ const Comment = ({users, initComment, deleteComment}) => {
     // setComments(updatedComments)
   }
 
+  const setCommentLikeCount = (num) => {
+    const updatedComment = {
+      ...comment,
+      like_Count: comment.like_Count + num
+    }
+    setComment(updatedComment)
+  }
+
   return (
     <Card>
       <Card.Body>
@@ -88,7 +96,7 @@ const Comment = ({users, initComment, deleteComment}) => {
           {comment.documentId ? <FileLink fileId={comment.documentId} /> : ""}
         </Card.Text>
         <div className="float-right"> 
-          {comment.like_Count} <LikeButton id={comment.id} liked={liked} setLiked={setLiked} isPost={false}/>
+          {comment.like_Count} <LikeButton id={comment.id} liked={liked} setLiked={setLiked} isPost={false} updateCommentLike={setCommentLikeCount} />
         </div>
       </Card.Body>
     </Card>

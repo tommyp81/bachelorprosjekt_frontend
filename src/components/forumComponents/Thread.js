@@ -21,15 +21,14 @@ import LikeButton from '../LikeButton.js';
 import Post from './Post.js';
 import Comment from './Comment.js';
 
-const Thread = ( { subtopics, topics, users, history, updatePosts }) => {
+const Thread = ( { subtopics, topics, users, history, getPost, setSinglePostLike, setPost }) => {
 
   const [comments, setComments] = useState([])
-  const [post, setPost] = useState([])
 
   const { postId } = useParams()
   const { user } = useContext(UserContext)
 
-
+  const post = getPost(postId)
 
   useEffect(() => {
     fetch("https://localhost:44361/comments")
@@ -47,7 +46,7 @@ const Thread = ( { subtopics, topics, users, history, updatePosts }) => {
     })
 
     if(res.status === 200) {
-      updatePosts()
+      setPost(post.id, {}, true)
       history.push("/Forum")
     } else {
       alert("ERROR")
@@ -101,7 +100,12 @@ const Thread = ( { subtopics, topics, users, history, updatePosts }) => {
     const res = await fetch(`https://localhost:44361/comments/${id}`, {
       method: 'DELETE'
     })
-    res.status === 200 ? setComments(comments.filter(comment => comment.id !== id)) : alert("ERROR")
+    if (res.status === 200) {
+      setComments(comments.filter(comment => comment.id !== id))
+      setPost(post.id, {comment_Count: post.comment_Count - 1})
+    } else {
+      alert("ERROR")
+    } 
   }
 
   const addComment = async (comment, file) => {
@@ -115,12 +119,11 @@ const Thread = ( { subtopics, topics, users, history, updatePosts }) => {
       method: 'POST', 
       body: formData
     })
-    console.log(res)
     const data = await res.json();
-    console.log(data)
     setComments(current => [...current, data])
     
-    updatePosts()
+    // updatePosts()
+    setPost(post.id, {comment_Count: post.comment_Count + 1})
     
     // console.log(file)
     // console.log(formData.getAll('File'))
@@ -169,42 +172,35 @@ const Thread = ( { subtopics, topics, users, history, updatePosts }) => {
     
     <h5>
       <Link to="/Forum" style={{textDecoration: 'none', color: 'white'}}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16">
         <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
         </svg>
         &nbsp;Tilbake til forum
       </Link>
       <div className="float-right" style={{textDecoration: 'none', color: 'white'}}>
-        {topics.filter(topics =>(topics.id === post.topicId)).map((filteredTopics) => (
-
-            <>{filteredTopics.title}
-
-          &nbsp;-&nbsp;
-
-          {subtopics.filter(subtopics => (subtopics.id === post.subTopicId)).map((filteredSubtopics) => ( 
-
-          filteredSubtopics.title
-
-            ))}</>
-          ))}
+        {topics.filter(topics =>(topics.id === post?.topicId)).map((filteredTopics, i) => (
+          <p key={i}>
+            {filteredTopics.title}
+            &nbsp;-&nbsp;
+            {subtopics.filter(subtopics => (subtopics.id === post?.subTopicId)).map((filteredSubtopics) => ( 
+              filteredSubtopics.title
+            ))}
+          </p>
+        ))}
         </div>
       </h5> 
       <div className="main">
-        <Post postId={postId} users={users} deletePost={deletePost}/>
+        {post && <Post post={post} users={users} deletePost={deletePost} commentsLength={comments.length} setPost={setPost}/>}
       </div>
-      
-      <p>HVA SKJER</p>
       
       
       {/*commentCount*/}
       
       <div className="comments">
-       {/* {!post.comment_Count ? <h3>Ingen kommentarer</h3> : <h3>Kommentarer</h3> } */}
+       {post && !post.comment_Count ? <h3>Ingen kommentarer</h3> : <h3>Kommentarer</h3> }
         {comments.filter(c => Number(postId) === c.postId).map((fc, i) => (
           <Comment key={i} initComment={fc} users={users} deleteComment={deleteComment} />
         ))}
-        
-          {/* <Comment key={i} comment={fc} users={users} deleteComment={deleteComment} editComment={editComment} /> */}
           
         
         

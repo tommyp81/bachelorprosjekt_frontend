@@ -35,7 +35,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history }) => {
 
 
   useEffect(() => {
-    setFilteredPosts(posts)
+    setFilteredPosts(posts.slice(0))
     setLoading(false)
   }, [posts])
 

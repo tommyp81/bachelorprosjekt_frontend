@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { FaThumbsUp } from 'react-icons/fa'
 import { UserContext } from '../UserContext'
 
-const LikeButton = ({id, liked, setLiked, isPost}) => {
+const LikeButton = ({id, liked, setLiked, isPost, updatePostLike, updateCommentLike}) => {
 
   const { user } = useContext(UserContext)
 
@@ -20,33 +20,9 @@ const LikeButton = ({id, liked, setLiked, isPost}) => {
     }
   }
   
-  const likeColor = liked ? "blue" : "grey"
+  const likeColor = liked ? "DodgerBlue" : "grey"
   const toggle = () => {
     liked ? deleteLike() : addLike()
-  }
-
-  const addLike = async () => {
-    const res = await fetch('https://localhost:44361/AddLike', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      }, 
-      body: JSON.stringify(likeInfo())
-    })
-    if (res.status === 200)
-      setLiked(true)
-  }
-
-  const deleteLike = async () => {
-    const res = await fetch('https://localhost:44361/DeleteLike', {
-      method: 'DELETE',
-      headers: {
-        'content-type': 'application/json'
-      }, 
-      body: JSON.stringify(likeInfo())
-    })
-    if (res.status === 200)
-      setLiked(false)
   }
 
   useEffect( async () => {
@@ -63,15 +39,51 @@ const LikeButton = ({id, liked, setLiked, isPost}) => {
       
     } catch (error) {
       console.log(error)
+      // setLiked(false)
+    }
+  }, [])
+
+  const addLike = async () => {
+    const res = await fetch('https://localhost:44361/AddLike', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      }, 
+      body: JSON.stringify(likeInfo())
+    })
+    if (res.status === 200) {
+      if(isPost)
+        updatePostLike(1)
+      else
+        updateCommentLike(1)
+      setLiked(true)
+    }
+      
+  }
+
+  const deleteLike = async () => {
+    const res = await fetch('https://localhost:44361/DeleteLike', {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json'
+      }, 
+      body: JSON.stringify(likeInfo())
+    })
+    if (res.status === 200) {
+      if(isPost)
+        updatePostLike(-1)
+      else
+        updateCommentLike(-1)
       setLiked(false)
     }
-    
-    
-  }, [])
+      
+  }
+
+  
 
   return (
     <span onClick={toggle} >
-      <FaThumbsUp color={likeColor} size={18} />
+      <FaThumbsUp className="like ml-1 mr-1 mb-2" color={likeColor} size={18} />
     </span>
   )
 }

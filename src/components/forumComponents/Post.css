@@ -40,7 +40,7 @@
 }
 
 .NewComment .nav-tabs {
-    border-bottom: 0;
+    /* border-bottom: 0; */
 }
 
 .NewComment .nav-item{

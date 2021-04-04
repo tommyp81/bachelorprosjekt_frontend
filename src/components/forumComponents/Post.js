@@ -1,5 +1,5 @@
 import moment from 'moment'
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, useRef } from 'react'
 import { Card, Button } from 'react-bootstrap'
 import { FaRegComment } from 'react-icons/fa'
 import { UserContext } from '../../UserContext'
@@ -9,20 +9,28 @@ import EditPost from './EditPost'
 
 moment.locale('nb')
 
-const Post = ({users, postId, deletePost }) => {
+const Post = ({users, post, deletePost, commentsLength, setPost }) => {
 
-  const [post, setPost] = useState([])
+  const initMount = useRef(true);
+
+  // const [post, setPost] = useState(initPost)
 
   const [liked, setLiked] = useState(false)
 
   const { user } = useContext(UserContext)
 
-  useEffect(() => {
-    fetch(`https://localhost:44361/posts/${postId}`)
-    .then(res => res.json())
-    .then(data => setPost(data))
-    .catch(console.log)
-  }, [liked])
+  // useEffect(() => {
+  //   console.log("HEIHEIHEI")
+  //   if (initMount.current) {
+  //     initMount.current = false
+  //   } else {
+  //     fetch(`https://localhost:44361/posts/${post.id}`)
+  //     .then(res => res.json())
+  //     .then(data => setPost(data))
+  //     .catch(console.log)
+  //   }
+    
+  // }, [liked, commentsLength])
 
 
   const editPost = async (post, file) => {
@@ -49,15 +57,18 @@ const Post = ({users, postId, deletePost }) => {
     })
     const data = await res.json();
 
-    setPost(data)
+    // setPost(data)
   }
 
+  const updatePostLike = (num) => {
+    setPost(post.id, {like_Count: post.like_Count + num})
+  }
 
   return (
     <Card>
         <Card.Body>
           <div className="float-left">
-            <p>Postet av <b>{users && users.length && users.find(u => u.id === post.userId)?.username}</b> {moment(post.date).calendar()}</p>
+            <p>Postet av <b>{users && users.length && users.find(u => u.id === post.userId).username}</b> {moment(post.date).calendar()}</p>
           </div>
           <div className="float-right" hidden={!(user.id === post.userId)}>
             <EditPost post={post} edit={editPost}/> &nbsp;
@@ -72,7 +83,7 @@ const Post = ({users, postId, deletePost }) => {
             {post.documentId ? <FileLink fileId={post.documentId} /> : ""}
           </Card.Text>
             <div className="float-right"> 
-              {post.like_Count} <LikeButton id={postId} liked={liked} setLiked={setLiked} isPost={true}/>
+              {post.like_Count} <LikeButton id={post.id} liked={liked} setLiked={setLiked} isPost={true} updatePostLike={updatePostLike}/>
               {post.comment_Count} <FaRegComment size={18} className="ml-2 mr-2 mb-1"/>  
             </div>
           </Card.Body>
