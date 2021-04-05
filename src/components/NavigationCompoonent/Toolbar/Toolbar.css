@@ -13,7 +13,7 @@
 .tlogo a {
   color: white;
   text-decoration: none;
-  font-size: 5mm;
+  font-size: 6mm;
   font-weight: bold;
 }
 
@@ -49,6 +49,7 @@
   padding: 22px 10px;
   box-sizing: border-box;
   border-bottom: 4px solid transparent;
+  font-weight: 500;
 }
 .tNavItems li a:hover,
 .tNavItems li a:active,
@@ -57,7 +58,7 @@
   border-bottom: 4px solid #40a4cb;
   color: rgb(216, 216, 216);
 }
-@media (max-width: 768px) {
+@media (max-width: 919px) {
   .tNavItems {
     display: none;
   }
@@ -65,13 +66,13 @@
     margin-right: 15px;
   }
   .tlogo a {
-    font-size: small;
+    font-size: 5mm;
   }
   .tlogo img {
     width: 35px;
   }
 }
-@media (min-width: 769px) {
+@media (min-width: 920px) {
   .t-toggle-btn {
     display: none;
   }

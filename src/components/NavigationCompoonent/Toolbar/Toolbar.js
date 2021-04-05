@@ -24,17 +24,23 @@ const ToolBar = (props) => {
         <div className="tNavItems">
           <ul>
             <li>
-              <a href="/">Hjem</a>
+              <a href="/">
+                <AiFillHome size="20px" /> Hjem
+              </a>
             </li>
             <li>
-              <a href="/Forum">Forum</a>
+              <a href="/Forum">
+                <BsChatDotsFill size="18px" /> Forum
+              </a>
             </li>
             <li>
-              <a href="/Kunnskapsportalen">Kunnskapsportalen</a>
+              <a href="/Kunnskapsportalen">
+                <HiAcademicCap size="23px" /> Kunnskapsportalen
+              </a>
             </li>
             <li>
               <a href="/Login">
-                <BsPersonFill size="18px" />
+                <BsPersonFill size="20px" /> Logg Inn
               </a>
             </li>
           </ul>
