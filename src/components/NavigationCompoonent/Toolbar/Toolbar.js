@@ -34,7 +34,7 @@ const ToolBar = (props) => {
             </li>
             <li>
               <a href="/Login">
-                <BsPersonFill size="18px" /> Logg inn
+                <BsPersonFill size="18px" />
               </a>
             </li>
           </ul>
