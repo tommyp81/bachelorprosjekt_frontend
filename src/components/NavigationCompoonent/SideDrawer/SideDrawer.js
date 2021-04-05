@@ -17,22 +17,22 @@ const SideDrawer = (props) => {
       <ul>
         <li>
           <a href="/">
-            <AiFillHome /> Hjem
+            <AiFillHome size="22px" /> Hjem
           </a>
         </li>
         <li>
           <a href="/Forum">
-            <BsChatDotsFill /> Forum
+            <BsChatDotsFill size="21px" /> Forum
           </a>
         </li>
         <li>
           <a href="/Kunnskapsportalen">
-            <HiAcademicCap /> Kunnskapsportalen
+            <HiAcademicCap size="22px" /> Kunnskapsportalen
           </a>
         </li>
         <li>
           <a href="/Login">
-            <BsPersonFill /> Logg inn
+            <BsPersonFill size="23px" /> Logg inn
           </a>
         </li>
       </ul>
