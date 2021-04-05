@@ -26,7 +26,7 @@ const ToolBar = (props) => {
             <li>
               <a href="/">Hjem</a>
             </li>
-            <li>
+            <li>  
               <a href="/Forum">Forum</a>
             </li>
             <li>

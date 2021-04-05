@@ -20,4 +20,4 @@ const SearchPosts = ({ setSearchInput }) => {
 
 }
 
-export default SearchPosts
+export default SearchPosts;
