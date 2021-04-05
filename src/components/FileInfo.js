@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {host} from '../../App'
+import {host} from '../App'
 
 const FileInfo = ({fileId, isReplaced}) => {
 
