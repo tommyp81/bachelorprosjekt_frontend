@@ -2,8 +2,21 @@
     margin-top: 200px;
 }
 
+.Kunnskapsportalen .videocol {
+    float: left;
+}
+
+
+.Kunnskapsportalen .documentcol {
+    float: right;
+}
+
 .Kunnskapsportalen .card {
-    margin: 10px;
+    margin-bottom: 10px;
+}
+
+.Kunnskapsportalen .card .title {
+    font-size: 24px;
 }
 
 .Kunnskapsportalen .card .content {
@@ -13,12 +26,15 @@
 .Kunnskapsportalen .card a {
 }
 
-.InfoTopics .tabs {
-    float: left;
+.Kunnskapsportalen .tabs {
+    justify-content: center;
 }
 
-.InfoTopics .tab .btn {
-    float: right;
+.InfoTopics .tabs {
+}
+
+.InfoTopics .tabs .tab {
+    justify-content: center;
 }
 
 

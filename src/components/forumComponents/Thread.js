@@ -198,7 +198,7 @@ const Thread = ( { subtopics, topics, users, history, getPost, setPost }) => {
       
       <div className="comments">
        {post && !post.comment_Count ? <h3>Ingen kommentarer</h3> : <h3>Kommentarer</h3> }
-        {comments.filter(c => Number(postId) === c.postId).map((fc, i) => (
+        {comments.slice(0).sort((d1, d2) => (moment(d2.date) - (moment(d1.date)))).filter(c => Number(postId) === c.postId).map((fc, i) => (
           <Comment key={i} initComment={fc} users={users} deleteComment={deleteComment} />
         ))}
           

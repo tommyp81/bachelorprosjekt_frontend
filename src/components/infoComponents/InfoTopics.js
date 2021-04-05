@@ -3,10 +3,10 @@ import {Button, Tabs, Tab, Accordion, Form} from "react-bootstrap";
 import "./Kunnskapsportalen.css";
 
 
-const InfoTopics = ({ infoTopics, showVideos, showDocuments, filterContent, toggleCategory }) => { 
+const InfoTopics = ({ infoTopics, allContent, filterContent }) => { 
 	return (
         <div className="InfoTopics"> 
-            <Button>Vis alt</Button>
+            <Button onClick={allContent}>Vis alt</Button>
         {infoTopics.map((mappedInfoTopics, i) => ( 
             <Button key={i} onClick={filterContent} value={mappedInfoTopics.title}>
                 {mappedInfoTopics.title}

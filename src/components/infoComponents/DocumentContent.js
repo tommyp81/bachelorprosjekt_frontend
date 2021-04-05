@@ -6,7 +6,7 @@ import "./Kunnskapsportalen.css";
 const DocumentContent = ({ documents, infoTopics }) => { 
 
     return (
-        <div className="content">
+        <div className="DocumentContent">
         {/*documents.map((mappedDocuments, i) => (
 ))*/}
         

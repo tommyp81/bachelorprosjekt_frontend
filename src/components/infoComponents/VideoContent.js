@@ -9,20 +9,20 @@ const VideoContent = ({ videos, infoTopics, content }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  function getYouTubeURL (url) {
-
+  function getYouTubeID (url) {
+    
   }
 
     return (
-        <div className="content">
+        <div className="VideoContent">
           {videos.map((filteredVideos) => (
           <Card>
             <Card.Body>
               <Row>
                 <Col lg={3}>
                   <div className="float-left">
-                    <Image src="https://img.youtube.com/vi/3NBPQ9RLOu0/0.jpg"
-                    width="100%">
+                    <Image src={`https://img.youtube.com/vi/${filteredVideos.youTubeId}/0.jpg`}
+                   width="100%">
 
                     </Image>
                   </div>
@@ -48,7 +48,7 @@ const VideoContent = ({ videos, infoTopics, content }) => {
                   oallowfullscreen="oallowfullscreen" 
                   webkitallowfullscreen="webkitallowfullscreen"
                   frameBorder="0"
-                  src="https://www.youtube.com/embed/3NBPQ9RLOu0" width="420" height="315"/>
+                  src={`https://www.youtube.com/embed/${filteredVideos.youTubeId}`} width="420" height="315"/>
                   <p>{filteredVideos.description}</p>
                 </Modal.Body>
                 <Modal.Footer>
