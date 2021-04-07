@@ -118,6 +118,7 @@ Satte margin-top 20px fordi det er samme som Pages objektet
 
 .NewPost p {
     color: white;
+    margin-left: -5px;
     text-align: left;
 }
 

@@ -2,17 +2,28 @@
     margin-top: 200px;
 }
 
+
 .Kunnskapsportalen .videocol {
     float: left;
+    margin-left: -15px;
 }
 
+.Kunnskapsportalen .divider {
+    border-left: 1px solid #dee2e6;
+    height: 99%;
+    top: 70px;
+    position: absolute;
+    left: 50%;
+    margin-left: -3px;
+}
 
 .Kunnskapsportalen .documentcol {
     float: right;
+    margin-right: -15px;
 }
 
 .Kunnskapsportalen .card {
-    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .Kunnskapsportalen .card .title {
@@ -27,14 +38,34 @@
 }
 
 .Kunnskapsportalen .tabs {
-    justify-content: center;
+    margin-bottom: 20px;
 }
 
-.InfoTopics .tabs {
+.Kunnskapsportalen .tab {
+    margin-bottom: 20px;
 }
 
-.InfoTopics .tabs .tab {
-    justify-content: center;
+@media (max-width: 768px) {
+    .Kunnskapsportalen #hidden {
+        display: none;
+    }
+}
+
+.Kunnskapsportalen .infotopics {
+    font-size: 40px ;
+}
+
+.Kunnskapsportalen .maincontent {
+}
+
+.InfoTopics {
+}
+
+.InfoTopics .btn  {
+    margin: 2.5px;
+}
+
+.UploadFile {
 }
 
 

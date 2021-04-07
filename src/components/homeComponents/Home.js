@@ -3,6 +3,7 @@ import { Container, Row, Col, Image, Spinner } from "react-bootstrap";
 import Feed from "../forumComponents/Feed.js";
 import "./Home.css";
 import moment from 'moment'
+import SortPosts from "../forumComponents/SortPosts.js"
 import ImgKunnskap from "../../assets/images/Illustrasjon.ipad.jpg";
 import ImgForum from "../../assets/images/kategori.kompetanse.jpg";
 
@@ -56,7 +57,6 @@ const Home = ({ posts, topic, subtopic, users, loading}) =>  {
           </Col>
         </Row>
       </Container>
-      <Footer />
     </div>
   );
 }

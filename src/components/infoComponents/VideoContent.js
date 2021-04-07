@@ -1,5 +1,6 @@
+import { Tooltip } from 'bootstrap';
 import React, { useState } from 'react';
-import {Button, Row, Col, Card, Image, Modal} from "react-bootstrap";
+import {Button, Row, Col, Card, Image, Modal, OverlayTrigger} from "react-bootstrap";
 import {Link} from 'react-router-dom'
 import "./Kunnskapsportalen.css";
 
@@ -19,13 +20,9 @@ const VideoContent = ({ videos, infoTopics, content }) => {
           <Card>
             <Card.Body>
               <Row>
-                <Col lg={3}>
-                  <div className="float-left">
-                    <Image src={`https://img.youtube.com/vi/${filteredVideos.youTubeId}/0.jpg`}
-                   width="100%">
-
+                <Col lg={3}><Image src={`https://img.youtube.com/vi/${filteredVideos.youTubeId}/0.jpg`}
+                   width="100%" onClick={handleShow}>
                     </Image>
-                  </div>
               </Col>
               <Col lg={5}>
               {infoTopics.filter(infoTopics => (infoTopics.id === filteredVideos.infoTopicId)).map((filteredTopics, i) => (
@@ -48,7 +45,7 @@ const VideoContent = ({ videos, infoTopics, content }) => {
                   oallowfullscreen="oallowfullscreen" 
                   webkitallowfullscreen="webkitallowfullscreen"
                   frameBorder="0"
-                  src={`https://www.youtube.com/embed/${filteredVideos.youTubeId}`} width="420" height="315"/>
+                  src={`https://www.youtube.com/embed/${filteredVideos.youTubeId}`} width="100%" height="300px"/>
                   <p>{filteredVideos.description}</p>
                 </Modal.Body>
                 <Modal.Footer>

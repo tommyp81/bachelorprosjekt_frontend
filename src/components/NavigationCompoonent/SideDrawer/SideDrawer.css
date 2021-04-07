@@ -22,7 +22,8 @@
   justify-content: center;
 }
 .sideDrawer li {
-  margin: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: -15px;
 }
 .sideDrawer a {
   color: black;

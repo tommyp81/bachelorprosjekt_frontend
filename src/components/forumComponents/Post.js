@@ -83,8 +83,8 @@ const Post = ({users, post, deletePost, commentsLength, setPost }) => {
             {post.documentId ? <FileLink fileId={post.documentId} /> : ""}
           </Card.Text>
             <div className="float-right"> 
-              {post.like_Count} <LikeButton id={post.id} liked={liked} setLiked={setLiked} isPost={true} updatePostLike={updatePostLike}/>
-              {post.comment_Count} <FaRegComment size={18} className="ml-2 mr-2 mb-1"/>  
+              {post.like_Count} <LikeButton id={post.id} liked={liked} setLiked={setLiked} isPost={true} updatePostLike={updatePostLike}/> &nbsp;
+              {post.comment_Count}<FaRegComment size={18} color="grey" className="ml-2 mr-2 mb-1"/>  
             </div>
           </Card.Body>
       </Card>

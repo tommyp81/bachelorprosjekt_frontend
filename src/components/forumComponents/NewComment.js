@@ -28,7 +28,7 @@ function NewComment({createNew, pId}) {
     <div className="NewComment">
       <Form onSubmit={submitComment}>
         <Tabs defaultActiveKey="1" >
-          <Tab eventKey="1" title="Kommentar">
+          <Tab eventKey="1" title="Kommentar" className="tab">
             <Form.Group >
               <Form.Control as="textarea" rows={3} name="comment" value={content} placeholder="Legg til en kommentar..." onChange={e => setContent(e.target.value)}/>
               {!file ? "" : 

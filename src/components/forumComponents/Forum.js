@@ -105,12 +105,6 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history, loading }) =
 
             <div className="desktop">
             <SearchPosts setSearchInput={setSearchFilter}/>
-            <NewPost 
-                subtopicTitle={subTopicTitle} 
-                subtopic={subtopicFocus} 
-                topicFocus={topicFocus} 
-                add={addPost} 
-                history={history} />
             </div>
             <Topics
               topics={topics}

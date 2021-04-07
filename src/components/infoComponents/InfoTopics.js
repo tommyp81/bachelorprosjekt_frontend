@@ -11,22 +11,6 @@ const InfoTopics = ({ infoTopics, allContent, filterContent }) => {
             <Button key={i} onClick={filterContent} value={mappedInfoTopics.title}>
                 {mappedInfoTopics.title}
             </Button> ))}
-            {/* 
-        <Tabs
-        as={Button}
-        variant="pills"
-        onSelect={filterContent}
-        >
-            
-            {infoTopics.map((mappedInfoTopics, i) => ( 
-            <Tab key={i} eventKey={mappedInfoTopics.id} title={mappedInfoTopics.title} className="tab">
-            </Tab>
-            ))}
-        </Tabs>*/}
-        
-        {/*
-            
-            {showCategory ? <Category /> : null}*/}
         </div>
     )
 }

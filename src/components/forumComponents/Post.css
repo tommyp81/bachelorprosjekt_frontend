@@ -39,11 +39,10 @@
     
 }
 
-.NewComment .nav-tabs {
-    /* border-bottom: 0; */
-}
 
 .NewComment .nav-item{
+    font-weight: bold;
+    color: white;
     background-color: unset;
 }
 

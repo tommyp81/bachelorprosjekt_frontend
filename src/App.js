@@ -47,7 +47,6 @@ const App = () => {
 
   const [loading, setLoading] = useState(true)
 
-
   const [topics, setTopics] = useState([]);
   const [subtopics, setSubtopics] = useState([]);
   const [posts, setPosts] = useState([]);
@@ -113,7 +112,7 @@ const App = () => {
       })
       .catch(console.log);
 
-      fetch("https://webforum.azurewebsites.net/GetDocumentInfo/1")
+      fetch(`https://webforum.azurewebsites.net/GetDocumentInfo/1`)
       .then((res) => res.json())
       .then((data) => {
         setDocuments(data);
@@ -227,7 +226,9 @@ const App = () => {
               setPost={setPost}
             />
           </Switch>
+          <Footer />
         </div>
+        
       </UserContext.Provider>
     </BrowserRouter>
   );
