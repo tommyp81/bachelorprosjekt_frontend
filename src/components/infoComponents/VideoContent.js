@@ -1,6 +1,5 @@
-import { Tooltip } from 'bootstrap';
 import React, { useState } from 'react';
-import {Button, Row, Col, Card, Image, Modal, OverlayTrigger} from "react-bootstrap";
+import {Button, Row, Col, Card, Image, Modal} from "react-bootstrap";
 import {Link} from 'react-router-dom'
 import "./Kunnskapsportalen.css";
 
