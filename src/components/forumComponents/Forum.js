@@ -33,7 +33,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history, loading }) =
 
 
   useEffect(() => {
-    setFilteredPosts(posts.slice(0))
+    setFilteredPosts(posts.slice(0).sort((d1, d2) => (moment(d2.date) - (moment(d1.date)))));
   }, [posts])
 
 

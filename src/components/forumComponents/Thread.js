@@ -5,6 +5,7 @@ import 'moment/locale/nb'
 import {useParams, Link} from 'react-router-dom'
 import Pages from "./Pages.js"
 import "./Post.css";
+import {host} from '../../App'
 
 //import Header from '../mainComponents/Header'
 
@@ -31,7 +32,7 @@ const Thread = ( { subtopics, topics, users, history, getPost, setPost }) => {
   const post = getPost(postId)
 
   useEffect(() => {
-    fetch("https://webforum.azurewebsites.net/comments")
+    fetch(host+"comments")
     .then(res => res.json())
     .then((data) => {
       setComments(data)
@@ -41,7 +42,7 @@ const Thread = ( { subtopics, topics, users, history, getPost, setPost }) => {
 
 
   const deletePost = async () => {
-    const res = await fetch(`https://webforum.azurewebsites.net/posts/${post.id}`, {
+    const res = await fetch(host+`posts/${post.id}`, {
       method: 'DELETE',
     })
 
@@ -97,7 +98,7 @@ const Thread = ( { subtopics, topics, users, history, getPost, setPost }) => {
 
   const deleteComment = async (e) => {
     let id = Number(e.target.value)
-    const res = await fetch(`https://webforum.azurewebsites.net/comments/${id}`, {
+    const res = await fetch(host+`comments/${id}`, {
       method: 'DELETE'
     })
     if (res.status === 200) {
@@ -115,7 +116,7 @@ const Thread = ( { subtopics, topics, users, history, getPost, setPost }) => {
     for (let k in comment) {
       formData.append(k, comment[k])
     }
-    const res = await fetch("https://webforum.azurewebsites.net/comments", {
+    const res = await fetch(host+"comments", {
       method: 'POST', 
       body: formData
     })
@@ -198,7 +199,7 @@ const Thread = ( { subtopics, topics, users, history, getPost, setPost }) => {
       
       <div className="comments">
        {post && !post.comment_Count ? <h3>Ingen kommentarer</h3> : <h3>Kommentarer</h3> }
-        {comments.slice(0).sort((d1, d2) => (moment(d2.date) - (moment(d1.date)))).filter(c => Number(postId) === c.postId).map((fc, i) => (
+        {comments.filter(c => Number(postId) === c.postId).map((fc, i) => (
           <Comment key={i} initComment={fc} users={users} deleteComment={deleteComment} />
         ))}
           

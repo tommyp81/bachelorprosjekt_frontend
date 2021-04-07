@@ -42,3 +42,11 @@
 .personvern {
   text-align: center;
 }
+@media (max-width: 919px) {
+  .textRight {
+    text-align: center;
+  }
+  .link {
+    text-align: center;
+  }
+}

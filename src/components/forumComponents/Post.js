@@ -6,6 +6,7 @@ import { UserContext } from '../../UserContext'
 import FileLink from '../FileLink'
 import LikeButton from '../LikeButton'
 import EditPost from './EditPost'
+import {host} from '../../App'
 
 moment.locale('nb')
 
@@ -26,7 +27,7 @@ const Post = ({users, post, deletePost, commentsLength, setPost }) => {
   //   } else {
   //     fetch(`https://localhost:44361/posts/${post.id}`)
   //     .then(res => res.json())
-  //     .then(data => setPost(data))
+  //     .then(data => setPost(data)) 
   //     .catch(console.log)
   //   }
     
@@ -39,7 +40,7 @@ const Post = ({users, post, deletePost, commentsLength, setPost }) => {
       formData.append('File', file)
       formData.append('postId', post.id)
       formData.append('userId', post.userId)
-      const upres = await fetch('https://webforum.azurewebsites.net/UploadDocument', {
+      const upres = await fetch(host+'UploadDocument', {
         method: 'POST',
         body: formData
       })
@@ -51,7 +52,7 @@ const Post = ({users, post, deletePost, commentsLength, setPost }) => {
     for (let k in post) {
       formData.append(k, post[k])
     }
-    const res = await fetch(`https://webforum.azurewebsites.net/posts/${post.id}`, {
+    const res = await fetch(host+`posts/${post.id}`, {
       method: 'PUT',
       body: formData
     })

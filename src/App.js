@@ -33,6 +33,8 @@ import Backdrop from "./components/NavigationCompoonent/Backdrop/Backdrop";
 // https://webforum.azurewebsites.net/answers
 // https://webforum.azurewebsites.net/users
 
+export const host = "https://webforum.azurewebsites.net/";
+
 const App = () => {
   const history = useHistory();
 
@@ -70,55 +72,56 @@ const App = () => {
   }
 
   useEffect(() => {
-    fetch("https://webforum.azurewebsites.net/posts")
+    fetch(host+"posts")
       .then((res) => res.json())
       .then((data) => {
         setPosts(data);
       })
       .catch(console.log);
 
-    fetch("https://webforum.azurewebsites.net/SubTopics")
+    fetch(host+"SubTopics")
       .then((res) => res.json())
       .then((data) => {
         setSubtopics(data);
       })
       .catch(console.log);
 
-    fetch("https://webforum.azurewebsites.net/Topics")
+    fetch(host+"Topics")
       .then((res) => res.json())
       .then((data) => {
         setTopics(data);
       })
       .catch(console.log);
 
-    fetch("https://webforum.azurewebsites.net/Users")
+    fetch(host+"Users")
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);
       })
       .catch(console.log);
 
-      fetch("https://webforum.azurewebsites.net/InfoTopics")
+      fetch(host+"InfoTopics")
       .then((res) => res.json())
       .then((data) => {
         setInfoTopics(data);
       })
       .catch(console.log);
 
-      fetch("https://webforum.azurewebsites.net/Videos")
+      fetch(host+"Videos")
       .then((res) => res.json())
       .then((data) => {
         setVideos(data);
       })
       .catch(console.log);
 
-      fetch(`https://webforum.azurewebsites.net/GetDocumentInfo/1`)
+      fetch(host+"GetDocumentInfo/1")
       .then((res) => res.json())
       .then((data) => {
         setDocuments(data);
       })
       .catch(console.log);
       setLoading(false)
+      
   }, []);
 
   // const updatePosts = async () => {
@@ -134,7 +137,7 @@ const App = () => {
     for (let k in post) {
       formData.append(k, post[k]);
     }
-    const res = await fetch("https://webforum.azurewebsites.net/posts", {
+    const res = await fetch(host+"posts", {
       method: "POST",
       body: formData,
     });
