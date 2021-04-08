@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react'
 import { FaThumbsUp } from 'react-icons/fa'
 import { UserContext } from '../UserContext'
 
+import { host } from '../App'
+
 const LikeButton = ({id, liked, setLiked, isPost, updatePostLike, updateCommentLike}) => {
 
   const { user } = useContext(UserContext)
@@ -26,7 +28,7 @@ const LikeButton = ({id, liked, setLiked, isPost, updatePostLike, updateCommentL
   }
 
   useEffect( async () => {
-    const res = await fetch('https://webforum.azurewebsites.net/GetLike', {
+    const res = await fetch(host+'GetLike', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -44,7 +46,7 @@ const LikeButton = ({id, liked, setLiked, isPost, updatePostLike, updateCommentL
   }, [])
 
   const addLike = async () => {
-    const res = await fetch('https://webforum.azurewebsites.net/AddLike', {
+    const res = await fetch(host+'AddLike', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -62,7 +64,7 @@ const LikeButton = ({id, liked, setLiked, isPost, updatePostLike, updateCommentL
   }
 
   const deleteLike = async () => {
-    const res = await fetch('https://webforum.azurewebsites.net/DeleteLike', {
+    const res = await fetch(host+'DeleteLike', {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
