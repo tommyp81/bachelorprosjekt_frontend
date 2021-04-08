@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {Button, Row, Col, Card, Image, Modal } from "react-bootstrap";
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom' 
 import "./Kunnskapsportalen.css";
 
 const VideoContent = ({ videos, infoTopics, content }) => { 
@@ -14,7 +14,7 @@ const VideoContent = ({ videos, infoTopics, content }) => {
           {videos.map((filteredVideos) => (
           <Card >
             <Card.Body>
-            
+
               <div className="left">
               <Image src={`https://img.youtube.com/vi/${filteredVideos.youTubeId}/0.jpg`}
               width="200px"
@@ -32,8 +32,7 @@ const VideoContent = ({ videos, infoTopics, content }) => {
               </Card>
               ))}
 
-{videos.map((filteredVideos) => (
-
+              {videos.map((filteredVideos) => (
               <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header closeButton>
                   <Modal.Title>{filteredVideos.title}</Modal.Title>
