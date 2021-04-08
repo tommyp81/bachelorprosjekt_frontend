@@ -72,10 +72,10 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history, loading }) =
         setSubTopicFocus("")
         setSubTopicTitle("")
         setSubTopicDesc("")
-        setFilteredPosts(posts)
+        setFilteredPosts(posts.slice(0).sort((d1, d2) => (moment(d2.date) - (moment(d1.date)))))
       } else {
         let value = topics.find(t => t.id === Number(key))?.title
-        setFilteredPosts(posts.filter(fp => fp.topicId === Number(key)))
+        setFilteredPosts(posts.filter(fp => fp.topicId === Number(key)).slice(0).sort((d1, d2) => (moment(d2.date) - (moment(d1.date)))))
         setTopicTitle(value)
       }
       setCurrentPage(1);
@@ -89,7 +89,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history, loading }) =
     setSubTopicTitle(title)
     setSubTopicFocus(subTop)
     setSubTopicDesc(desc)
-    setFilteredPosts(posts.filter(fp => fp.subTopicId === Number(subTop)))
+    setFilteredPosts(posts.filter(fp => fp.subTopicId === Number(subTop)).slice(0).sort((d1, d2) => (moment(d2.date) - (moment(d1.date)))))
     setCurrentPage(1);
   }
 
@@ -97,7 +97,6 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history, loading }) =
   return (
     <div className="Forum mt-5">
       <Container>
-        <h1>Forum</h1>
       </Container>
       <Container className="body">
         <Row xs={1} sm={1} lg={2}>

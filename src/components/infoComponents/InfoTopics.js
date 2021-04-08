@@ -4,11 +4,12 @@ import "./Kunnskapsportalen.css";
 
 
 const InfoTopics = ({ infoTopics, allContent, filterContent }) => { 
+
 	return (
         <div className="InfoTopics"> 
             <Button onClick={allContent}>Vis alt</Button>
         {infoTopics.map((mappedInfoTopics, i) => ( 
-            <Button key={i} onClick={filterContent} value={mappedInfoTopics.title}>
+            <Button key={i} onClick={filterContent} value={mappedInfoTopics.id} title={mappedInfoTopics.title}>
                 {mappedInfoTopics.title}
             </Button> ))}
         </div>

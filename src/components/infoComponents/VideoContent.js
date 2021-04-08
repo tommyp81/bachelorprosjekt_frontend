@@ -1,6 +1,5 @@
-import { Tooltip } from 'bootstrap';
 import React, { useState } from 'react';
-import {Button, Row, Col, Card, Image, Modal, OverlayTrigger} from "react-bootstrap";
+import {Button, Row, Col, Card, Image, Modal } from "react-bootstrap";
 import {Link} from 'react-router-dom'
 import "./Kunnskapsportalen.css";
 
@@ -10,33 +9,36 @@ const VideoContent = ({ videos, infoTopics, content }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  function getYouTubeID (url) {
-    
-  }
-
     return (
         <div className="VideoContent">
           {videos.map((filteredVideos) => (
-          <Card>
+          <Card >
             <Card.Body>
-              <Row>
-                <Col lg={3}><Image src={`https://img.youtube.com/vi/${filteredVideos.youTubeId}/0.jpg`}
-                   width="100%" onClick={handleShow}>
-                    </Image>
-              </Col>
-              <Col lg={5}>
+            
+              <div className="left">
+              <Image src={`https://img.youtube.com/vi/${filteredVideos.youTubeId}/0.jpg`}
+              width="200px"
+              onClick={handleShow}
+              style={{cursor: "pointer"}}>
+              </Image>
+              </div>
+
+              <div className="vidright">
               {infoTopics.filter(infoTopics => (infoTopics.id === filteredVideos.infoTopicId)).map((filteredTopics, i) => (
               <p className="toptext">Delt i {filteredTopics.title}</p>))}
-              <h3 className="title">{filteredVideos.title}</h3></Col>
-              <Col lg={4}>
-              <Button variant="primary" onClick={handleShow}>
-                Se video
-              </Button>
-              
+              <h3 className="title">{filteredVideos.title}</h3><Link to="/Forum">Diskuter i forumet</Link>
+              </div>
+              </Card.Body>
+              </Card>
+              ))}
+
+{videos.map((filteredVideos) => (
+
               <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header closeButton>
                   <Modal.Title>{filteredVideos.title}</Modal.Title>
                 </Modal.Header>
+                
                 <Modal.Body>
                   <iframe 
                   allowfullscreen="allowfullscreen"
@@ -54,13 +56,8 @@ const VideoContent = ({ videos, infoTopics, content }) => {
                   </Button>
                 </Modal.Footer>
               </Modal>
-              <br/><br/>
-              <Link to="/Forum">Diskuter i forumet</Link>
-              </Col>
-              </Row>
-            </Card.Body>
-            </Card>
-            ))}
+               ))}
+            
       </div>
     )
 }

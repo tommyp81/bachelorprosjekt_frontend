@@ -10,24 +10,22 @@ import "./Kunnskapsportalen.css";
  
 const Kunnskapsportalen = ({ infoTopics, videos, documents, users }) => {
  
-
-    const [content, setContent] = useState([...videos])
+    const [videoContent, setVideoContent] = useState(videos)
+    const [documentContent, setDocumentContent] = useState(documents)
+    const [content, setContent] = useState([])
     const [title, setTitle] = useState("")
 
     const filterContent = (e) => {
-      let filter = videos.filter(videos => videos.infoTopicsId === infoTopics.id)
-      if (filter) {
-        let title = e.target.value;
-        setContent(videos.filter(videos => videos.infoTopicsId === infoTopics.id))
-        setTitle(title)
-      } else {
-        setTitle("yo")
-      }
-      
+      let value = e.target.value;
+      let title = e.target.getAttribute("title")
+      setVideoContent(videos.filter(videos => videos.infoTopicId === Number(value)))
+      setDocumentContent(documents.filter(documents => documents.infoTopicId === Number(value)))
+      setTitle(title)
     }
 
     const allContent = () => {
-      setContent(videos)
+      setVideoContent(videos)
+      setDocumentContent(documents)
       setTitle("Alle kategorier")
     } 
 
@@ -35,40 +33,30 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users }) => {
         <div className="Kunnskapsportalen">
               <Container style={{display: 'flex', flexDirection: 'column'}}> 
                 <h1>Kunnskapsportalen</h1>
-                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis 
-                  praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias 
-                  excepturi sint occaecati cupiditate non provident eos et accusamus et iusto odio 
-                  dignissimos ducimus qui blanditiis praesentium voluptatum delenitieos et accusamus 
-                  et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti</p>
               <Row>
-                <Col lg={12}>
-                  <Row>
-                    <Col lg={10} className="infotopics">
-                    {!title ? "Alle kategorier" : title}
+                <Col>
+                    <h4>{!title ? "Alle kategorier" : title}</h4>
                     <InfoTopics infoTopics={infoTopics} allContent={allContent} filterContent={filterContent}/>
-                    </Col>
-                    <Col lg={2} className="uploadfile">
-                    <UploadFile infoTopics={infoTopics}/>
-                    </Col>
-                  </Row>
-                </Col>
-                <Col lg={2}></Col>
-                
+                  </Col>
               </Row>
+                
               <Row>
                 <Col lg={12} className="maincontent">
-                  <Tabs defaultActiveKey="0" className="tabs">
-                    <Tab eventKey="0" title="Vis alt" className="tab" id="hidden">
-                      <Col xs={6} className="videocol"><VideoContent videos={content} infoTopics={infoTopics}/></Col>
+                  <Tabs defaultActiveKey="1" className="tabs" as={Button} variant="pills">
+                    <Tab eventKey="1" title="Vis alt" className="tab" id="hidden">
+                      <UploadFile infoTopics={infoTopics}/>
+                      <Col xs={6} className="videocol"><VideoContent videos={videoContent} infoTopics={infoTopics}/></Col>
                       <div className="divider"></div>
-                      <Col xs={6} className="documentcol"><DocumentContent documents={documents} infoTopics={infoTopics}/></Col>
+                      <Col xs={6} className="documentcol"><DocumentContent documents={documentContent} infoTopics={infoTopics}/></Col>
                       
                     </Tab>
-                    <Tab eventKey="1" title="Videoer" className="tab">
-                     <VideoContent videos={content} infoTopics={infoTopics}/>
+                    <Tab eventKey="2" title="Videoer" className="tab">
+                      <UploadFile infoTopics={infoTopics}/>
+                     <VideoContent videos={videoContent} infoTopics={infoTopics}/>
                     </Tab>
-                    <Tab eventKey="2" title="Dokumenter" className="tab">
-                      <DocumentContent documents={documents} infoTopics={infoTopics}/>
+                    <Tab eventKey="3" title="Dokumenter" className="tab">
+                      <UploadFile infoTopics={infoTopics}/>
+                      <DocumentContent documents={documentContent} infoTopics={infoTopics}/>
                     </Tab>
                   </Tabs>
                 </Col>

@@ -81,6 +81,7 @@ const UploadFile = ({ infoTopics }) => {
             >
               Tittel kreves!
             </Form.Control.Feedback>
+            <br/>
             <Form.Label>Beskrivelse</Form.Label>
             <Form.Control as="textarea" rows={3} required></Form.Control>
             <Form.Control.Feedback
@@ -89,6 +90,7 @@ const UploadFile = ({ infoTopics }) => {
             >
               Beskrivelse kreves!
             </Form.Control.Feedback>
+            <br/>
             <Form.Control as="select" custom>
               {infoTopics.map((mappedInfoTopics) => (
                 <option>{mappedInfoTopics.title}</option>

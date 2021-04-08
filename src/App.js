@@ -114,7 +114,7 @@ const App = () => {
       })
       .catch(console.log);
 
-      fetch(host+"GetDocumentInfo/1")
+      fetch(host+"getdocuments")
       .then((res) => res.json())
       .then((data) => {
         setDocuments(data);
