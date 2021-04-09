@@ -11,8 +11,10 @@ import Footer from "../mainComponents/Footer";
 
 import { Link } from "react-router-dom";
 import { Navbar } from "../navigation/navbar/navbar.jsx";
+import SpinnerDiv from "../forumComponents/SpinnerDiv.js";
 
 const Home = ({ posts, topic, subtopic, users, loading }) => {
+
   return (
     <div className="Home">
       <Container>
@@ -22,7 +24,7 @@ const Home = ({ posts, topic, subtopic, users, loading }) => {
         <Row xs={1} sm={1} lg={2}>
           <Col md={6} className="feedcol">
             {loading ? (
-              <Spinner />
+              <SpinnerDiv />
             ) : (
               <Feed
                 posts={posts
@@ -77,6 +79,7 @@ const Home = ({ posts, topic, subtopic, users, loading }) => {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </div>
   );
 };
