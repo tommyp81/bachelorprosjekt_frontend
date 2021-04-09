@@ -21,6 +21,7 @@ import { FaRegComment, FaThumbsUp } from "react-icons/fa";
 import LikeButton from '../LikeButton.js';
 import Post from './Post.js';
 import Comment from './Comment.js';
+import Comments from './Comments.js';
 
 const Thread = ( { subtopics, topics, users, history, getPost, setPost }) => {
 
@@ -35,11 +36,21 @@ const Thread = ( { subtopics, topics, users, history, getPost, setPost }) => {
     fetch(host+"comments")
     .then(res => res.json())
     .then((data) => {
-      setComments(data)
+      setComments(data.filter(c => Number(postId) === c.postId))
     })
     .catch(console.log)
+
+    // setInterval(async() => {
+    //   fetch(host+"comments")
+    //   .then(res => res.json())
+    //   .then((data) => {
+    //     setComments(data.filter(c => Number(postId) === c.postId))
+    //   })
+    //   .catch(console.log)
+    // }, 60000);
   }, [])
 
+  // const threadComments = comments.filter(c => Number(postId) === c.postId).slice(0).sort((d1, d2) => moment(d2.date) - moment(d1.date))
 
   const deletePost = async () => {
     const res = await fetch(host+`posts/${post.id}`, {
@@ -126,97 +137,106 @@ const Thread = ( { subtopics, topics, users, history, getPost, setPost }) => {
     // updatePosts()
     setPost(post.id, {comment_Count: post.comment_Count + 1})
     
-    // console.log(file)
-    // console.log(formData.getAll('File'))
+    if(comments.length % commentsPerPage === 0)
+      setCurrentPage(last + 1)
+    else
+      goToLast()
     
   }
 
-  // const handlePostLike = async () => {
-    
-  //   const res = await fetch("https://localhost:44361/likes", {
-  //     method: 'POST',
-  //     headers: {
-  //       'content-type': 'application/json'
-  //     },
-  //     body: JSON.stringify({UserId: user.id, PostId: post.id})
-  //   })
-  //   console.log(res)
-    
-    
-  // }
 
-  // const handleCommentLike = async (c) => {
-
-  // }
-
-  // const commentsPerPage = 5
-  // const [currentPage, setCurrentPage] = useState(1)
+  const commentsPerPage = 5
+  const [currentPage, setCurrentPage] = useState(1)
  
-  // const indexOfLastComment = currentPage * commentsPerPage;
-  // const indexOfFirstComment = indexOfLastComment - commentsPerPage;
-  // const currentComments = comments.slice(indexOfFirstComment, indexOfLastComment);
+  const indexOfLastComment = currentPage * commentsPerPage;
+  const indexOfFirstComment = indexOfLastComment - commentsPerPage;
+  const currentComments = comments.slice(indexOfFirstComment, indexOfLastComment);
 
-  // const paginate = pageNum => setCurrentPage(pageNum)
-  // const nextPage = () => setCurrentPage(currentPage + 1)
-  // const prevPage = () => setCurrentPage(currentPage - 1)
+  const paginate = pageNum => setCurrentPage(pageNum)
+  const nextPage = () => setCurrentPage(currentPage + 1)
+  const prevPage = () => setCurrentPage(currentPage - 1)
 
-  // const lastPage = currentComments.length !== commentsPerPage || indexOfLastComment === comments.length;
-  // const firstPage = currentPage === 1;
+  const lastPage = currentComments.length !== commentsPerPage || indexOfLastComment === comments.length;
+  const firstPage = currentPage === 1;
   
-  // const goToLast = () => setCurrentPage(Math.ceil(comments.length / commentsPerPage))
-  // const goToFirst = () => setCurrentPage(1)
+  const last = Math.ceil(comments.length / commentsPerPage)
+  const goToLast = () => setCurrentPage(last)
+  const goToFirst = () => setCurrentPage(1)
+
 
   return (
     <div className="Post">
       
-    <Container style={{display: 'flex', flexDirection: 'column'}}> 
+      <Container style={{display: 'flex', flexDirection: 'column'}}> 
     
-    <h5>
-      <Link to="/Forum" style={{textDecoration: 'none', color: 'white'}}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16">
-        <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-        </svg>
-        &nbsp;Tilbake til forum
-      </Link>
-      <div className="float-right" style={{textDecoration: 'none', color: 'white'}}>
-        {topics.filter(topics =>(topics.id === post?.topicId)).map((filteredTopics, i) => (
-          <p key={i}>
-            {filteredTopics.title}
-            &nbsp;-&nbsp;
-            {subtopics.filter(subtopics => (subtopics.id === post?.subTopicId)).map((filteredSubtopics) => ( 
-              filteredSubtopics.title
+        <h5>
+          <Link to="/Forum" style={{textDecoration: 'none', color: 'white'}}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+            </svg>
+            &nbsp;Tilbake til forum
+          </Link>
+          <div className="float-right" style={{textDecoration: 'none', color: 'white'}}>
+            {topics.filter(topics =>(topics.id === post?.topicId)).map((filteredTopics, i) => (
+              <p key={i}>
+                {filteredTopics.title}
+                &nbsp;-&nbsp;
+                {subtopics.filter(subtopics => (subtopics.id === post?.subTopicId)).map((filteredSubtopics) => ( 
+                  filteredSubtopics.title
+                ))}
+              </p>
             ))}
-          </p>
-        ))}
+          </div>
+        </h5> 
+        <div className="main">
+          {post && <Post post={post} users={users} deletePost={deletePost} commentsLength={comments.length} setPost={setPost}/>}
         </div>
-      </h5> 
-      <div className="main">
-        {post && <Post post={post} users={users} deletePost={deletePost} commentsLength={comments.length} setPost={setPost}/>}
-      </div>
-      
-      
-      {/*commentCount*/}
-      
-      <div className="comments">
-       {post && !post.comment_Count ? <h3>Ingen kommentarer</h3> : <h3>Kommentarer</h3> }
-        {comments.filter(c => Number(postId) === c.postId).map((fc, i) => (
-          <Comment key={i} initComment={fc} users={users} deleteComment={deleteComment} />
-        ))}
-          
         
         
-          
-            
-          {/*<Pages postsPerPage={commentsPerPage} paginate={paginate} totalPosts={currentComments.length} 
-          nextPage={nextPage} prevPage={prevPage} currentPage={currentPage} firstPage={firstPage} lastPage={lastPage} goToFirst={goToFirst} goToLast={goToLast}/>*/}
-         </div>
-         <div className="newcomment">
-           <NewComment createNew={addComment} user={user} pId={postId}/> 
-         </div>
-
+        {/*commentCount*/}
         
-      {/* { !editingPost ? <EditPost post={post} edit={editPost}/> : <></>} */}
-    </Container>
+        <div className="comments">
+          {post && !post.comment_Count ? <h3>Ingen kommentarer</h3> : <h3>Kommentarer</h3> }
+          {post.comment_Count > 0 && 
+            <div className="d-flex justify-content-end">
+              <Pages 
+                postsPerPage={commentsPerPage} 
+                paginate={paginate} 
+                totalPosts={comments.length} 
+                nextPage={nextPage} 
+                prevPage={prevPage} 
+                currentPage={currentPage} 
+                firstPage={firstPage} 
+                lastPage={lastPage} 
+                goToFirst={goToFirst} 
+                goToLast={goToLast}
+              />
+            </div>
+          }
+          {currentComments.map(c => (
+            <Comment key={c.id} initComment={c} users={users} deleteComment={deleteComment} />
+          ))}
+          {post.comment_Count > 0 && 
+            <div className="float-right">
+              <Pages 
+                postsPerPage={commentsPerPage} 
+                paginate={paginate} 
+                totalPosts={comments.length} 
+                nextPage={nextPage} 
+                prevPage={prevPage} 
+                currentPage={currentPage} 
+                firstPage={firstPage} 
+                lastPage={lastPage} 
+                goToFirst={goToFirst} 
+                goToLast={goToLast}
+              />
+            </div>
+          } 
+        </div>
+          <div className="newcomment">
+            <NewComment createNew={addComment} user={user} pId={postId}/> 
+          </div>
+      </Container>
     </div>
   )
 };
