@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { Component } from "react";
 import { Container, Row, Col, Image, Spinner } from "react-bootstrap";
 import Feed from "../forumComponents/Feed.js";
 import "./Home.css";
@@ -11,50 +11,8 @@ import Footer from "../mainComponents/Footer";
 
 import { Link } from "react-router-dom";
 import { Navbar } from "../navigation/navbar/navbar.jsx";
-import { Button } from "react-bootstrap";
-const Home = ({ posts, topic, subtopic, users, loading }) => {
-  const [showMorPosts, setshowMorPosts] = useState(false);
-  const togglepostsHandler = () => {
-    const doesShow = showMorPosts;
-    setshowMorPosts({ showMorPosts: !doesShow });
-  };
-  let loadPostss = null;
-  if (showMorPosts) {
-    loading ? (
-      <Spinner />
-    ) : (
-      (loadPostss = (
-        <Feed
-          posts={posts
-            .slice(0)
-            .sort((d1, d2) => moment(d2.date) - moment(d1.date))}
-          users={users}
-          topic={topic}
-          subtopic={subtopic}
-          maxLength={10}
-        />
-      ))
-    );
-  } else {
-    {
-      loading ? (
-        <Spinner />
-      ) : (
-        (loadPostss = (
-          <Feed
-            posts={posts
-              .slice(0)
-              .sort((d1, d2) => moment(d2.date) - moment(d1.date))}
-            users={users}
-            topic={topic}
-            subtopic={subtopic}
-            maxLength={3}
-          />
-        ))
-      );
-    }
-  }
 
+const Home = ({ posts, topic, subtopic, users, loading }) => {
   return (
     <div className="Home">
       <Container>
@@ -63,14 +21,19 @@ const Home = ({ posts, topic, subtopic, users, loading }) => {
         </Row>
         <Row xs={1} sm={1} lg={2}>
           <Col md={6} className="feedcol">
-            {loadPostss}
-            <Button
-              variant="primary"
-              onClick={togglepostsHandler}
-              disabled={showMorPosts}
-            >
-              Vis mer
-            </Button>
+            {loading ? (
+              <Spinner />
+            ) : (
+              <Feed
+                posts={posts
+                  .slice(0)
+                  .sort((d1, d2) => moment(d2.date) - moment(d1.date))}
+                users={users}
+                topic={topic}
+                subtopic={subtopic}
+                maxLength={3}
+              />
+            )}
           </Col>
           <Col md={6} className="textcol">
             <Link to="/Kunnskapsportalen">
@@ -114,6 +77,7 @@ const Home = ({ posts, topic, subtopic, users, loading }) => {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </div>
   );
 };
