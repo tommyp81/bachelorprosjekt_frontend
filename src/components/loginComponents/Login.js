@@ -37,7 +37,7 @@ const Login = ({ history }) => {
         setUser({ id: 4, username: "pia", loggedIn: true });
         break;
       case "sepita":
-        setUser({ id: 5, username: "sepideh", loggedIn: true });
+        setUser({ id: 5, username: "sepita", loggedIn: true });
         break;
       case "charlotte":
         setUser({ id: 7, username: "charlotte", loggedIn: true });
@@ -93,7 +93,7 @@ const Login = ({ history }) => {
                   <option value="henrik">henrik</option>
                   <option value="erik">erik</option>
                   <option value="pia">pia</option>
-                  <option value="sepideh">sepideh</option>
+                  <option value="sepita">sepideh</option>
                   <option value="charlotte">charlotte</option>
                 </Form.Control>
               </Form.Group>
