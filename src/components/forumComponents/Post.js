@@ -58,7 +58,7 @@ const Post = ({users, post, deletePost, commentsLength, setPost }) => {
     })
     const data = await res.json();
 
-    // setPost(data)
+    setPost(post.id, data)
   }
 
   const updatePostLike = (num) => {

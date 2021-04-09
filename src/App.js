@@ -121,14 +121,14 @@ const App = () => {
       })
       .catch(console.log);
       
-      sleep(5000).then(() => setLoading(false))
-      // setLoading(false)
+      // sleep(5000).then(() => setLoading(false))
+      setLoading(false)
       
   }, []);
 
-  const sleep = (milliseconds) => {
-    return new Promise(resolve => setTimeout(resolve, milliseconds))
-  }
+  // const sleep = (milliseconds) => {
+  //   return new Promise(resolve => setTimeout(resolve, milliseconds))
+  // }
   
 
   // const updatePosts = async () => {
