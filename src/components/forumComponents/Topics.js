@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Tabs, Tab, Accordion, Card, Image } from "react-bootstrap";
 import "./Topics.css";
-
+import {host} from '../../App'
 
 const Topics = ({ topics, subtopics, topClick, subClick, topicFocus, subtopicFocus }) => {
 
@@ -30,7 +30,7 @@ const Topics = ({ topics, subtopics, topClick, subClick, topicFocus, subtopicFoc
 							eventKey={topics.id}
 							className="imgbtn">
 							<Image
-								src={topics.imageUrl}
+								src={host+topics.imageUrl}
 								className={topicFocus === topics.id ? 'topicimgActive' : 'topicimg'}
 							/>
 							<div className="imgtitle">{topics.title}</div>
