@@ -35,6 +35,21 @@ const UploadFile = ({ infoTopics }) => {
     }
 
     setValidated(true);
+
+    fetch('https://webforum.azurewebsites.net/videos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(form)
+      .then(res => {
+        return res.json()
+      })
+      .then(data => console.log(data))
+      .catch(error => console.log())
+    })
+
+
   };
 
   return (
