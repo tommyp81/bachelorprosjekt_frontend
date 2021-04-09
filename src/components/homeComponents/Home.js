@@ -114,7 +114,6 @@ const Home = ({ posts, topic, subtopic, users, loading }) => {
           </Col>
         </Row>
       </Container>
-      <Footer />
     </div>
   );
 };
