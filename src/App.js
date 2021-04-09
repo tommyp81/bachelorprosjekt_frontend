@@ -120,9 +120,16 @@ const App = () => {
         setDocuments(data);
       })
       .catch(console.log);
-      setLoading(false)
+      
+      sleep(5000).then(() => setLoading(false))
+      // setLoading(false)
       
   }, []);
+
+  const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+  }
+  
 
   // const updatePosts = async () => {
   //   const res = await fetch("https://localhost:44361/posts");
