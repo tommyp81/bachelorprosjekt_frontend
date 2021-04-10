@@ -95,10 +95,11 @@ const Comment = ({users, initComment, deleteComment}) => {
           {comment.content}
           <br/>
           {comment.documentId ? <FileLink fileId={comment.documentId} /> : ""}
-        </Card.Text>
-        <div className="float-right"> 
+          <div className="float-right"> 
           {comment.like_Count} <LikeButton id={comment.id} liked={liked} setLiked={setLiked} isPost={false} updateCommentLike={setCommentLikeCount} />
         </div>
+        </Card.Text>
+        
       </Card.Body>
     </Card>
   )

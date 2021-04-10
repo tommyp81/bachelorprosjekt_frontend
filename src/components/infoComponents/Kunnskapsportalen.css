@@ -10,9 +10,16 @@
 }
 
 .Kunnskapsportalen h1, h4 {
+    text-align: center;
     color: white;
 }
 
+.Kunnskapsportalen .top {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 50%;
+}
 
 .Kunnskapsportalen .videocol {
     float: left;
@@ -21,11 +28,9 @@
 
 .Kunnskapsportalen .divider {
     border-left: 1px solid #dee2e6;
-    height: 96.7%;
-    top: 115px;
+    height: 98%;
     position: absolute;
     left: 50%;
-    margin-left: -3px;
 }
 
 .Kunnskapsportalen .documentcol {
@@ -65,7 +70,8 @@
 }
 
 .Kunnskapsportalen .tabs {
-    margin-bottom: 20px;
+    margin-top: 20px;
+    justify-content: center;
 }
 
 .Kunnskapsportalen .tab {
@@ -79,22 +85,27 @@
 }
 
 .Kunnskapsportalen .infotopics {
-    font-size: 40px ;
 }
 
 .Kunnskapsportalen .maincontent {
 }
 
 .InfoTopics {
+    margin-bottom: 10px;
+    
 }
 
 .InfoTopics .btn  {
     margin: 2.5px;
+    
 }
 
 .UploadFile {
 }
 
+.UploadFile p {
+    margin-left: 5px;
+}
 
 .UploadFile .modal-header .title {
 }

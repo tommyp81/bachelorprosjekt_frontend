@@ -10,10 +10,14 @@ import "./Kunnskapsportalen.css";
  
 const Kunnskapsportalen = ({ infoTopics, videos, documents, users }) => {
  
-    const [videoContent, setVideoContent] = useState(videos)
-    const [documentContent, setDocumentContent] = useState(documents)
-    const [content, setContent] = useState([])
+    const [videoContent, setVideoContent] = useState([])
+    const [documentContent, setDocumentContent] = useState([])
     const [title, setTitle] = useState("")
+
+    useEffect(() => {
+      setVideoContent(videos)
+      setDocumentContent(documents)
+    }, [videos] && [documents])
 
     const filterContent = (e) => {
       let value = e.target.value;
@@ -29,14 +33,33 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users }) => {
       setTitle("Alle kategorier")
     } 
 
+    const useCheckMobileScreen = () => {
+      const [width, setWidth] = useState(window.innerWidth);
+      const handleWindowSizeChange = () => {
+              setWidth(window.innerWidth);
+      }
+  
+      useEffect(() => {
+          window.addEventListener('resize', handleWindowSizeChange);
+          return () => {
+              window.removeEventListener('resize', handleWindowSizeChange);
+          }
+      }, []);
+  
+      return (width <= 768);
+  }  
+
     return (
         <div className="Kunnskapsportalen">
               <Container style={{display: 'flex', flexDirection: 'column'}}> 
                 <h1>Kunnskapsportalen</h1>
               <Row>
                 <Col>
-                    <h4>{!title ? "Alle kategorier" : title}</h4>
+                  <div className="top">
+                    
                     <InfoTopics infoTopics={infoTopics} allContent={allContent} filterContent={filterContent}/>
+                    <h4>{!title ? "Alle kategorier" : title}</h4>
+                  </div>
                   </Col>
               </Row>
                 

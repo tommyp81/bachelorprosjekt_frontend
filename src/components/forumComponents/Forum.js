@@ -11,6 +11,7 @@ import SearchPosts from "./SearchPosts.js";
 
 import SortPosts from './SortPosts'
 import { UserContext } from '../../UserContext'
+import SpinnerDiv from './SpinnerDiv.js';
 
 
 
@@ -143,7 +144,7 @@ const Forum = ({ posts, addPost, topics, subtopics, users, history, loading }) =
 
             <Container className="main">
               {/* {renderPosts} */}
-              {loading ? <Spinner /> :
+              {loading ? <SpinnerDiv /> :
               <Feed posts={currentPosts} users={users} topic={topics} subtopic={subtopics} maxLength={currentPosts.length}/>
               }
             </Container>

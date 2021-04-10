@@ -13,7 +13,7 @@ const FileLink = ({fileId}) => {
   }, [fileId])
 
   return (
-    <a href={host+`GetDocument/${fileId}`} >{fileInfo.fileName}</a>
+    <p><br/><b>Vedlegg: <a href={host+`GetDocument/${fileId}`} >{fileInfo.fileName}</a></b></p>
   )
 }
 
