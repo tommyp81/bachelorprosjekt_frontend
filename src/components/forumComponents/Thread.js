@@ -58,8 +58,8 @@ const Thread = ( { subtopics, topics, users, history, getPost, setPost }) => {
     })
 
     if(res.status === 200) {
-      setPost(post.id, {}, true)
       history.push("/Forum")
+      setPost(post.id, {}, true)
     } else {
       alert("ERROR")
     }
