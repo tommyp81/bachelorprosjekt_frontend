@@ -10,12 +10,11 @@ import './Feed.css'
 
 const Feed = ({ posts, users, topic, subtopic, maxLength, loading}) => {
 
-  const [likes, setLikes] = useState(0)
 
-  //if ({loading}) {
-    //return <h2>Laster inn...</h2>
-  //  return <SpinnerDiv/>
-  //}
+  if (posts.length === 0 && users.length === 0 && topic.length === 0 && subtopic.length === 0) {
+    console.log("HEI")
+    return <SpinnerDiv/>
+  }
 
 
   return (
@@ -33,7 +32,7 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading}) => {
               <Card.Title>{post.title}</Card.Title>
                 {topic.filter(topic => (topic.id === post.topicId)).map((filteredTopics, j) => (
                   <Card.Text key={j} className="float-left">
-                    {filteredTopics.title} - {subtopic?.find(st => st.id === post.subTopicId).title}
+                    {filteredTopics.title} - {subtopic.find(st => st.id === post.subTopicId)?.title}
                   </Card.Text>
                 ))}              
               <Card.Text className="float-right">

@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
-import { Button, Tabs, Tab, Accordion, Card, Image } from "react-bootstrap";
+import React from 'react';
+import { Button, Tabs, Tab, Accordion, Image } from "react-bootstrap";
 import "./Topics.css";
 import {host} from '../../App'
 
 const Topics = ({ topics, subtopics, topClick, subClick, topicFocus, subtopicFocus }) => {
 
+	const handleSelect = (eventKey) => {
+		if(eventKey === null) {
+			topClick("0")
+		} else {
+			topClick(eventKey)
+		}
+	}
 
 	return (
 		<div className="Topics">
@@ -20,11 +27,12 @@ const Topics = ({ topics, subtopics, topClick, subClick, topicFocus, subtopicFoc
 					</Accordion.Toggle>
 				</Accordion>
 
-				{topics.map((topics, i) => (
+				{topics.map((topics) => (
 
 					<Accordion
+						key={topics.id}
 						activeKey={topicFocus}
-						onSelect={topClick}>
+						onSelect={handleSelect}>
 
 						<Accordion.Toggle
 							eventKey={topics.id}
@@ -36,10 +44,9 @@ const Topics = ({ topics, subtopics, topClick, subClick, topicFocus, subtopicFoc
 							<div className="imgtitle">{topics.title}</div>
 						</Accordion.Toggle>
 
-						{subtopics.filter(subtopics => (subtopics.topicId === topics.id)).map((filteredSubtopics, i) => (
-							<Accordion.Collapse eventKey={topics.id}>
-								<Button 
-								key={i} 
+						{subtopics.filter(subtopics => (subtopics.topicId === topics.id)).map((filteredSubtopics) => (
+							<Accordion.Collapse eventKey={topics.id} key={filteredSubtopics.id}>
+								<Button  
 								title={filteredSubtopics.title} 
 								value={filteredSubtopics.id} 
 								onClick={subClick}

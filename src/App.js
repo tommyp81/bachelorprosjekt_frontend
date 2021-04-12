@@ -47,7 +47,7 @@ const App = () => {
     localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   const [topics, setTopics] = useState([]);
   const [subtopics, setSubtopics] = useState([]);
@@ -73,62 +73,56 @@ const App = () => {
 
   useEffect(() => {
     fetch(host+"posts")
-      .then((res) => res.json())
-      .then((data) => {
-        setPosts(data);
-      })
-      .catch(console.log);
+    .then((res) => res.json())
+    .then((data) => {
+      setPosts(data);
+    })
+    .catch(console.log);
 
     fetch(host+"SubTopics")
-      .then((res) => res.json())
-      .then((data) => {
-        setSubtopics(data);
-      })
-      .catch(console.log);
+    .then((res) => res.json())
+    .then((data) => {
+      setSubtopics(data);
+    })
+    .catch(console.log);
 
     fetch(host+"Topics")
-      .then((res) => res.json())
-      .then((data) => {
-        setTopics(data);
-      })
-      .catch(console.log);
+    .then((res) => res.json())
+    .then((data) => {
+      setTopics(data);
+    })
+    .catch(console.log);
 
     fetch(host+"Users")
-      .then((res) => res.json())
-      .then((data) => {
-        setUsers(data);
-      })
-      .catch(console.log);
+    .then((res) => res.json())
+    .then((data) => {
+      setUsers(data);
+    })
+    .catch(console.log);
 
-      fetch(host+"InfoTopics")
-      .then((res) => res.json())
-      .then((data) => {
-        setInfoTopics(data);
-      })
-      .catch(console.log);
+    fetch(host+"InfoTopics")
+    .then((res) => res.json())
+    .then((data) => {
+      setInfoTopics(data);
+    })
+    .catch(console.log);
 
-      fetch(host+"Videos")
-      .then((res) => res.json())
-      .then((data) => {
-        setVideos(data);
-      })
-      .catch(console.log);
+    fetch(host+"Videos")
+    .then((res) => res.json())
+    .then((data) => {
+      setVideos(data);
+    })
+    .catch(console.log);
 
-      fetch(host+"getdocuments")
-      .then((res) => res.json())
-      .then((data) => {
-        setDocuments(data);
-      })
-      .catch(console.log);
-      
-      sleep(1000).then(() => setLoading(false))
-      //setLoading(false)
-      
+    fetch(host+"getdocuments")
+    .then((res) => res.json())
+    .then((data) => {
+      setDocuments(data);
+    })
+    .catch(console.log);
+    // setLoading(false)
   }, []);
 
-   const sleep = (milliseconds) => {
-     return new Promise(resolve => setTimeout(resolve, milliseconds))
-   }
   
 
   // const updatePosts = async () => {
