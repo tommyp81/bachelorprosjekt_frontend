@@ -7,6 +7,7 @@ import FileLink from '../FileLink'
 import LikeButton from '../LikeButton'
 import EditPost from './EditPost'
 import {host} from '../../App'
+import SpinnerDiv from './SpinnerDiv'
 
 moment.locale('nb')
 
@@ -65,11 +66,15 @@ const Post = ({users, post, deletePost, commentsLength, setPost }) => {
     setPost(post.id, {like_Count: post.like_Count + num})
   }
 
+  // if(post == {}) {
+  //   return <SpinnerDiv />
+  // }
+
   return (
     <Card>
         <Card.Body>
           <div className="float-left">
-            <p>Postet av <b>{users && users.length && users.find(u => u.id === post.userId).username}</b> {moment(post.date).calendar()}</p>
+            <p>Postet av <b>{users && users.length && users.find(u => u.id === post.userId)?.username}</b> {moment(post.date).calendar()}</p>
           </div>
           <div className="float-right" hidden={!(user.id === post.userId)}>
             <EditPost post={post} edit={editPost}/> &nbsp;

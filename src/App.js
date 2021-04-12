@@ -151,7 +151,7 @@ const App = () => {
 
   // search for specific post by id(number) in posts and returns said post
   const getPost = (id) => {
-    return posts.find(post => post.id == id)
+    return posts.find(post => post.id == id) || {}
   }
 
 
