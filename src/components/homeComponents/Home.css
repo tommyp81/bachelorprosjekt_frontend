@@ -13,8 +13,16 @@ body, html {
     padding: 40px;
 }
 
-.Home .lastposts {
+.Home .toprow {
+    margin-bottom: 10px;
+}
+
+.Home .sortposts {
     margin-left: 10px;
+}
+
+.Home .lastposts {
+    
 }
 
 .Home .feedcol {

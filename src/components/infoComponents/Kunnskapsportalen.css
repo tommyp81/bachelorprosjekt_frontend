@@ -97,8 +97,21 @@
 
 .InfoTopics .btn  {
     margin: 2.5px;
-    
+    background-color: #28a745;
+    color: white;
+    font-size: 18px;
+    border: unset;
 }
+
+.InfoTopics .btn:hover,
+.InfoTopics .btn:focus, 
+.InfoTopics .btn:target, 
+.InfoTopics .btn:active {
+    background-color: #1b8b35;
+    box-shadow: unset;
+    border: unset;
+}
+
 
 .UploadFile {
 }

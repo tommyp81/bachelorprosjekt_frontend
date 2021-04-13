@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { Container, Row, Col, Image, Spinner } from "react-bootstrap";
 import Feed from "../forumComponents/Feed.js";
 import "./Home.css";
@@ -12,14 +12,21 @@ import Footer from "../mainComponents/Footer";
 import { Link } from "react-router-dom";
 import { Navbar } from "../navigation/navbar/navbar.jsx";
 import SpinnerDiv from "../forumComponents/SpinnerDiv.js";
+import SortPosts from "../forumComponents/SortPosts.js";
 
 const Home = ({ posts, topic, subtopic, users, loading }) => {
+
+  const [filteredPosts, setFilteredPosts] = useState([])
+
+  useEffect(() => {
+    setFilteredPosts(posts.slice(0).sort((d1, d2) => (moment(d2.date) - (moment(d1.date)))));
+  }, [posts])
 
   return (
     <div className="Home">
       <Container>
-        <Row>
-          <h5 className="lastposts">Siste poster i forumet</h5>
+        <Row className="toprow">
+          <div className="sortposts"><SortPosts post={filteredPosts} setFilteredPosts={setFilteredPosts}/></div>
         </Row>
         <Row xs={1} sm={1} lg={2}>
           <Col md={6} className="feedcol">
@@ -27,9 +34,7 @@ const Home = ({ posts, topic, subtopic, users, loading }) => {
               <SpinnerDiv />
             ) : (
               <Feed
-                posts={posts
-                  .slice(0)
-                  .sort((d1, d2) => moment(d2.date) - moment(d1.date))}
+                posts={filteredPosts}
                 users={users}
                 topic={topic}
                 subtopic={subtopic}
@@ -79,7 +84,6 @@ const Home = ({ posts, topic, subtopic, users, loading }) => {
           </Col>
         </Row>
       </Container>
-      <Footer />
     </div>
   );
 };

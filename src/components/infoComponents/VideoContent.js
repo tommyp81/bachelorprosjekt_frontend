@@ -5,6 +5,7 @@ import "./Kunnskapsportalen.css";
 
 const VideoContent = ({ videos, infoTopics, content }) => { 
   const [show, setShow] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -29,11 +30,9 @@ const VideoContent = ({ videos, infoTopics, content }) => {
               <h3 className="title">{filteredVideos.title}</h3><Link to="/Forum">Diskuter i forumet</Link>
               </div>
               </Card.Body>
-              </Card>
-              ))}
+              
 
-              {videos.map((filteredVideos) => (
-              <Modal show={show} onHide={handleClose} centered>
+              <Modal show={show} onHide={handleClose} centered >
                 <Modal.Header closeButton>
                   <Modal.Title>{filteredVideos.title}</Modal.Title>
                 </Modal.Header>
@@ -55,6 +54,7 @@ const VideoContent = ({ videos, infoTopics, content }) => {
                   </Button>
                 </Modal.Footer>
               </Modal>
+              </Card>
                ))}
             
       </div>
