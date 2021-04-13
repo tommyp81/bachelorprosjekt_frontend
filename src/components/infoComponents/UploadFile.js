@@ -9,51 +9,113 @@ import {
   Modal,
   Form,
 } from "react-bootstrap";
+import {Row, Col, Container} from "react-bootstrap";
+import "./Kunnskapsportalen.css";
 import FileDrop from "../FileDrop";
 import validator from "validator";
-const UploadFile = ({ infoTopics }) => {
+
+const UploadFile = () => {
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [validated, setValidated] = useState(false);
 
-  const validateUrl = (event) => {
+  const [id, setId] = useState("")
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
+
+  const regExp = /(.+?)(\/)(watch\x3Fv=)?(embed\/watch\x3Ffeature\=player_embedded\x26v=)?([a-zA-Z0-9_-]{11})/g;
+
+  /*const validateUrl = (event) => {
     if (validator.isURL(event)) {
       setValidated(true);
     } else {
       setErrorMessage("Ugyldig URL");
       setValidated(false);
     }
-  };
+  }*/
 
   const handleSubmit = (event) => {
-    const form = event.currentTarget;
+    /*const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
-    }
+    }*/
 
-    setValidated(true);
+    //setValidated(true);
+
+    const match = regExp.exec(id)
+    const matchString = match[match.length-1].toString()
+
+    const data = new Object();
+    data.youTubeId = matchString;
+    data.title = title;
+    data.description = description;
+    data.userId = 2;                     // SKAL IKKE VÆRE HARDKODET USERID
+    data.infoTopicId = 2;                // SKAL IKKE VÆRE HARDKODET INFOTOPICID
+    
+    console.log("Objektet:")
+    console.log(data)
 
     fetch('https://webforum.azurewebsites.net/videos', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(form)
-      .then(res => {
-        return res.json()
-      })
-      .then(data => console.log(data))
-      .catch(error => console.log())
-    })
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(res => {
+                return res.json()
+            })
+                .then(data => console.log(data))
+                .catch(error => console.log(error))
 
 
   };
 
   return (
-    <div className="UploadFile">
+    <div>
+      <Form>
+        <Form.Group>    
+        <Form.Control
+        type="text"
+        rows={1}
+        name="youTubeId"
+        value={id}
+        placeholder="Youtube ID"
+        onChange={e => setId(e.target.value)}
+        />
+        <Form.Control
+        type="text"
+        rows={1}
+        name="youTubeTitle"
+        value={title}
+        placeholder="Youtube Title"
+        onChange={e => setTitle(e.target.value)}
+        />
+        <Form.Control
+        type="text"
+        rows={1}
+        name="youTubeDescription"
+        value={description}
+        placeholder="Youtube Description"
+        onChange={e => setDescription(e.target.value)}
+        />
+        </Form.Group>
+        <Button className="float-right" type="submit" variant="success" onClick={handleSubmit}>
+        Send
+        </Button>
+      </Form>
+    </div>
+  );
+};
+
+export default UploadFile;
+
+
+
+    {/*<div className="UploadFile">
       <Button onClick={handleShow} variant="primary">
         Last opp
       </Button>
@@ -122,8 +184,6 @@ const UploadFile = ({ infoTopics }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
-  );
-};
+              </div>*/}
 
-export default UploadFile;
+
