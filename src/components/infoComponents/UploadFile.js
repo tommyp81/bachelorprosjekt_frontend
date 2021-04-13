@@ -14,11 +14,12 @@ import "./Kunnskapsportalen.css";
 import FileDrop from "../FileDrop";
 import validator from "validator";
 
-const UploadFile = () => {
+const UploadFile = ({infoTopics}) => {
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   const [errorMessage, setErrorMessage] = useState("");
   const [validated, setValidated] = useState(false);
 
@@ -75,41 +76,113 @@ const UploadFile = () => {
   };
 
   return (
-    <div>
-      <Form>
-        <Form.Group>    
-        <Form.Control
-        type="text"
-        rows={1}
-        name="youTubeId"
-        value={id}
-        placeholder="Youtube ID"
-        onChange={e => setId(e.target.value)}
-        />
-        <Form.Control
-        type="text"
-        rows={1}
-        name="youTubeTitle"
-        value={title}
-        placeholder="Youtube Title"
-        onChange={e => setTitle(e.target.value)}
-        />
-        <Form.Control
-        type="text"
-        rows={1}
-        name="youTubeDescription"
-        value={description}
-        placeholder="Youtube Description"
-        onChange={e => setDescription(e.target.value)}
-        />
-        </Form.Group>
-        <Button className="float-right" type="submit" variant="success" onClick={handleSubmit}>
-        Send
-        </Button>
-      </Form>
-    </div>
-  );
-};
+    <div className="UploadFile">
+      <Button onClick={handleShow} variant="primary">
+        Last opp
+      </Button>
+
+      <Modal show={show} onHide={handleClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Last opp ny...</Modal.Title>
+        </Modal.Header>
+
+
+
+        <Tabs defaultActiveKey="0">
+          <Tab title="Video" eventKey="0">
+            <Modal.Body>
+              <Form>
+                <Form.Group>    
+                <Form.Control
+                type="text"
+                rows={1}
+                name="youTubeId"
+                value={id}
+                placeholder="Youtube ID"
+                onChange={e => setId(e.target.value)}
+                />
+                <Form.Control
+                type="text"
+                rows={1}
+                name="youTubeTitle"
+                value={title}
+                placeholder="Youtube Title"
+                onChange={e => setTitle(e.target.value)}
+                />
+                <Form.Control
+                type="text"
+                rows={1}
+                name="youTubeDescription"
+                value={description}
+                placeholder="Youtube Description"
+                onChange={e => setDescription(e.target.value)}
+                />
+                </Form.Group>
+                <Button variant="danger" onClick={handleClose}>
+                  Avbryt
+                </Button>
+                <Button className="float-right" type="submit" variant="success" onClick={handleSubmit}>
+                Send
+                </Button>
+              </Form>
+            </Modal.Body>
+          </Tab>
+
+
+
+          <Tab title="Dokument" eventKey="1">
+            <Modal.Body>
+              <FileDrop />
+              <Form noValidate validated={validated} onSubmit={handleSubmit}>
+            <Form.Label>Tittel</Form.Label>
+            <Form.Control type="input" required></Form.Control>
+            <Form.Control.Feedback
+              type="invalid"
+              style={{ fontSize: 11, fontWeight: "bold", color: "red" }}
+            >
+              Tittel kreves!
+            </Form.Control.Feedback>
+            <br/>
+            <Form.Label>Beskrivelse</Form.Label>
+            <Form.Control as="textarea" rows={3} required></Form.Control>
+            <Form.Control.Feedback
+              type="invalid"
+              style={{ fontSize: 11, fontWeight: "bold", color: "red" }}
+            >
+              Beskrivelse kreves!
+            </Form.Control.Feedback>
+            <br/>
+            <Form.Control as="select" custom>
+              {infoTopics.map((mappedInfoTopics) => (
+                <option>{mappedInfoTopics.title}</option>
+              ))}
+            </Form.Control>
+            <Button variant="danger" onClick={handleClose}>
+            Avbryt
+          </Button>
+          </Form>
+
+
+
+            </Modal.Body>
+          </Tab>
+        </Tabs>
+        <Modal.Body>
+          
+        </Modal.Body>{/** 
+        <Modal.Footer>
+          <Button variant="danger" onClick={handleClose}>
+            Avbryt
+          </Button>
+          
+          <Button variant="primary" type="submit" onClick={handleSubmit}>
+            Last opp
+          </Button>
+        </Modal.Footer>*/}
+      </Modal>
+              </div>
+  )
+              }
 
 export default UploadFile;
 
@@ -127,18 +200,36 @@ export default UploadFile;
         <Tabs defaultActiveKey="0">
           <Tab title="Video" eventKey="0">
             <Modal.Body>
-              <Form
-                noValidate
-                validated={validated}
-                onChange={(e) => validateUrl(e.target.value)}
-              >
-                <Form.Label>Lim inn YouTube-URL</Form.Label>
-                <Form.Control type="input" required></Form.Control>
-                <span
-                  style={{ fontSize: 11, fontWeight: "bold", color: "red" }}
-                >
-                  {errorMessage}
-                </span>
+              <Form>
+                <Form.Group>    
+                <Form.Control
+                type="text"
+                rows={1}
+                name="youTubeId"
+                value={id}
+                placeholder="Youtube ID"
+                onChange={e => setId(e.target.value)}
+                />
+                <Form.Control
+                type="text"
+                rows={1}
+                name="youTubeTitle"
+                value={title}
+                placeholder="Youtube Title"
+                onChange={e => setTitle(e.target.value)}
+                />
+                <Form.Control
+                type="text"
+                rows={1}
+                name="youTubeDescription"
+                value={description}
+                placeholder="Youtube Description"
+                onChange={e => setDescription(e.target.value)}
+                />
+                </Form.Group>
+                <Button className="float-right" type="submit" variant="success" onClick={handleSubmit}>
+                Send
+                </Button>
               </Form>
             </Modal.Body>
           </Tab>
