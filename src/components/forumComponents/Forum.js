@@ -67,24 +67,6 @@ const Forum = ({
     })
     .slice(indexOfFirstPost, indexOfLastPost);
 
-  const handleLoadMore = (e) => {
-    switch (e) {
-      case "option-10":
-        setPostsPerPage(postsPerPage);
-        break;
-      case "option-25":
-        setPostsPerPage(postsPerPage + 15);
-        break;
-      case "option-50":
-        setPostsPerPage(postsPerPage + 25);
-        break;
-      case "option-100":
-        setPostsPerPage(postsPerPage + 50);
-        break;
-      default:
-        setPostsPerPage(null);
-    }
-  };
   const paginate = (pageNum) => setCurrentPage(pageNum);
   const nextPage = () => setCurrentPage(currentPage + 1);
   const prevPage = () => setCurrentPage(currentPage - 1);
@@ -230,7 +212,6 @@ const Forum = ({
                     {[10, 25, 50, 100].map((pageSize) => (
                       <Dropdown.Item
                         value={pageSize}
-                        onClick={handleLoadMore}
                         onSelect={(e) => setPostsPerPage(pageSize)}
                       >
                         Vis {pageSize} poster per side
