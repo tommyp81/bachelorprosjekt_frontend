@@ -69,7 +69,6 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users }) => {
                     <Tab eventKey="1" title="Vis alt" className="tab" id="hidden">
                       <UploadFile infoTopics={infoTopics}/>
                       <Col xs={6} className="videocol"><VideoContent videos={videoContent} infoTopics={infoTopics}/></Col>
-                      <div className="divider"></div>
                       <Col xs={6} className="documentcol"><DocumentContent documents={documentContent} infoTopics={infoTopics}/></Col>
                       
                     </Tab>

@@ -5,6 +5,14 @@ import "./Kunnskapsportalen.css";
 
 const DocumentContent = ({ documents, infoTopics }) => { 
 
+  function titleLength(str) {
+    if (str.length > 25) {
+      return str.substring(0, 25) + "..."
+    } else {
+      return str;
+    }
+  }
+
     return (
         <div className="DocumentContent">
        {documents.map((mappedDocuments, i) => (
@@ -15,7 +23,7 @@ const DocumentContent = ({ documents, infoTopics }) => {
             </svg></div>
             <div className="docright">
             {infoTopics.filter(infoTopics => (infoTopics.id === mappedDocuments.infoTopicId)).map((filteredTopics, i) => (
-            <p className="toptext">Delt i {filteredTopics.title}</p>))}
+            <p className="toptext">Delt i {titleLength(filteredTopics.title)}</p>))}
             <h3 className="title">{mappedDocuments.fileName}</h3>
             
             <Link to="/Forum">Diskuter i forumet</Link></div>
