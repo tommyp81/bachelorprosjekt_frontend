@@ -57,8 +57,8 @@ const UploadFile = ({infoTopics, documents}) => {
     data.youTubeId = matchString;
     data.title = title;
     data.description = description;
-    data.userId = 2;                                  // SKAL IKKE VÆRE HARDKODET USERID
-    data.infoTopicId = 2; //infoTopicId               // SKAL IKKE VÆRE HARDKODET INFOTOPICID
+    data.userId = 2;    // SKAL IKKE VÆRE HARDKODET USERID
+    data.infoTopicId = infoTopicId; 
     
     console.log("Objektet:")
     console.log(data)
@@ -85,13 +85,15 @@ const UploadFile = ({infoTopics, documents}) => {
   const handleSubmitDocument = (event) => {
     let formData = new FormData();
       formData.append('File', file)
-      formData.append('infoTopicId', 2) //skal ikke være hardkodet
-
+      formData.append('userId', 2) //skal ikke være hardkodet
+      formData.append('infoTopicId', infoTopicId)
     fetch('https://webforum.azurewebsites.net/UploadDocument', {
       method: 'POST',
       body: formData
       })
     }
+
+    console.log(infoTopicId)
 
   return (
     <div className="UploadFile">
@@ -103,8 +105,6 @@ const UploadFile = ({infoTopics, documents}) => {
         <Modal.Header closeButton>
           <Modal.Title>Last opp ny...</Modal.Title>
         </Modal.Header>
-
-
 
         <Tabs defaultActiveKey="0">
           <Tab title="Video" eventKey="0">
@@ -139,10 +139,10 @@ const UploadFile = ({infoTopics, documents}) => {
                 <Form.Control 
                 as="select" 
                 name="infoTopicId" 
+                onClick={e => setInfoTopicId(e.target.value)}
                 custom>
                   {infoTopics.map((mappedInfoTopics) => (
-                    <option value={mappedInfoTopics.id} 
-                    onChange={e => setInfoTopicId(e.target.value)}> 
+                    <option value={mappedInfoTopics.id}> 
                     {mappedInfoTopics.title}
                     </option>
                   ))}
@@ -165,16 +165,22 @@ const UploadFile = ({infoTopics, documents}) => {
 
           <Tab title="Dokument" eventKey="1">
             <Modal.Body>
-            <Form noValidate validated={validated} onSubmit={handleSubmitDocument}> 
+            <Form noValidate validated={validated}> 
             <Form.Group>
             <Form.Label>Velg fil</Form.Label>  
             <FileDrop file={file} setFile={setFile}/>
             <Form.Label>Velg kategori</Form.Label>  
-            <Form.Control as="select" custom>
-              {infoTopics.map((mappedInfoTopics) => (
-                <option>{mappedInfoTopics.title}</option>
-              ))}
-            </Form.Control>
+            <Form.Control 
+                as="select" 
+                name="infoTopicId" 
+                onClick={e => setInfoTopicId(e.target.value)}
+                custom>
+                  {infoTopics.map((mappedInfoTopics) => (
+                    <option value={mappedInfoTopics.id}> 
+                    {mappedInfoTopics.title}
+                    </option>
+                  ))}
+                </Form.Control>
             </Form.Group>
             <div className="float-right">
                 <Button variant="danger" onClick={handleClose}>
