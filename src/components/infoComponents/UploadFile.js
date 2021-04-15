@@ -14,7 +14,7 @@ import "./Kunnskapsportalen.css";
 import FileDrop from "../FileDrop";
 import validator from "validator";
 
-const UploadFile = ({infoTopics}) => {
+const UploadFile = ({infoTopics, documents}) => {
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -22,13 +22,7 @@ const UploadFile = ({infoTopics}) => {
 
   const [errorMessage, setErrorMessage] = useState("");
   const [validated, setValidated] = useState(false);
-
-  const [id, setId] = useState("")
-  const [title, setTitle] = useState("")
-  const [description, setDescription] = useState("")
-
-  const regExp = /(.+?)(\/)(watch\x3Fv=)?(embed\/watch\x3Ffeature\=player_embedded\x26v=)?([a-zA-Z0-9_-]{11})/g;
-
+  
   /*const validateUrl = (event) => {
     if (validator.isURL(event)) {
       setValidated(true);
@@ -38,7 +32,16 @@ const UploadFile = ({infoTopics}) => {
     }
   }*/
 
-  const handleSubmit = (event) => {
+  const [id, setId] = useState("")
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
+  const [userId, setUserId] = useState("")
+  const [infoTopicId, setInfoTopicId] = useState("")
+
+  //Video
+  const regExp = /(.+?)(\/)(watch\x3Fv=)?(embed\/watch\x3Ffeature\=player_embedded\x26v=)?([a-zA-Z0-9_-]{11})/g;
+
+  const handleSubmitVideo = (event) => {
     /*const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -54,8 +57,8 @@ const UploadFile = ({infoTopics}) => {
     data.youTubeId = matchString;
     data.title = title;
     data.description = description;
-    data.userId = 2;                     // SKAL IKKE VÆRE HARDKODET USERID
-    data.infoTopicId = 2;                // SKAL IKKE VÆRE HARDKODET INFOTOPICID
+    data.userId = 2;                                  // SKAL IKKE VÆRE HARDKODET USERID
+    data.infoTopicId = 2; //infoTopicId               // SKAL IKKE VÆRE HARDKODET INFOTOPICID
     
     console.log("Objektet:")
     console.log(data)
@@ -74,6 +77,21 @@ const UploadFile = ({infoTopics}) => {
 
 
   };
+  
+  //Dokument 
+  
+  const [file, setFile] = useState();
+
+  const handleSubmitDocument = (event) => {
+    let formData = new FormData();
+      formData.append('File', file)
+      formData.append('infoTopicId', 2) //skal ikke være hardkodet
+
+    fetch('https://webforum.azurewebsites.net/UploadDocument', {
+      method: 'POST',
+      body: formData
+      })
+    }
 
   return (
     <div className="UploadFile">
@@ -92,38 +110,53 @@ const UploadFile = ({infoTopics}) => {
           <Tab title="Video" eventKey="0">
             <Modal.Body>
               <Form>
-                <Form.Group>    
+                <Form.Group> 
+                <Form.Label>YouTube-URL</Form.Label>   
                 <Form.Control
                 type="text"
                 rows={1}
                 name="youTubeId"
                 value={id}
-                placeholder="Youtube ID"
                 onChange={e => setId(e.target.value)}
-                />
+                /><br />
+                <Form.Label>Tittel</Form.Label>
                 <Form.Control
                 type="text"
                 rows={1}
                 name="youTubeTitle"
                 value={title}
-                placeholder="Youtube Title"
                 onChange={e => setTitle(e.target.value)}
-                />
+                /><br />
+                <Form.Label>Beskrivelse</Form.Label>
                 <Form.Control
-                type="text"
-                rows={1}
+                as="textarea" 
+                rows={3} 
                 name="youTubeDescription"
                 value={description}
-                placeholder="Youtube Description"
                 onChange={e => setDescription(e.target.value)}
-                />
+                /><br/>
+                <Form.Label>Velg kategori</Form.Label>  
+                <Form.Control 
+                as="select" 
+                name="infoTopicId" 
+                custom>
+                  {infoTopics.map((mappedInfoTopics) => (
+                    <option value={mappedInfoTopics.id} 
+                    onChange={e => setInfoTopicId(e.target.value)}> 
+                    {mappedInfoTopics.title}
+                    </option>
+                  ))}
+                </Form.Control>
                 </Form.Group>
+                
+              <div className="float-right">
                 <Button variant="danger" onClick={handleClose}>
                   Avbryt
+                </Button>&nbsp;
+                <Button type="submit" variant="primary" onClick={handleSubmitVideo}>
+                  Send
                 </Button>
-                <Button className="float-right" type="submit" variant="success" onClick={handleSubmit}>
-                Send
-                </Button>
+              </div>
               </Form>
             </Modal.Body>
           </Tab>
@@ -132,34 +165,26 @@ const UploadFile = ({infoTopics}) => {
 
           <Tab title="Dokument" eventKey="1">
             <Modal.Body>
-              <FileDrop />
-              <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <Form.Label>Tittel</Form.Label>
-            <Form.Control type="input" required></Form.Control>
-            <Form.Control.Feedback
-              type="invalid"
-              style={{ fontSize: 11, fontWeight: "bold", color: "red" }}
-            >
-              Tittel kreves!
-            </Form.Control.Feedback>
-            <br/>
-            <Form.Label>Beskrivelse</Form.Label>
-            <Form.Control as="textarea" rows={3} required></Form.Control>
-            <Form.Control.Feedback
-              type="invalid"
-              style={{ fontSize: 11, fontWeight: "bold", color: "red" }}
-            >
-              Beskrivelse kreves!
-            </Form.Control.Feedback>
-            <br/>
+            <Form noValidate validated={validated} onSubmit={handleSubmitDocument}> 
+            <Form.Group>
+            <Form.Label>Velg fil</Form.Label>  
+            <FileDrop file={file} setFile={setFile}/>
+            <Form.Label>Velg kategori</Form.Label>  
             <Form.Control as="select" custom>
               {infoTopics.map((mappedInfoTopics) => (
                 <option>{mappedInfoTopics.title}</option>
               ))}
             </Form.Control>
-            <Button variant="danger" onClick={handleClose}>
-            Avbryt
-          </Button>
+            </Form.Group>
+            <div className="float-right">
+                <Button variant="danger" onClick={handleClose}>
+                  Avbryt
+                </Button>&nbsp;
+                <Button type="submit" variant="primary" onClick={handleSubmitDocument}>
+                  Send
+                </Button>
+              </div>
+             
           </Form>
 
 

@@ -13,7 +13,7 @@ function NewComment({createNew, pId}) {
   const [file, setFile] = useState();
 
   function validateForm() {
-    return content.length > 0;
+    return content.length > 0 && content.length <= 4000;
   }
 
   function submitComment(event) {

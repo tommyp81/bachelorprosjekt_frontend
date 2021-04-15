@@ -67,17 +67,17 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users }) => {
                 <Col lg={12} className="maincontent">
                   <Tabs defaultActiveKey="1" className="tabs" as={Button} variant="pills">
                     <Tab eventKey="1" title="Vis alt" className="tab" id="hidden">
-                      <UploadFile infoTopics={infoTopics}/>
+                      <UploadFile infoTopics={infoTopics} documents={documents}/>
                       <Col xs={6} className="videocol"><VideoContent videos={videoContent} infoTopics={infoTopics}/></Col>
                       <Col xs={6} className="documentcol"><DocumentContent documents={documentContent} infoTopics={infoTopics}/></Col>
                       
                     </Tab>
                     <Tab eventKey="2" title="Videoer" className="tab">
-                      <UploadFile infoTopics={infoTopics}/>
+                    <UploadFile infoTopics={infoTopics} documents={documents}/>
                      <VideoContent videos={videoContent} infoTopics={infoTopics}/>
                     </Tab>
                     <Tab eventKey="3" title="Dokumenter" className="tab">
-                      <UploadFile infoTopics={infoTopics}/>
+                    <UploadFile infoTopics={infoTopics} documents={documents}/>
                       <DocumentContent documents={documentContent} infoTopics={infoTopics}/>
                     </Tab>
                   </Tabs>

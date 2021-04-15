@@ -94,7 +94,7 @@ const Comment = ({users, initComment, deleteComment}) => {
         <Card.Text><br /><br />
           {comment.content}
           <br/>
-          {comment.documentId ? <FileLink fileId={comment.documentId} /> : ""}
+          {comment.documentId ? <p><br/>Vedlegg: <b><FileLink fileId={comment.documentId} /></b></p> : ""}
           <div className="float-right"> 
           {comment.like_Count} <LikeButton id={comment.id} liked={liked} setLiked={setLiked} isPost={false} updateCommentLike={setCommentLikeCount} />
         </div>

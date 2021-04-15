@@ -86,7 +86,7 @@ const Post = ({users, post, deletePost, commentsLength, setPost }) => {
           <Card.Text>
             {post.content}
             <br/>
-            {post.documentId ? <FileLink fileId={post.documentId} /> : ""}
+            {post.documentId ? <p><br/>Vedlegg: <b><FileLink fileId={post.documentId} /></b></p>  : ""}
           </Card.Text>
             <div className="float-right"> 
               {post.like_Count} <LikeButton id={post.id} liked={liked} setLiked={setLiked} isPost={true} updatePostLike={updatePostLike}/> &nbsp;

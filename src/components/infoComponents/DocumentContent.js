@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {Button, Row, Col, Card} from "react-bootstrap";
 import {Link} from 'react-router-dom'
+import FileLink from '../FileLink';
 import "./Kunnskapsportalen.css";
 
 const DocumentContent = ({ documents, infoTopics }) => { 
@@ -23,8 +24,8 @@ const DocumentContent = ({ documents, infoTopics }) => {
             </svg></div>
             <div className="docright">
             {infoTopics.filter(infoTopics => (infoTopics.id === mappedDocuments.infoTopicId)).map((filteredTopics, i) => (
-            <p className="toptext">Delt i {titleLength(filteredTopics.title)}</p>))}
-            <h3 className="title">{mappedDocuments.fileName}</h3>
+            <div className="toptext">Delt i {filteredTopics.title}</div>))}<br/>
+            <h3 className="title">{titleLength(<FileLink fileId={mappedDocuments.id} />)}</h3>
             
             <Link to="/Forum">Diskuter i forumet</Link></div>
           </Card.Body>
