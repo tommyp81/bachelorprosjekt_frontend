@@ -3,8 +3,6 @@ import { Container, Row, Col, Image, Spinner } from "react-bootstrap";
 import Feed from "../forumComponents/Feed.js";
 import "./Home.css";
 import moment from "moment";
-import ImgKunnskap from "../../assets/images/Illustrasjon.ipad.jpg";
-import ImgForum from "../../assets/images/kategori.kompetanse.jpg";
 
 import Footer from "../mainComponents/Footer";
 //import Header from '../mainComponents/Header'
