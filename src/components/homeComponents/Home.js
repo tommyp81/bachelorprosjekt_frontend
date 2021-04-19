@@ -24,7 +24,8 @@ const Home = ({ posts, topic, subtopic, users, loading }) => {
     <div className="Home">
       <Container>
         <Row className="toprow">
-          <div className="sortposts"><SortPosts post={filteredPosts} setFilteredPosts={setFilteredPosts}/></div>
+          <Col><div className="sortposts"><SortPosts post={filteredPosts} setFilteredPosts={setFilteredPosts}/></div></Col>
+          <Col className="hidden"></Col>
         </Row>
         <Row xs={1} sm={1} lg={2}>
           <Col md={6} className="feedcol">
