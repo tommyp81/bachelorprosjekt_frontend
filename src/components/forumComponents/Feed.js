@@ -97,7 +97,7 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
                   className="ml-2 mr-2 mb-1"
                 />
               </Card.Text>
-              <Card.Text className="float-right">
+              <Card.Text className="float-left">
                 {getText(post.content)}
               </Card.Text>
             </Card.Body>
