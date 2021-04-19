@@ -13,6 +13,7 @@ import {Row, Col, Container} from "react-bootstrap";
 import "./Kunnskapsportalen.css";
 import FileDrop from "../FileDrop";
 import validator from "validator";
+import { host } from '../../App'
 
 const UploadFile = ({infoTopics, documents}) => {
 
@@ -63,7 +64,7 @@ const UploadFile = ({infoTopics, documents}) => {
     console.log("Objektet:")
     console.log(data)
 
-    fetch('https://webforum.azurewebsites.net/videos', {
+    fetch(host+'Videos', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -87,7 +88,7 @@ const UploadFile = ({infoTopics, documents}) => {
       formData.append('File', file)
       formData.append('userId', 2) //skal ikke være hardkodet
       formData.append('infoTopicId', infoTopicId)
-    fetch('https://webforum.azurewebsites.net/UploadDocument', {
+    fetch(host+'UploadDocument', {
       method: 'POST',
       body: formData
       })
