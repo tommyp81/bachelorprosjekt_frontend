@@ -12,13 +12,12 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
   const [ReadMore, setReadMore] = useState(false);
   const getText = (content) => {
     if (content.length <= 150) return content;
-
     if (content.length > 150 && ReadMore) {
       return (
         <>
           <Card.Text>
             {content}
-            <Link variant="link" onClick={() => setReadMore(false)}>
+            <Link size="sm" variant="link" onClick={() => setReadMore(false)}>
               {" "}
               Les Mindre
             </Link>
@@ -26,13 +25,12 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
         </>
       );
     }
-
     if (content.length > 150) {
       return (
         <>
           <Card.Text>
             {content.slice(0, 150)}
-            <Link variant="link" onClick={() => setReadMore(true)}>
+            <Link size="sm" variant="link" onClick={() => setReadMore(true)}>
               {" "}
               ... Les Mer
             </Link>
@@ -97,6 +95,7 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
                   className="ml-2 mr-2 mb-1"
                 />
               </Card.Text>
+              <br />
               <Card.Text className="float-left">
                 {getText(post.content)}
               </Card.Text>
