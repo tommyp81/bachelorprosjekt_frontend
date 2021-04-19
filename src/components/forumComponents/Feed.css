@@ -1,45 +1,40 @@
 .Feed {
-    
 }
 
 .Feed .card {
-    border: none;
-    border-radius: 0px;
-    border-bottom: 1px solid rgb(209, 209, 209);
-    padding-bottom: 15px;
-    
+  border: none;
+  border-radius: 0px;
+  border-bottom: 1px solid rgb(209, 209, 209);
+  padding-bottom: 15px;
 }
-
 
 .Feed .card:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
-
 .Feed .subtoptitle {
-    font-size: 16px;
-    color: grey;
+  font-size: 16px;
+  color: grey;
 }
 
 .Feed .float-left {
-    font-size: 16px;
-    color: grey;
+  margin: 0;
+  font-size: 16px;
+  color: grey;
 }
 
 @media (max-width: 768px) {
-    
-    .Feed .card-title {
-        margin-left: -10px;
-        font-size: 20px;
-    }
+  .Feed .card-title {
+    margin-left: -10px;
+    font-size: 20px;
+  }
 
-    .Feed .card-text {
-        margin-left: -10px;
-        font-size: 14px;
-    }
+  .Feed .card-text {
+    margin-left: -10px;
+    font-size: 14px;
+  }
 
-    .Feed .card:last-child {
-        border-bottom: 1px solid rgb(209, 209, 209);
-    }
-
+  .Feed .card:last-child {
+    border-bottom: 1px solid rgb(209, 209, 209);
+  }
 }
