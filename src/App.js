@@ -33,7 +33,7 @@ import Backdrop from "./components/NavigationCompoonent/Backdrop/Backdrop";
 // https://webforum.azurewebsites.net/answers
 // https://webforum.azurewebsites.net/users
 
-export const host = "https://localhost:44361/";
+export const host = "https://webforum.azurewebsites.net/";
 
 const App = () => {
   const history = useHistory();
