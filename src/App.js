@@ -33,7 +33,7 @@ import Backdrop from "./components/NavigationCompoonent/Backdrop/Backdrop";
 // https://webforum.azurewebsites.net/answers
 // https://webforum.azurewebsites.net/users
 
-export const host = "https://webforum.azurewebsites.net/";
+export const host = "https://localhost:44361/";
 
 const App = () => {
   const history = useHistory();
@@ -217,6 +217,7 @@ const App = () => {
               videos={videos}
               documents={documents}
               users={users}
+              addPost={addPost}
             />
             <ProtectedRoute
               exact

@@ -42,6 +42,9 @@ const Login = ({ history }) => {
       case "charlotte":
         setUser({ id: 7, username: "charlotte", loggedIn: true });
         break;
+      case "admin":
+        setUser({ id: 8, username: "admin", loggedIn: true});
+        break;
       default:
         break;
     }
@@ -89,6 +92,7 @@ const Login = ({ history }) => {
                   onChange={(e) => setUname(e.target.value)}
                 >
                   <option value="test">test</option>
+                  <option value="admin">admin</option>
                   <option value="tommy">tommy</option>
                   <option value="henrik">henrik</option>
                   <option value="erik">erik</option>

@@ -15,12 +15,12 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
     if (content.length > 150 && ReadMore) {
       return (
         <>
-          <Card.Text>
+          <Card.Text className="float-left">
             {content}
-            <Link size="sm" variant="link" onClick={() => setReadMore(false)}>
+            <Button style={{outline: 'none', boxShadow: 'none'}} size="sm" variant="link" onClick={() => setReadMore(false)}>
               {" "}
               Les Mindre
-            </Link>
+            </Button>
           </Card.Text>
         </>
       );
@@ -28,12 +28,12 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
     if (content.length > 150) {
       return (
         <>
-          <Card.Text>
+          <Card.Text className="float-left">
             {content.slice(0, 150)}
-            <Link size="sm" variant="link" onClick={() => setReadMore(true)}>
+            <Button style={{outline: 'none', boxShadow: 'none'}} size="sm" variant="link" onClick={() => setReadMore(true)}>
               {" "}
               ... Les Mer
-            </Link>
+            </Button>
           </Card.Text>
         </>
       );
@@ -53,11 +53,8 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
   return (
     <div className="Feed">
       {posts.slice(0, maxLength).map((post, i) => (
-        <Card key={i}>
-          <Link
-            to={`/forum/${post.id}`}
-            style={{ textDecoration: "none", color: "#000000" }}
-          >
+        <Card key={i} style={{color: "#000000"}}>
+          
             <Card.Body>
               <div className="float-left">
                 {users
@@ -71,7 +68,12 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
               </div>
               <br />
               <br />
-              <Card.Title>{post.title}</Card.Title>
+              <Link
+                to={`/forum/${post.id}`}
+                style={{ textDecoration: "none", color: "#000000" }}
+              >
+                <Card.Title>{post.title}</Card.Title>
+              </Link>
               {topic
                 .filter((topic) => topic.id === post.topicId)
                 .map((filteredTopics, j) => (
@@ -83,7 +85,7 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
               <Card.Text className="float-right">
                 {post.like_Count}{" "}
                 <FaThumbsUp
-                  className="like ml-1 mr-1 mb-2"
+                  className="ml-1 mr-1 mb-2"
                   color="grey"
                   size={18}
                 />{" "}
@@ -96,11 +98,8 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
                 />
               </Card.Text>
               <br />
-              <Card.Text className="float-left">
-                {getText(post.content)}
-              </Card.Text>
+              {getText(post.content)}
             </Card.Body>
-          </Link>
         </Card>
       ))}
     </div>

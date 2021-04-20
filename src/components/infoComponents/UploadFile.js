@@ -15,7 +15,7 @@ import FileDrop from "../FileDrop";
 import validator from "validator";
 import { host } from '../../App'
 
-const UploadFile = ({infoTopics, documents}) => {
+const UploadFile = ({infoTopics, documents, setVideos, setDocuments, addPost}) => {
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -42,7 +42,13 @@ const UploadFile = ({infoTopics, documents}) => {
   //Video
   const regExp = /(.+?)(\/)(watch\x3Fv=)?(embed\/watch\x3Ffeature\=player_embedded\x26v=)?([a-zA-Z0-9_-]{11})/g;
 
+
   const handleSubmitVideo = (event) => {
+    event.preventDefault();
+    if(infoTopicId == 0) {
+      alert("Ikke valgt kategori")
+      return;
+    }
     /*const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -58,25 +64,35 @@ const UploadFile = ({infoTopics, documents}) => {
     data.youTubeId = matchString;
     data.title = title;
     data.description = description;
-    data.userId = 2;    // SKAL IKKE VÆRE HARDKODET USERID
+    data.userId = 8;    // SKAL IKKE VÆRE HARDKODET USERID
     data.infoTopicId = infoTopicId; 
     
     console.log("Objektet:")
     console.log(data)
 
     fetch(host+'Videos', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            }).then(res => {
-                return res.json()
-            })
-                .then(data => console.log(data))
-                .catch(error => console.log(error))
-
-
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    }).then(res => {
+      return res.json()
+    })
+    .then(data => {
+      console.log(data)
+      setVideos(current => [...current, data])
+    })
+    .catch(error => console.log(error))
+    
+    // addPost({ 
+    //   title, 
+    //   content: description,
+    //   userId: 8, 
+    //   subTopicId: 1, 
+    //   topicId: infoTopicId
+    // })
+    handleClose();
   };
   
   //Dokument 
@@ -84,17 +100,32 @@ const UploadFile = ({infoTopics, documents}) => {
   const [file, setFile] = useState();
 
   const handleSubmitDocument = (event) => {
+    event.preventDefault();
+    if(infoTopicId == 0) {
+      alert("Ikke valgt kategori")
+      return;
+    }
     let formData = new FormData();
-      formData.append('File', file)
-      formData.append('userId', 2) //skal ikke være hardkodet
-      formData.append('infoTopicId', infoTopicId)
+    formData.append('File', file)
+    formData.append('userId', 8) //skal ikke være hardkodet
+    formData.append('infoTopicId', infoTopicId)
     fetch(host+'UploadDocument', {
       method: 'POST',
       body: formData
-      })
-    }
-
+    })
+    .then(res => {
+      return res.json();
+    })
+    .then(data => {
+      setDocuments(current => [...current, data]);
+    })
+    .catch(error => console.log(error))
     console.log(infoTopicId)
+    handleClose();
+  }
+
+    
+    
 
   return (
     <div className="UploadFile">
@@ -139,11 +170,14 @@ const UploadFile = ({infoTopics, documents}) => {
                 <Form.Label>Velg kategori</Form.Label>  
                 <Form.Control 
                 as="select" 
-                name="infoTopicId" 
-                onClick={e => setInfoTopicId(e.target.value)}
+                onChange={e => {
+                  console.log(e.target.value)
+                  setInfoTopicId(e.target.value)
+                }}
                 custom>
-                  {infoTopics.map((mappedInfoTopics) => (
-                    <option value={mappedInfoTopics.id}> 
+                  <option value="0">Kategori...</option>
+                  {infoTopics.map((mappedInfoTopics, i) => (
+                    <option key={i} value={mappedInfoTopics.id}> 
                     {mappedInfoTopics.title}
                     </option>
                   ))}
@@ -172,16 +206,19 @@ const UploadFile = ({infoTopics, documents}) => {
             <FileDrop file={file} setFile={setFile}/>
             <Form.Label>Velg kategori</Form.Label>  
             <Form.Control 
-                as="select" 
-                name="infoTopicId" 
-                onClick={e => setInfoTopicId(e.target.value)}
-                custom>
-                  {infoTopics.map((mappedInfoTopics) => (
-                    <option value={mappedInfoTopics.id}> 
-                    {mappedInfoTopics.title}
-                    </option>
-                  ))}
-                </Form.Control>
+              as="select" 
+              onChange={e => {
+                console.log(e.target.value)
+                setInfoTopicId(e.target.value)
+              }}
+              custom>
+                <option value="0">Kategori...</option>
+                {infoTopics.map((mappedInfoTopics, i) => (
+                  <option key={i} value={mappedInfoTopics.id}> 
+                  {mappedInfoTopics.title}
+                  </option>
+                ))}
+            </Form.Control>
             </Form.Group>
             <div className="float-right">
                 <Button variant="danger" onClick={handleClose}>
