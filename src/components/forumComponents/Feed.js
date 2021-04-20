@@ -46,7 +46,7 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
     topic.length === 0 &&
     subtopic.length === 0
   ) {
-    console.log("HEI");
+    // console.log("HEI");
     return <SpinnerDiv />;
   }
 
