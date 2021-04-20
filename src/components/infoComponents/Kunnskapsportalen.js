@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { Component, useState, useEffect, useContext } from 'react';
 import {Link} from 'react-router-dom'
 
 import {Row, Col, Container, Tabs, Tab, Card, Button, Image} from "react-bootstrap";
@@ -7,8 +7,11 @@ import UploadFile from "./UploadFile.js";
 import VideoContent from "./VideoContent.js"
 import DocumentContent from "./DocumentContent.js"
 import "./Kunnskapsportalen.css";
+import { UserContext } from '../../UserContext.js';
  
-const Kunnskapsportalen = ({ infoTopics, videos, documents, users }) => {
+const Kunnskapsportalen = ({ infoTopics, videos, documents, users, addPost }) => {
+
+  const {user} = useContext(UserContext);
  
     const [videoContent, setVideoContent] = useState([])
     const [documentContent, setDocumentContent] = useState([])
@@ -17,7 +20,7 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users }) => {
     useEffect(() => {
       setVideoContent(videos)
       setDocumentContent(documents)
-    }, [videos] && [documents])
+    }, [videos, documents])
 
     const filterContent = (e) => {
       let value = e.target.value;
@@ -65,20 +68,20 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users }) => {
                 
               <Row>
                 <Col lg={12} className="maincontent">
+                  {user.id == 8 &&
+                    <UploadFile infoTopics={infoTopics} documents={documents} setVideos={setVideoContent} setDocuments={setDocumentContent} addPost={addPost}/>
+                  }
                   <Tabs defaultActiveKey={useCheckMobileScreen ? "2" : "1"} className="tabs" as={Button} variant="pills">
                     {useCheckMobileScreen ? <Tab eventKey="1" title="Vis alt" className="tab" id="hidden">
-                      <UploadFile infoTopics={infoTopics} documents={documents}/>
                       <Col xs={6} className="videocol"><VideoContent videos={videoContent} infoTopics={infoTopics}/></Col>
                       <Col xs={6} className="documentcol"><DocumentContent documents={documentContent} infoTopics={infoTopics}/></Col>
                       
                     </Tab> : ""
                     }
                     <Tab eventKey="2" title="Videoer" className="tab">
-                    <UploadFile infoTopics={infoTopics} documents={documents}/>
                      <VideoContent videos={videoContent} infoTopics={infoTopics}/>
                     </Tab>
                     <Tab eventKey="3" title="Dokumenter" className="tab">
-                    <UploadFile infoTopics={infoTopics} documents={documents}/>
                       <DocumentContent documents={documentContent} infoTopics={infoTopics}/>
                     </Tab>
                   </Tabs>

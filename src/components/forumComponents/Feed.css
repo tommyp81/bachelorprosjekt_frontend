@@ -23,6 +23,11 @@
   color: grey;
 }
 
+.card-title:hover {
+  font-weight: bold;
+  /* text-shadow: 5px 5px 5px; */
+}
+
 @media (max-width: 768px) {
   .Feed .card-title {
     margin-left: -10px;

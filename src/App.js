@@ -217,6 +217,7 @@ const App = () => {
               videos={videos}
               documents={documents}
               users={users}
+              addPost={addPost}
             />
             <ProtectedRoute
               exact
