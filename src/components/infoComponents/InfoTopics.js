@@ -7,7 +7,7 @@ const InfoTopics = ({ infoTopics, allContent, filterContent }) => {
 
 	return (
         <div className="InfoTopics"> 
-            <Button onClick={allContent} id="hidden">Alle kategorier</Button>
+            <Button onClick={allContent}>Alle kategorier</Button>
         {infoTopics.map((mappedInfoTopics, i) => ( 
             <Button key={i} onClick={filterContent} value={mappedInfoTopics.id} title={mappedInfoTopics.title}>
                 {mappedInfoTopics.title}
