@@ -30,14 +30,11 @@ const VideoContent = ({ videos, infoTopics, content, deletePost, setVideoContent
     return (
         <div className="VideoContent">
           {videos.map((filteredVideos, i) => (
-            
+            <>
             <Card key={i} 
             onClick={() => handleShow(i)}
             style={{cursor: "pointer"}}>
             <Card.Body>
-              <div className="float-right" hidden={!(user.id === filteredVideos.userId)}>
-                <Button variant="danger" size="sm" value={filteredVideos.id} onClick={() => deleteVideo(filteredVideos.id, filteredVideos.postId)}>Slett</Button>
-              </div>
             <Row sm={1}>
               
               <Col md={6} sm={1}>
@@ -59,7 +56,10 @@ const VideoContent = ({ videos, infoTopics, content, deletePost, setVideoContent
             </Row>
             </Card.Body>
             </Card>
-            
+            <div className="float-right" hidden={!(user.id === filteredVideos.userId)}>
+              <Button variant="danger" size="sm" value={filteredVideos.id} onClick={() => deleteVideo(filteredVideos.id, filteredVideos.postId)}>Slett</Button>
+            </div>
+            </>
                ))}
 
               {videos.map((filteredVideos, i) => (
