@@ -133,6 +133,7 @@ const App = () => {
 
   // sends post to api/database and updates posts with new post
   const addPost = async (post, file) => {
+    
     const formData = new FormData();
     if (file) formData.append("File", file);
     for (let k in post) {
@@ -148,6 +149,19 @@ const App = () => {
 
     return data.id;
   };
+
+  const deletePost = async (postId) => {
+    const res = await fetch(host+`posts/${postId}`, {
+      method: 'DELETE',
+    })
+
+    if(res.status === 200) {
+      setPost(postId, {}, true)
+      return true
+    } else {
+      return false
+    }
+  }
 
   // search for specific post by id(number) in posts and returns said post
   const getPost = (id) => {
@@ -219,6 +233,7 @@ const App = () => {
               users={users}
               post={posts}
               addPost={addPost}
+              deletePost={deletePost}
             />
             <ProtectedRoute
               exact
@@ -230,6 +245,7 @@ const App = () => {
               history={history}
               getPost={getPost}
               setPost={setPost}
+              deletePost={deletePost}
             />
           </Switch>
           <Footer />

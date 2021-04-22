@@ -43,7 +43,7 @@ const UploadFile = ({infoTopics, documents, setVideos, setDocuments, addPost}) =
   const regExp = /(.+?)(\/)(watch\x3Fv=)?(embed\/watch\x3Ffeature\=player_embedded\x26v=)?([a-zA-Z0-9_-]{11})/g;
 
 
-  const handleSubmitVideo = (event) => {
+  const handleSubmitVideo = async (event) => {
     event.preventDefault();
     if(infoTopicId == 0) {
       alert("Ikke valgt kategori")
@@ -60,23 +60,43 @@ const UploadFile = ({infoTopics, documents, setVideos, setDocuments, addPost}) =
     const match = regExp.exec(id)
     const matchString = match[match.length-1].toString()
 
-    const data = new Object();
-    data.youTubeId = matchString;
-    data.title = title;
-    data.description = description;
-    data.userId = 8;    // SKAL IKKE VÆRE HARDKODET USERID
-    //data.postId = 100; //SKAL IKKE VÆRE HARDKODET
-    data.infoTopicId = infoTopicId; 
+    const postData = {
+      title,
+      content: description,
+      userId: 8,
+      subTopicId: Number(infoTopicId) + 16,
+      topicId: 5
+    }
+
+    console.log(postData)
+
+    const postId = await addPost(postData);
+
+    const videoData = {
+      youtubeId: matchString,
+      title,
+      description,
+      userId: 8,
+      postId,
+      infoTopicId
+    }
+
+    // const data = new Object();
+    // data.youTubeId = matchString;
+    // data.title = title;
+    // data.description = description;
+    // data.userId = 8;    // SKAL IKKE VÆRE HARDKODET USERID
+    // data.infoTopicId = infoTopicId; 
     
     console.log("Objektet:")
-    console.log(data)
+    console.log(videoData)
 
     fetch(host+'Videos', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(videoData)
     }).then(res => {
       return res.json()
     })

@@ -9,7 +9,7 @@ import DocumentContent from "./DocumentContent.js"
 import "./Kunnskapsportalen.css";
 import { UserContext } from '../../UserContext.js';
  
-const Kunnskapsportalen = ({ infoTopics, videos, documents, users, post, addPost }) => {
+const Kunnskapsportalen = ({ infoTopics, videos, documents, users, addPost, deletePost, post }) => {
 
   const {user} = useContext(UserContext);
  
@@ -84,8 +84,8 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, post, addPost
                   {user.id == 8 &&
                     <UploadFile infoTopics={infoTopics} documents={documents} setVideos={setVideoContent} setDocuments={setDocumentContent} addPost={addPost}/>
                   }
-                      <Col xl={6} className="videocol"><VideoContent videos={videoContent} infoTopics={infoTopics} post={post}/></Col>
-                      <Col xl={6} className="documentcol"><DocumentContent documents={documentContent} infoTopics={infoTopics}/></Col>
+                      <Col xl={6} className="videocol"><VideoContent videos={videoContent} infoTopics={infoTopics} post={post} deletePost={deletePost} setVideoContent={setVideoContent}/></Col>
+                      <Col xl={6} className="documentcol"><DocumentContent documents={documentContent} infoTopics={infoTopics} setDocumentContent={setDocumentContent}/></Col>
                       
                     </Tab> : ""
                     }
@@ -95,7 +95,7 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, post, addPost
                     {user.id == 8 &&
                     <UploadFile infoTopics={infoTopics} documents={documents} setVideos={setVideoContent} setDocuments={setDocumentContent} addPost={addPost}/>
                     }
-                     <VideoContent videos={videoContent} infoTopics={infoTopics} post={post}/>
+                     <VideoContent videos={videoContent} infoTopics={infoTopics} post={post} deletePost={deletePost} setVideoContent={setVideoContent}/>
                     </Tab>
                     <Tab eventKey="3" title="Dokumenter" className="tab">
                     <div className="topictitle">{!title ? "Alle kategorier" : title}</div>
@@ -103,7 +103,7 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, post, addPost
                     {user.id == 8 &&
                     <UploadFile infoTopics={infoTopics} documents={documents} setVideos={setVideoContent} setDocuments={setDocumentContent} addPost={addPost}/>
                     }
-                      <DocumentContent documents={documentContent} infoTopics={infoTopics}/>
+                      <DocumentContent documents={documentContent} infoTopics={infoTopics} setDocumentContent={setDocumentContent}/>
                     </Tab>
                     
                   </Tabs>
