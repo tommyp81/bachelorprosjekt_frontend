@@ -4,6 +4,7 @@ import { AiFillHome } from "react-icons/ai";
 import { BsChatDotsFill } from "react-icons/bs";
 import { BsPersonFill } from "react-icons/bs";
 import { HiAcademicCap } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 const SideDrawer = (props) => {
   let drawerClasses = "sideDrawer";
@@ -16,24 +17,24 @@ const SideDrawer = (props) => {
     <nav className={drawerClasses}>
       <ul>
         <li>
-          <a href="/">
+          <Link to="/" onClick={props.toggle}>
             <AiFillHome size="22px" /> Hjem
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="/Forum">
+          <Link to="/Forum" onClick={props.toggle}>
             <BsChatDotsFill size="21px" /> Forum
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="/Kunnskapsportalen">
+          <Link to="/Kunnskapsportalen" onClick={props.toggle}>
             <HiAcademicCap size="22px" /> Kunnskapsportalen
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="/Login">
+          <Link to="/Login" onClick={props.toggle}>
             <BsPersonFill size="23px" /> Logg inn
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>

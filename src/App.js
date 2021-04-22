@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
-import { Spinner } from "react-bootstrap";
+import { Switch, Route, useHistory } from "react-router-dom";
 
 //Importing main components.
 
@@ -16,13 +15,10 @@ import Home from "./components/homeComponents/Home.js";
 //Importing forum components
 //Bruk disse hver for seg!
 import Forum from "./components/forumComponents/Forum.js";
-import NewComment from "./components/forumComponents/NewComment.js";
 import Thread from "./components/forumComponents/Thread.js";
 
-//import { Navbar } from "./components/navigation/navbar/navbar";
 
 import Kunnskapsportalen from "./components/infoComponents/Kunnskapsportalen.js";
-// import Kunnskapsportalen from "./components/infoComponents/Info";
 import Register from "./components/registerComponent/Register";
 import { UserContext } from "./UserContext";
 import ProtectedRoute from "./ProtectedRoute";
@@ -33,7 +29,7 @@ import Backdrop from "./components/NavigationCompoonent/Backdrop/Backdrop";
 // https://webforum.azurewebsites.net/answers
 // https://webforum.azurewebsites.net/users
 
-export const host = "https://webforum.azurewebsites.net/";
+export const host = "https://localhost:44361/";
 
 const App = () => {
   const history = useHistory();
@@ -188,71 +184,70 @@ const App = () => {
   }
 
   return (
-    <BrowserRouter>
-      <UserContext.Provider value={{ user, setUser }}>
-        <div className="App">
-          <Toolbar handleDrawerToggleClick={handleDrawerToggleClick} />
-          <SideDrawer show={sideDrawerOpen} />
-          {backdrop}
-          <Switch>
-            <Route path="/Login" component={Login} history={history} />
-            <ProtectedRoute
-              exact
-              path="/"
-              component={Home}
-              topic={topics}
-              subtopic={subtopics}
-              users={users}
-              posts={posts}
-              loading={loading}
-            />
-            <ProtectedRoute
-              path="/Register"
-              component={Register}
-              Register={Register}
-            />
-            <ProtectedRoute
-              exact
-              path="/Forum"
-              component={Forum}
-              posts={posts}
-              addPost={addPost}
-              subtopics={subtopics}
-              topics={topics}
-              users={users}
-              history={history}
-              loading={loading}
-            />
-            <ProtectedRoute
-              exact
-              path="/Kunnskapsportalen"
-              component={Kunnskapsportalen}
-              infoTopics={infoTopics}
-              videos={videos}
-              documents={documents}
-              users={users}
-              post={posts}
-              addPost={addPost}
-              deletePost={deletePost}
-            />
-            <ProtectedRoute
-              exact
-              path="/Forum/:postId"
-              component={Thread}
-              subtopics={subtopics}
-              topics={topics}
-              users={users}
-              history={history}
-              getPost={getPost}
-              setPost={setPost}
-              deletePost={deletePost}
-            />
-          </Switch>
-          <Footer />
-        </div>
-        
-      </UserContext.Provider>
-    </BrowserRouter>
+    <UserContext.Provider value={{ user, setUser }}>
+      <div className="App">
+        <Toolbar handleDrawerToggleClick={handleDrawerToggleClick} />
+        <SideDrawer show={sideDrawerOpen} toggle={handleDrawerToggleClick} />
+        {backdrop}
+        <Switch>
+          <Route path="/Login" component={Login} history={history} />
+          <ProtectedRoute
+            exact
+            path="/"
+            component={Home}
+            topic={topics}
+            subtopic={subtopics}
+            users={users}
+            posts={posts}
+            loading={loading}
+          />
+          <ProtectedRoute
+            path="/Register"
+            component={Register}
+            Register={Register}
+          />
+          <ProtectedRoute
+            exact
+            path="/Forum"
+            component={Forum}
+            posts={posts}
+            addPost={addPost}
+            subtopics={subtopics}
+            topics={topics}
+            users={users}
+            history={history}
+            loading={loading}
+          />
+          <ProtectedRoute
+            exact
+            path="/Kunnskapsportalen"
+            component={Kunnskapsportalen}
+            infoTopics={infoTopics}
+            videos={videos}
+            documents={documents}
+            users={users}
+            post={posts}
+            addPost={addPost}
+            deletePost={deletePost}
+          />
+          <ProtectedRoute
+            exact
+            path="/Forum/:postId"
+            component={Thread}
+            subtopics={subtopics}
+            topics={topics}
+            users={users}
+            history={history}
+            getPost={getPost}
+            setPost={setPost}
+            deletePost={deletePost}
+          />
+        </Switch>
+        <Footer />
+      </div>
+      
+    </UserContext.Provider>
+
   );
 };
 

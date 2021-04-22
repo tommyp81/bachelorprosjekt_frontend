@@ -6,6 +6,7 @@ import { AiFillHome } from "react-icons/ai";
 import { BsChatDotsFill } from "react-icons/bs";
 import { BsPersonFill } from "react-icons/bs";
 import { HiAcademicCap } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 const ToolBar = (props) => {
   return (
@@ -15,33 +16,33 @@ const ToolBar = (props) => {
           <ToggleButton click={props.handleDrawerToggleClick} />
         </div>
         <div className="tlogo">
-          <a href="/">
+          <Link to="/">
             <img src={logo} alt="badmintonclub logo" />
-          </a>
+          </Link>
           <a href="/">Norges Badmintonforbund</a>
         </div>
         <div className="freeSpace" />
         <div className="tNavItems">
           <ul>
             <li>
-              <a href="/">
+              <Link to="/">
                 <AiFillHome size="20px" /> Hjem
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/Forum">
+              <Link to="/Forum">
                 <BsChatDotsFill size="18px" /> Forum
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/Kunnskapsportalen">
+              <Link to="/Kunnskapsportalen">
                 <HiAcademicCap size="23px" /> Kunnskapsportalen
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/Login">
+              <Link to="/Login">
                 <BsPersonFill size="20px" /> Logg Inn
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
