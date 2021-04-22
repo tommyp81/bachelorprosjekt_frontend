@@ -78,7 +78,7 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, post, addPost
                   <Tabs defaultActiveKey={!useCheckMobileScreen ? "1" : "2"} className="tabs" as={Button} variant="pills">
                     
                     
-                    {useCheckMobileScreen ? <Tab eventKey="1" title="Vis alt" className="tab" id="hidden">
+                    {useCheckMobileScreen ? <Tab eventKey="1" title="Vis alt" className="tab">
                       <div className="topictitle">{!title ? "Alle kategorier" : title}</div>
                       <div className="desc">{!description ? "" : description} </div>
                   {user.id == 8 &&
