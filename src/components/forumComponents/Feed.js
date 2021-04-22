@@ -5,41 +5,10 @@ import "moment/locale/nb";
 import { FaThumbsUp, FaRegComment } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import SpinnerDiv from "./SpinnerDiv";
-
+import ReadMoreReact from "../forumComponents/ReadMore";
 import "./Feed.css";
 
 const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
-  const [ReadMore, setReadMore] = useState(false);
-  const getText = (content) => {
-    if (content.length <= 150) return content.id;
-    if (content.length > 150 && ReadMore) {
-      return (
-        <>
-          <Card.Text>
-            {content}
-            <Link size="sm" variant="link" onClick={() => setReadMore(false)}>
-              {" "}
-              Les Mindre
-            </Link>
-          </Card.Text>
-        </>
-      );
-    }
-    if (content.length > 150) {
-      return (
-        <>
-          <Card.Text>
-            {content.slice(0, 150)}
-            <Link size="sm" variant="link" onClick={() => setReadMore(true)}>
-              {" "}
-              ... Les Mer
-            </Link>
-          </Card.Text>
-        </>
-      );
-    }
-  };
-
   if (
     posts.length === 0 &&
     users.length === 0 &&
@@ -73,7 +42,7 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
               <br />
               <Card.Title>{post.title}</Card.Title>
               <Card.Text className="float-left">
-                {getText(post.content)}
+                <ReadMoreReact text={post.content} />
               </Card.Text>
               <br />
               <br />
