@@ -23,7 +23,7 @@ import Post from './Post.js';
 import Comment from './Comment.js';
 import Comments from './Comments.js';
 
-const Thread = ( { subtopics, topics, users, history, getPost, setPost }) => {
+const Thread = ( { subtopics, topics, users, history, getPost, setPost, deletePost }) => {
 
   const [comments, setComments] = useState([])
 
@@ -52,17 +52,12 @@ const Thread = ( { subtopics, topics, users, history, getPost, setPost }) => {
 
   // const threadComments = comments.filter(c => Number(postId) === c.postId).slice(0).sort((d1, d2) => moment(d2.date) - moment(d1.date))
 
-  const deletePost = async () => {
-    const res = await fetch(host+`posts/${post.id}`, {
-      method: 'DELETE',
-    })
-
-    if(res.status === 200) {
+  const deleteThread = async () => {
+    const success = deletePost(postId)
+    if (success)
       history.push("/Forum")
-      setPost(post.id, {}, true)
-    } else {
-      alert("ERROR")
-    }
+    else 
+      alert("Feil ved sletting av post")
   }
   
 
@@ -189,7 +184,7 @@ const Thread = ( { subtopics, topics, users, history, getPost, setPost }) => {
           </div>
         </h5> 
         <div className="main">
-          {post && <Post post={post} users={users} deletePost={deletePost} commentsLength={comments.length} setPost={setPost}/>}
+          {post && <Post post={post} users={users} deletePost={deleteThread} commentsLength={comments.length} setPost={setPost}/>}
         </div>
         
         

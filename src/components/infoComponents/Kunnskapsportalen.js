@@ -9,7 +9,7 @@ import DocumentContent from "./DocumentContent.js"
 import "./Kunnskapsportalen.css";
 import { UserContext } from '../../UserContext.js';
  
-const Kunnskapsportalen = ({ infoTopics, videos, documents, users, addPost }) => {
+const Kunnskapsportalen = ({ infoTopics, videos, documents, users, addPost, deletePost }) => {
 
   const {user} = useContext(UserContext);
  
@@ -73,16 +73,16 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, addPost }) =>
                   }
                   <Tabs defaultActiveKey={useCheckMobileScreen ? "2" : "1"} className="tabs" as={Button} variant="pills">
                     {useCheckMobileScreen ? <Tab eventKey="1" title="Vis alt" className="tab" id="hidden">
-                      <Col xs={6} className="videocol"><VideoContent videos={videoContent} infoTopics={infoTopics}/></Col>
-                      <Col xs={6} className="documentcol"><DocumentContent documents={documentContent} infoTopics={infoTopics}/></Col>
+                      <Col xs={6} className="videocol"><VideoContent videos={videoContent} infoTopics={infoTopics} deletePost={deletePost} setVideoContent={setVideoContent}/></Col>
+                      <Col xs={6} className="documentcol"><DocumentContent documents={documentContent} infoTopics={infoTopics} setDocumentContent={setDocumentContent}/></Col>
                       
                     </Tab> : ""
                     }
                     <Tab eventKey="2" title="Videoer" className="tab">
-                     <VideoContent videos={videoContent} infoTopics={infoTopics}/>
+                     <VideoContent videos={videoContent} infoTopics={infoTopics} deletePost={deletePost} setVideoContent={setVideoContent}/>
                     </Tab>
                     <Tab eventKey="3" title="Dokumenter" className="tab">
-                      <DocumentContent documents={documentContent} infoTopics={infoTopics}/>
+                      <DocumentContent documents={documentContent} infoTopics={infoTopics} setDocumentContent={setDocumentContent}/>
                     </Tab>
                   </Tabs>
                 </Col>

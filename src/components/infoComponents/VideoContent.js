@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {Button, Row, Col, Card, Image, Modal } from "react-bootstrap";
 import {Link} from 'react-router-dom' 
+import { host } from '../../App';
+import { UserContext } from '../../UserContext';
 import "./Kunnskapsportalen.css";
 
-const VideoContent = ({ videos, infoTopics, content }) => { 
+const VideoContent = ({ videos, infoTopics, content, deletePost, setVideoContent }) => { 
+
+  const {user} = useContext(UserContext)
   
   const [show, setShow] = useState(null);
 
@@ -18,11 +22,27 @@ const VideoContent = ({ videos, infoTopics, content }) => {
     }
   }
 
+  const deleteVideo = async (videoId, postId) => {
+    const res = await fetch(host+`videos/${videoId}`, {
+      method: 'DELETE'
+    })
+    if (res.ok) {
+      setVideoContent(videos.filter(v => v.id != videoId))
+      deletePost(postId)
+    } else {
+      alert("Feil ved sletting av Video")
+    }
+
+  }
+
     return (
         <div className="VideoContent">
           {videos.map((filteredVideos, i) => (
           <Card key={i}>
             <Card.Body>
+              <div className="float-right" hidden={!(user.id === filteredVideos.userId)}>
+                <Button variant="danger" size="sm" value={filteredVideos.id} onClick={() => deleteVideo(filteredVideos.id, filteredVideos.postId)}>Slett</Button>
+              </div>
 
               <div className="left">
               <Image src={`https://img.youtube.com/vi/${filteredVideos.youTubeId}/0.jpg`}
@@ -35,7 +55,7 @@ const VideoContent = ({ videos, infoTopics, content }) => {
               <div className="vidright">
               {infoTopics.filter(infoTopics => (infoTopics.id === filteredVideos.infoTopicId)).map((filteredTopics, i) => (
               <p className="toptext">Delt i {filteredTopics.title}</p>))}
-              <h3 className="title">{titleLength(filteredVideos.title)}</h3><Link to="/Forum">Diskuter i forumet</Link>
+              <h3 className="title">{titleLength(filteredVideos.title)}</h3><Link to={`/Forum/${filteredVideos.postId}`}>Diskuter i forumet</Link>
               </div>
               </Card.Body>
               
