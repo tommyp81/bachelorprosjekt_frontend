@@ -49,7 +49,7 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
               <Card.Text className="float-right">
                 {post.like_Count}{" "}
                 <FaThumbsUp
-                  className="like ml-1 mr-1 mb-2"
+                  className="ml-1 mr-1 mb-2"
                   color="grey"
                   size={18}
                 />{" "}
