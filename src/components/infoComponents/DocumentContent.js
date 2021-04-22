@@ -6,7 +6,6 @@ import { host } from '../../App';
 import { UserContext } from '../../UserContext';
 import FileLink from '../FileLink';
 import moment from 'moment'
-import { host } from '../../App'
 import "./Kunnskapsportalen.css";
 
 const DocumentContent = ({ documents, infoTopics, setDocumentContent }) => { 
