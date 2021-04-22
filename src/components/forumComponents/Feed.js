@@ -11,7 +11,7 @@ import "./Feed.css";
 const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
   const [ReadMore, setReadMore] = useState(false);
   const getText = (content) => {
-    if (content.length <= 150) return content;
+    if (content.length <= 150) return content.id;
     if (content.length > 150 && ReadMore) {
       return (
         <>
@@ -70,17 +70,14 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
                   ))}
               </div>
               <br />
-              {topic
-                .filter((topic) => topic.id === post.topicId)
-                .map((filteredTopics, j) => (
-                  <Card.Text key={j} className="float-left">
-                    {filteredTopics.title} -{" "}
-                    {subtopic.find((st) => st.id === post.subTopicId)?.title}
-                  </Card.Text>
-                ))}
-              <br />
               <br />
               <Card.Title>{post.title}</Card.Title>
+              <Card.Text className="float-left">
+                {getText(post.content)}
+              </Card.Text>
+              <br />
+              <br />
+              <br />
               <Card.Text className="float-right">
                 {post.like_Count}{" "}
                 <FaThumbsUp
@@ -96,10 +93,14 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
                   className="ml-2 mr-2 mb-1"
                 />
               </Card.Text>
-
-              <Card.Text className="float-left">
-                {getText(post.content)}
-              </Card.Text>
+              {topic
+                .filter((topic) => topic.id === post.topicId)
+                .map((filteredTopics, j) => (
+                  <Card.Text key={j} className="float-left">
+                    {filteredTopics.title} -{" "}
+                    {subtopic.find((st) => st.id === post.subTopicId)?.title}
+                  </Card.Text>
+                ))}
             </Card.Body>
           </Link>
         </Card>
