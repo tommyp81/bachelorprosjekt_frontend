@@ -1,19 +1,36 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {Button, Row, Col, Card, Image, Modal } from "react-bootstrap";
 import {Link} from 'react-router-dom' 
+import { host } from '../../App';
+import { UserContext } from '../../UserContext';
 import moment from 'moment'
 import "./Kunnskapsportalen.css";
 
-const VideoContent = ({ videos, infoTopics, content, post }) => { 
+const VideoContent = ({ videos, infoTopics, content, deletePost, setVideoContent, post }) => { 
+
+  const {user} = useContext(UserContext)
   
   const [show, setShow] = useState(null);
 
   const handleShow = (index) => setShow(index);
   const handleClose = () => setShow(null);
+  const deleteVideo = async (videoId, postId) => {
+    const res = await fetch(host+`videos/${videoId}`, {
+      method: 'DELETE'
+    })
+    if (res.ok) {
+      setVideoContent(videos.filter(v => v.id != videoId))
+      deletePost(postId)
+    } else {
+      alert("Feil ved sletting av Video")
+    }
+
+  }
+
     return (
         <div className="VideoContent">
           {videos.map((filteredVideos, i) => (
-            
+            <>
             <Card key={i} 
             onClick={() => handleShow(i)}
             style={{cursor: "pointer"}}>
@@ -28,6 +45,7 @@ const VideoContent = ({ videos, infoTopics, content, post }) => {
               </p>))}
               <div className="title">{filteredVideos.title}</div><br/><br/>
               <p>Klikk for å se video</p>
+              <Link to={`/Forum/${filteredVideos.postId}`}>Diskuter i forumet</Link>
               </div> 
               </Col>
               <Col md={6} sm={11}>
@@ -38,7 +56,10 @@ const VideoContent = ({ videos, infoTopics, content, post }) => {
             </Row>
             </Card.Body>
             </Card>
-            
+            <div className="float-right" hidden={!(user.id === filteredVideos.userId)}>
+              <Button variant="danger" size="sm" value={filteredVideos.id} onClick={() => deleteVideo(filteredVideos.id, filteredVideos.postId)}>Slett</Button>
+            </div>
+            </>
                ))}
 
               {videos.map((filteredVideos, i) => (
