@@ -65,6 +65,7 @@ const UploadFile = ({infoTopics, documents, setVideos, setDocuments, addPost}) =
     data.title = title;
     data.description = description;
     data.userId = 8;    // SKAL IKKE VÆRE HARDKODET USERID
+    //data.postId = 100; //SKAL IKKE VÆRE HARDKODET
     data.infoTopicId = infoTopicId; 
     
     console.log("Objektet:")
