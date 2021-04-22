@@ -13,7 +13,7 @@ class ReadMore extends Component {
       showSecondary: false,
       primaryContent,
       secondaryContent,
-      readMore: "Les Mer",
+      readMore: " Les Mer",
       readLess: " Les Mindre",
     };
   }
@@ -36,9 +36,7 @@ class ReadMore extends Component {
         <div>
           <span onClick={this.setStatus.bind(this)}>
             {this.state.primaryContent} {this.state.secondaryContent}
-            <div>
-              <Link>{this.state.readLess}</Link>{" "}
-            </div>
+            <Link>{this.state.readLess}</Link>{" "}
           </span>
         </div>
       );
@@ -49,10 +47,11 @@ class ReadMore extends Component {
             {this.state.primaryContent}
             <span style={{ display: "none" }}>
               {this.state.secondaryContent}
-            </span>
-            <div onClick={this.setStatus.bind(this)}>
-              <Link>{this.state.readMore}</Link>
-            </div>
+            </span>{" "}
+            ...
+            <Link onClick={this.setStatus.bind(this)}>
+              {this.state.readMore}
+            </Link>
           </span>
         </div>
       );
