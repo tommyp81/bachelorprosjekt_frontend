@@ -22,16 +22,14 @@ const DocumentContent = ({ documents, infoTopics }) => {
             <div className="content">
             {infoTopics.filter(infoTopics => (infoTopics.id === mappedDocuments.infoTopicId)).map((filteredTopics, i) => (
             <div className="toptext">Delt {moment(mappedDocuments.uploaded).calendar()} i {filteredTopics.title}</div>))}<br/>
-            <h3 className="title">  
+            <div className="title">  
               <FileEarmarkTextFill className="iconmobile"/>{" "}
               <FileLink fileId={mappedDocuments.id}/>
-            </h3><br/><br/>
+            </div><br/><br/>
             <p>Klikk for å laste ned</p>
             </div>
             </Col>
-            <Col>
-            
-            <div className="contentimg"><FileEarmarkTextFill style={{height:"150px", width:"150px"}} className="icon"/></div>
+            <Col className="desktop"><FileEarmarkTextFill style={{height:"150px", width:"150px"}} className="icon"/>
             </Col>
             </Row>
           </Card.Body>

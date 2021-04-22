@@ -16,6 +16,7 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, post, addPost
     const [videoContent, setVideoContent] = useState([])
     const [documentContent, setDocumentContent] = useState([])
     const [title, setTitle] = useState("")
+    const [description, setDescription] = useState("")
 
     useEffect(() => {
       setVideoContent(videos)
@@ -25,16 +26,20 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, post, addPost
     const filterContent = (e) => {
       let value = e.target.value;
       let title = e.target.getAttribute("title")
+      let desc = infoTopics.find((infoTopics) => infoTopics.id === Number(value)).description;
       setVideoContent(videos.filter(videos => videos.infoTopicId === Number(value)))
       setDocumentContent(documents.filter(documents => documents.infoTopicId === Number(value)))
       setTitle(title)
+      setDescription(desc)
     }
 
     const allContent = () => {
       setVideoContent(videos)
       setDocumentContent(documents)
       setTitle("Alle kategorier")
+      setDescription("")
     } 
+
 
     const useCheckMobileScreen = () => {
       const [width, setWidth] = useState(window.innerWidth);
@@ -54,36 +59,53 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, post, addPost
 
     return (
         <div className="Kunnskapsportalen">
-              <Container style={{display: 'flex', flexDirection: 'column'}}> 
-                <h1>Kunnskapsportalen</h1>
+              <Container style={{display: 'flex', flexDirection: 'column'}}>
+                
+                <h1>Kunnskapsportalen</h1><br/>
               <Row>
                 <Col>
                   <div className="top">
                     
                     <InfoTopics infoTopics={infoTopics} allContent={allContent} filterContent={filterContent}/>
-                    <h4>{!title ? "Alle kategorier" : title}</h4>
+                    
                   </div>
                   </Col>
               </Row>
                 
               <Row>
                 <Col lg={12} className="maincontent">
+                  
+                  <Tabs defaultActiveKey={!useCheckMobileScreen ? "1" : "2"} className="tabs" as={Button} variant="pills">
+                    
+                    
+                    {useCheckMobileScreen ? <Tab eventKey="1" title="Vis alt" className="tab" id="hidden">
+                      <h3>{!title ? "Alle kategorier" : title}</h3>
+                      <div className="desc">{!description ? "" : description} </div>
                   {user.id == 8 &&
                     <UploadFile infoTopics={infoTopics} documents={documents} setVideos={setVideoContent} setDocuments={setDocumentContent} addPost={addPost}/>
                   }
-                  <Tabs defaultActiveKey={!useCheckMobileScreen ? "1" : "2"} className="tabs" as={Button} variant="pills">
-                    {useCheckMobileScreen ? <Tab eventKey="1" title="Vis alt" className="tab" id="hidden">
                       <Col xl={6} className="videocol"><VideoContent videos={videoContent} infoTopics={infoTopics} post={post}/></Col>
                       <Col xl={6} className="documentcol"><DocumentContent documents={documentContent} infoTopics={infoTopics}/></Col>
                       
                     </Tab> : ""
                     }
                     <Tab eventKey="2" title="Videoer" className="tab">
+                    <h3>{!title ? "Alle kategorier" : title}</h3>
+                    <div className="desc">{!description ? "" : description} </div>
+                    {user.id == 8 &&
+                    <UploadFile infoTopics={infoTopics} documents={documents} setVideos={setVideoContent} setDocuments={setDocumentContent} addPost={addPost}/>
+                    }
                      <VideoContent videos={videoContent} infoTopics={infoTopics} post={post}/>
                     </Tab>
                     <Tab eventKey="3" title="Dokumenter" className="tab">
+                    <h3>{!title ? "Alle kategorier" : title}</h3>
+                    <div className="desc">{!description ? "" : description} </div>
+                    {user.id == 8 &&
+                    <UploadFile infoTopics={infoTopics} documents={documents} setVideos={setVideoContent} setDocuments={setDocumentContent} addPost={addPost}/>
+                    }
                       <DocumentContent documents={documentContent} infoTopics={infoTopics}/>
                     </Tab>
+                    
                   </Tabs>
                 </Col>
        

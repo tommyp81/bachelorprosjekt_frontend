@@ -1,26 +1,31 @@
 .Kunnskapsportalen .container {
-    margin-top: 200px;
+    margin-top: 150px;
     background-color: #0b2c63;
     border-radius: 10px;
     padding: 30px; 
 }
 
-.Kunnskapsportalen h1, h4 {
+.Kunnskapsportalen h1, h3, .desc {
     text-align: center;
     color: white;
+}
+.Kunnskapsportalen h3 {
+    margin-bottom: 20px;
+}
+
+.Kunnskapsportalen .desc {
+    margin-bottom: 10px;
 }
 
 .Kunnskapsportalen .top {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    width: 50%;
 }
 
 .Kunnskapsportalen .videocol {
     float: left;
 }
-
 
 .Kunnskapsportalen .documentcol {
     float: right;
@@ -35,10 +40,12 @@
 }
 
 .Kunnskapsportalen .card img, .Kunnskapsportalen .card .icon {
+    float: right;
     max-width: 175px;
 }
 
 .Kunnskapsportalen .card .title {
+    font-weight: 600;
     font-size: 30px;
     white-space: nowrap;
     display: inline;
@@ -50,7 +57,7 @@
 
 /*Mobile*/
 @media (max-width: 425px) {
-    .Kunnskapsportalen .card .title {
+    .Kunnskapsportalen .card .title, .Kunnskapsportalen .card .content {
         white-space: unset;
     }
 
@@ -63,12 +70,16 @@
 
 @media (max-width: 320px) {
     .Kunnskapsportalen .card .content {
-        white-space: unset;
+        margin: 2.5px 0px 2.5px 6px;
     }
 }
 
 @media (max-width: 767px) {
-    .Kunnskapsportalen .card .icon {
+    .Kunnskapsportalen h1 {
+        font-size: 26px;
+    }
+
+    .Kunnskapsportalen .card .desktop {
         display: none;
     }
 
@@ -76,7 +87,16 @@
         font-size: 24px;
     }    
     
+    .Kunnskapsportalen .tabs .nav-item {
+        margin: 2.5px 0px 2.5px 6px;
+    }  
    
+}
+
+@media (max-width: 575px) {
+    .Kunnskapsportalen .card img {
+        max-width: 100%
+    }    
 }
 
 @media (min-width: 768px) {
@@ -87,14 +107,13 @@
 
 
 .Kunnskapsportalen .tabs {
-    margin-top: 20px;
     justify-content: center;
 }
 
 .Kunnskapsportalen .tabs .nav-item {
     color: white;
     font-size: 15px;
-    margin: 2.5px 0px 2.5px 6px;
+    margin: 2.5px 0px 40px 6px;
     background-color: #007bff;
 }
 
@@ -113,11 +132,6 @@
     .Kunnskapsportalen #hidden {
         display: none;
     }
-}
-
-.InfoTopics {
-    margin-bottom: 10px;
-    
 }
 
 .InfoTopics .btn-primary  {
@@ -139,8 +153,4 @@
 
 .UploadFile {
     margin-left: 15px;
-}
-
-.UploadFile p {
-    margin-left: 5px;
 }

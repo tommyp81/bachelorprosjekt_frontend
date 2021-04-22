@@ -18,19 +18,19 @@ const VideoContent = ({ videos, infoTopics, content, post }) => {
             onClick={() => handleShow(i)}
             style={{cursor: "pointer"}}>
             <Card.Body>
-            <Row sm={2}>
+            <Row sm={1}>
               
-              <Col md={6} sm={0}>
+              <Col md={6} sm={1}>
               <div className="content">
               {infoTopics.filter(infoTopics => (infoTopics.id === filteredVideos.infoTopicId)).map((filteredTopics, i) => (
               <p className="toptext">Delt {post.filter(post => (post.id === filteredVideos.postId)).map((filteredPosts , i) => (
                 moment(filteredPosts.date).calendar()))} i {filteredTopics.title}
               </p>))}
-              <h3 className="title">{filteredVideos.title}</h3><br/><br/>
+              <div className="title">{filteredVideos.title}</div><br/><br/>
               <p>Klikk for å se video</p>
               </div> 
               </Col>
-              <Col md={6} sm={12}>
+              <Col md={6} sm={11}>
               <div className="contentimg">
               <Image src={`https://img.youtube.com/vi/${filteredVideos.youTubeId}/0.jpg`} />
               </div>
