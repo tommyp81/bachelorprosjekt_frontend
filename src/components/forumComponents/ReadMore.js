@@ -13,8 +13,8 @@ class ReadMore extends Component {
       showSecondary: false,
       primaryContent,
       secondaryContent,
-      readMore: " Les Mer",
-      readLess: " Les Mindre",
+      readMore: "Les mer",
+      readLess: " Les mindre",
     };
   }
 

@@ -6,7 +6,7 @@
 }
 
 @media (max-width: 768px) {
-    .Post {
+    .Post .foruminfo {
     }
 }
 
@@ -24,21 +24,13 @@
     margin-bottom: 20px;
 }
 
-.Post .comments h3{
+.Post .comments h3 {
     color: white;
 }
 
 .Post .comments .card {
     margin-bottom: 10px;
 }
-
-.EditComment .btn {
-}
-
-.NewComment textarea {
-    
-}
-
 
 .NewComment .nav-item{
     font-weight: bold;

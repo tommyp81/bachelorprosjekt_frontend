@@ -86,18 +86,22 @@ const Comment = ({users, initComment, deleteComment}) => {
         <div className="float-left">
           <p>Postet av <b>{users && users.length && users.find(u => u.id === comment.userId).username}</b> {moment(comment.date).calendar()}</p>
         </div>
-        <div className="float-right" hidden={!(user.id === comment.userId)}>
-          <EditComment comment={comment} edit={editComment}/> &nbsp;
-          <Button variant="danger" size="sm" onClick={deleteComment} value={comment.id}>Slett</Button>
-        </div>  
+        
         
         <Card.Text><br /><br />
           {comment.content}
-          <br/>
-          {comment.documentId ? <p><br/>Vedlegg: <b><FileLink fileId={comment.documentId} /></b></p> : ""}
+          <br/><br/>
+
+          <div className="float-left">{comment.documentId ? <p>Vedlegg: <b><FileLink fileId={comment.documentId} /></b></p> : ""}</div>
+          <br/><br/>
+          <div className="float-left" hidden={!(user.id === comment.userId)}>
+          
+          <EditComment comment={comment} edit={editComment}/> &nbsp;
+          <Button variant="danger" size="sm" onClick={deleteComment} value={comment.id}>Slett</Button>
+          </div> 
           <div className="float-right"> 
           {comment.like_Count} <LikeButton id={comment.id} liked={liked} setLiked={setLiked} isPost={false} updateCommentLike={setCommentLikeCount} />
-        </div>
+          </div>
         </Card.Text>
         
       </Card.Body>

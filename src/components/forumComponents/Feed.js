@@ -42,9 +42,8 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
               <br />
               <Card.Title>{post.title}</Card.Title>
               <Card.Text className="float-left">
-                <ReadMoreReact text={post.content} />
+                <ReadMoreReact text={post.content} /><br/>
               </Card.Text>
-              <br />
               <br />
               <br />
               <Card.Text className="float-right">

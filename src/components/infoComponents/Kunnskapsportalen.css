@@ -5,16 +5,18 @@
     padding: 30px; 
 }
 
-.Kunnskapsportalen h1, h3, .desc {
-    text-align: center;
+.Kunnskapsportalen h1, .topictitle, .desc {
     color: white;
+    text-align: center;
 }
-.Kunnskapsportalen h3 {
+.Kunnskapsportalen .topictitle {
     margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 30px;
 }
 
 .Kunnskapsportalen .desc {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .Kunnskapsportalen .top {

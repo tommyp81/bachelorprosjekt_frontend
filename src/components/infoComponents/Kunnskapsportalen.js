@@ -79,7 +79,7 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, post, addPost
                     
                     
                     {useCheckMobileScreen ? <Tab eventKey="1" title="Vis alt" className="tab" id="hidden">
-                      <h3>{!title ? "Alle kategorier" : title}</h3>
+                      <div className="topictitle">{!title ? "Alle kategorier" : title}</div>
                       <div className="desc">{!description ? "" : description} </div>
                   {user.id == 8 &&
                     <UploadFile infoTopics={infoTopics} documents={documents} setVideos={setVideoContent} setDocuments={setDocumentContent} addPost={addPost}/>
@@ -90,7 +90,7 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, post, addPost
                     </Tab> : ""
                     }
                     <Tab eventKey="2" title="Videoer" className="tab">
-                    <h3>{!title ? "Alle kategorier" : title}</h3>
+                    <div className="topictitle">{!title ? "Alle kategorier" : title}</div>
                     <div className="desc">{!description ? "" : description} </div>
                     {user.id == 8 &&
                     <UploadFile infoTopics={infoTopics} documents={documents} setVideos={setVideoContent} setDocuments={setDocumentContent} addPost={addPost}/>
@@ -98,7 +98,7 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, post, addPost
                      <VideoContent videos={videoContent} infoTopics={infoTopics} post={post}/>
                     </Tab>
                     <Tab eventKey="3" title="Dokumenter" className="tab">
-                    <h3>{!title ? "Alle kategorier" : title}</h3>
+                    <div className="topictitle">{!title ? "Alle kategorier" : title}</div>
                     <div className="desc">{!description ? "" : description} </div>
                     {user.id == 8 &&
                     <UploadFile infoTopics={infoTopics} documents={documents} setVideos={setVideoContent} setDocuments={setDocumentContent} addPost={addPost}/>

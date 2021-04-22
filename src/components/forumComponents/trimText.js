@@ -1,4 +1,4 @@
-const trimText = (text, min = 180, max = 200) => {
+const trimText = (text, min = 160, max = 180) => {
   let firstSpace, resultIdx;
 
   if (resultIdx === undefined) {
