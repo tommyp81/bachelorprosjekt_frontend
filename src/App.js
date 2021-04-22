@@ -231,6 +231,7 @@ const App = () => {
               videos={videos}
               documents={documents}
               users={users}
+              post={posts}
               addPost={addPost}
               deletePost={deletePost}
             />

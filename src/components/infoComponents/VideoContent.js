@@ -3,9 +3,10 @@ import {Button, Row, Col, Card, Image, Modal } from "react-bootstrap";
 import {Link} from 'react-router-dom' 
 import { host } from '../../App';
 import { UserContext } from '../../UserContext';
+import moment from 'moment'
 import "./Kunnskapsportalen.css";
 
-const VideoContent = ({ videos, infoTopics, content, deletePost, setVideoContent }) => { 
+const VideoContent = ({ videos, infoTopics, content, deletePost, setVideoContent, post }) => { 
 
   const {user} = useContext(UserContext)
   
@@ -13,15 +14,6 @@ const VideoContent = ({ videos, infoTopics, content, deletePost, setVideoContent
 
   const handleShow = (index) => setShow(index);
   const handleClose = () => setShow(null);
-  
-  function titleLength(str) {
-    if (str.length > 25) {
-      return str.substring(0, 25) + "..."
-    } else {
-      return str;
-    }
-  }
-
   const deleteVideo = async (videoId, postId) => {
     const res = await fetch(host+`videos/${videoId}`, {
       method: 'DELETE'
@@ -38,28 +30,36 @@ const VideoContent = ({ videos, infoTopics, content, deletePost, setVideoContent
     return (
         <div className="VideoContent">
           {videos.map((filteredVideos, i) => (
-          <Card key={i}>
+            
+            <Card key={i} 
+            onClick={() => handleShow(i)}
+            style={{cursor: "pointer"}}>
             <Card.Body>
               <div className="float-right" hidden={!(user.id === filteredVideos.userId)}>
                 <Button variant="danger" size="sm" value={filteredVideos.id} onClick={() => deleteVideo(filteredVideos.id, filteredVideos.postId)}>Slett</Button>
               </div>
-
-              <div className="left">
-              <Image src={`https://img.youtube.com/vi/${filteredVideos.youTubeId}/0.jpg`}
-              width="200px"
-              onClick={() => handleShow(i)}
-              style={{cursor: "pointer"}}>
-              </Image>
-              </div>
-
-              <div className="vidright">
-              {infoTopics.filter(infoTopics => (infoTopics.id === filteredVideos.infoTopicId)).map((filteredTopics, i) => (
-              <p className="toptext">Delt i {filteredTopics.title}</p>))}
-              <h3 className="title">{titleLength(filteredVideos.title)}</h3><Link to={`/Forum/${filteredVideos.postId}`}>Diskuter i forumet</Link>
-              </div>
-              </Card.Body>
+            <Row sm={1}>
               
-              </Card>
+              <Col md={6} sm={1}>
+              <div className="content">
+              {infoTopics.filter(infoTopics => (infoTopics.id === filteredVideos.infoTopicId)).map((filteredTopics, i) => (
+              <p className="toptext">Delt {post.filter(post => (post.id === filteredVideos.postId)).map((filteredPosts , i) => (
+                moment(filteredPosts.date).calendar()))} i {filteredTopics.title}
+              </p>))}
+              <div className="title">{filteredVideos.title}</div><br/><br/>
+              <p>Klikk for å se video</p>
+              <Link to={`/Forum/${filteredVideos.postId}`}>Diskuter i forumet</Link>
+              </div> 
+              </Col>
+              <Col md={6} sm={11}>
+              <div className="contentimg">
+              <Image src={`https://img.youtube.com/vi/${filteredVideos.youTubeId}/0.jpg`} />
+              </div>
+              </Col>
+            </Row>
+            </Card.Body>
+            </Card>
+            
                ))}
 
               {videos.map((filteredVideos, i) => (
@@ -78,6 +78,7 @@ const VideoContent = ({ videos, infoTopics, content, deletePost, setVideoContent
                                 frameBorder="0"
                                 src={`https://www.youtube.com/embed/${filteredVideos.youTubeId}`} width="100%" height="300px"/>
                                 <p>{filteredVideos.description}</p>
+                                <Link to="/Forum">Diskuter i forumet</Link>
                               </Modal.Body>
                               <Modal.Footer>
                                 <Button variant="secondary" onClick={handleClose}>

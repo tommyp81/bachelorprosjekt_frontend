@@ -33,13 +33,13 @@
 }
 
 @media (min-width: 1024px) {
-    .Forum .newpost {
-    }
-
     .Forum .mobilesearch {
         display: none;
     }
     
+    .NewPost p {
+        margin-left: -5px;
+    }
 }
 
 
@@ -118,7 +118,6 @@ Satte margin-top 20px fordi det er samme som Pages objektet
 
 .NewPost p {
     color: white;
-    margin-left: -5px;
     text-align: left;
 }
 

@@ -1,81 +1,133 @@
-.Kunnskapsportalen {
-   
-}
-
 .Kunnskapsportalen .container {
-    margin-top: 200px;
+    margin-top: 150px;
     background-color: #0b2c63;
     border-radius: 10px;
     padding: 30px; 
 }
 
-.Kunnskapsportalen h1, h4 {
-    text-align: center;
+.Kunnskapsportalen h1, .topictitle, .desc {
     color: white;
+    text-align: center;
+}
+.Kunnskapsportalen .topictitle {
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 30px;
+}
+
+.Kunnskapsportalen .desc {
+    margin-bottom: 20px;
 }
 
 .Kunnskapsportalen .top {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    width: 50%;
 }
 
 .Kunnskapsportalen .videocol {
     float: left;
-    margin-left: -15px;
-}
-
-.Kunnskapsportalen .divider {
-    border-left: 1px solid #dee2e6;
-    height: 98%;
-    position: absolute;
-    left: 50%;
 }
 
 .Kunnskapsportalen .documentcol {
     float: right;
-    margin-right: -15px;
 }
 
 .Kunnskapsportalen .card {
     margin-top: 10px;
 }
 
-
-
-.Kunnskapsportalen .card .left {
-    float: left;
+.Kunnskapsportalen .card .contentimg {
+    float: right;
 }
 
-.Kunnskapsportalen .card .vidright {
-    margin-left: 210px;
+.Kunnskapsportalen .card img, .Kunnskapsportalen .card .icon {
+    float: right;
+    max-width: 175px;
+}
+
+.Kunnskapsportalen .card .title {
+    font-weight: 600;
+    font-size: 30px;
+    white-space: nowrap;
+    display: inline;
+} 
+
+.Kunnskapsportalen .card .content {
+    white-space: nowrap;
+}
+
+/*Mobile*/
+@media (max-width: 425px) {
+    .Kunnskapsportalen .card .title, .Kunnskapsportalen .card .content {
+        white-space: unset;
+    }
+
+    .Kunnskapsportalen .card img {
+        display: block;
+        margin: auto;
+        max-width: 100%;
+    }    
 }
 
 @media (max-width: 320px) {
-    .Kunnskapsportalen .card .vidright {
-        margin-left: unset;
+    .Kunnskapsportalen .card .content {
+        margin: 2.5px 0px 2.5px 6px;
     }
-} 
-
-.Kunnskapsportalen .card .title {
-    font-size: 26px;
 }
 
-.Kunnskapsportalen .card .content {
+@media (max-width: 767px) {
+    .Kunnskapsportalen h1 {
+        font-size: 26px;
+    }
 
+    .Kunnskapsportalen .card .desktop {
+        display: none;
+    }
+
+    .Kunnskapsportalen .card .title {
+        font-size: 24px;
+    }    
+    
+    .Kunnskapsportalen .tabs .nav-item {
+        margin: 2.5px 0px 2.5px 6px;
+    }  
+   
 }
 
-.Kunnskapsportalen .card a {
+@media (max-width: 575px) {
+    .Kunnskapsportalen .card img {
+        max-width: 100%
+    }    
 }
+
+@media (min-width: 768px) {
+    .Kunnskapsportalen .card .iconmobile {
+        display: none;
+    }
+}
+
 
 .Kunnskapsportalen .tabs {
-    margin-top: 20px;
     justify-content: center;
+}
+
+.Kunnskapsportalen .tabs .nav-item {
+    color: white;
+    font-size: 15px;
+    margin: 2.5px 0px 40px 6px;
+    background-color: #007bff;
+}
+
+.Kunnskapsportalen .tabs .nav-item:hover,
+.Kunnskapsportalen .tabs .nav-item:focus,
+.Kunnskapsportalen .tabs .nav-item:target { 
+    background-color: #005fc4;
 }
 
 .Kunnskapsportalen .tab {
     margin-bottom: 20px;
+    
 }
 
 @media (max-width: 1023px) {
@@ -84,18 +136,7 @@
     }
 }
 
-.Kunnskapsportalen .infotopics {
-}
-
-.Kunnskapsportalen .maincontent {
-}
-
-.InfoTopics {
-    margin-bottom: 10px;
-    
-}
-
-.InfoTopics .btn  {
+.InfoTopics .btn-primary  {
     margin: 2.5px;
     background-color: #28a745;
     color: white;
@@ -106,19 +147,12 @@
 .InfoTopics .btn:hover,
 .InfoTopics .btn:focus, 
 .InfoTopics .btn:target, 
-.InfoTopics .btn:active {
+.InfoTopics .btn:not(:disabled):not(.disabled).active,
+.InfoTopics .btn-primary:not(:disabled):not(.disabled):active {
     background-color: #1b8b35;
-    box-shadow: unset;
     border: unset;
 }
 
-
 .UploadFile {
-}
-
-.UploadFile p {
-    margin-left: 5px;
-}
-
-.UploadFile .modal-header .title {
+    margin-left: 15px;
 }

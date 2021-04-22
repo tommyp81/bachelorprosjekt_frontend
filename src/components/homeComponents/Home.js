@@ -24,10 +24,17 @@ const Home = ({ posts, topic, subtopic, users, loading }) => {
     <div className="Home">
       <Container>
         <Row className="toprow">
-          <Col><div className="sortposts"><SortPosts post={filteredPosts} setFilteredPosts={setFilteredPosts}/></div></Col>
+          <Col>
+          <div className="float-left">
+            <h3>Diskusjoner i forumet</h3>
+          </div>
+          <div className="sortposts">
+          <SortPosts post={filteredPosts} setFilteredPosts={setFilteredPosts}/>
+          </div>
+          </Col>
           <Col className="hidden"></Col>
         </Row>
-        <Row xs={1} sm={1} lg={2}>
+        <Row md={1} lg={2}>
           <Col md={6} className="feedcol">
             {loading ? (
               <SpinnerDiv />
