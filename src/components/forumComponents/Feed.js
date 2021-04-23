@@ -21,8 +21,8 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
 
   return (
     <div className="Feed">
-      {posts.slice(0, maxLength).map((post, i) => (
-        <Card key={i}>
+      {posts.slice(0, maxLength).map((post) => (
+        <Card key={post.id}>
           <Link
             to={`/forum/${post.id}`}
             style={{ textDecoration: "none", color: "#000000" }}
