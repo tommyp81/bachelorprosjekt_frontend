@@ -2,7 +2,8 @@
     margin-top: 150px;
     background-color: #0b2c63;
     border-radius: 10px;
-    padding: 30px; 
+    padding-bottom: 30px;
+    padding-top: 30px;
 }
 
 .Kunnskapsportalen h1, .topictitle, .desc {
@@ -53,21 +54,12 @@
     display: inline;
 } 
 
-.Kunnskapsportalen .card .content {
-    white-space: nowrap;
-}
 
 /*Mobile*/
 @media (max-width: 425px) {
     .Kunnskapsportalen .card .title, .Kunnskapsportalen .card .content {
         white-space: unset;
     }
-
-    .Kunnskapsportalen .card img {
-        display: block;
-        margin: auto;
-        max-width: 100%;
-    }    
 }
 
 @media (max-width: 320px) {
@@ -76,10 +68,15 @@
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .Kunnskapsportalen h1 {
         font-size: 26px;
     }
+
+    .Kunnskapsportalen .card img {
+        margin-top: 5px;
+        max-width: 100%;
+    }    
 
     .Kunnskapsportalen .card .desktop {
         display: none;

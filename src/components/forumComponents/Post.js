@@ -75,28 +75,25 @@ const Post = ({users, post, deletePost, commentsLength, setPost }) => {
         <Card.Body>
           <div className="float-left">
             <p>Postet av <b>{users && users.length && users.find(u => u.id === post.userId)?.username}</b> {moment(post.date).calendar()}</p>
-          </div>
+          </div><div className="float-right"> 
+              {post.like_Count} <LikeButton id={post.id} liked={liked} setLiked={setLiked} isPost={true} updatePostLike={updatePostLike}/> &nbsp;
+              {post.comment_Count}<FaRegComment size={18} color="grey" className="ml-2 mr-2 mb-1"/>  
+            </div>
           
           <Card.Title><br /><br />
             <h2>{post.title}</h2>
           </Card.Title>
           <Card.Text>
             {post.content}
-            <br/>
-            
           </Card.Text>
             <div className="float-left">
               {post.documentId ? <p>Vedlegg: <b><FileLink fileId={post.documentId} /></b></p>  : ""}
             </div>
-            <br/><br/>
-          <div className="float-left" hidden={!(user.id === post.userId)}>
+          <div className="float-right" hidden={!(user.id === post.userId)}>
             <EditPost post={post} edit={editPost}/> &nbsp;
             <Button variant="danger" size="sm" onClick={deletePost} value={post.id}>Slett</Button>
           </div>
-            <div className="float-right"> 
-              {post.like_Count} <LikeButton id={post.id} liked={liked} setLiked={setLiked} isPost={true} updatePostLike={updatePostLike}/> &nbsp;
-              {post.comment_Count}<FaRegComment size={18} color="grey" className="ml-2 mr-2 mb-1"/>  
-            </div>
+            
           </Card.Body>
       </Card>
   )

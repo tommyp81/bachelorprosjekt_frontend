@@ -35,30 +35,31 @@ const VideoContent = ({ videos, infoTopics, content, deletePost, setVideoContent
             onClick={() => handleShow(i)}
             style={{cursor: "pointer"}}>
             <Card.Body>
-            <Row sm={1}>
+            <Row>
               
-              <Col md={6} sm={1}>
-              <div className="content">
-              {infoTopics.filter(infoTopics => (infoTopics.id === filteredVideos.infoTopicId)).map((filteredTopics, i) => (
-              <p className="toptext">Delt {post.filter(post => (post.id === filteredVideos.postId)).map((filteredPosts , i) => (
-                moment(filteredPosts.date).calendar()))} i {filteredTopics.title}
-              </p>))}
-              <div className="title">{filteredVideos.title}</div><br/><br/>
-              <p>Klikk for å se video</p>
-              <Link to={`/Forum/${filteredVideos.postId}`}>Diskuter i forumet</Link>
-              </div> 
+              <Col md={5}>
+                <div className="content">
+                {infoTopics.filter(infoTopics => (infoTopics.id === filteredVideos.infoTopicId)).map((filteredTopics, i) => (
+                <p className="toptext">Delt {post.filter(post => (post.id === filteredVideos.postId)).map((filteredPosts , i) => (
+                  moment(filteredPosts.date).calendar()))} i {filteredTopics.title}
+                </p>))}
+                <div className="title">{filteredVideos.title}</div><br/>
+                <p>Klikk for å se video</p>
+                <div hidden={!(user.id === filteredVideos.userId)}>
+                <Button variant="danger" size="sm" value={filteredVideos.id} onClick={() => deleteVideo(filteredVideos.id, filteredVideos.postId)}>Slett</Button>
+                </div>
+                </div> 
               </Col>
-              <Col md={6} sm={11}>
-              <div className="contentimg">
-              <Image src={`https://img.youtube.com/vi/${filteredVideos.youTubeId}/0.jpg`} />
-              </div>
+              <Col md={7}>
+                <div className="contentimg">
+                <Image src={`https://img.youtube.com/vi/${filteredVideos.youTubeId}/0.jpg`}/>
+                
+                </div>
               </Col>
             </Row>
             </Card.Body>
             </Card>
-            <div className="float-right" hidden={!(user.id === filteredVideos.userId)}>
-              <Button variant="danger" size="sm" value={filteredVideos.id} onClick={() => deleteVideo(filteredVideos.id, filteredVideos.postId)}>Slett</Button>
-            </div>
+            
             </>
                ))}
 
@@ -78,7 +79,7 @@ const VideoContent = ({ videos, infoTopics, content, deletePost, setVideoContent
                                 frameBorder="0"
                                 src={`https://www.youtube.com/embed/${filteredVideos.youTubeId}`} width="100%" height="300px"/>
                                 <p>{filteredVideos.description}</p>
-                                <Link to="/Forum">Diskuter i forumet</Link>
+                                <Link to={`/Forum/${filteredVideos.postId}`}>Diskuter i forumet</Link>
                               </Modal.Body>
                               <Modal.Footer>
                                 <Button variant="secondary" onClick={handleClose}>

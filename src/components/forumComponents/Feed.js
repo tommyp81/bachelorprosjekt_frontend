@@ -38,15 +38,7 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
                     </Card.Text>
                   ))}
               </div>
-              <br />
-              <br />
-              <Card.Title>{post.title}</Card.Title>
-              <Card.Text className="float-left">
-                <ReadMoreReact text={post.content} /><br/>
-              </Card.Text>
-              <br />
-              <br />
-              <Card.Text className="float-right">
+              <div className="float-right">
                 {post.like_Count}{" "}
                 <FaThumbsUp
                   className="ml-1 mr-1 mb-2"
@@ -59,8 +51,16 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
                   size={18}
                   color="grey"
                   className="ml-2 mr-2 mb-1"
-                />
+                /></div>
+              <br />
+              <br />
+              <Card.Title>{post.title}</Card.Title>
+              <Card.Text className="float-left">
+                <ReadMoreReact text={post.content} /><br/>
               </Card.Text>
+              <br />
+              <br />
+              
               {topic
                 .filter((topic) => topic.id === post.topicId)
                 .map((filteredTopics, j) => (

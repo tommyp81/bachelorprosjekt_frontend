@@ -75,7 +75,7 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, addPost, dele
               <Row>
                 <Col lg={12} className="maincontent">
                   
-                  <Tabs defaultActiveKey={!useCheckMobileScreen ? "1" : "2"} className="tabs" as={Button} variant="pills">
+                  <Tabs defaultActiveKey="1" className="tabs" as={Button} variant="pills">
                     
                     
                     {useCheckMobileScreen ? <Tab eventKey="1" title="Vis alt" className="tab">
