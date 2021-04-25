@@ -163,6 +163,7 @@ const UploadFile = ({infoTopics, documents, setVideos, setDocuments, addPost}) =
           <Tab title="Video" eventKey="0">
             <Modal.Body>
               <Form>
+
                 <Form.Group> 
                 <Form.Label>YouTube-URL</Form.Label>   
                 <Form.Control
@@ -172,6 +173,7 @@ const UploadFile = ({infoTopics, documents, setVideos, setDocuments, addPost}) =
                 value={id}
                 onChange={e => setId(e.target.value)}
                 /><br />
+
                 <Form.Label>Tittel</Form.Label>
                 <Form.Control
                 type="text"
@@ -180,6 +182,7 @@ const UploadFile = ({infoTopics, documents, setVideos, setDocuments, addPost}) =
                 value={title}
                 onChange={e => setTitle(e.target.value)}
                 /><br />
+
                 <Form.Label>Beskrivelse</Form.Label>
                 <Form.Control
                 as="textarea" 
@@ -188,6 +191,7 @@ const UploadFile = ({infoTopics, documents, setVideos, setDocuments, addPost}) =
                 value={description}
                 onChange={e => setDescription(e.target.value)}
                 /><br/>
+                
                 <Form.Label>Velg kategori</Form.Label>  
                 <Form.Control 
                 as="select" 
@@ -270,9 +274,9 @@ const UploadFile = ({infoTopics, documents, setVideos, setDocuments, addPost}) =
           </Button>
         </Modal.Footer>*/}
       </Modal>
-              </div>
+    </div>
   )
-              }
+}
 
 export default UploadFile;
 
