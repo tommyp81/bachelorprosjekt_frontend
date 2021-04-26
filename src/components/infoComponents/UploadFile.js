@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Button,
   Tabs,
@@ -14,12 +14,15 @@ import "./Kunnskapsportalen.css";
 import FileDrop from "../FileDrop";
 import validator from "validator";
 import { host } from '../../App'
+import { UserContext } from "../../UserContext";
 
 const UploadFile = ({infoTopics, documents, setVideos, setDocuments, addPost}) => {
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const {user} = useContext(UserContext)
 
   const [errorMessage, setErrorMessage] = useState("");
   const [validated, setValidated] = useState(false);
@@ -63,7 +66,7 @@ const UploadFile = ({infoTopics, documents, setVideos, setDocuments, addPost}) =
     const postData = {
       title,
       content: description,
-      userId: 8,
+      userId: user.id,
       subTopicId: Number(infoTopicId) + 16,
       topicId: 5
     }
@@ -76,7 +79,7 @@ const UploadFile = ({infoTopics, documents, setVideos, setDocuments, addPost}) =
       youtubeId: matchString,
       title,
       description,
-      userId: 8,
+      userId: user.id,
       postId,
       infoTopicId
     }
@@ -128,7 +131,7 @@ const UploadFile = ({infoTopics, documents, setVideos, setDocuments, addPost}) =
     }
     let formData = new FormData();
     formData.append('File', file)
-    formData.append('userId', 8) //skal ikke være hardkodet
+    formData.append('userId', user.id) //skal ikke være hardkodet
     formData.append('infoTopicId', infoTopicId)
     fetch(host+'UploadDocument', {
       method: 'POST',

@@ -44,7 +44,7 @@
 
 .Kunnskapsportalen .card img, .Kunnskapsportalen .card .icon {
     float: right;
-    max-width: 175px;
+    max-width: 200px;
 }
 
 .Kunnskapsportalen .card .title {
@@ -68,7 +68,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 769px) {
     .Kunnskapsportalen h1 {
         font-size: 26px;
     }
@@ -94,10 +94,11 @@
     }    
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
     .Kunnskapsportalen .card .iconmobile {
         display: none;
     }
+    
 }
 
 

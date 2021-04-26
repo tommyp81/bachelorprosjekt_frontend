@@ -4,128 +4,123 @@ import WelcomeLogo from "../loginComponents/WelcomeLogo";
 import { host } from "../../App";
 import "./Register.css";
 
-const Register = (props) => {
+const Register = ({ setTabKey, setUsers}) => {
 
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const [username, setUsername] = useState("");
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [Brukernavn, setBrukernavn] = useState("");
+  const [Fornavn, setFornavn] = useState("");
+  const [Etternavn, setEtternavn] = useState("");
+  const [Epost, setEpost] = useState("");
+  const [Passord, setPassord] = useState("");
+  const [BekreftPassord, setBekreftPassord] = useState("");
 
   const handleSubmitUser = async (event) => {
-    const userData = {
-      username: username,
-      firstName: firstname,
-      lastName: lastname,
-      //epost: email,
-      password: password,
-      //bekreftPassord: confirmPassword
+
+    event.preventDefault();
+    const brukerData = {
+      username: Brukernavn,
+      firstName: Fornavn,
+      lastName: Etternavn,
+      email: Epost,
+      password: Passord,
+      //bekreftPassord: BekreftPassord
     };
+
+    console.log("Objektet:");
+    console.log(brukerData);
 
     fetch(host + "users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(userData),
+      body: JSON.stringify(brukerData),
     })
       .then((res) => {
-        return res.json();
+        if(res.ok)
+          return res.json();
+        throw res
       })
       .then((data) => {
-        console.log(data);
+        setUsers(current => [...current, data])
       })
       .catch((error) => console.log(error));
 
-    handleClose();
+      setTabKey('login')
+
   };
 
   return (
     <div className="Register">
       <Container fluid="md">
         <Row>
-          <Col className="submit" sm={30}>
-            <h2 id="registerHeading">Registrer informasjonen din</h2>
-
-            <Form>
-              <Form.Group controlId="">
+          {/*<Col className="logo" sm={12} >
+                        <WelcomeLogo />
+                        </Col>*/}
+          <Col className="submit">
+            <Form onSubmit={handleSubmitUser}>
+              <Form.Group >
                 <Form.Label>Brukernavn</Form.Label>
                 <Form.Control
-                  id="username"
                   type="text"
-                  name="Brukernavn"
                   placeholder="Brukernavn"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  value={Brukernavn}
+                  onChange={(e) => setBrukernavn(e.target.value)}
                 />
               </Form.Group>
 
-              <Form.Group controlId="">
+              <Form.Group >
                 <Form.Label>Fornavn</Form.Label>
                 <Form.Control
-                  id="firstname"
                   type="text"
-                  name="Fornavn"
-                  placeholder=""
-                  value={firstname}
-                  onChange={(e) => setFirstname(e.target.value)}
+                  placeholder="Fornavn"
+                  value={Fornavn}
+                  onChange={(e) => setFornavn(e.target.value)}
                 />
               </Form.Group>
 
-              <Form.Group controlId="">
+              <Form.Group >
                 <Form.Label>Etternavn</Form.Label>
                 <Form.Control
-                  id="lastname"
                   type="text"
-                  name="Etternavn"
-                  placeholder=""
-                  value={lastname}
-                  onChange={(e) => setLastname(e.target.value)}
+                  placeholder="Etternavn"
+                  value={Etternavn}
+                  onChange={(e) => setEtternavn(e.target.value)}
                 />
               </Form.Group>
 
-              <Form.Group controlId="formBasicEmail">
+              <Form.Group >
                 <Form.Label>E-post</Form.Label>
                 <Form.Control
                   type="email"
-                  name="email"
                   placeholder="email@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={Epost}
+                  onChange={(e) => setEpost(e.target.value)}
                 />
               </Form.Group>
 
-              <Form.Group controlId="formBasicPassword">
+              <Form.Group >
                 <Form.Label>Passord</Form.Label>
                 <Form.Control
                   type="password"
-                  name="password"
-                  placeholder=""
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Passord"
+                  value={Passord}
+                  onChange={(e) => setPassord(e.target.value)}
                 />
               </Form.Group>
 
-              <Form.Group controlId="formBasicPassword">
+              <Form.Group >
                 <Form.Label>Bekreft passord</Form.Label>
                 <Form.Control
                   type="password"
-                  name="password"
-                  placeholder=""
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="Bekreft Passord"
+                  value={BekreftPassord}
+                  onChange={(e) => setBekreftPassord(e.target.value)}
                 />
               </Form.Group>
 
               <Button
                 variant="success"
                 type="submit"
-                onClick={handleSubmitUser}
               >
                 Sendt inn
               </Button>

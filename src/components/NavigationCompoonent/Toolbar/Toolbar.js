@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Toolbar.css";
 import logo from "../../../assets/images/BadmintonClubLogo.png";
 import ToggleButton from "../SideDrawer/ToggleButton";
+import { UserContext } from "../../../UserContext";
 import { AiFillHome } from "react-icons/ai";
-import { BsChatDotsFill } from "react-icons/bs";
+import { BsBoxArrowLeft, BsChatDotsFill } from "react-icons/bs";
 import { BsPersonFill } from "react-icons/bs";
 import { HiAcademicCap } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import { Button, Dropdown } from "react-bootstrap";
 
 const ToolBar = (props) => {
+  const {user} = useContext(UserContext)
   return (
     <header className="toolbar">
       <nav className="tnavigation">
@@ -21,28 +24,52 @@ const ToolBar = (props) => {
           </Link>
           <a href="/">Norges Badmintonforbund</a>
         </div>
-        <div className="freeSpace" />
         <div className="tNavItems">
           <ul>
-            <li>
+            <li className="linkItem">
               <Link to="/">
                 <AiFillHome size="20px" /> Hjem
               </Link>
             </li>
-            <li>
+            <li className="linkItem">
               <Link to="/Forum">
                 <BsChatDotsFill size="18px" /> Forum
               </Link>
             </li>
-            <li>
+            <li className="linkItem">
               <Link to="/Kunnskapsportalen">
                 <HiAcademicCap size="23px" /> Kunnskapsportalen
               </Link>
             </li>
-            <li>
-              <Link to="/Login">
-                <BsPersonFill size="20px" /> Logg Inn
-              </Link>
+            </ul>
+            </div>
+           
+            <div className="uNavItems">
+            <ul className="user">
+             {user.loggedIn ? 
+              <Dropdown>
+                <Dropdown.Toggle>
+                  <BsPersonFill size="20px" /> {user.username}
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item>Logget inn som: <b>{user.username}</b></Dropdown.Item>
+                  <Dropdown.Item>Fornavn: {user.firstName}</Dropdown.Item>
+                  <Dropdown.Item>Etternavn: {user.lastName}</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+              :
+              ""
+             }
+            <li className="userItem">
+              {user.loggedIn ? 
+                <Link to="#" onClick={props.logout}>
+                  <BsBoxArrowLeft size="22px" /> Logg ut
+                </Link>
+              :
+                <Link to="/Login">
+                  <BsPersonFill size="20px" /> Logg Inn
+                </Link>
+              }
             </li>
           </ul>
         </div>

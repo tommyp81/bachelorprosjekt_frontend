@@ -25,6 +25,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import Toolbar from "./components/NavigationCompoonent/Toolbar/Toolbar";
 import SideDrawer from "./components/NavigationCompoonent/SideDrawer/SideDrawer";
 import Backdrop from "./components/NavigationCompoonent/Backdrop/Backdrop";
+import NotFound from "./components/NotFound";
 // https://webforum.azurewebsites.net/posts
 // https://webforum.azurewebsites.net/answers
 // https://webforum.azurewebsites.net/users
@@ -53,6 +54,10 @@ const App = () => {
   const [videos, setVideos] = useState([])
   const [documents, setDocuments] = useState([])
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
+
+  const testlogout = () => {
+    setUser({})
+  }
 
   const handleDrawerToggleClick = () => {
     setSideDrawerOpen((prevDrawerState) => !prevDrawerState);
@@ -152,7 +157,7 @@ const App = () => {
     })
 
     if(res.status === 200) {
-      setPost(postId, {}, true)
+      updatePostInArray(postId, {}, true)
       return true
     } else {
       return false
@@ -165,7 +170,7 @@ const App = () => {
   }
 
 
-  const setPost = (id, changes, isDelete) => {
+  const updatePostInArray = (id, changes, isDelete) => {
     if(!isDelete) {
       const updatedPosts = posts.map(p => {
         if(p.id == id) {
@@ -186,62 +191,57 @@ const App = () => {
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <div className="App">
-        <Toolbar handleDrawerToggleClick={handleDrawerToggleClick} />
+        <Toolbar handleDrawerToggleClick={handleDrawerToggleClick} logout={testlogout}/>
         <SideDrawer show={sideDrawerOpen} toggle={handleDrawerToggleClick} />
         {backdrop}
         <Switch>
-          <Route path="/Login" component={Login} history={history} />
-          <ProtectedRoute
-            exact
-            path="/"
-            component={Home}
-            topic={topics}
-            subtopic={subtopics}
-            users={users}
-            posts={posts}
-            loading={loading}
-          />
-          <ProtectedRoute
-            path="/Register"
-            component={Register}
-            Register={Register}
-          />
-          <ProtectedRoute
-            exact
-            path="/Forum"
-            component={Forum}
-            posts={posts}
-            addPost={addPost}
-            subtopics={subtopics}
-            topics={topics}
-            users={users}
-            history={history}
-            loading={loading}
-          />
-          <ProtectedRoute
-            exact
-            path="/Kunnskapsportalen"
-            component={Kunnskapsportalen}
-            infoTopics={infoTopics}
-            videos={videos}
-            documents={documents}
-            users={users}
-            post={posts}
-            addPost={addPost}
-            deletePost={deletePost}
-          />
-          <ProtectedRoute
-            exact
-            path="/Forum/:postId"
-            component={Thread}
-            subtopics={subtopics}
-            topics={topics}
-            users={users}
-            history={history}
-            getPost={getPost}
-            setPost={setPost}
-            deletePost={deletePost}
-          />
+          <Route path="/Login">
+            <Login history={history} setUsers={setUsers} />
+          </Route>
+          <ProtectedRoute exact path="/">
+            <Home 
+              topic={topics}
+              subtopic={subtopics}
+              users={users}
+              posts={posts}
+              loading={loading}
+            />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/Forum">
+            <Forum
+              posts={posts}
+              addPost={addPost}
+              subtopics={subtopics}
+              topics={topics}
+              users={users}
+              history={history}
+              loading={loading}
+            />
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/Kunnskapsportalen">
+            <Kunnskapsportalen
+              infoTopics={infoTopics}
+              videos={videos}
+              documents={documents}
+              users={users}
+              post={posts}
+              addPost={addPost}
+              deletePost={deletePost}
+            />
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/Forum/:postId">
+            <Thread
+              subtopics={subtopics}
+              topics={topics}
+              users={users}
+              history={history}
+              getPost={getPost}
+              updatePostInArray={updatePostInArray}
+              deletePost={deletePost}
+            />
+          </ProtectedRoute>
+          <Route path="/error" component={NotFound} />
         </Switch>
         <Footer />
       </div>
