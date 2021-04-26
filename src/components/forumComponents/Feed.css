@@ -39,6 +39,5 @@
   }
 
   .Feed .card:last-child {
-    border-bottom: 1px solid rgb(209, 209, 209);
   }
 }

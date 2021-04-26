@@ -1,14 +1,19 @@
-import React from "react";
+import {React ,useContext} from "react";
 import "./Toolbar.css";
 import logo from "../../../assets/images/BadmintonClubLogo.png";
 import ToggleButton from "../SideDrawer/ToggleButton";
+import { UserContext } from "../../../UserContext";
 import { AiFillHome } from "react-icons/ai";
 import { BsChatDotsFill } from "react-icons/bs";
 import { BsPersonFill } from "react-icons/bs";
 import { HiAcademicCap } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import { Dropdown } from "react-bootstrap";
 
 const ToolBar = (props) => {
+
+  const { user } = useContext(UserContext)
+
   return (
     <header className="toolbar">
       <nav className="tnavigation">
@@ -21,7 +26,6 @@ const ToolBar = (props) => {
           </Link>
           <a href="/">Norges Badmintonforbund</a>
         </div>
-        <div className="freeSpace" />
         <div className="tNavItems">
           <ul>
             <li>
@@ -39,9 +43,26 @@ const ToolBar = (props) => {
                 <HiAcademicCap size="23px" /> Kunnskapsportalen
               </Link>
             </li>
+            </ul>
+            </div>
+           
+            <div className="uNavItems">
+            <ul className="user">
+             {/*<li>
+              <Dropdown>
+                <Dropdown.Toggle>
+              <BsPersonFill size="20px" />
+              {user.username}
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item>Fornavn Etternavn</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+              
+            </li>*/}
             <li>
               <Link to="/Login">
-                <BsPersonFill size="20px" /> Logg Inn
+                 Logg ut
               </Link>
             </li>
           </ul>

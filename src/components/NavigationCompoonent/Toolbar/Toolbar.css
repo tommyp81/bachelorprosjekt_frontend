@@ -24,9 +24,7 @@
   left: 0;
   border-radius: 18px;
 }
-.freeSpace {
-  flex: 1;
-}
+
 .tnavigation {
   display: flex;
   height: 100%;
@@ -34,14 +32,24 @@
   padding: 0 1rem;
 }
 
-.tNavItems ul {
+.tNavItems {
+  margin-left: 50px;
+}
+
+.tNavItems ul, .uNavItems ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
 }
 
-.tNavItems a {
+.uNavItems .user {
+  position: absolute;
+  right: 1rem;
+  top: 3px;
+}
+
+.tNavItems a, .uNavItems a {
   color: white;
   text-decoration: none;
   display: block;
@@ -52,14 +60,17 @@
   font-weight: 500;
 }
 .tNavItems li a:hover,
+.uNavItems li a:hover,
 .tNavItems li a:active,
-.tNavItems li a:hover {
+.uNavItems li a:active,
+.tNavItems li a:hover,
+.uNavItems li a:hover  {
   background-color: #072557;
   border-bottom: 4px solid #40a4cb;
   color: rgb(216, 216, 216);
 }
 @media (max-width: 919px) {
-  .tNavItems {
+  .tNavItems, .uNavItems {
     display: none;
   }
   .t-toggle-btn {
