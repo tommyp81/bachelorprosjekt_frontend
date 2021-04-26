@@ -1,11 +1,7 @@
-.Register {
-  position: fixed;
-  top: 25%;
-  left: 20%;
-}
+
 
 .Register .submit {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   justify-content: center;
   background-color: #0b2c63;
