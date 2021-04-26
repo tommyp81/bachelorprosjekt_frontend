@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Form, Button, Container, Col, Modal, Row } from "react-bootstrap";
+import { Form, Button, Container, Col, Modal, Row, Tabs, Tab } from "react-bootstrap";
 import WelcomeLogo from "./WelcomeLogo";
 
 import { Link, useHistory } from "react-router-dom";
 import Register from "../registerComponent/Register";
+import { host } from '../../App'
 
 import "./Login.css";
 import { UserContext } from "../../UserContext";
@@ -12,7 +13,7 @@ const Login = ({ history }) => {
   
 
   // LOGIN / REGISTRATION HOOKS
-  const [username, setUsername] = useState(""); //test
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
 
@@ -30,9 +31,9 @@ const Login = ({ history }) => {
     // return username.length > 0 && password.length > 0;
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-	
+  //function handleSubmit(event) {
+    //event.preventDefault();
+
     /*switch (username) {
       case "test":
         setUser({ id: 6, username: "test", loggedIn: true });
@@ -62,6 +63,30 @@ const Login = ({ history }) => {
         break;
     }*/
 
+    //loginUser();
+  //}
+
+  const handleSubmit = async (event) => {
+	event.preventDefault();
+
+	console.log(username, password)
+	const formData = new FormData();
+	formData.append("username", username)
+	formData.append("password", password)
+	const res = await fetch(host+"Login",{
+		method: 'POST',
+		body: formData
+	})
+
+	if (res.ok) {
+		const data = await res.json()
+		setUser({ id: data.id, username: data.username, loggedIn: true });
+		console.log("Success")
+	  } else {
+		const resText = await res.text()
+		alert(resText)
+		return;
+	}
     loginUser();
   }
 
@@ -80,7 +105,7 @@ const Login = ({ history }) => {
           <Col className="login" lg={5}>
             <h2>Logg inn med <br />Idrettens ID</h2>
             <Form onSubmit={handleSubmit}>
-              {/* <Form.Group controlId="formBasicEmail" >
+              <Form.Group controlId="formBasicEmail" >
                     <Form.Control 
                     type="text"
                     name="username"
@@ -98,7 +123,9 @@ const Login = ({ history }) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     />
-                </Form.Group> */}
+                </Form.Group>
+
+				{/*
                 <Form.Group controlId="exampleForm.ControlSelect1">
                 <Form.Label>Innlogging</Form.Label>
 
@@ -108,7 +135,7 @@ const Login = ({ history }) => {
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Control type="password" placeholder="Passord" />
-                </Form.Group>
+                </Form.Group>*/}
 
                 {/*<Form.Control
                   as="select"
@@ -122,11 +149,11 @@ const Login = ({ history }) => {
                   <option value="pia">pia</option>
                   <option value="sepita">sepideh</option>
                   <option value="charlotte">charlotte</option>
-                </Form.Control>*/}
-              </Form.Group>
+                </Form.Control>
+				</Form.Group>*/}
 
             	<Button
-            		variant="success"
+            	    variant="success"
                 	type="submit"
                 // disabled={!validateForm()}
             	>

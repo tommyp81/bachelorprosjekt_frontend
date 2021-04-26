@@ -18,11 +18,11 @@ const Post = ({users, post, deletePost, commentsLength, setPost }) => {
   // const [post, setPost] = useState(initPost)
 
   const [liked, setLiked] = useState(false)
+  const [edited, setEdited] = useState("")
 
   const { user } = useContext(UserContext)
 
   // useEffect(() => {
-  //   console.log("HEIHEIHEI")
   //   if (initMount.current) {
   //     initMount.current = false
   //   } else {
@@ -76,6 +76,7 @@ const Post = ({users, post, deletePost, commentsLength, setPost }) => {
           <div className="float-left">
             <p>Postet av <b>{users && users.length && users.find(u => u.id === post.userId)?.username}</b> {moment(post.date).calendar()}</p>
           </div><div className="float-right"> 
+              {edited}
               {post.like_Count} <LikeButton id={post.id} liked={liked} setLiked={setLiked} isPost={true} updatePostLike={updatePostLike}/> &nbsp;
               {post.comment_Count}<FaRegComment size={18} color="grey" className="ml-2 mr-2 mb-1"/>  
             </div>

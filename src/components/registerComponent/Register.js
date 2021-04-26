@@ -5,43 +5,40 @@ import { host } from "../../App";
 import "./Register.css";
 
 const Register = (props) => {
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [Brukernavn, setBrukernavn] = useState("");
-  const [Fornavn, setFornavn] = useState("");
-  const [Etternavn, setEtternavn] = useState("");
-  const [Epost, setEpost] = useState("");
-  const [Passord, setPassord] = useState("");
-  const [BekreftPassord, setBekreftPassord] = useState("");
+  const [username, setUsername] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmitUser = async (event) => {
-    const brukerData = {
-      username: Brukernavn,
-      firstName: Fornavn,
-      lastName: Etternavn,
-      //epost: Epost,
-      password: Passord,
-      //bekreftPassord: BekreftPassord
+    const userData = {
+      username: username,
+      firstName: firstname,
+      lastName: lastname,
+      //epost: email,
+      password: password,
+      //bekreftPassord: confirmPassword
     };
-
-    console.log("Objektet:");
-    console.log(brukerData);
 
     fetch(host + "users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(brukerData),
+      body: JSON.stringify(userData),
     })
       .then((res) => {
         return res.json();
       })
       .then((data) => {
         console.log(data);
-        //setVideos(current => [...current, data])
       })
       .catch((error) => console.log(error));
 
@@ -52,9 +49,6 @@ const Register = (props) => {
     <div className="Register">
       <Container fluid="md">
         <Row>
-          {/*<Col className="logo" sm={12} >
-                        <WelcomeLogo />
-                        </Col>*/}
           <Col className="submit" sm={30}>
             <h2 id="registerHeading">Registrer informasjonen din</h2>
 
@@ -62,36 +56,36 @@ const Register = (props) => {
               <Form.Group controlId="">
                 <Form.Label>Brukernavn</Form.Label>
                 <Form.Control
-                  id="Brukernavn"
+                  id="username"
                   type="text"
                   name="Brukernavn"
                   placeholder="Brukernavn"
-                  value={Brukernavn}
-                  onChange={(e) => setBrukernavn(e.target.value)}
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </Form.Group>
 
               <Form.Group controlId="">
                 <Form.Label>Fornavn</Form.Label>
                 <Form.Control
-                  id="Fornavn"
+                  id="firstname"
                   type="text"
                   name="Fornavn"
                   placeholder=""
-                  value={Fornavn}
-                  onChange={(e) => setFornavn(e.target.value)}
+                  value={firstname}
+                  onChange={(e) => setFirstname(e.target.value)}
                 />
               </Form.Group>
 
               <Form.Group controlId="">
                 <Form.Label>Etternavn</Form.Label>
                 <Form.Control
-                  id="Etternavn"
+                  id="lastname"
                   type="text"
                   name="Etternavn"
                   placeholder=""
-                  value={Etternavn}
-                  onChange={(e) => setEtternavn(e.target.value)}
+                  value={lastname}
+                  onChange={(e) => setLastname(e.target.value)}
                 />
               </Form.Group>
 
@@ -101,8 +95,8 @@ const Register = (props) => {
                   type="email"
                   name="email"
                   placeholder="email@example.com"
-                  value={Epost}
-                  onChange={(e) => setEpost(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Form.Group>
 
@@ -112,8 +106,8 @@ const Register = (props) => {
                   type="password"
                   name="password"
                   placeholder=""
-                  value={Passord}
-                  onChange={(e) => setPassord(e.target.value)}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Form.Group>
 
@@ -123,8 +117,8 @@ const Register = (props) => {
                   type="password"
                   name="password"
                   placeholder=""
-                  value={BekreftPassord}
-                  onChange={(e) => setBekreftPassord(e.target.value)}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                 />
               </Form.Group>
 
