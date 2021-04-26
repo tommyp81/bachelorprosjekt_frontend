@@ -58,7 +58,6 @@ const Comment = ({users, initComment, deleteComment}) => {
 
     // const updatedComments = comments.map(comment => {
     //   if (comment.id === data.id) {
-    //     console.log("HEIIIIIIIIII")
     //     const updateComment = {
     //       ...comment,
     //       content: data.content, 
