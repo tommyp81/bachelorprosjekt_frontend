@@ -20,7 +20,7 @@ const Register = (props) => {
       username: Brukernavn,
       firstName: Fornavn,
       lastName: Etternavn,
-      //epost: Epost,
+      email: Epost,
       password: Passord,
       //bekreftPassord: BekreftPassord
     };
@@ -87,16 +87,15 @@ const Register = (props) => {
                 />
               </Form.Group>
 
-              {/* <Form.Group >
+              <Form.Group >
                 <Form.Label>E-post</Form.Label>
                 <Form.Control
                   type="email"
-                  name="email"
                   placeholder="email@example.com"
                   value={Epost}
                   onChange={(e) => setEpost(e.target.value)}
                 />
-              </Form.Group> */}
+              </Form.Group>
 
               <Form.Group >
                 <Form.Label>Passord</Form.Label>

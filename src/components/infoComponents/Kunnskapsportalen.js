@@ -81,7 +81,7 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, addPost, dele
                     {useCheckMobileScreen ? <Tab eventKey="1" title="Vis alt" className="tab">
                       <div className="topictitle">{!title ? "Alle kategorier" : title}</div>
                       <div className="desc">{!description ? "" : description} </div>
-                  {user.isAdmin &&
+                  {user.admin &&
                     <UploadFile infoTopics={infoTopics} documents={documents} setVideos={setVideoContent} setDocuments={setDocumentContent} addPost={addPost}/>
                   }
                       <Col xl={6} className="videocol"><VideoContent videos={videoContent} infoTopics={infoTopics} post={post} deletePost={deletePost} setVideoContent={setVideoContent}/></Col>
@@ -92,7 +92,7 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, addPost, dele
                     <Tab eventKey="2" title="Videoer" className="tab">
                     <div className="topictitle">{!title ? "Alle kategorier" : title}</div>
                     <div className="desc">{!description ? "" : description} </div>
-                    {user.isAdmin &&
+                    {user.admin &&
                     <UploadFile infoTopics={infoTopics} documents={documents} setVideos={setVideoContent} setDocuments={setDocumentContent} addPost={addPost}/>
                     }
                      <VideoContent videos={videoContent} infoTopics={infoTopics} post={post} deletePost={deletePost} setVideoContent={setVideoContent}/>
@@ -100,7 +100,7 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, addPost, dele
                     <Tab eventKey="3" title="Dokumenter" className="tab">
                     <div className="topictitle">{!title ? "Alle kategorier" : title}</div>
                     <div className="desc">{!description ? "" : description} </div>
-                    {user.isAdmin &&
+                    {user.admin &&
                     <UploadFile infoTopics={infoTopics} documents={documents} setVideos={setVideoContent} setDocuments={setDocumentContent} addPost={addPost}/>
                     }
                       <DocumentContent documents={documentContent} infoTopics={infoTopics} setDocumentContent={setDocumentContent}/>
