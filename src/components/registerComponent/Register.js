@@ -5,9 +5,6 @@ import { host } from "../../App";
 import "./Register.css";
 
 const Register = (props) => {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   const [Brukernavn, setBrukernavn] = useState("");
   const [Fornavn, setFornavn] = useState("");
@@ -17,6 +14,8 @@ const Register = (props) => {
   const [BekreftPassord, setBekreftPassord] = useState("");
 
   const handleSubmitUser = async (event) => {
+
+    event.preventDefault();
     const brukerData = {
       username: Brukernavn,
       firstName: Fornavn,
@@ -45,7 +44,8 @@ const Register = (props) => {
       })
       .catch((error) => console.log(error));
 
-    handleClose();
+      props.setTabKey('login')
+
   };
 
   return (
@@ -55,47 +55,39 @@ const Register = (props) => {
           {/*<Col className="logo" sm={12} >
                         <WelcomeLogo />
                         </Col>*/}
-          <Col className="submit" sm={30}>
-            <h2 id="registerHeading">Registrer informasjonen din</h2>
-
-            <Form>
-              <Form.Group controlId="">
+          <Col className="submit">
+            <Form onSubmit={handleSubmitUser}>
+              <Form.Group >
                 <Form.Label>Brukernavn</Form.Label>
                 <Form.Control
-                  id="Brukernavn"
                   type="text"
-                  name="Brukernavn"
                   placeholder="Brukernavn"
                   value={Brukernavn}
                   onChange={(e) => setBrukernavn(e.target.value)}
                 />
               </Form.Group>
 
-              <Form.Group controlId="">
+              <Form.Group >
                 <Form.Label>Fornavn</Form.Label>
                 <Form.Control
-                  id="Fornavn"
                   type="text"
-                  name="Fornavn"
-                  placeholder=""
+                  placeholder="Fornavn"
                   value={Fornavn}
                   onChange={(e) => setFornavn(e.target.value)}
                 />
               </Form.Group>
 
-              <Form.Group controlId="">
+              <Form.Group >
                 <Form.Label>Etternavn</Form.Label>
                 <Form.Control
-                  id="Etternavn"
                   type="text"
-                  name="Etternavn"
-                  placeholder=""
+                  placeholder="Etternavn"
                   value={Etternavn}
                   onChange={(e) => setEtternavn(e.target.value)}
                 />
               </Form.Group>
 
-              <Form.Group controlId="formBasicEmail">
+              {/* <Form.Group >
                 <Form.Label>E-post</Form.Label>
                 <Form.Control
                   type="email"
@@ -104,25 +96,23 @@ const Register = (props) => {
                   value={Epost}
                   onChange={(e) => setEpost(e.target.value)}
                 />
-              </Form.Group>
+              </Form.Group> */}
 
-              <Form.Group controlId="formBasicPassword">
+              <Form.Group >
                 <Form.Label>Passord</Form.Label>
                 <Form.Control
                   type="password"
-                  name="password"
-                  placeholder=""
+                  placeholder="Passord"
                   value={Passord}
                   onChange={(e) => setPassord(e.target.value)}
                 />
               </Form.Group>
 
-              <Form.Group controlId="formBasicPassword">
+              <Form.Group >
                 <Form.Label>Bekreft passord</Form.Label>
                 <Form.Control
                   type="password"
-                  name="password"
-                  placeholder=""
+                  placeholder="Bekreft Passord"
                   value={BekreftPassord}
                   onChange={(e) => setBekreftPassord(e.target.value)}
                 />
@@ -131,7 +121,6 @@ const Register = (props) => {
               <Button
                 variant="success"
                 type="submit"
-                onClick={handleSubmitUser}
               >
                 Sendt inn
               </Button>
