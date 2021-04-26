@@ -195,53 +195,52 @@ const App = () => {
         <SideDrawer show={sideDrawerOpen} toggle={handleDrawerToggleClick} />
         {backdrop}
         <Switch>
-          <Route path="/Login" children={<Login history={history} setUsers={setUsers} />}/>
-          <ProtectedRoute
-            exact
-            path="/"
-            component={Home}
-            topic={topics}
-            subtopic={subtopics}
-            users={users}
-            posts={posts}
-            loading={loading}
-          />
-          <ProtectedRoute
-            exact
-            path="/Forum"
-            component={Forum}
-            posts={posts}
-            addPost={addPost}
-            subtopics={subtopics}
-            topics={topics}
-            users={users}
-            history={history}
-            loading={loading}
-          />
-          <ProtectedRoute
-            exact
-            path="/Kunnskapsportalen"
-            component={Kunnskapsportalen}
-            infoTopics={infoTopics}
-            videos={videos}
-            documents={documents}
-            users={users}
-            post={posts}
-            addPost={addPost}
-            deletePost={deletePost}
-          />
-          <ProtectedRoute
-            exact
-            path="/Forum/:postId"
-            component={Thread}
-            subtopics={subtopics}
-            topics={topics}
-            users={users}
-            history={history}
-            getPost={getPost}
-            updatePostInArray={updatePostInArray}
-            deletePost={deletePost}
-          />
+          <Route path="/Login">
+            <Login history={history} setUsers={setUsers} />
+          </Route>
+          <ProtectedRoute exact path="/">
+            <Home 
+              topic={topics}
+              subtopic={subtopics}
+              users={users}
+              posts={posts}
+              loading={loading}
+            />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/Forum">
+            <Forum
+              posts={posts}
+              addPost={addPost}
+              subtopics={subtopics}
+              topics={topics}
+              users={users}
+              history={history}
+              loading={loading}
+            />
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/Kunnskapsportalen">
+            <Kunnskapsportalen
+              infoTopics={infoTopics}
+              videos={videos}
+              documents={documents}
+              users={users}
+              post={posts}
+              addPost={addPost}
+              deletePost={deletePost}
+            />
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/Forum/:postId">
+            <Thread
+              subtopics={subtopics}
+              topics={topics}
+              users={users}
+              history={history}
+              getPost={getPost}
+              updatePostInArray={updatePostInArray}
+              deletePost={deletePost}
+            />
+          </ProtectedRoute>
           <Route path="/error" component={NotFound} />
         </Switch>
         <Footer />
