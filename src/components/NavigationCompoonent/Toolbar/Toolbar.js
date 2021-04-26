@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Toolbar.css";
 import logo from "../../../assets/images/BadmintonClubLogo.png";
 import ToggleButton from "../SideDrawer/ToggleButton";
@@ -7,8 +7,11 @@ import { BsChatDotsFill } from "react-icons/bs";
 import { BsPersonFill } from "react-icons/bs";
 import { HiAcademicCap } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import { UserContext } from "../../../UserContext";
 
 const ToolBar = (props) => {
+  const {user} = useContext(UserContext)
   return (
     <header className="toolbar">
       <nav className="tnavigation">
@@ -40,9 +43,15 @@ const ToolBar = (props) => {
               </Link>
             </li>
             <li>
-              <Link to="/Login">
-                <BsPersonFill size="20px" /> Logg Inn
-              </Link>
+              {user.loggedIn ? 
+                <Link to="#" onClick={props.logout}>
+                  <BsPersonFill size="20px" /> Logg ut
+                </Link>
+              :
+                <Link to="/Login">
+                  <BsPersonFill size="20px" /> Logg Inn
+                </Link>
+              }
             </li>
           </ul>
         </div>

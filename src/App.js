@@ -25,6 +25,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import Toolbar from "./components/NavigationCompoonent/Toolbar/Toolbar";
 import SideDrawer from "./components/NavigationCompoonent/SideDrawer/SideDrawer";
 import Backdrop from "./components/NavigationCompoonent/Backdrop/Backdrop";
+import NotFound from "./components/NotFound";
 // https://webforum.azurewebsites.net/posts
 // https://webforum.azurewebsites.net/answers
 // https://webforum.azurewebsites.net/users
@@ -53,6 +54,10 @@ const App = () => {
   const [videos, setVideos] = useState([])
   const [documents, setDocuments] = useState([])
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
+
+  const testlogout = () => {
+    setUser({})
+  }
 
   const handleDrawerToggleClick = () => {
     setSideDrawerOpen((prevDrawerState) => !prevDrawerState);
@@ -152,7 +157,7 @@ const App = () => {
     })
 
     if(res.status === 200) {
-      setPost(postId, {}, true)
+      updatePostInArray(postId, {}, true)
       return true
     } else {
       return false
@@ -165,7 +170,7 @@ const App = () => {
   }
 
 
-  const setPost = (id, changes, isDelete) => {
+  const updatePostInArray = (id, changes, isDelete) => {
     if(!isDelete) {
       const updatedPosts = posts.map(p => {
         if(p.id == id) {
@@ -186,7 +191,7 @@ const App = () => {
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <div className="App">
-        <Toolbar handleDrawerToggleClick={handleDrawerToggleClick} />
+        <Toolbar handleDrawerToggleClick={handleDrawerToggleClick} logout={testlogout}/>
         <SideDrawer show={sideDrawerOpen} toggle={handleDrawerToggleClick} />
         {backdrop}
         <Switch>
@@ -239,9 +244,10 @@ const App = () => {
             users={users}
             history={history}
             getPost={getPost}
-            setPost={setPost}
+            updatePostInArray={updatePostInArray}
             deletePost={deletePost}
           />
+          <Route path="/error" component={NotFound} />
         </Switch>
         <Footer />
       </div>

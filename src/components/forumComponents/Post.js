@@ -11,7 +11,7 @@ import SpinnerDiv from './SpinnerDiv'
 
 moment.locale('nb')
 
-const Post = ({users, post, deletePost, commentsLength, setPost }) => {
+const Post = ({users, post, deletePost,  updatePost }) => {
 
   const initMount = useRef(true);
 
@@ -59,11 +59,11 @@ const Post = ({users, post, deletePost, commentsLength, setPost }) => {
     })
     const data = await res.json();
 
-    setPost(post.id, data)
+    updatePost(post.id, data)
   }
 
   const updatePostLike = (num) => {
-    setPost(post.id, {like_Count: post.like_Count + num})
+    updatePost(post.id, {like_Count: post.like_Count + num})
   }
 
   // if(post == {}) {
