@@ -29,8 +29,6 @@ const Login = ({ history }) => {
 
   async function handleSubmit(event) {
     event.preventDefault();
-
-    console.log(username, password)
     const formData = new FormData();
     formData.append("username", username)
     formData.append("password", password)

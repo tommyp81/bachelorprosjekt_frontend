@@ -50,7 +50,6 @@ const Thread = ( { subtopics, topics, users, history, updatePostInArray, deleteP
       .catch(() => {
         history.push('/error')
       })
-      console.log("posttttt")
       return () => setPost({})
   },[postId])
   
