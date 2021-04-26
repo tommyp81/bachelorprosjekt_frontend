@@ -195,7 +195,7 @@ const App = () => {
         <SideDrawer show={sideDrawerOpen} toggle={handleDrawerToggleClick} />
         {backdrop}
         <Switch>
-          <Route path="/Login" component={Login} history={history} />
+          <Route path="/Login" children={<Login history={history} setUsers={setUsers} />}/>
           <ProtectedRoute
             exact
             path="/"
@@ -205,11 +205,6 @@ const App = () => {
             users={users}
             posts={posts}
             loading={loading}
-          />
-          <ProtectedRoute
-            path="/Register"
-            component={Register}
-            Register={Register}
           />
           <ProtectedRoute
             exact

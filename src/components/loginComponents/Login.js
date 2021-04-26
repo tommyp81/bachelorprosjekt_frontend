@@ -9,7 +9,7 @@ import "./Login.css";
 import { UserContext } from "../../UserContext";
 import { host } from "../../App";
 
-const Login = ({ history }) => {
+const Login = ({ history, setUsers }) => {
   
 
   // LOGIN / REGISTRATION HOOKS
@@ -64,7 +64,7 @@ const Login = ({ history }) => {
           </Col>
           <Col className="login" lg={5}>
             <h2>Logg inn / Registrer deg</h2>
-            <Tabs activeKey={tabKey} onSelect={k => setTabKey(k)}>
+            <Tabs transition={false} activeKey={tabKey} onSelect={k => setTabKey(k)}>
               <Tab eventKey="login" title="login">
                 <Form onSubmit={handleSubmit}>
                   <Form.Label>Innlogging</Form.Label>
@@ -92,7 +92,7 @@ const Login = ({ history }) => {
                 </Form>
               </Tab>
               <Tab eventKey="register" title="register">
-                <Register setTabKey={setTabKey}/>
+                <Register setTabKey={setTabKey} setUsers={setUsers}/>
               </Tab>
             </Tabs>
             <a href="https://www.nif.buypass.no/nif-forgot-password/">Glemt passord?</a>

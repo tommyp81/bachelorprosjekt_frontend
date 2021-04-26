@@ -4,7 +4,7 @@ import WelcomeLogo from "../loginComponents/WelcomeLogo";
 import { host } from "../../App";
 import "./Register.css";
 
-const Register = (props) => {
+const Register = ({ setTabKey, setUsers}) => {
 
   const [Brukernavn, setBrukernavn] = useState("");
   const [Fornavn, setFornavn] = useState("");
@@ -36,15 +36,16 @@ const Register = (props) => {
       body: JSON.stringify(brukerData),
     })
       .then((res) => {
-        return res.json();
+        if(res.ok)
+          return res.json();
+        throw res
       })
       .then((data) => {
-        console.log(data);
-        //setVideos(current => [...current, data])
+        setUsers(current => [...current, data])
       })
       .catch((error) => console.log(error));
 
-      props.setTabKey('login')
+      setTabKey('login')
 
   };
 
