@@ -8,29 +8,33 @@ import Footer from "../mainComponents/Footer";
 //import Header from '../mainComponents/Header'
 
 import { Link } from "react-router-dom";
-import { Navbar } from "../navigation/navbar/navbar.jsx";
+
 import SpinnerDiv from "../forumComponents/SpinnerDiv.js";
 import SortPosts from "../forumComponents/SortPosts.js";
 
 const Home = ({ posts, topic, subtopic, users, loading }) => {
-
-  const [filteredPosts, setFilteredPosts] = useState([])
+  const [filteredPosts, setFilteredPosts] = useState([]);
 
   useEffect(() => {
-    setFilteredPosts(posts.slice(0).sort((d1, d2) => (moment(d2.date) - (moment(d1.date)))));
-  }, [posts])
+    setFilteredPosts(
+      posts.slice(0).sort((d1, d2) => moment(d2.date) - moment(d1.date))
+    );
+  }, [posts]);
 
   return (
     <div className="Home">
       <Container>
         <Row className="toprow">
           <Col>
-          <div className="float-left">
-            <h3>Diskusjoner i forumet</h3>
-          </div>
-          <div className="sortposts">
-          <SortPosts post={filteredPosts} setFilteredPosts={setFilteredPosts}/>
-          </div>
+            <div className="float-left">
+              <h3>Diskusjoner i forumet</h3>
+            </div>
+            <div className="sortposts">
+              <SortPosts
+                post={filteredPosts}
+                setFilteredPosts={setFilteredPosts}
+              />
+            </div>
           </Col>
           <Col className="hidden"></Col>
         </Row>
