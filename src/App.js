@@ -71,6 +71,17 @@ const App = () => {
     backdrop = <Backdrop click={handleBackdropClick} />;
   }
 
+  const toolbar = (
+    <Toolbar
+      handleDrawerToggleClick={handleDrawerToggleClick}
+      logout={testlogout}
+    />
+  );
+
+  const sidebar = (
+    <SideDrawer show={sideDrawerOpen} toggle={handleDrawerToggleClick} />
+  );
+
   useEffect(() => {
     fetch(host + "posts")
       .then((res) => res.json())
@@ -191,14 +202,8 @@ const App = () => {
             <Login history={history} setUsers={setUsers} />
           </Route>
           <ProtectedRoute exact path="/">
-            <Toolbar
-              handleDrawerToggleClick={handleDrawerToggleClick}
-              logout={testlogout}
-            />
-            <SideDrawer
-              show={sideDrawerOpen}
-              toggle={handleDrawerToggleClick}
-            />
+            {toolbar}
+            {sidebar}
             {backdrop}
             <Home
               topic={topics}
@@ -211,14 +216,8 @@ const App = () => {
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/Forum">
-            <Toolbar
-              handleDrawerToggleClick={handleDrawerToggleClick}
-              logout={testlogout}
-            />
-            <SideDrawer
-              show={sideDrawerOpen}
-              toggle={handleDrawerToggleClick}
-            />
+            {toolbar}
+            {sidebar}
             {backdrop}
             <Forum
               posts={posts}
@@ -232,14 +231,8 @@ const App = () => {
             <Footer />
           </ProtectedRoute>
           <ProtectedRoute exact path="/Kunnskapsportalen">
-            <Toolbar
-              handleDrawerToggleClick={handleDrawerToggleClick}
-              logout={testlogout}
-            />
-            <SideDrawer
-              show={sideDrawerOpen}
-              toggle={handleDrawerToggleClick}
-            />
+            {toolbar}
+            {sidebar}
             {backdrop}
             <Kunnskapsportalen
               infoTopics={infoTopics}
