@@ -212,7 +212,6 @@ const App = () => {
               posts={posts}
               loading={loading}
             />{" "}
-            <Footer />
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/Forum">
@@ -228,7 +227,6 @@ const App = () => {
               history={history}
               loading={loading}
             />{" "}
-            <Footer />
           </ProtectedRoute>
           <ProtectedRoute exact path="/Kunnskapsportalen">
             {toolbar}
@@ -243,9 +241,11 @@ const App = () => {
               addPost={addPost}
               deletePost={deletePost}
             />{" "}
-            <Footer />
           </ProtectedRoute>
           <ProtectedRoute exact path="/Forum/:postId">
+            {toolbar}
+            {sidebar}
+            {backdrop}
             <Thread
               subtopics={subtopics}
               topics={topics}
@@ -255,9 +255,11 @@ const App = () => {
               updatePostInArray={updatePostInArray}
               deletePost={deletePost}
             />
+            <Footer />
           </ProtectedRoute>
           <Route path="/error" component={NotFound} />
         </Switch>
+        <Footer />
       </div>
     </UserContext.Provider>
   );
