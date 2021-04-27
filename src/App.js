@@ -17,7 +17,6 @@ import Home from "./components/homeComponents/Home.js";
 import Forum from "./components/forumComponents/Forum.js";
 import Thread from "./components/forumComponents/Thread.js";
 
-
 import Kunnskapsportalen from "./components/infoComponents/Kunnskapsportalen.js";
 import Register from "./components/registerComponent/Register";
 import { UserContext } from "./UserContext";
@@ -44,20 +43,20 @@ const App = () => {
     localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const [topics, setTopics] = useState([]);
   const [subtopics, setSubtopics] = useState([]);
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
   const [infoTopics, setInfoTopics] = useState([]);
-  const [videos, setVideos] = useState([])
-  const [documents, setDocuments] = useState([])
+  const [videos, setVideos] = useState([]);
+  const [documents, setDocuments] = useState([]);
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
 
   const testlogout = () => {
-    setUser({})
-  }
+    setUser({});
+  };
 
   const handleDrawerToggleClick = () => {
     setSideDrawerOpen((prevDrawerState) => !prevDrawerState);
@@ -73,58 +72,56 @@ const App = () => {
   }
 
   useEffect(() => {
-    fetch(host+"posts")
-    .then((res) => res.json())
-    .then((data) => {
-      setPosts(data);
-    })
-    .catch(console.log);
+    fetch(host + "posts")
+      .then((res) => res.json())
+      .then((data) => {
+        setPosts(data);
+      })
+      .catch(console.log);
 
-    fetch(host+"SubTopics")
-    .then((res) => res.json())
-    .then((data) => {
-      setSubtopics(data);
-    })
-    .catch(console.log);
+    fetch(host + "SubTopics")
+      .then((res) => res.json())
+      .then((data) => {
+        setSubtopics(data);
+      })
+      .catch(console.log);
 
-    fetch(host+"Topics")
-    .then((res) => res.json())
-    .then((data) => {
-      setTopics(data);
-    })
-    .catch(console.log);
+    fetch(host + "Topics")
+      .then((res) => res.json())
+      .then((data) => {
+        setTopics(data);
+      })
+      .catch(console.log);
 
-    fetch(host+"Users")
-    .then((res) => res.json())
-    .then((data) => {
-      setUsers(data);
-    })
-    .catch(console.log);
+    fetch(host + "Users")
+      .then((res) => res.json())
+      .then((data) => {
+        setUsers(data);
+      })
+      .catch(console.log);
 
-    fetch(host+"InfoTopics")
-    .then((res) => res.json())
-    .then((data) => {
-      setInfoTopics(data);
-    })
-    .catch(console.log);
+    fetch(host + "InfoTopics")
+      .then((res) => res.json())
+      .then((data) => {
+        setInfoTopics(data);
+      })
+      .catch(console.log);
 
-    fetch(host+"Videos")
-    .then((res) => res.json())
-    .then((data) => {
-      setVideos(data);
-    })
-    .catch(console.log);
+    fetch(host + "Videos")
+      .then((res) => res.json())
+      .then((data) => {
+        setVideos(data);
+      })
+      .catch(console.log);
 
-    fetch(host+"getdocuments")
-    .then((res) => res.json())
-    .then((data) => {
-      setDocuments(data);
-    })
-    .catch(console.log);
+    fetch(host + "getdocuments")
+      .then((res) => res.json())
+      .then((data) => {
+        setDocuments(data);
+      })
+      .catch(console.log);
     // setLoading(false)
   }, []);
-
-  
 
   // const updatePosts = async () => {
   //   const res = await fetch("https://localhost:44361/posts");
@@ -134,13 +131,12 @@ const App = () => {
 
   // sends post to api/database and updates posts with new post
   const addPost = async (post, file) => {
-    
     const formData = new FormData();
     if (file) formData.append("File", file);
     for (let k in post) {
       formData.append(k, post[k]);
     }
-    const res = await fetch(host+"posts", {
+    const res = await fetch(host + "posts", {
       method: "POST",
       body: formData,
     });
@@ -152,63 +148,78 @@ const App = () => {
   };
 
   const deletePost = async (postId) => {
-    const res = await fetch(host+`posts/${postId}`, {
-      method: 'DELETE',
-    })
+    const res = await fetch(host + `posts/${postId}`, {
+      method: "DELETE",
+    });
 
-    if(res.status === 200) {
-      updatePostInArray(postId, {}, true)
-      return true
+    if (res.status === 200) {
+      updatePostInArray(postId, {}, true);
+      return true;
     } else {
-      return false
+      return false;
     }
-  }
+  };
 
   // search for specific post by id(number) in posts and returns said post
   const getPost = (id) => {
-    return posts.find(post => post.id == id) || {}
-  }
-
+    return posts.find((post) => post.id == id) || {};
+  };
 
   const updatePostInArray = (id, changes, isDelete) => {
-    if(!isDelete) {
-      const updatedPosts = posts.map(p => {
-        if(p.id == id) {
+    if (!isDelete) {
+      const updatedPosts = posts.map((p) => {
+        if (p.id == id) {
           const updatedPost = {
             ...p,
-            ...changes
-          }
-          return updatedPost
+            ...changes,
+          };
+          return updatedPost;
         }
-        return p
-      })
-      setPosts(updatedPosts)
+        return p;
+      });
+      setPosts(updatedPosts);
     } else {
-      setPosts(posts.filter(p => p.id != id))
+      setPosts(posts.filter((p) => p.id != id));
     }
-  }
+  };
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <div className="App">
-        <Toolbar handleDrawerToggleClick={handleDrawerToggleClick} logout={testlogout}/>
-        <SideDrawer show={sideDrawerOpen} toggle={handleDrawerToggleClick} />
-        {backdrop}
         <Switch>
           <Route path="/Login">
             <Login history={history} setUsers={setUsers} />
           </Route>
           <ProtectedRoute exact path="/">
-            <Home 
+            <Toolbar
+              handleDrawerToggleClick={handleDrawerToggleClick}
+              logout={testlogout}
+            />
+            <SideDrawer
+              show={sideDrawerOpen}
+              toggle={handleDrawerToggleClick}
+            />
+            {backdrop}
+            <Home
               topic={topics}
               subtopic={subtopics}
               users={users}
               posts={posts}
               loading={loading}
-            />
+            />{" "}
+            <Footer />
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/Forum">
+            <Toolbar
+              handleDrawerToggleClick={handleDrawerToggleClick}
+              logout={testlogout}
+            />
+            <SideDrawer
+              show={sideDrawerOpen}
+              toggle={handleDrawerToggleClick}
+            />
+            {backdrop}
             <Forum
               posts={posts}
               addPost={addPost}
@@ -217,9 +228,19 @@ const App = () => {
               users={users}
               history={history}
               loading={loading}
-            />
+            />{" "}
+            <Footer />
           </ProtectedRoute>
           <ProtectedRoute exact path="/Kunnskapsportalen">
+            <Toolbar
+              handleDrawerToggleClick={handleDrawerToggleClick}
+              logout={testlogout}
+            />
+            <SideDrawer
+              show={sideDrawerOpen}
+              toggle={handleDrawerToggleClick}
+            />
+            {backdrop}
             <Kunnskapsportalen
               infoTopics={infoTopics}
               videos={videos}
@@ -228,7 +249,8 @@ const App = () => {
               post={posts}
               addPost={addPost}
               deletePost={deletePost}
-            />
+            />{" "}
+            <Footer />
           </ProtectedRoute>
           <ProtectedRoute exact path="/Forum/:postId">
             <Thread
@@ -243,11 +265,8 @@ const App = () => {
           </ProtectedRoute>
           <Route path="/error" component={NotFound} />
         </Switch>
-        <Footer />
       </div>
-      
     </UserContext.Provider>
-
   );
 };
 
