@@ -255,7 +255,6 @@ const App = () => {
               updatePostInArray={updatePostInArray}
               deletePost={deletePost}
             />
-            <Footer />
           </ProtectedRoute>
           <Route path="/error" component={NotFound} />
         </Switch>
