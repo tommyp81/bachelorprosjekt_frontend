@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Breadcrumb, Card, Form } from "react-bootstrap";
+import { Breadcrumb, Card, Form, Modal } from "react-bootstrap";
 import moment from "moment";
 import "moment/locale/nb";
 import { useParams, Link } from "react-router-dom";
@@ -41,7 +41,9 @@ const Thread = ({
   const [post, setPost] = useState({});
 
   const [liked, setLiked] = useState(false);
-
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   //Post
   useEffect(() => {
     fetch(host + `posts/${postId}`)
@@ -299,11 +301,31 @@ const Thread = ({
                   <Button
                     variant="danger"
                     size="sm"
-                    onClick={deleteThread}
+                    onClick={handleShow}
                     value={post.id}
                   >
                     Slett
                   </Button>
+                  <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>Slett Post</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      Er du sikker på at du vil slette din post?
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={handleClose}>
+                        Avbryt
+                      </Button>
+                      <Button
+                        variant="danger"
+                        onClick={deleteThread}
+                        value={post.id}
+                      >
+                        Slett
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
                 </div>
               </Card.Body>
             </Card>
