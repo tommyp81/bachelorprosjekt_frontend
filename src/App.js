@@ -198,14 +198,14 @@ const App = () => {
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <div className="App">
+        {user.loggedIn && toolbar}
+        {user.loggedIn && sidebar}
+        {user.loggedIn && backdrop}
         <Switch>
           <Route path="/Login">
             <Login history={history} setUsers={setUsers} />
           </Route>
           <ProtectedRoute exact path="/">
-            {toolbar}
-            {sidebar}
-            {backdrop}
             <Home
               topic={topics}
               subtopic={subtopics}
@@ -216,9 +216,6 @@ const App = () => {
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/Forum">
-            {toolbar}
-            {sidebar}
-            {backdrop}
             <Forum
               posts={posts}
               addPost={addPost}
@@ -230,9 +227,6 @@ const App = () => {
             />{" "}
           </ProtectedRoute>
           <ProtectedRoute exact path="/Kunnskapsportalen">
-            {toolbar}
-            {sidebar}
-            {backdrop}
             <Kunnskapsportalen
               infoTopics={infoTopics}
               videos={videos}
@@ -244,9 +238,6 @@ const App = () => {
             />{" "}
           </ProtectedRoute>
           <ProtectedRoute exact path="/Forum/:postId">
-            {toolbar}
-            {sidebar}
-            {backdrop}
             <Thread
               subtopics={subtopics}
               topics={topics}

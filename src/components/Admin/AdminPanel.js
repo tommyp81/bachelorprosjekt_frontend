@@ -8,8 +8,8 @@ const AdminPanel = ({users, setUsers}) => {
 
 
   const test = (e) => {
-    const {id, checked, ref} = e.target
-    console.log(id, checked, ref)
+    const {id, checked} = e.target
+    console.log(id, checked)
     if(checked)
       setSelectedUsers(old => [...old, users.find(u => u.id == id)])
     else {
@@ -56,7 +56,7 @@ const AdminPanel = ({users, setUsers}) => {
 
 
   return (
-    <div className="m-5">
+    <div style={{margin: '150px'}}>
       {selectedUsers.length > 0 && <Button variant="danger" onClick={deleteSelectedUsers}>Slett Bruker(e)</Button>}
       <Table striped bordered hover>
         <thead>
@@ -80,7 +80,7 @@ const AdminPanel = ({users, setUsers}) => {
               <td>{u.lastName}</td>
               <td>{u.email}</td>
               <td>
-                <Form.Control id={u.id} as="select" defaultValue={u.admin} onChange={adminToggle}>
+                <Form.Control id={u.id} as="select" defaultValue={u.admin} onChange={adminToggle} disabled={true}>
                   <option value={true}>true</option>
                   <option value={false}>false</option>
                 </Form.Control>
