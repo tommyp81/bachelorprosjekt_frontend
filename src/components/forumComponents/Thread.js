@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Breadcrumb, Card, Form, Modal } from "react-bootstrap";
+import { Breadcrumb, Card, Form } from "react-bootstrap";
 import moment from "moment";
 import "moment/locale/nb";
 import { useParams, Link } from "react-router-dom";
@@ -206,11 +206,6 @@ const Thread = ({
   const goToLast = () => setCurrentPage(last);
   const goToFirst = () => setCurrentPage(1);
 
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
   return (
     <div className="Post">
       {post != {} && (
@@ -303,27 +298,11 @@ const Thread = ({
                   <Button
                     variant="danger"
                     size="sm"
-                    onClick={handleShow}
+                    onClick={deleteThread}
                     value={post.id}
                   >
                     Slett
                   </Button>
-                  <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
-                      <Modal.Title>Slett Post</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      Er du sikker på at du vil slette din post?
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="secondary" onClick={handleClose}>
-                        Avbryt
-                      </Button>
-                      <Button variant="danger" onClick={deleteThread}>
-                        Slett
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
                 </div>
               </Card.Body>
             </Card>
