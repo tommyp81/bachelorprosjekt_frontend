@@ -36,8 +36,7 @@
   margin-left: 50px;
 }
 
-.tNavItems ul,
-.uNavItems ul {
+.tNavItems ul, .uNavItems ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -50,7 +49,7 @@
   top: 3px;
 }
 
-.tNavItems .linkItem a,
+.tNavItems .linkItem a, 
 .uNavItems .userItem a {
   color: white;
   text-decoration: none;
@@ -64,13 +63,13 @@
 .tNavItems .linkItem a:hover,
 .uNavItems .userItem a:hover,
 .tNavItems .linkItem a:active,
-.uNavItems .userItem a:active {
+.uNavItems .userItem a:active  {
   background-color: #072557;
   border-bottom: 4px solid #40a4cb;
   color: rgb(216, 216, 216);
 }
 
-.uNavItems .btn:not(:disabled):not(.disabled) {
+.uNavItems .btn:not(:disabled):not(.disabled){
   transition: unset;
   border-radius: unset;
   background-color: #0b2c63;
@@ -82,12 +81,12 @@
   box-sizing: border-box;
   border: unset;
   border-bottom: 4px solid transparent;
-  font-weight: 500;
+  font-weight: 500
 }
 
 .uNavItems .btn:not(:disabled):not(.disabled):hover,
 .uNavItems .btn:not(:disabled):not(.disabled):focus,
-.uNavItems .btn:not(:disabled):not(.disabled):active,
+.uNavItems .btn:not(:disabled):not(.disabled):active, 
 .uNavItems .btn:not(:disabled):not(.disabled):target,
 .uNavItems .btn:not(:disabled):not(.disabled):visited {
   box-shadow: unset;
@@ -104,15 +103,16 @@
   cursor: unset;
 }
 
+
 @media (max-width: 1024px) {
-  .tNavItems {
+  .tNavItems, .uNavItems {
     display: none;
   }
   .t-toggle-btn {
     margin-right: 15px;
   }
   .tlogo a {
-    font-size: 4mm;
+    font-size: 5mm;
   }
   .tlogo img {
     width: 35px;
