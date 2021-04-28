@@ -8,7 +8,7 @@ import { BsBoxArrowLeft, BsChatDotsFill } from "react-icons/bs";
 import { BsPersonFill } from "react-icons/bs";
 import { HiAcademicCap } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import { Button, Dropdown } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 
 const ToolBar = (props) => {
   const {user} = useContext(UserContext)
@@ -52,9 +52,9 @@ const ToolBar = (props) => {
                   <BsPersonFill size="20px" /> {user.username}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item>Logget inn som: <b>{user.username}</b></Dropdown.Item>
-                  <Dropdown.Item>Fornavn: {user.firstName}</Dropdown.Item>
-                  <Dropdown.Item>Etternavn: {user.lastName}</Dropdown.Item>
+                  <Dropdown.Item><BsPersonFill size="20px" /> <b>{user.username}</b></Dropdown.Item>
+                  <Dropdown.Item>{user.firstName} {user.lastName}</Dropdown.Item>
+                  <Dropdown.Item>{user.email}</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
               :
@@ -67,7 +67,7 @@ const ToolBar = (props) => {
                 </Link>
               :
                 <Link to="/Login">
-                  <BsPersonFill size="20px" /> Logg Inn
+                  <BsPersonFill size="20px" /> Logg inn
                 </Link>
               }
             </li>

@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./SideDrawer.css";
+import { UserContext } from "../../../UserContext";
 import { AiFillHome } from "react-icons/ai";
-import { BsChatDotsFill } from "react-icons/bs";
+import { BsChatDotsFill, BsBoxArrowLeft } from "react-icons/bs";
 import { BsPersonFill } from "react-icons/bs";
 import { HiAcademicCap } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
 const SideDrawer = (props) => {
+
+  const {user} = useContext(UserContext)
+  
   let drawerClasses = "sideDrawer";
 
   if (props.show) {
@@ -15,6 +19,11 @@ const SideDrawer = (props) => {
 
   return (
     <nav className={drawerClasses}>
+      <div className="user">
+        <BsPersonFill size="50px" /><br/> <b>{user.username}</b><br/>
+        {user.firstName} {user.lastName}<br/>
+        {user.email}
+      </div>
       <ul>
         <li>
           <Link to="/" onClick={props.toggle}>
@@ -32,11 +41,12 @@ const SideDrawer = (props) => {
           </Link>
         </li>
         <li>
-          <Link to="/Login" onClick={props.toggle}>
-            <BsPersonFill size="23px" /> Logg inn
+          <Link to="/Login" onClick={props.logout}>
+            <BsBoxArrowLeft size="22px" /> Logg ut
           </Link>
         </li>
       </ul>
+      
     </nav>
   );
 };

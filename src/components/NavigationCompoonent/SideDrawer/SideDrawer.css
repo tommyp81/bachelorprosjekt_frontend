@@ -1,3 +1,25 @@
+.sideDrawer .user {
+  position: absolute;
+  text-align: center;
+  left: 23%;
+  top: 15%;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 425px) {
+  .sideDrawer .user {
+    font-size: 1rem;
+    top: 10%;
+  }
+}
+
+@media (max-width: 320px) {
+  .sideDrawer .user {
+    left: 13%;
+  }
+}
+
+
 .sideDrawer {
   height: 100%;
   background: white;
@@ -5,11 +27,11 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 70%;
+  width: 80%;
   max-width: 400px;
   z-index: 200;
   transform: translateX(-100%);
-  transition: transform 0.3s ease-out;
+  transition: 0.3s ease-out;
 }
 .sideDrawer.open {
   transform: translateX(0);
@@ -24,7 +46,7 @@
 }
 .sideDrawer li {
   margin-bottom: 1.5rem;
-  margin-left: -15px;
+  margin-left: -25px;
 }
 .sideDrawer a {
   color: black;
@@ -36,7 +58,7 @@
   color: gray;
 }
 
-@media (min-width: 920px) {
+@media (min-width: 1025px) {
   .sideDrawer {
     display: none;
   }
