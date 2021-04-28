@@ -18,6 +18,8 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
     return <SpinnerDiv />;
   }
 
+  
+
   return (
     <div className="Feed">
       {posts.slice(0, maxLength).map((post) => (
@@ -28,12 +30,11 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
           >
             <Card.Body>
               <div className="float-left">
-                {users
-                  .filter((user) => user.id === post.userId)
-                  .map((filteredUser, i) => (
+              
+                {users.filter((user) => user.id === post.userId).map((filteredUser, i) => (
                     <Card.Text key={i}>
-                      Postet av <b>{filteredUser.username}</b>{" "}
-                      {moment(post.date).calendar()}
+                      {post.userId === null ? <>Postet av <b>[Slettet bruker]</b></> : <>Postet av <b>{filteredUser.username}</b></>}
+                      {" "}{moment(post.date).calendar()}
                     </Card.Text>
                   ))}
               </div>

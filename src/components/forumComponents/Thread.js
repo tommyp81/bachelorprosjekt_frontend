@@ -244,13 +244,14 @@ const Thread = ({
             <Card>
               <Card.Body>
                 <div className="float-left">
-                  <p>
-                    Postet av{" "}
+                  
+                  <p>Postet av{" "}
+                  {post.userId === null ? <b>[Slettet bruker]</b> : 
                     <b>
                       {users &&
                         users.length &&
                         users.find((u) => u.id === post.userId)?.username}
-                    </b>{" "}
+                    </b>}{" "}
                     {moment(post.date).calendar()}
                   </p>
                 </div>

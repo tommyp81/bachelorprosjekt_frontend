@@ -6,21 +6,25 @@ import InfoTopics from "./InfoTopics.js";
 import UploadFile from "./UploadFile.js";
 import VideoContent from "./VideoContent.js"
 import DocumentContent from "./DocumentContent.js"
+import SearchContent from "./SearchContent.js"
 import "./Kunnskapsportalen.css";
 import { UserContext } from '../../UserContext.js';
  
 const Kunnskapsportalen = ({ infoTopics, videos, documents, users, addPost, deletePost, post }) => {
 
-  const {user} = useContext(UserContext);
+    const {user} = useContext(UserContext);
  
     const [videoContent, setVideoContent] = useState([])
     const [documentContent, setDocumentContent] = useState([])
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
+    const [searchFilter, setSearchFilter] = useState("")
+    const [currentContent, setCurrentContent] = useState("")
 
     useEffect(() => {
       setVideoContent(videos)
       setDocumentContent(documents)
+      setCurrentContent(videos.concat(documents))
     }, [videos, documents])
 
     const filterContent = (e) => {
@@ -39,23 +43,6 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, addPost, dele
       setTitle("Alle kategorier")
       setDescription("")
     } 
-
-
-    const useCheckMobileScreen = () => {
-      const [width, setWidth] = useState(window.innerWidth);
-      const handleWindowSizeChange = () => {
-              setWidth(window.innerWidth);
-      }
-  
-      useEffect(() => {
-          window.addEventListener('resize', handleWindowSizeChange);
-          return () => {
-              window.removeEventListener('resize', handleWindowSizeChange);
-          }
-      }, []);
-  
-      return (width <= 768);
-  }  
 
     return (
         <div className="Kunnskapsportalen">
@@ -78,17 +65,17 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, addPost, dele
                   <Tabs defaultActiveKey="1" className="tabs" as={Button} variant="pills">
                     
                     
-                    {useCheckMobileScreen ? <Tab eventKey="1" title="Vis alt" className="tab">
+                  <Tab eventKey="1" title="Vis alt" className="tab">
                       <div className="topictitle">{!title ? "Alle kategorier" : title}</div>
                       <div className="desc">{!description ? "" : description} </div>
                   {user.admin &&
                     <UploadFile infoTopics={infoTopics} documents={documents} setVideos={setVideoContent} setDocuments={setDocumentContent} addPost={addPost}/>
                   }
+                  {/*<SearchContent setSearchInput={setSearchFilter}/>*/}
                       <Col xl={6} className="videocol"><VideoContent videos={videoContent} infoTopics={infoTopics} post={post} deletePost={deletePost} setVideoContent={setVideoContent}/></Col>
                       <Col xl={6} className="documentcol"><DocumentContent documents={documentContent} infoTopics={infoTopics} setDocumentContent={setDocumentContent}/></Col>
                       
-                    </Tab> : ""
-                    }
+                    </Tab>
                     <Tab eventKey="2" title="Videoer" className="tab">
                     <div className="topictitle">{!title ? "Alle kategorier" : title}</div>
                     <div className="desc">{!description ? "" : description} </div>

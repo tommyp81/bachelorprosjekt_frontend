@@ -83,7 +83,11 @@ const Comment = ({users, initComment, deleteComment}) => {
     <Card>
       <Card.Body>
         <div className="float-left">
-          <p>Postet av <b>{users && users.length && users.find(u => u.id === comment.userId).username}</b> {moment(comment.date).calendar()}</p>
+          
+          <p>Postet av{" "}
+          {comment.userId === null ? <b>[Slettet bruker]</b> : 
+            <b>{users && users.length && users.find(u => u.id === comment.userId).username}</b>} {" "}
+          {moment(comment.date).calendar()}</p>
         </div><div className="float-right"> 
           {comment.like_Count} <LikeButton id={comment.id} liked={liked} setLiked={setLiked} isPost={false} updateCommentLike={setCommentLikeCount} />
           </div>
