@@ -27,9 +27,6 @@ const DocumentContent = ({ documents, infoTopics, setDocumentContent }) => {
        {documents.map((mappedDocuments, i) => (
           <Card>
             <Card.Body>
-              
-              <a href={host+`GetDocument/${mappedDocuments.id}`}
-              style={{textDecoration: "none", color: "unset"}}>
                 <Row>
                   <Col>
                   <div className="content">
@@ -53,7 +50,6 @@ const DocumentContent = ({ documents, infoTopics, setDocumentContent }) => {
                   
                   </Col>
                 </Row>
-              </a>
             </Card.Body>
           </Card>
           ))}

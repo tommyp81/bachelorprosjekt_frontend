@@ -247,7 +247,6 @@ const App = () => {
               updatePostInArray={updatePostInArray}
               deletePost={deletePost}
             />
-            <Footer />
           </ProtectedRoute>
           <ProtectedRoute path="/Admin">
             <AdminPanel users={users} setUsers={setUsers} />
