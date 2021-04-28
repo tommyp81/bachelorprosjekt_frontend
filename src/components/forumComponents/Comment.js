@@ -1,6 +1,6 @@
 import moment from "moment";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Modal } from "react-bootstrap";
 import { UserContext } from "../../UserContext";
 import FileLink from "../FileLink";
 import LikeButton from "../LikeButton";
@@ -16,6 +16,9 @@ const Comment = ({ users, initComment, deleteComment }) => {
 
   const [comment, setComment] = useState(initComment);
   const [liked, setLiked] = useState(false);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   // useEffect( async () => {
   //   if (initMount.current) {
@@ -124,11 +127,31 @@ const Comment = ({ users, initComment, deleteComment }) => {
             <Button
               variant="danger"
               size="sm"
-              onClick={deleteComment}
+              onClick={handleShow}
               value={comment.id}
             >
               Slett
             </Button>
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>Slett Kommentar</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                Er du sikker på at du vil slette din kommentar?
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Avbryt
+                </Button>
+                <Button
+                  variant="danger"
+                  onClick={deleteComment}
+                  value={comment.id}
+                >
+                  Slett
+                </Button>
+              </Modal.Footer>
+            </Modal>
           </div>
         </Card.Text>
       </Card.Body>
