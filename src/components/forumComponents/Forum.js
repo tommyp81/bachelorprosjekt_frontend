@@ -1,18 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-  Card,
   Col,
   Container,
   Dropdown,
-  Pagination,
   Row,
-  Spinner,
 } from "react-bootstrap";
 import Topics from "./Topics.js";
 import NewPost from "./NewPost.js";
 import Pages from "./Pages.js";
 import "./Forum.css";
-import { Component } from "react";
 import moment from "moment";
 import Feed from "./Feed.js";
 import SearchPosts from "./SearchPosts.js";
@@ -30,6 +26,7 @@ const Forum = ({
   history,
   loading,
 }) => {
+
   // const [posts, setPosts] = useState([...props.posts]);
   const [filteredPosts, setFilteredPosts] = useState([]);
 
@@ -37,7 +34,6 @@ const Forum = ({
   const [subtopicFocus, setSubTopicFocus] = useState("");
 
   const [topicTitle, setTopicTitle] = useState("");
-  const [topicDesc, setTopicDesc] = useState("");
   const [subTopicDesc, setSubTopicDesc] = useState("");
   const [subTopicTitle, setSubTopicTitle] = useState("");
 
@@ -66,6 +62,10 @@ const Forum = ({
       }
     })
     .slice(indexOfFirstPost, indexOfLastPost);
+
+  const handleScroll = () => {
+    window.scroll({top:0, behavior:"smooth"})
+  }
 
   const paginate = (pageNum) => setCurrentPage(pageNum);
   const nextPage = () => setCurrentPage(currentPage + 1);
@@ -212,7 +212,7 @@ const Forum = ({
                     {[10, 25, 50, 100].map((pageSize) => (
                       <Dropdown.Item
                         value={pageSize}
-                        onSelect={(e) => setPostsPerPage(pageSize)}
+                        onSelect={(e) => {setPostsPerPage(pageSize); setCurrentPage(1); handleScroll()}}
                       >
                         Vis {pageSize} poster per side
                       </Dropdown.Item>

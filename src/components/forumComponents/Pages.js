@@ -9,29 +9,27 @@ const Pages = ({postsPerPage, totalPosts, paginate, nextPage, prevPage, currentP
     pageNumbers.push(i);
   }
 
-  /*
-  const prevPgn = []
-    for (let i = currentPage; i <= currentPage + 1; i ++) {
-      prevPgn.push(i)
-  }*/
+  const handleScroll = () => {
+    window.scroll({top:0,behavior:'smooth'})
+  }
 
   return (
     <div className="Pages" style={{marginTop:"20px"}}>
       <Pagination>
         <Pagination.Item
-        onClick={() => goToFirst()}
+        onClick={() => {goToFirst(); handleScroll()}}
         hidden={firstPage}>
           {"<<"}
         </Pagination.Item>
       
         <Pagination.Item
-        onClick={() => prevPage()}
+        onClick={() => {prevPage(); handleScroll()}}
         hidden={firstPage}>
           {"<"}
         </Pagination.Item>
 
         <Pagination.Item
-        onClick={() => prevPage()}
+        onClick={() => {prevPage(); handleScroll()}}
         hidden={firstPage}>
           {currentPage - 1}
         </Pagination.Item>
@@ -41,20 +39,20 @@ const Pages = ({postsPerPage, totalPosts, paginate, nextPage, prevPage, currentP
           </Pagination.Item>
 
           <Pagination.Item
-        onClick={() => nextPage()}
+        onClick={() => {nextPage(); handleScroll()}}
         hidden={lastPage}>
           {currentPage + 1}
         </Pagination.Item>
 
 
         <Pagination.Item
-        onClick={() => nextPage()}
+        onClick={() => {nextPage(); handleScroll()}}
         hidden={lastPage}>
           {">"}
         </Pagination.Item>
 
         <Pagination.Item
-        onClick={() => goToLast()}
+        onClick={() => {goToLast(); handleScroll()}}
         hidden={lastPage}>
           {">>"}
         </Pagination.Item>

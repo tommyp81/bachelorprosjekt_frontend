@@ -95,7 +95,6 @@ const Login = ({ history, setUsers }) => {
                 <Register setTabKey={setTabKey} setUsers={setUsers}/>
               </Tab>
             </Tabs>
-            <a href="https://www.nif.buypass.no/nif-forgot-password/">Glemt passord?</a>
           </Col>
         </Row>
       </Container>
