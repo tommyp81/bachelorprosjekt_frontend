@@ -25,6 +25,7 @@ import Toolbar from "./components/NavigationCompoonent/Toolbar/Toolbar";
 import SideDrawer from "./components/NavigationCompoonent/SideDrawer/SideDrawer";
 import Backdrop from "./components/NavigationCompoonent/Backdrop/Backdrop";
 import NotFound from "./components/NotFound";
+import AdminPanel from "./components/Admin/AdminPanel";
 // https://webforum.azurewebsites.net/posts
 // https://webforum.azurewebsites.net/answers
 // https://webforum.azurewebsites.net/users
@@ -197,14 +198,14 @@ const App = () => {
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <div className="App">
+        {user.loggedIn && toolbar}
+        {user.loggedIn && sidebar}
+        {user.loggedIn && backdrop}
         <Switch>
           <Route path="/Login">
             <Login history={history} setUsers={setUsers} />
           </Route>
           <ProtectedRoute exact path="/">
-            {toolbar}
-            {sidebar}
-            {backdrop}
             <Home
               topic={topics}
               subtopic={subtopics}
@@ -215,9 +216,6 @@ const App = () => {
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/Forum">
-            {toolbar}
-            {sidebar}
-            {backdrop}
             <Forum
               posts={posts}
               addPost={addPost}
@@ -229,9 +227,6 @@ const App = () => {
             />{" "}
           </ProtectedRoute>
           <ProtectedRoute exact path="/Kunnskapsportalen">
-            {toolbar}
-            {sidebar}
-            {backdrop}
             <Kunnskapsportalen
               infoTopics={infoTopics}
               videos={videos}
@@ -243,9 +238,6 @@ const App = () => {
             />{" "}
           </ProtectedRoute>
           <ProtectedRoute exact path="/Forum/:postId">
-            {toolbar}
-            {sidebar}
-            {backdrop}
             <Thread
               subtopics={subtopics}
               topics={topics}
@@ -255,6 +247,9 @@ const App = () => {
               updatePostInArray={updatePostInArray}
               deletePost={deletePost}
             />
+          </ProtectedRoute>
+          <ProtectedRoute path="/Admin">
+            <AdminPanel users={users} setUsers={setUsers} />
           </ProtectedRoute>
           <Route path="/error" component={NotFound} />
         </Switch>

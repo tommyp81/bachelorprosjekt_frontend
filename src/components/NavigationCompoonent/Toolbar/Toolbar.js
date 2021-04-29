@@ -55,6 +55,7 @@ const ToolBar = (props) => {
                   <Dropdown.Item><BsPersonFill size="20px" /> <b>{user.username}</b></Dropdown.Item>
                   <Dropdown.Item>{user.firstName} {user.lastName}</Dropdown.Item>
                   <Dropdown.Item>{user.email}</Dropdown.Item>
+                  {user.admin && <Dropdown.Item><Link to="/Admin">Admin Panel</Link></Dropdown.Item>}
                 </Dropdown.Menu>
               </Dropdown>
               :
