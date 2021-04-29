@@ -87,7 +87,8 @@ const Comment = ({ users, initComment, deleteComment }) => {
           <p>Postet av{" "}
           {comment.userId === null ? <b>[Slettet bruker]</b> : 
             <b>{users && users.length && users.find(u => u.id === comment.userId).username}</b>} {" "}
-          {moment(comment.date).calendar()}</p>
+          {moment(comment.date).calendar()}&nbsp;
+          </p>
         </div><div className="float-right"> 
           {comment.like_Count} <LikeButton id={comment.id} liked={liked} setLiked={setLiked} isPost={false} updateCommentLike={setCommentLikeCount} />
           </div>
@@ -109,6 +110,7 @@ const Comment = ({ users, initComment, deleteComment }) => {
               ""
             )}
           </div>
+          {comment.edited ? <i style={{color: "gray"}}>Redigert</i> : ""}
           <div className="float-right" hidden={!(user.id === comment.userId)}>
             <EditComment comment={comment} edit={editComment} /> &nbsp;
             <Button

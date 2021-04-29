@@ -293,6 +293,7 @@ const Thread = ({
                     ""
                   )}
                 </div>
+                {post.edited ? <i style={{color: "gray"}}>Redigert</i> : ""}
                 <div
                   className="float-right"
                   hidden={!(user.id === post.userId)}
