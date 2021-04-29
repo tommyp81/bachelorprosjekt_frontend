@@ -1,6 +1,5 @@
 .Forum {
     padding-top: 100px;
-    
 }
 
 .Forum .body {
@@ -75,13 +74,9 @@
         padding-bottom: 20px;
     }
 
-    .Forum .mobilesearch {
-    }
-
     .Forum .main {
         margin-top: -20px;
         border-radius: 10px;
-        
     }
 
     .NewPost p {
@@ -96,10 +91,6 @@
 .Forum .bot .float-right {
     margin-top: 20px;
 }
-/*
-.float-right og float-mid er del av react-bootstrap?
-Satte margin-top 20px fordi det er samme som Pages objektet
-*/
 
 .Forum .main {
     border: 1px solid rgb(209, 209, 209);

@@ -5,11 +5,6 @@
     margin-top: 120px;
 }
 
-@media (max-width: 768px) {
-    .Post .foruminfo {
-    }
-}
-
 .Post .main .card {
     margin-top: 10px;
     margin-bottom: 20px;
