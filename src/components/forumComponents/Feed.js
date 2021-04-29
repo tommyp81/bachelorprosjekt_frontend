@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import SpinnerDiv from "./SpinnerDiv";
 import ReadMoreReact from "../forumComponents/ReadMore";
 import "./Feed.css";
+import LikeStatus from "../LikeStatus";
 
 const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
   if (
@@ -30,21 +31,14 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
           >
             <Card.Body>
               <div className="float-left">
-              
-                {users.filter((user) => user.id === post.userId).map((filteredUser, i) => (
-                    <Card.Text key={i}>
-                      {post.userId === null ? <>Postet av <b>[Slettet bruker]</b></> : <>Postet av <b>{filteredUser.username}</b></>}
-                      {" "}{moment(post.date).calendar()}
-                    </Card.Text>
-                  ))}
+                <Card.Text>
+                  {post.userId === null ? <>Postet av <b>[Slettet bruker]</b></> : <>Postet av <b>{users?.find(u => u.id === post.userId).username}</b></>}
+                  {" "}{moment(post.date).calendar()}
+                </Card.Text>
               </div>
               <div className="float-right">
                 {post.like_Count}{" "}
-                <FaThumbsUp
-                  className="ml-1 mr-1 mb-2"
-                  color="grey"
-                  size={18}
-                />{" "}
+                <LikeStatus postId={post.id} />{" "}
                 &nbsp;
                 {post.comment_Count}{" "}
                 <FaRegComment
