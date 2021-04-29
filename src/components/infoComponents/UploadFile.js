@@ -37,9 +37,7 @@ const UploadFile = ({
   const [errorMessage, setErrorMessage] = useState("");
 
   const [validated, setValidated] = useState(false);
-
   const validateUrl = (event) => {
-    setId(event);
     if (validator.isURL(event)) {
       setValidated(true);
       setErrorMessage("Gyldig URL");
@@ -47,6 +45,10 @@ const UploadFile = ({
       setErrorMessage("Ugyldig URL");
       setValidated(false);
     }
+  };
+  const twoMethods = (event) => {
+    setId(event);
+    validateUrl(event);
   };
   //Video
   const regExp = /(.+?)(\/)(watch\x3Fv=)?(embed\/watch\x3Ffeature\=player_embedded\x26v=)?([a-zA-Z0-9_-]{11})/g;
@@ -181,7 +183,7 @@ const UploadFile = ({
                     rows={1}
                     name="youTubeId"
                     value={id}
-                    onChange={(e) => validateUrl(e.target.value)}
+                    onChange={(e) => twoMethods(e.target.value)}
                   />
                   <span
                     style={{ fontSize: 11, fontWeight: "bold", color: "red" }}
