@@ -122,11 +122,9 @@ const Register = ({ setTabKey, setUsers}) => {
                 variant="success"
                 type="submit"
               >
-                Sendt inn
+                Opprett bruker
               </Button>
             </Form>
-
-            <a href="/Login">Har du en konto?</a>
           </Col>
         </Row>
       </Container>

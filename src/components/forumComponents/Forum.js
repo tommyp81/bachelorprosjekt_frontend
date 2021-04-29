@@ -56,18 +56,15 @@ const Forum = ({
       if (searchFilter === "") {
         return post;
       } else if (
-        post.title.toLowerCase().includes(searchFilter.toLowerCase())
+        post.title.toLowerCase().includes(searchFilter.toLowerCase()) 
+        /*users.filter((user) => user.id === post.userId).map((filteredUser) => (
+        filteredUser.username.toLowerCase().includes(searchFilter.toLowerCase())))*/
       ) {
         return post;
       }
     })
     .slice(indexOfFirstPost, indexOfLastPost);
 
-  const handleScroll = () => {
-    window.scroll({top:0, behavior:"smooth"})
-  }
-
-  const paginate = (pageNum) => setCurrentPage(pageNum);
   const nextPage = () => setCurrentPage(currentPage + 1);
   const prevPage = () => setCurrentPage(currentPage - 1);
 
@@ -79,6 +76,10 @@ const Forum = ({
     setCurrentPage(Math.ceil(filteredPosts.length / postsPerPage));
   const goToFirst = () => setCurrentPage(1);
 
+  const handleScroll = () => {
+      window.scroll({top:0, behavior:"smooth"})
+    }
+  
   const onTopClick = (key) => {
     if (key) {
       setTopicFocus(key);
@@ -191,9 +192,6 @@ const Forum = ({
             <Container className="bot">
               <div className="float-left">
                 <Pages
-                  postsPerPage={postsPerPage}
-                  paginate={paginate}
-                  totalPosts={currentPosts.length}
                   nextPage={nextPage}
                   prevPage={prevPage}
                   currentPage={currentPage}

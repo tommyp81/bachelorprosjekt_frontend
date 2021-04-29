@@ -145,3 +145,18 @@
 .UploadFile {
     margin-left: 15px;
 }
+
+.SearchContent {
+    width: 250px;
+}
+
+@media (max-width: 575px) {
+    .SearchContent{
+        width: 100%;
+    }    
+
+    .UploadFile {
+        margin-bottom: 15px;
+    }
+}
+

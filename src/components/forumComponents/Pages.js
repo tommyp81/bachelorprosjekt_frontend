@@ -1,8 +1,8 @@
 import React from "react"
-import { Pagination, Dropdown } from "react-bootstrap"
+import { Pagination } from "react-bootstrap"
 import "./Pages.css";
 
-const Pages = ({postsPerPage, totalPosts, paginate, nextPage, prevPage, currentPage, firstPage, lastPage, goToFirst, goToLast}) => {
+const Pages = ({nextPage, prevPage, currentPage, firstPage, lastPage, goToFirst, goToLast}) => {
 
   const pageNumbers = []
   for (let i = 1; i <= currentPage + 2; i++) {

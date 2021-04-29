@@ -19,13 +19,31 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, addPost, dele
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [searchFilter, setSearchFilter] = useState("")
-    const [currentContent, setCurrentContent] = useState("")
 
     useEffect(() => {
       setVideoContent(videos)
       setDocumentContent(documents)
-      setCurrentContent(videos.concat(documents))
     }, [videos, documents])
+
+    const currentVideoContent = videoContent.filter((videoContent) => {
+      if (searchFilter === "") {
+        return videoContent;
+      } else if (
+        videoContent.title.toLowerCase().includes(searchFilter.toLowerCase())
+      ) {
+        return videoContent;
+      }
+    })
+    
+    const currentDocumentContent = documentContent.filter((documentContent) => {
+      if (searchFilter === "") {
+        return documentContent;
+      } else if (
+        documentContent.fileName.toLowerCase().includes(searchFilter.toLowerCase())
+      ) {
+        return documentContent;
+      }
+    })
 
     const filterContent = (e) => {
       let value = e.target.value;
@@ -35,6 +53,7 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, addPost, dele
       setDocumentContent(documents.filter(documents => documents.infoTopicId === Number(value)))
       setTitle(title)
       setDescription(desc)
+      setSearchFilter("")
     }
 
     const allContent = () => {
@@ -42,7 +61,9 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, addPost, dele
       setDocumentContent(documents)
       setTitle("Alle kategorier")
       setDescription("")
+      setSearchFilter("")
     } 
+
 
     return (
         <div className="Kunnskapsportalen">
@@ -62,35 +83,40 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, addPost, dele
               <Row>
                 <Col lg={12} className="maincontent">
                   
-                  <Tabs defaultActiveKey="1" className="tabs" as={Button} variant="pills">
-                    
-                    
+                  <Tabs defaultActiveKey="2" className="tabs" as={Button} variant="pills">
+                    {/* 
                   <Tab eventKey="1" title="Vis alt" className="tab">
                       <div className="topictitle">{!title ? "Alle kategorier" : title}</div>
                       <div className="desc">{!description ? "" : description} </div>
                   {user.admin &&
                     <UploadFile infoTopics={infoTopics} documents={documents} setVideos={setVideoContent} setDocuments={setDocumentContent} addPost={addPost}/>
                   }
-                  {/*<SearchContent setSearchInput={setSearchFilter}/>*/}
+                      <SearchContent setSearchInput={setSearchFilter}/>
                       <Col xl={6} className="videocol"><VideoContent videos={videoContent} infoTopics={infoTopics} post={post} deletePost={deletePost} setVideoContent={setVideoContent}/></Col>
                       <Col xl={6} className="documentcol"><DocumentContent documents={documentContent} infoTopics={infoTopics} setDocumentContent={setDocumentContent}/></Col>
                       
-                    </Tab>
+                    </Tab>*/}
                     <Tab eventKey="2" title="Videoer" className="tab">
                     <div className="topictitle">{!title ? "Alle kategorier" : title}</div>
                     <div className="desc">{!description ? "" : description} </div>
+                    <div className="float-right">
                     {user.admin &&
                     <UploadFile infoTopics={infoTopics} documents={documents} setVideos={setVideoContent} setDocuments={setDocumentContent} addPost={addPost}/>
                     }
-                     <VideoContent videos={videoContent} infoTopics={infoTopics} post={post} deletePost={deletePost} setVideoContent={setVideoContent}/>
+                    </div>
+                     <SearchContent setSearchInput={setSearchFilter}/>
+                     <VideoContent videos={currentVideoContent} infoTopics={infoTopics} post={post} deletePost={deletePost} setVideoContent={setVideoContent}/>
                     </Tab>
                     <Tab eventKey="3" title="Dokumenter" className="tab">
                     <div className="topictitle">{!title ? "Alle kategorier" : title}</div>
                     <div className="desc">{!description ? "" : description} </div>
+                    <div className="float-right">
                     {user.admin &&
                     <UploadFile infoTopics={infoTopics} documents={documents} setVideos={setVideoContent} setDocuments={setDocumentContent} addPost={addPost}/>
                     }
-                      <DocumentContent documents={documentContent} infoTopics={infoTopics} setDocumentContent={setDocumentContent}/>
+                    </div>
+                      <SearchContent setSearchInput={setSearchFilter}/>
+                      <DocumentContent documents={currentDocumentContent} infoTopics={infoTopics} setDocumentContent={setDocumentContent}/>
                     </Tab>
                     
                   </Tabs>

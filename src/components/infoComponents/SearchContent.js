@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
+import "./Kunnskapsportalen.css"
 import { Form } from "react-bootstrap"
 
 const SearchContent = ({ setSearchInput }) => {
@@ -8,7 +9,7 @@ const SearchContent = ({ setSearchInput }) => {
       <Form onSubmit={e => e.preventDefault()}>
         <Form.Group>
           <Form.Control
-            placeholder="Søk i kunnskapsportalen"
+            placeholder="Søk i kunnskapsportalen..."
             onChange={e => setSearchInput(e.target.value)}
           />
         </Form.Group>
