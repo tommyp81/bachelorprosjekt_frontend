@@ -6,47 +6,50 @@ import "./Register.css";
 
 const Register = ({ setTabKey, setUsers}) => {
 
-  const [Brukernavn, setBrukernavn] = useState("");
-  const [Fornavn, setFornavn] = useState("");
-  const [Etternavn, setEtternavn] = useState("");
-  const [Epost, setEpost] = useState("");
-  const [Passord, setPassord] = useState("");
-  const [BekreftPassord, setBekreftPassord] = useState("");
+  const [username, setUsername] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmitUser = async (event) => {
 
-    event.preventDefault();
-    const brukerData = {
-      username: Brukernavn,
-      firstName: Fornavn,
-      lastName: Etternavn,
-      email: Epost,
-      password: Passord,
-      //bekreftPassord: BekreftPassord
-    };
+    if(password === confirmPassword){
+      event.preventDefault();
+      const userData = {
+        username: username,
+        firstName: firstname,
+        lastName: lastname,
+        email: email,
+        password: password,
+        //bekreftPassord: BekreftPassord
+      };
 
-    console.log("Objektet:");
-    console.log(brukerData);
+      console.log("Objektet:");
+      console.log(userData);
 
-    fetch(host + "users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(brukerData),
-    })
-      .then((res) => {
-        if(res.ok)
-          return res.json();
-        throw res
+      fetch(host + "users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
       })
-      .then((data) => {
-        setUsers(current => [...current, data])
-      })
-      .catch((error) => console.log(error));
+        .then((res) => {
+          if(res.ok)
+            return res.json();
+          throw res
+        })
+        .then((data) => {
+          setUsers(current => [...current, data])
+        })
+        .catch((error) => console.log(error));
 
-      setTabKey('login')
-
+        setTabKey('login')
+    } else {
+      alert("Passord og bekreft passord er ikke like.")
+    }
   };
 
   return (
@@ -63,8 +66,8 @@ const Register = ({ setTabKey, setUsers}) => {
                 <Form.Control
                   type="text"
                   placeholder="Brukernavn"
-                  value={Brukernavn}
-                  onChange={(e) => setBrukernavn(e.target.value)}
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </Form.Group>
 
@@ -73,8 +76,8 @@ const Register = ({ setTabKey, setUsers}) => {
                 <Form.Control
                   type="text"
                   placeholder="Fornavn"
-                  value={Fornavn}
-                  onChange={(e) => setFornavn(e.target.value)}
+                  value={firstname}
+                  onChange={(e) => setFirstname(e.target.value)}
                 />
               </Form.Group>
 
@@ -83,8 +86,8 @@ const Register = ({ setTabKey, setUsers}) => {
                 <Form.Control
                   type="text"
                   placeholder="Etternavn"
-                  value={Etternavn}
-                  onChange={(e) => setEtternavn(e.target.value)}
+                  value={lastname}
+                  onChange={(e) => setLastname(e.target.value)}
                 />
               </Form.Group>
 
@@ -93,8 +96,8 @@ const Register = ({ setTabKey, setUsers}) => {
                 <Form.Control
                   type="email"
                   placeholder="email@example.com"
-                  value={Epost}
-                  onChange={(e) => setEpost(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Form.Group>
 
@@ -103,8 +106,8 @@ const Register = ({ setTabKey, setUsers}) => {
                 <Form.Control
                   type="password"
                   placeholder="Passord"
-                  value={Passord}
-                  onChange={(e) => setPassord(e.target.value)}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Form.Group>
 
@@ -113,8 +116,8 @@ const Register = ({ setTabKey, setUsers}) => {
                 <Form.Control
                   type="password"
                   placeholder="Bekreft Passord"
-                  value={BekreftPassord}
-                  onChange={(e) => setBekreftPassord(e.target.value)}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                 />
               </Form.Group>
 

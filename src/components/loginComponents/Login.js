@@ -81,7 +81,7 @@ const Login = ({ history, setUsers }) => {
                   <Form.Label>Innlogging</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Brukernavn"
+                    placeholder="Brukernavn/epost"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                   />
