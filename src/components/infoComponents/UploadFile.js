@@ -68,6 +68,7 @@ const UploadFile = ({
     //setValidated(true);
 
     const match = regExp.exec(id);
+    if(match){
     const matchString = match[match.length - 1].toString();
 
     const postData = {
@@ -81,6 +82,7 @@ const UploadFile = ({
     console.log(postData);
 
     const postId = await addPost(postData);
+
 
     const videoData = {
       youtubeId: matchString,
@@ -125,6 +127,9 @@ const UploadFile = ({
     //   topicId: infoTopicId
     // })
     handleClose();
+    } else {
+      alert("YouTube-URL-feltet kan ikke være tomt.")
+    }
   };
 
   //Dokument
@@ -265,7 +270,7 @@ const UploadFile = ({
                     }}
                     custom
                   >
-                    <option value="0">Kategori...</option>
+                    <option value="">Kategori...</option>
                     {infoTopics.map((mappedInfoTopics, i) => (
                       <option key={i} value={mappedInfoTopics.id}>
                         {mappedInfoTopics.title}
