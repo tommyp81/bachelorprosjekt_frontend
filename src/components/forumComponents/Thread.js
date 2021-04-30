@@ -254,7 +254,8 @@ const Thread = ({
                         users.length &&
                         users.find((u) => u.id === post.userId)?.username}
                     </b>}{" "}
-                    {moment(post.date).calendar()}
+                    {moment(post.date).calendar()}&nbsp;
+                    {post.edited ? <i style={{color: "gray"}}>(Redigert)</i> : ""}
                   </p>
                 </div>
                 <div className="float-right">
@@ -293,7 +294,7 @@ const Thread = ({
                     ""
                   )}
                 </div>
-                {post.edited ? <i style={{color: "gray"}}>Redigert</i> : ""}
+                
                 <div
                   className="float-right"
                   hidden={!(user.id === post.userId)}

@@ -22,7 +22,8 @@ const SideDrawer = (props) => {
       <div className="user">
         <BsPersonFill size="50px" /><br/> <b>{user.username}</b><br/>
         {user.firstName} {user.lastName}<br/>
-        {user.email}
+        {user.email}<br/>
+        {user.admin && <Link to="/Admin">Administrer brukere</Link>}
       </div>
       <ul>
         <li>
