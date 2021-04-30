@@ -25,7 +25,6 @@ const EditPost = ({ post, edit }) => {
   }
 
   function handleSubmit(event) {
-    alert("Din post er redigert!");
     event.preventDefault();
     let editedPost = {
       id: post.id,

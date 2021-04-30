@@ -45,7 +45,7 @@ const VideoContent = ({ videos, infoTopics, content, deletePost, setVideoContent
                 </p>))}
                 <div className="title">{filteredVideos.title}</div><br/>
                 <p>Klikk for å se video</p>
-                <div hidden={!(user.id === filteredVideos.userId)}>
+                <div hidden={!user.admin}>
                 <Button variant="danger" size="sm" value={filteredVideos.id} onClick={() => deleteVideo(filteredVideos.id, filteredVideos.postId)}>Slett</Button>
                 </div>
                 </div> 

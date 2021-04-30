@@ -41,9 +41,9 @@ const DocumentContent = ({ documents, infoTopics, setDocumentContent }) => {
                     <FileLink fileId={mappedDocuments.id}/>
                   </div><br/>
                   <p>Klikk for å laste ned</p>
-                  {user.id === mappedDocuments.userId && 
+                  <div hidden={!user.admin}>
                     <Button variant="danger" size="sm" onClick={() => deleteDocument(mappedDocuments.id)}>Slett</Button>
-                  }
+                  </div>
                   </div>
                   </Col>
                   <Col className="desktop"><FileEarmarkTextFill style={{height:"150px", width:"150px"}} className="icon"/>

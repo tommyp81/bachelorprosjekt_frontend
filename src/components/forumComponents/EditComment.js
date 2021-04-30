@@ -24,7 +24,6 @@ const EditComment = ({ comment, edit }) => {
   }
 
   function handleSubmit(event) {
-    alert("Din kommentar er redigert!");
     event.preventDefault();
     let editedComment = {
       id: comment.id,
