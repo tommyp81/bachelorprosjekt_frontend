@@ -57,10 +57,9 @@ const Forum = ({
         return post;
       } else if (
         post.title.toLowerCase().includes(searchFilter.toLowerCase()) 
-        /*users.filter((user) => user.id === post.userId).map((filteredUser) => (
-        filteredUser.username.toLowerCase().includes(searchFilter.toLowerCase())))*/
+        // users.username.toLowerCase().includes(searchFilter.toLowerCase())
       ) {
-        return post;
+        return post; 
       }
     })
     .slice(indexOfFirstPost, indexOfLastPost);

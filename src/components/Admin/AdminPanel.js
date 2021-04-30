@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { Button, Form, Table } from 'react-bootstrap'
 import { host } from '../../App'
-
+import SearchUsers from "./SearchUsers.js"
 import './AdminPanel.css'
 import PasswordDialog from './PasswordDialog'
 
 const AdminPanel = ({users, setUsers}) => {
 
   const [selectedUsers, setSelectedUsers] = useState([])
-
+  const [searchFilter, setSearchFilter] = useState("");
   
 
 
@@ -52,13 +52,24 @@ const AdminPanel = ({users, setUsers}) => {
     }))
   }
 
-
-
+  const currentUsers = users
+    .filter((users) => {
+      if (searchFilter === "") {
+        return users;
+      } else if (
+        users.username.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        users.firstName.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        users.lastName.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        users.email.toLowerCase().includes(searchFilter.toLowerCase())
+      ) {
+        return users;
+      }
+    })
 
   return (
     <div className="containerPanel container col-12">
       {selectedUsers.length > 0 && <Button variant="danger" onClick={deleteSelectedUsers}>Slett Bruker(e)</Button>}
-      
+      <SearchUsers setSearchInput={setSearchFilter}/>
       <Table className="" variant="dark" striped bordered responsive>
         <thead>
           <tr>
@@ -73,7 +84,7 @@ const AdminPanel = ({users, setUsers}) => {
           </tr>
         </thead>
         <tbody>
-          {users.map((u) => (
+          {currentUsers.map((u) => (
             <tr key={u.id} >
               <td width={50}><Form.Check onChange={e => test(e)} id={u.id} type="checkbox" custom/></td>
               <td width={50}>{u.id}</td>
