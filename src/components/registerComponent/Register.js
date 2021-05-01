@@ -15,20 +15,16 @@ const Register = ({ setTabKey, setUsers}) => {
 
   const handleSubmitUser = async (event) => {
 
+    event.preventDefault();
+    const userData = {
+      username: username,
+      firstName: firstname,
+      lastName: lastname,
+      email: email,
+      password: password,
+    };
+
     if(password === confirmPassword){
-      event.preventDefault();
-      const userData = {
-        username: username,
-        firstName: firstname,
-        lastName: lastname,
-        email: email,
-        password: password,
-        //bekreftPassord: BekreftPassord
-      };
-
-      console.log("Objektet:");
-      console.log(userData);
-
       fetch(host + "users", {
         method: "POST",
         headers: {
@@ -45,11 +41,14 @@ const Register = ({ setTabKey, setUsers}) => {
           setUsers(current => [...current, data])
         })
         .catch((error) => console.log(error));
-
-        setTabKey('login')
-    } else {
-      alert("Passord og bekreft passord er ikke like.")
     }
+
+      if(password === confirmPassword){
+        setTabKey('login')
+      } else {
+        alert("Passord og bekreft passord er ikke like.")
+    }
+    
   };
 
   return (
