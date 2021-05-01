@@ -88,7 +88,7 @@ const Comment = ({ users, initComment, deleteComment }) => {
           {comment.userId === null ? <b>[Slettet bruker]</b> : 
             <b>{users && users.length && users.find(u => u.id === comment.userId).username}</b>} {" "}
           {moment(comment.date).calendar()}&nbsp;
-          {comment.edited ? <i style={{color: "gray"}}>(Redigert)</i> : ""}
+          {comment.edited ? <i style={{color: "gray"}}>(Redigert {moment(comment.editDate).calendar()})</i> : ""}
           </p>
         </div><div className="float-right"> 
           {comment.like_Count} <LikeButton id={comment.id} liked={liked} setLiked={setLiked} isPost={false} updateCommentLike={setCommentLikeCount} />
