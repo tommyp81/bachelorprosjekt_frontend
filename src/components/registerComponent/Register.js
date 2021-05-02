@@ -12,8 +12,10 @@ const Register = ({ setTabKey, setUsers}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  
   const handleSubmitUser = async (event) => {
+
+    var userExists = false;
 
     event.preventDefault();
     const userData = {
@@ -33,22 +35,25 @@ const Register = ({ setTabKey, setUsers}) => {
         body: JSON.stringify(userData),
       })
         .then((res) => {
-          if(res.ok)
+          if(!res.ok) {
+            userExists = true;
+            res.text().then(text => alert(text))
+          } else {
             return res.json();
-          throw res
+          }    
         })
         .then((data) => {
           setUsers(current => [...current, data])
         })
         .catch((error) => console.log(error));
-    }
+      }
 
-      if(password === confirmPassword){
-        setTabKey('login')
-      } else {
-        alert("Passord og bekreft passord er ikke like.")
+      
+    if(password === confirmPassword && !userExists){
+      setTabKey('login')
+    } else {
+      alert("Passord og bekreft passord er ikke like.")
     }
-    
   };
 
   return (
