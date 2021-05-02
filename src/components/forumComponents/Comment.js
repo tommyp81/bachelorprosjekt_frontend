@@ -112,16 +112,19 @@ const Comment = ({ users, initComment, deleteComment }) => {
             )}
           </div>
           
-          <div className="float-right" hidden={!(user.id === comment.userId)}>
-            <EditComment comment={comment} edit={editComment} /> &nbsp;
-            <Button
-              variant="danger"
-              size="sm"
-              onClick={handleShow}
-              value={comment.id}
-            >
-              Slett
-            </Button>
+          <div className="float-right">
+            {(user.id === comment.userId) && <EditComment comment={comment} edit={editComment} />}
+            {
+              ((user.id === comment.userId) || user.admin) &&
+              <Button
+                variant="danger"
+                size="sm"
+                onClick={handleShow}
+                value={comment.id}
+              >
+                Slett
+              </Button>
+            }
             <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>
                 <Modal.Title>Slett Kommentar</Modal.Title>

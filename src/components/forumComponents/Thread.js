@@ -297,17 +297,19 @@ const Thread = ({
                 
                 <div
                   className="float-right"
-                  hidden={!(user.id === post.userId)}
                 >
-                  <EditPost post={post} edit={editPost} /> &nbsp;
-                  <Button
-                    variant="danger"
-                    size="sm"
-                    onClick={handleShow}
-                    value={post.id}
-                  >
-                    Slett
-                  </Button>
+                  { (user.id === post.userId) && <EditPost post={post} edit={editPost} />}
+                  {
+                    ((user.id === post.userId) || user.admin) &&
+                    <Button
+                      variant="danger"
+                      size="sm"
+                      onClick={handleShow}
+                      value={post.id}
+                    >
+                      Slett
+                    </Button>
+                  }
                   <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
                       <Modal.Title>Slett Post</Modal.Title>
