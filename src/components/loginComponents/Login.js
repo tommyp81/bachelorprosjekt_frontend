@@ -13,7 +13,7 @@ const Login = ({ history, setUsers }) => {
   
 
   // LOGIN / REGISTRATION HOOKS
-  const [username, setUsername] = useState(""); //test
+  const [input, setInput] = useState(""); //test
   const [password, setPassword] = useState("");
 
   const [tabKey, setTabKey] = useState('login')
@@ -24,13 +24,24 @@ const Login = ({ history, setUsers }) => {
 
 
   function validateForm() {
-    return username.length > 0 && password.length > 0;
+    return input.length > 0 && password.length > 0;
   }
+
+  function validateEmail(email) {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
 
   async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData();
-    formData.append("username", username)
+
+    if (validateEmail(input)){
+      formData.append("email", input)
+    } else {
+      formData.append("username", input)
+    }
+
     formData.append("password", password)
     const res = await fetch(host+"Login", {
       method: 'POST',
@@ -70,9 +81,9 @@ const Login = ({ history, setUsers }) => {
                   <Form.Label>Innlogging</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Brukernavn"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Brukernavn/epost"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
                   />
                 
                   <Form.Control 
