@@ -8,6 +8,7 @@ import Register from "../registerComponent/Register";
 import "./Login.css";
 import { UserContext } from "../../UserContext";
 import { host } from "../../App";
+import UsernameDialog from "../Admin/UsernameDialog";
 
 const Login = ({ history, setUsers }) => {
   
@@ -32,7 +33,7 @@ const Login = ({ history, setUsers }) => {
         return re.test(email);
     }
 
-  async function handleSubmit(event) {
+  function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData();
 
@@ -43,6 +44,12 @@ const Login = ({ history, setUsers }) => {
     }
 
     formData.append("password", password)
+
+    loginUser(formData)
+  }
+
+  const loginUser = async (formData) => {
+
     const res = await fetch(host+"Login", {
       method: 'POST',
       body: formData
@@ -58,10 +65,7 @@ const Login = ({ history, setUsers }) => {
       return;
     }
 
-    loginUser();
-  }
 
-  const loginUser = () => {
     history.push("./");
   };
 
@@ -103,7 +107,7 @@ const Login = ({ history, setUsers }) => {
                 </Form>
               </Tab>
               <Tab eventKey="register" title="register">
-                <Register setTabKey={setTabKey} setUsers={setUsers}/>
+                <Register setTabKey={setTabKey} setUsers={setUsers} loginUser={loginUser}/>
               </Tab>
             </Tabs>
           </Col>

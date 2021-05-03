@@ -4,7 +4,7 @@ import WelcomeLogo from "../loginComponents/WelcomeLogo";
 import { host } from "../../App";
 import "./Register.css";
 
-const Register = ({ setTabKey, setUsers}) => {
+const Register = ({ setTabKey, setUsers, loginUser}) => {
 
   const [username, setUsername] = useState("");
   const [firstname, setFirstname] = useState("");
@@ -51,6 +51,10 @@ const Register = ({ setTabKey, setUsers}) => {
         })
         .then((data) => {
           setUsers(current => [...current, data])
+          const formData = new FormData()
+          formData.append('username', data.username)
+          formData.append('password', password)
+          loginUser(formData)
         })
         .catch((error) => console.log(error));
       }

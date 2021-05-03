@@ -10,7 +10,13 @@ const PasswordDialog = ({ user }) => {
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    setPassword("")
+    setPassword2("")
+    setShow(true)
+  }
+
+  const isDiabled = password.length < 1 || password2.length < 1
 
 
   const setNewPassword = async (e) => {
@@ -23,9 +29,10 @@ const PasswordDialog = ({ user }) => {
         },
         body: JSON.stringify({...user, password})
       })
-      if(res.ok)
+      if(res.ok) {
         handleClose();
-      else {
+        alert("Passordet er endret!")
+      } else {
         const text = await res.text()
         alert(text)
       }
@@ -33,16 +40,17 @@ const PasswordDialog = ({ user }) => {
     } else {
       alert("Passordene er ikke like!")
     }
+    
   }
   
   return (
     <>
-      <Button onClick={handleShow}>Sett Passord</Button>
+      <Button variant="link" onClick={handleShow}>Endre Passord</Button>
       <Modal animation={false} show={show} onHide={handleClose}>
         <Modal.Header closeButton={true}>
           <Modal.Title>Sett nytt passord for: {user.username}</Modal.Title>
         </Modal.Header>
-        <Form onSubmit={setNewPassword}>
+        <Modal.Body>
           <Form.Control 
             type='password'
             placeholder='Nytt Passord'
@@ -56,12 +64,12 @@ const PasswordDialog = ({ user }) => {
             onChange={e => setPassword2(e.target.value)}
           />
           <div className="float-right">
-            <Button variant="success" type="submit" >OK</Button>
+            <Button disabled={isDiabled} variant="success" onClick={setNewPassword} >OK</Button>
             <Button variant="danger" onClick={handleClose}>
               Avbryt
             </Button>
           </div>
-        </Form>
+        </Modal.Body>
 
       </Modal>
     </>
