@@ -12,9 +12,16 @@ const Register = ({ setTabKey, setUsers}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  var isDisabled = true;
+  if(!username || !firstname || !lastname || !email || !password || !confirmPassword){
+    isDisabled = true;
+  } else {
+    isDisabled = false;
+  }
+
   
   const handleSubmitUser = async (event) => {
-
     var userExists = false;
 
     event.preventDefault();
@@ -23,7 +30,7 @@ const Register = ({ setTabKey, setUsers}) => {
       firstName: firstname,
       lastName: lastname,
       email: email,
-      password: password,
+      password: password
     };
 
     if(password === confirmPassword){
@@ -128,6 +135,7 @@ const Register = ({ setTabKey, setUsers}) => {
               <Button
                 variant="success"
                 type="submit"
+                disabled={isDisabled}
               >
                 Opprett bruker
               </Button>
