@@ -110,6 +110,7 @@ const Comment = ({ users, initComment, deleteComment }) => {
               ("")}
           </div>
 
+          {((user.id === comment.userId) || user.admin) ? 
           <div className="editdelete">
             {(user.id === comment.userId) && <EditComment comment={comment} edit={editComment} />} &nbsp;
             {((user.id === comment.userId) || user.admin) &&
@@ -143,7 +144,8 @@ const Comment = ({ users, initComment, deleteComment }) => {
               </Modal.Footer>
             </Modal>
           </div>
-
+          : ""}
+          
           <div className="like"> 
           {comment.like_Count}&nbsp;<LikeButton id={comment.id} liked={liked} setLiked={setLiked} isPost={false} updateCommentLike={setCommentLikeCount} />
           </div>
