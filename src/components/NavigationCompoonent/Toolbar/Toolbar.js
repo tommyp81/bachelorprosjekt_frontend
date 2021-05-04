@@ -9,6 +9,8 @@ import { BsPersonFill } from "react-icons/bs";
 import { HiAcademicCap } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
+import PasswordDialog from "../../Admin/PasswordDialog";
+import UsernameDialog from "../../Admin/UsernameDialog";
 
 const ToolBar = (props) => {
   const {user} = useContext(UserContext)
@@ -56,6 +58,8 @@ const ToolBar = (props) => {
                   <Dropdown.Item>{user.firstName} {user.lastName}</Dropdown.Item>
                   <Dropdown.Item>{user.email}</Dropdown.Item>
                   {user.admin && <Dropdown.Item><Link to="/Admin">Administrer brukere</Link></Dropdown.Item>}
+                  <Dropdown.Item><UsernameDialog setUsers={props.setUsers} users={props.users} /></Dropdown.Item>
+                  <Dropdown.Item><PasswordDialog user={user} /></Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
               :

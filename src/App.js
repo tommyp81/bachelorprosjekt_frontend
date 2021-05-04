@@ -76,6 +76,8 @@ const App = () => {
     <Toolbar
       handleDrawerToggleClick={handleDrawerToggleClick}
       logout={testlogout}
+      users={users}
+      setUsers={setUsers}
     />
   );
 

@@ -3,6 +3,18 @@ td, th {
   vertical-align: middle;
 }
 
+.usertable {
+  background-color: white;
+}
+
 .containerPanel {
   margin-top: 150px;
+}
+
+.btn-link:hover {
+  cursor: pointer;
+}
+
+.deletebutton {
+  height: 40px;
 }
