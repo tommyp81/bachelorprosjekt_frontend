@@ -51,7 +51,7 @@ const UsernameDialog = ({users, setUsers}) => {
 
   return (
     <>
-      <Button variant="link" onClick={handleShow}>Endre Brukernavn</Button>
+      <span className="btn-link" onClick={handleShow}>Endre Brukernavn</span>
       <Modal animation={false} show={show} onHide={handleClose}>
         <Modal.Header closeButton={true}>
           <Modal.Title>Sett nytt Brukernavn for: {user.username}</Modal.Title>
