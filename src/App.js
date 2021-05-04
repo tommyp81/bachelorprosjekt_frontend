@@ -30,7 +30,7 @@ import AdminPanel from "./components/Admin/AdminPanel";
 // https://webforum.azurewebsites.net/answers
 // https://webforum.azurewebsites.net/users
 
-export const host = "https://badmintonbackend.azurewebsites.net/";
+export const host = "https://webforum.azurewebsites.net/";
 
 const App = () => {
   const history = useHistory();
