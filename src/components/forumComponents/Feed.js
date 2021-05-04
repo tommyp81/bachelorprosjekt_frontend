@@ -32,7 +32,7 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
             <Card.Body>
               <div className="float-left">
                 <Card.Text>
-                  {post.userId === null ? <>Postet av <b>[Slettet bruker]</b></> : <>Postet av <b>{users?.find(u => u.id === post.userId).username}</b></>}
+                  {post.userId === null ? <>Postet av <b>[Slettet bruker]</b></> : <>Postet av <b>{users?.find(u => u.id === post.userId)?.username}</b></>}
                   {" "}{moment(post.date).calendar()}
                 </Card.Text>
               </div>
