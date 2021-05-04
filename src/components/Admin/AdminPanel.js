@@ -12,7 +12,7 @@ const AdminPanel = ({users, setUsers}) => {
   
 
 
-  const test = (e) => {
+  const selectUser = (e) => {
     const {id, checked} = e.target
     console.log(id, checked)
     if(checked)
@@ -66,11 +66,14 @@ const AdminPanel = ({users, setUsers}) => {
       }
     })
 
+
   return (
     <div className="containerPanel container col-12">
-      {selectedUsers.length > 0 && <Button variant="danger" onClick={deleteSelectedUsers}>Slett Bruker(e)</Button>}
-      <SearchUsers setSearchInput={setSearchFilter}/>
-      <Table className="" variant="dark" striped bordered responsive>
+      <div className="d-flex justify-content-between">
+        <Button className="deletebutton" variant="danger" onClick={deleteSelectedUsers} disabled={selectedUsers.length < 1}>Slett Bruker(e)</Button>
+        <SearchUsers setSearchInput={setSearchFilter}/>
+      </div>
+      <Table className="usertable" striped bordered responsive>
         <thead>
           <tr>
             <th></th>
@@ -86,20 +89,20 @@ const AdminPanel = ({users, setUsers}) => {
         <tbody>
           {currentUsers.map((u) => (
             <tr key={u.id} >
-              <td width={50}><Form.Check onChange={e => test(e)} id={u.id} type="checkbox" custom/></td>
+              <td width={50}><Form.Check onChange={e => selectUser(e)} id={u.id} disabled={u.id === 1} type="checkbox" custom/></td>
               <td width={50}>{u.id}</td>
               <td>{u.username}</td>
               <td className="d-none d-xl-table-cell">{u.firstName}</td>
               <td className="d-none d-xl-table-cell">{u.lastName}</td>
               <td className="d-none d-xl-table-cell">{u.email}</td>
-              <td >
-                <Form.Control custom id={u.id} as="select" defaultValue={u.admin} onChange={adminToggle} disabled={u.id === 1}>
+              <td width={130}>
+                <Form.Control size="sm"  id={u.id} as="select" defaultValue={u.admin} onChange={adminToggle} disabled={u.id === 1}>
                   <option value={true}>true</option>
                   <option value={false}>false</option>
                 </Form.Control>
                 {/* {String(u.admin)} */}
               </td>
-              <td width={150}><PasswordDialog user={u}/></td>
+              <td width={125}><PasswordDialog user={u}/></td>
             </tr>
           ))}
         </tbody>

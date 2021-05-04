@@ -45,7 +45,7 @@ const PasswordDialog = ({ user }) => {
   
   return (
     <>
-      <Button variant="link" onClick={handleShow}>Endre Passord</Button>
+      <span className="btn-link" onClick={handleShow}>Endre Passord</span>
       <Modal animation={false} show={show} onHide={handleClose}>
         <Modal.Header closeButton={true}>
           <Modal.Title>Sett nytt passord for: {user.username}</Modal.Title>
