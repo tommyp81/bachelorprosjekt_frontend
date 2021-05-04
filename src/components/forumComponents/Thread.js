@@ -279,7 +279,6 @@ const Thread = ({
                 </div>
                 </Card.Text>
                 
-                {!(user.id === post.userId) ? "" : 
                 <div className="editdelete">
                   {(user.id === post.userId) && <EditPost post={post} edit={editPost} />}&nbsp;
                   {((user.id === post.userId) || user.admin) &&
@@ -312,7 +311,7 @@ const Thread = ({
                     </Modal.Footer>
                   </Modal>
                 </div> 
-                }
+                
 
                 <div className="likecomment">
                   {post.comment_Count}
