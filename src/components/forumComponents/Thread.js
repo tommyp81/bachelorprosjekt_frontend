@@ -245,7 +245,8 @@ const Thread = ({
           <div className="main">
             <Card>
               <Card.Body>
-                <div className="float-left">
+                <Card.Text>
+                  <div className="float-left">
                   
                   <p>Postet av{" "}
                   {post.userId === null ? <b>[Slettet bruker]</b> : 
@@ -258,55 +259,35 @@ const Thread = ({
                     {post.edited ? <i style={{color: "gray"}}>(Redigert {moment(post.editDate).calendar()})</i> : ""}
                   </p>
                 </div>
-                <div className="float-right">
-                  {post.like_Count}{" "}
-                  <LikeButton
-                    id={postId}
-                    liked={liked}
-                    setLiked={setLiked}
-                    isPost={true}
-                    updatePostLike={updatePostLike}
-                  />{" "}
-                  &nbsp;
-                  {post.comment_Count}
-                  <FaRegComment
-                    size={18}
-                    color="grey"
-                    className="ml-2 mr-2 mb-1"
-                  />
-                </div>
+                </Card.Text>
 
                 <Card.Title>
-                  <br />
-                  <br />
-                  <h2>{post.title}</h2>
+                  <br/>
+                  {post.title}
                 </Card.Title>
-                <Card.Text>{post.content}</Card.Text>
-                <div className="float-left">
-                  {post.documentId ? (
-                    <p>
-                      Vedlegg:{" "}
-                      <b>
-                        <FileLink fileId={post.documentId} />
-                      </b>
-                    </p>
-                  ) : (
-                    ""
-                  )}
+
+                <Card.Text>
+                <div className="postcontent">
+                  {post.content}
                 </div>
+
+                <div className="postattachment" style={{color: "grey"}}>
+                  {post.documentId ? 
+                    (<p>Vedlegg: <b><FileLink fileId={post.documentId}/></b></p>) 
+                  : 
+                    ("")}
+                </div>
+                </Card.Text>
                 
-                <div
-                  className="float-right"
-                >
-                  { (user.id === post.userId) && <EditPost post={post} edit={editPost} />}
-                  {
-                    ((user.id === post.userId) || user.admin) &&
+                {!(user.id === post.userId) ? "" : 
+                <div className="editdelete">
+                  {(user.id === post.userId) && <EditPost post={post} edit={editPost} />}&nbsp;
+                  {((user.id === post.userId) || user.admin) &&
                     <Button
                       variant="danger"
                       size="sm"
                       onClick={handleShow}
-                      value={post.id}
-                    >
+                      value={post.id}>
                       Slett
                     </Button>
                   }
@@ -330,6 +311,27 @@ const Thread = ({
                       </Button>
                     </Modal.Footer>
                   </Modal>
+                </div> 
+                }
+
+                <div className="likecomment">
+                  {post.comment_Count}
+                  <FaRegComment
+                    size={18}
+                    color="grey"
+                    className="ml-2 mr-2 mb-1"
+                  />
+
+                  &nbsp;
+
+                  {post.like_Count}&nbsp;
+                  <LikeButton
+                    id={postId}
+                    liked={liked}
+                    setLiked={setLiked}
+                    isPost={true}
+                    updatePostLike={updatePostLike}
+                  />
                 </div>
               </Card.Body>
             </Card>

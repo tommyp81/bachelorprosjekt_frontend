@@ -1,7 +1,7 @@
 .sideDrawer .user {
   position: absolute;
   text-align: center;
-  left: 23%;
+  left: 25%;
   top: 15%;
   font-size: 1.2rem;
 }
@@ -14,13 +14,13 @@
 @media (max-width: 425px) {
   .sideDrawer .user, .sideDrawer .user a {
     font-size: 1rem;
-    top: 10%;
+    top: 5%;
   }
 }
 
 @media (max-width: 320px) {
   .sideDrawer .user {
-    left: 13%;
+    left: 30px;
   }
 }
 

@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 
 import SpinnerDiv from "../forumComponents/SpinnerDiv.js";
 import SortPosts from "../forumComponents/SortPosts.js";
+import { ArrowLeft, ArrowRight } from "react-bootstrap-icons";
 
 const Home = ({ posts, topic, subtopic, users, loading }) => {
   const [filteredPosts, setFilteredPosts] = useState([]);
@@ -26,9 +27,7 @@ const Home = ({ posts, topic, subtopic, users, loading }) => {
       <Container>
         <Row className="toprow">
           <Col>
-            <div className="float-left">
-              <h3>Diskusjoner i forumet</h3>
-            </div>
+            <h3>Diskusjoner i forumet</h3>
             <div className="sortposts">
               <SortPosts
                 post={filteredPosts}
@@ -65,10 +64,10 @@ const Home = ({ posts, topic, subtopic, users, loading }) => {
                   <h1>Ønsker du å lære mer?</h1>
                   <p>
                     I kunnskapsportalen finner du mange nyttige artikler og
-                    videoer som lærer deg korrekte treningsteknikker relevante
+                    videoer som lærer deg korrekte treningsteknikker som er relevante
                     for badmintonsporten.
                   </p>
-                  <h5>Til kunnskapsportalen</h5>
+                  <h5>Til kunnskapsportalen <ArrowRight/></h5>
                 </div>
               </div>
             </Link>
@@ -87,7 +86,7 @@ const Home = ({ posts, topic, subtopic, users, loading }) => {
                     dele kunnskap, opplevelser og erfaringer fra
                     badmintonsporten.
                   </p>
-                  <h5>Til forumet</h5>
+                  <h5><ArrowLeft/> Til forumet</h5>
                 </div>
               </div>
             </Link>

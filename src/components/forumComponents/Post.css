@@ -11,6 +11,10 @@
     color: black;
 }
 
+.Post .main .card-title {
+    font-size: 30px;
+}
+
 .Post .card .card-body .float-left {
     color: gray;
 }
@@ -33,7 +37,43 @@
     background-color: unset;
 }
 
+.Post .editdelete {
+    float: left;
+}
+
+.Post .likecomment {
+    float: right;
+}
+
 .like:hover {
     cursor: pointer;
     opacity: .5;
+}
+
+
+@media (max-width: 768px) {
+    .Post .card-text {
+      font-size: 14px;
+    }
+  
+    .Post .likecomment {
+      font-size: 14px;
+    } 
+  }
+  
+
+@media (max-width: 425px) {
+
+    .Post .main .card-title {
+        font-size: 20px;
+    }
+
+    .Post .likecomment {
+        float: left;
+    }
+    
+    .Post .editdelete {
+        float: unset;
+        margin-bottom: 15px;
+    }
 }

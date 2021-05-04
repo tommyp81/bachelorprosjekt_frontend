@@ -36,7 +36,22 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
                   {" "}{moment(post.date).calendar()}
                 </Card.Text>
               </div>
-              <div className="float-right">
+              
+              <br />
+              <br />
+              <Card.Title>{post.title}</Card.Title>
+              <Card.Text>
+                <ReadMoreReact text={post.content} />
+              </Card.Text>
+              
+              {topic
+                .filter((topic) => topic.id === post.topicId)
+                .map((filteredTopics, j) => (
+                  <Card.Text key={j} className="subtoptitle">
+                    {filteredTopics.title} -{" "}
+                    {subtopic.find((st) => st.id === post.subTopicId)?.title}
+                  </Card.Text>
+                ))}<div className="likecomment">
                 {post.like_Count}{" "}
                 <LikeStatus postId={post.id} />{" "}
                 &nbsp;
@@ -46,23 +61,6 @@ const Feed = ({ posts, users, topic, subtopic, maxLength, loading }) => {
                   color="grey"
                   className="ml-2 mr-2 mb-1"
                 /></div>
-              <br />
-              <br />
-              <Card.Title>{post.title}</Card.Title>
-              <Card.Text className="float-left">
-                <ReadMoreReact text={post.content} /><br/>
-              </Card.Text>
-              <br />
-              <br />
-              
-              {topic
-                .filter((topic) => topic.id === post.topicId)
-                .map((filteredTopics, j) => (
-                  <Card.Text key={j} className="float-left">
-                    {filteredTopics.title} -{" "}
-                    {subtopic.find((st) => st.id === post.subTopicId)?.title}
-                  </Card.Text>
-                ))}
             </Card.Body>
           </Link>
         </Card>

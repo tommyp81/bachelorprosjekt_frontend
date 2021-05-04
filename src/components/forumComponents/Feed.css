@@ -9,14 +9,19 @@
   border-bottom: none;
 }
 
-.Feed .subtoptitle {
-  font-size: 16px;
-}
-
 .Feed .float-left {
   margin: 0;
   font-size: 16px;
   color: grey;
+}
+
+.Feed .subtoptitle {
+  color: grey;
+  float: left;
+}
+
+.Feed .likecomment {
+  float: right;
 }
 
 .Feed .card-title:hover {
@@ -33,4 +38,21 @@
     margin-left: -10px;
     font-size: 14px;
   }
+
+  .Feed .likecomment {
+    font-size: 14px;
+    margin-left: -10px;
+  } 
+  
+}
+
+
+@media (max-width: 425px) {
+  .Feed .likecomment {
+    float: left;
+  }
+  .Feed .subtoptitle { 
+    float: unset;
+    }
+
 }

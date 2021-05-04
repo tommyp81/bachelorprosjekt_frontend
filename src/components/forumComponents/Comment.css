@@ -1,0 +1,19 @@
+.Comment .editdelete {
+    float: left;
+    margin-top: 10px;
+}
+
+.Comment .like {
+    float: right;
+}
+
+@media (max-width: 425px) {
+    .Comment .like {
+        float: left;
+    }
+    
+    .Comment .editdelete {
+        float: unset;
+        margin-bottom: 15px;
+    }
+}

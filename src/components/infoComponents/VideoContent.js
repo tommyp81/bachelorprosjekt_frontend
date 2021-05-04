@@ -40,7 +40,7 @@ const VideoContent = ({ videos, infoTopics, content, deletePost, setVideoContent
               <Col md={5}>
                 <div className="content">
                 {infoTopics.filter(infoTopics => (infoTopics.id === filteredVideos.infoTopicId)).map((filteredTopics, i) => (
-                <p className="toptext">Delt {post.filter(post => (post.id === filteredVideos.postId)).map((filteredPosts , i) => (
+                <p className="toptext" style={{color: "gray"}}>Delt {post.filter(post => (post.id === filteredVideos.postId)).map((filteredPosts , i) => (
                   moment(filteredPosts.date).calendar()))} i {filteredTopics.title}
                 </p>))}
                 <div className="title">{filteredVideos.title}</div><br/>

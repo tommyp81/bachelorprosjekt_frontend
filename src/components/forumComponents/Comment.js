@@ -5,6 +5,7 @@ import { UserContext } from "../../UserContext";
 import FileLink from "../FileLink";
 import LikeButton from "../LikeButton";
 import EditComment from "./EditComment";
+import "./Comment.css"
 import { host } from "../../App";
 
 moment.locale("nb");
@@ -80,8 +81,10 @@ const Comment = ({ users, initComment, deleteComment }) => {
   };
 
   return (
+    <div className="Comment">
     <Card>
       <Card.Body>
+        <Card.Text>
         <div className="float-left">
           
           <p>Postet av{" "}
@@ -90,44 +93,38 @@ const Comment = ({ users, initComment, deleteComment }) => {
           {moment(comment.date).calendar()}&nbsp;
           {comment.edited ? <i style={{color: "gray"}}>(Redigert {moment(comment.editDate).calendar()})</i> : ""}
           </p>
-        </div><div className="float-right"> 
-          {comment.like_Count} <LikeButton id={comment.id} liked={liked} setLiked={setLiked} isPost={false} updateCommentLike={setCommentLikeCount} />
-          </div>
+        </div>
+        </Card.Text>
         
-        
-        <Card.Text><br /><br />
+        <Card.Text>
+          <br />
+          <div className="commentcontent">
           {comment.content}
-          <br />
-          <br />
-          <div className="float-left">
-            {comment.documentId ? (
-              <p>
-                Vedlegg:{" "}
-                <b>
-                  <FileLink fileId={comment.documentId} />
-                </b>
-              </p>
-            ) : (
-              ""
-            )}
           </div>
+          <br />
           
-          <div className="float-right">
-            {(user.id === comment.userId) && <EditComment comment={comment} edit={editComment} />}
-            {
-              ((user.id === comment.userId) || user.admin) &&
+          <div className="postattachment" style={{color: "grey"}}>
+            {comment.documentId ? 
+              (<>Vedlegg: <b><FileLink fileId={comment.documentId}/></b></>) 
+              : 
+              ("")}
+          </div>
+
+          {!(user.id === comment.userId) ? "" : 
+          <div className="editdelete">
+            {(user.id === comment.userId) && <EditComment comment={comment} edit={editComment} />} &nbsp;
+            {((user.id === comment.userId) || user.admin) &&
               <Button
                 variant="danger"
                 size="sm"
                 onClick={handleShow}
-                value={comment.id}
-              >
+                value={comment.id}>
                 Slett
-              </Button>
-            }
+              </Button>}
+           
             <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>
-                <Modal.Title>Slett Kommentar</Modal.Title>
+                <Modal.Title>Slett kommentar</Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 Er du sikker på at du vil slette din kommentar?
@@ -136,6 +133,7 @@ const Comment = ({ users, initComment, deleteComment }) => {
                 <Button variant="secondary" onClick={handleClose}>
                   Avbryt
                 </Button>
+                &nbsp;
                 <Button
                   variant="danger"
                   onClick={deleteComment}
@@ -146,9 +144,15 @@ const Comment = ({ users, initComment, deleteComment }) => {
               </Modal.Footer>
             </Modal>
           </div>
+          }
+
+          <div className="like"> 
+          {comment.like_Count}&nbsp;<LikeButton id={comment.id} liked={liked} setLiked={setLiked} isPost={false} updateCommentLike={setCommentLikeCount} />
+          </div>
         </Card.Text>
       </Card.Body>
     </Card>
+    </div>
   );
 };
 

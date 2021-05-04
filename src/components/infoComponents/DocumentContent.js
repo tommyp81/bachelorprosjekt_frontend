@@ -31,11 +31,10 @@ const DocumentContent = ({ documents, infoTopics, setDocumentContent }) => {
                   <Col>
                   <div className="content">
                   {infoTopics.filter(infoTopics => (infoTopics.id === mappedDocuments.infoTopicId)).map((filteredTopics, i) => (
-                    <div className="toptext">
+                    <p className="toptext" style={{color: "grey"}}>
                       Delt {moment(mappedDocuments.uploaded).calendar()} i {filteredTopics.title}
-                        
-                    </div>
-                    ))}<br/>
+                    </p>
+                    ))}
                   <div className="title">  
                     <FileEarmarkTextFill className="iconmobile"/>{" "}
                     <FileLink fileId={mappedDocuments.id}/>
