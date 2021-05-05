@@ -9,6 +9,7 @@ import DocumentContent from "./DocumentContent.js"
 import SearchContent from "./SearchContent.js"
 import "./Kunnskapsportalen.css";
 import { UserContext } from '../../UserContext.js';
+import { host } from '../../App.js';
  
 const Kunnskapsportalen = ({ infoTopics, videos, documents, users, addPost, deletePost, post }) => {
 
@@ -20,30 +21,41 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, addPost, dele
     const [description, setDescription] = useState("")
     const [searchFilter, setSearchFilter] = useState("")
 
-    useEffect(() => {
-      setVideoContent(videos)
-      setDocumentContent(documents)
-    }, [videos, documents])
+    // Videos
+    // `videos?infoTopicId=${}&pageNumber=${}&pageSize=${}&sortOrder=${}&sortType=${}`
+    useEffect( async () => {
+      const res = await fetch(host + 'videos')
+      const videos = await res.json()
+      setVideoContent(videos.data)
+    }, [])
 
-    const currentVideoContent = videoContent.filter((videoContent) => {
-      if (searchFilter === "") {
-        return videoContent;
-      } else if (
-        videoContent.title.toLowerCase().includes(searchFilter.toLowerCase())
-      ) {
-        return videoContent;
-      }
-    })
+    // Documents
+    // `GetDocuments?infoTopicId=${}&pageNumber=${}&pageSize=${}&sortOrder=${}&sortType=${}`
+    useEffect( async () => {
+      const res = await fetch(host + 'GetDocuments')
+      const documents = await res.json()
+      setVideoContent(documents.data)
+    }, [])
+
+    // const currentVideoContent = videoContent.filter((videoContent) => {
+    //   if (searchFilter === "") {
+    //     return videoContent;
+    //   } else if (
+    //     videoContent.title.toLowerCase().includes(searchFilter.toLowerCase())
+    //   ) {
+    //     return videoContent;
+    //   }
+    // })
     
-    const currentDocumentContent = documentContent.filter((documentContent) => {
-      if (searchFilter === "") {
-        return documentContent;
-      } else if (
-        documentContent.fileName.toLowerCase().includes(searchFilter.toLowerCase())
-      ) {
-        return documentContent;
-      }
-    })
+    // const currentDocumentContent = documentContent.filter((documentContent) => {
+    //   if (searchFilter === "") {
+    //     return documentContent;
+    //   } else if (
+    //     documentContent.fileName.toLowerCase().includes(searchFilter.toLowerCase())
+    //   ) {
+    //     return documentContent;
+    //   }
+    // })
 
     const filterContent = (e) => {
       let value = e.target.value;
@@ -105,7 +117,7 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, addPost, dele
                     }
                     </div>
                      <SearchContent setSearchInput={setSearchFilter}/>
-                     <VideoContent videos={currentVideoContent} infoTopics={infoTopics} post={post} deletePost={deletePost} setVideoContent={setVideoContent}/>
+                     <VideoContent videos={videoContent} infoTopics={infoTopics} post={post} deletePost={deletePost} setVideoContent={setVideoContent}/>
                     </Tab>
                     <Tab eventKey="3" title="Dokumenter" className="tab">
                     <div className="topictitle">{!title ? "Alle kategorier" : title}</div>
@@ -116,7 +128,7 @@ const Kunnskapsportalen = ({ infoTopics, videos, documents, users, addPost, dele
                     }
                     </div>
                       <SearchContent setSearchInput={setSearchFilter}/>
-                      <DocumentContent documents={currentDocumentContent} infoTopics={infoTopics} setDocumentContent={setDocumentContent}/>
+                      <DocumentContent documents={documentContent} infoTopics={infoTopics} setDocumentContent={setDocumentContent}/>
                     </Tab>
                     
                   </Tabs>

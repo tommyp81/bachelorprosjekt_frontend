@@ -10,17 +10,21 @@ import Footer from "../mainComponents/Footer";
 import { Link } from "react-router-dom";
 
 import SpinnerDiv from "../forumComponents/SpinnerDiv.js";
-import SortPosts from "../forumComponents/SortPosts.js";
+import SortItems from "../forumComponents/SortItems.js";
 import { ArrowLeft, ArrowRight } from "react-bootstrap-icons";
+import { host } from "../../App.js";
 
-const Home = ({ posts, topic, subtopic, users, loading }) => {
+const Home = ({ topic, subtopic, users }) => {
   const [filteredPosts, setFilteredPosts] = useState([]);
+  const [sort, setSort] = useState({sortOrder: "Asc", sortType: "Date"})
+  const postsInFeed = 3
 
-  useEffect(() => {
-    setFilteredPosts(
-      posts.slice(0).sort((d1, d2) => moment(d2.date) - moment(d1.date))
-    );
-  }, [posts]);
+  useEffect( async () => {
+    const res = await fetch(host + 
+      `posts?pageNumber=${1}&pageSize=${postsInFeed}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`)
+    const posts = await res.json()
+    setFilteredPosts(posts.data)
+  }, [sort]);
 
   return (
     <div className="Home">
@@ -29,9 +33,9 @@ const Home = ({ posts, topic, subtopic, users, loading }) => {
           <Col>
             <h3>Diskusjoner i forumet</h3>
             <div className="sortposts">
-              <SortPosts
-                post={filteredPosts}
-                setFilteredPosts={setFilteredPosts}
+              <SortItems
+                setSort={setSort}
+                isPost={true}
               />
             </div>
           </Col>
@@ -39,17 +43,12 @@ const Home = ({ posts, topic, subtopic, users, loading }) => {
         </Row>
         <Row md={1} lg={2}>
           <Col md={6} className="feedcol">
-            {loading ? (
-              <SpinnerDiv />
-            ) : (
-              <Feed
+            <Feed
                 posts={filteredPosts}
-                users={users}
                 topic={topic}
                 subtopic={subtopic}
-                maxLength={3}
-              />
-            )}
+                postsPerPage={postsInFeed}
+            />
           </Col>
           <Col md={6} className="textcol">
             <Link to="/Kunnskapsportalen">

@@ -10,7 +10,7 @@ import { host } from "../../App";
 
 moment.locale("nb");
 
-const Comment = ({ users, initComment, deleteComment }) => {
+const Comment = ({ initComment, deleteComment }) => {
   const initMount = useRef(true);
 
   const { user } = useContext(UserContext);
@@ -89,7 +89,7 @@ const Comment = ({ users, initComment, deleteComment }) => {
           
           <p>Postet av{" "}
           {comment.userId === null ? <b>[Slettet bruker]</b> : 
-            <b>{users && users.length && users.find(u => u.id === comment.userId).username}</b>} {" "}
+            <b>{comment.userId}</b>} {" "}
           {moment(comment.date).calendar()}&nbsp;
           {comment.edited ? <i style={{color: "gray"}}>(Redigert {moment(comment.editDate).calendar()})</i> : ""}
           </p>

@@ -24,6 +24,7 @@ import Comment from "./Comment.js";
 import Comments from "./Comments.js";
 import { ArrowLeft } from "react-bootstrap-icons";
 import { RiArrowLeftFill } from "react-icons/ri";
+import SortItems from "./SortItems.js";
 
 const Thread = ({
   subtopics,
@@ -44,6 +45,14 @@ const Thread = ({
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [sort, setSort] = useState({sortOrder: "Asc", sortType: "Date"})
+
+  const commentsPerPage = 5;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(null)
+  const [totalRecords, setTotalRecords] = useState(null)
+  
   //Post
   useEffect(() => {
     fetch(host + `posts/${postId}`)
@@ -62,15 +71,35 @@ const Thread = ({
 
   // Comments
   useEffect(() => {
-    fetch(host + "comments")
+    fetch(host + 
+      `comments?postId=${postId}
+      &pageNumber=${currentPage}
+      &pageSize=${commentsPerPage}
+      &sortOrder=${sort.sortOrder}
+      &sortType=${sort.sortType}`)
       .then((res) => res.json())
       .then((data) => {
-        setComments(data.filter((c) => Number(postId) === c.postId));
+        setComments(data.data);
+        setTotalPages(data.totalPages)
+        setTotalRecords(data.totalRecords)
       })
       .catch(console.log);
-  }, []);
+  }, [currentPage, sort]);
 
   // const threadComments = comments.filter(c => Number(postId) === c.postId).slice(0).sort((d1, d2) => moment(d2.date) - moment(d1.date))
+
+
+  
+
+  const nextPage = () => setCurrentPage(currentPage + 1);
+  const prevPage = () => setCurrentPage(currentPage - 1);
+
+  const lastPage = currentPage === totalPages;
+  const firstPage = currentPage === 1;
+
+  const goToLast = () => setCurrentPage(totalPages);
+  const goToFirst = () => setCurrentPage(1);
+
 
   const deleteThread = async () => {
     const success = deletePost(postId);
@@ -102,12 +131,12 @@ const Thread = ({
     });
     const data = await res.json();
     setPost(data);
-    updatePostInArray(post.id, data);
+    // updatePostInArray(post.id, data);
   };
 
   const updatePostLike = (num) => {
     setPost({ ...post, like_Count: post.like_Count + num });
-    updatePostInArray(post.id, { like_Count: post.like_Count + num });
+    // updatePostInArray(post.id, { like_Count: post.like_Count + num });
   };
 
   // const editComment = async (comment, file) => {
@@ -158,7 +187,7 @@ const Thread = ({
     if (res.status === 200) {
       setComments(comments.filter((comment) => comment.id !== id));
       setPost({ ...post, comment_Count: post.comment_Count - 1 });
-      updatePostInArray(post.id, { comment_Count: post.comment_Count - 1 });
+      // updatePostInArray(post.id, { comment_Count: post.comment_Count - 1 });
     } else {
       alert("ERROR");
     }
@@ -179,34 +208,13 @@ const Thread = ({
 
     // updatePosts()
     setPost({ ...post, comment_Count: post.comment_Count + 1 });
-    updatePostInArray(post.id, { comment_Count: post.comment_Count + 1 });
+    // updatePostInArray(post.id, { comment_Count: post.comment_Count + 1 });
 
-    if (comments.length % commentsPerPage === 0) setCurrentPage(last + 1);
+    if (totalRecords % commentsPerPage === 0) setCurrentPage(totalPages + 1);
     else goToLast();
   };
 
-  const commentsPerPage = 5;
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const indexOfLastComment = currentPage * commentsPerPage;
-  const indexOfFirstComment = indexOfLastComment - commentsPerPage;
-  const currentComments = comments.slice(
-    indexOfFirstComment,
-    indexOfLastComment
-  );
-
-  const paginate = (pageNum) => setCurrentPage(pageNum);
-  const nextPage = () => setCurrentPage(currentPage + 1);
-  const prevPage = () => setCurrentPage(currentPage - 1);
-
-  const lastPage =
-    currentComments.length !== commentsPerPage ||
-    indexOfLastComment === comments.length;
-  const firstPage = currentPage === 1;
-
-  const last = Math.ceil(comments.length / commentsPerPage);
-  const goToLast = () => setCurrentPage(last);
-  const goToFirst = () => setCurrentPage(1);
+  
 
   return (
     <div className="Post">
@@ -249,12 +257,7 @@ const Thread = ({
                   <div className="float-left">
                   
                   <p>Postet av{" "}
-                  {post.userId === null ? <b>[Slettet bruker]</b> : 
-                    <b>
-                      {users &&
-                        users.length &&
-                        users.find((u) => u.id === post.userId)?.username}
-                    </b>}{" "}
+                    {post.userId === null ? <b>[Slettet bruker]</b> : <b>{post.userId}</b>}{" "}
                     {moment(post.date).calendar()}&nbsp;
                     {post.edited ? <i style={{color: "gray"}}>(Redigert {moment(post.editDate).calendar()})</i> : ""}
                   </p>
@@ -346,20 +349,17 @@ const Thread = ({
             ) : (
               <h3>Kommentarer</h3>
             )}
-            {currentComments.map((c) => (
+            {comments.map((c) => (
               <Comment
                 key={c.id}
                 initComment={c}
-                users={users}
                 deleteComment={deleteComment}
               />
             ))}
             {post.comment_Count > 0 && (
-              <div className="float-right">
+              <div className="d-flex justify-content-between">
+                <SortItems setSort={setSort} isPost={false} />
                 <Pages
-                  postsPerPage={commentsPerPage}
-                  paginate={paginate}
-                  totalPosts={comments.length}
                   nextPage={nextPage}
                   prevPage={prevPage}
                   currentPage={currentPage}

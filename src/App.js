@@ -30,7 +30,7 @@ import AdminPanel from "./components/Admin/AdminPanel";
 // https://webforum.azurewebsites.net/answers
 // https://webforum.azurewebsites.net/users
 
-export const host = "https://webforum.azurewebsites.net/";
+export const host = "https://localhost:44361/";
 
 const App = () => {
   const history = useHistory();
@@ -86,12 +86,12 @@ const App = () => {
   );
 
   useEffect(() => {
-    fetch(host + "posts")
-      .then((res) => res.json())
-      .then((data) => {
-        setPosts(data);
-      })
-      .catch(console.log);
+    // fetch(host + "posts")
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setPosts(data);
+    //   })
+    //   .catch(console.log);
 
     fetch(host + "SubTopics")
       .then((res) => res.json())
@@ -121,27 +121,8 @@ const App = () => {
       })
       .catch(console.log);
 
-    fetch(host + "Videos")
-      .then((res) => res.json())
-      .then((data) => {
-        setVideos(data);
-      })
-      .catch(console.log);
-
-    fetch(host + "getdocuments")
-      .then((res) => res.json())
-      .then((data) => {
-        setDocuments(data);
-      })
-      .catch(console.log);
     // setLoading(false)
   }, []);
-
-  // const updatePosts = async () => {
-  //   const res = await fetch("https://localhost:44361/posts");
-  //   const data = await res.json();
-  //   setPosts(data);
-  // };
 
   // sends post to api/database and updates posts with new post
   const addPost = async (post, file) => {
@@ -167,7 +148,7 @@ const App = () => {
     });
 
     if (res.status === 200) {
-      updatePostInArray(postId, {}, true);
+      // updatePostInArray(postId, {}, true);
       return true;
     } else {
       return false;

@@ -32,15 +32,15 @@ const UsernameDialog = ({users, setUsers}) => {
     if(res.ok) { 
       const data = await res.json()
       setUser({...user, username: data.username})
-      setUsers(users.map(u => {
-        if(u.id == user.id) {
-          return {
-            ...u, 
-            username: data.username
-          }
-        }
-        return u
-      }))
+      // setUsers(users.map(u => {
+      //   if(u.id == user.id) {
+      //     return {
+      //       ...u, 
+      //       username: data.username
+      //     }
+      //   }
+      //   return u
+      // }))
       alert("Brukernavn endret!")
     } else {
       const text = await res.text()

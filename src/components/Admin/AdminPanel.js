@@ -1,15 +1,43 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Form, Table } from 'react-bootstrap'
 import { host } from '../../App'
 import SearchUsers from "./SearchUsers.js"
 import './AdminPanel.css'
 import PasswordDialog from './PasswordDialog'
+import Pages from '../forumComponents/Pages'
 
-const AdminPanel = ({users, setUsers}) => {
+const AdminPanel = () => {
+
+  const [users, setUsers] = useState([])
 
   const [selectedUsers, setSelectedUsers] = useState([])
   const [searchFilter, setSearchFilter] = useState("");
+
+  const [sort, setSort] = useState({sortOrder: "", sortType: ""})
+  const [currentPage, setCurrentPage] = useState(1)
+  const [usersPerPage, setUsersPerPage] = useState(10);
+  const [totalPages, setTotalPages] = useState(null)
+
+
+  useEffect( async () => {
+    const res = await fetch(host + 
+      `users?pageNumber=${currentPage}&pageSize=${usersPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`)
+    const resData = await res.json()
+    setUsers(resData.data)
+    setTotalPages(resData.totalPages)
+
+  }, [currentPage, sort])
   
+
+  const nextPage = () => setCurrentPage(currentPage + 1);
+  const prevPage = () => setCurrentPage(currentPage - 1);
+
+  const lastPage = currentPage === totalPages
+  const firstPage = currentPage === 1;
+
+  const goToLast = () =>
+    setCurrentPage(totalPages);
+  const goToFirst = () => setCurrentPage(1);
 
 
   const selectUser = (e) => {
@@ -52,19 +80,19 @@ const AdminPanel = ({users, setUsers}) => {
     }))
   }
 
-  const currentUsers = users
-    .filter((users) => {
-      if (searchFilter === "") {
-        return users;
-      } else if (
-        users.username.toLowerCase().includes(searchFilter.toLowerCase()) ||
-        users.firstName.toLowerCase().includes(searchFilter.toLowerCase()) ||
-        users.lastName.toLowerCase().includes(searchFilter.toLowerCase()) ||
-        users.email.toLowerCase().includes(searchFilter.toLowerCase())
-      ) {
-        return users;
-      }
-    })
+  // const currentUsers = users
+  //   .filter((users) => {
+  //     if (searchFilter === "") {
+  //       return users;
+  //     } else if (
+  //       users.username.toLowerCase().includes(searchFilter.toLowerCase()) ||
+  //       users.firstName.toLowerCase().includes(searchFilter.toLowerCase()) ||
+  //       users.lastName.toLowerCase().includes(searchFilter.toLowerCase()) ||
+  //       users.email.toLowerCase().includes(searchFilter.toLowerCase())
+  //     ) {
+  //       return users;
+  //     }
+  //   })
 
 
   return (
@@ -87,7 +115,7 @@ const AdminPanel = ({users, setUsers}) => {
           </tr>
         </thead>
         <tbody>
-          {currentUsers.map((u) => (
+          {users.map((u) => (
             <tr key={u.id} >
               <td width={50}><Form.Check onChange={e => selectUser(e)} id={u.id} disabled={u.id === 1} type="checkbox" custom/></td>
               <td width={50}>{u.id}</td>
@@ -107,6 +135,15 @@ const AdminPanel = ({users, setUsers}) => {
           ))}
         </tbody>
       </Table>
+      <Pages
+        nextPage={nextPage}
+        prevPage={prevPage}
+        currentPage={currentPage}
+        firstPage={firstPage}
+        lastPage={lastPage}
+        goToFirst={goToFirst}
+        goToLast={goToLast}
+      />
     </div>
   )
 }
