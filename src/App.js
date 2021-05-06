@@ -82,7 +82,7 @@ const App = () => {
   );
 
   const sidebar = (
-    <SideDrawer show={sideDrawerOpen} toggle={handleDrawerToggleClick} />
+    <SideDrawer show={sideDrawerOpen} toggle={handleDrawerToggleClick} logout={testlogout}/>
   );
 
   useEffect(() => {

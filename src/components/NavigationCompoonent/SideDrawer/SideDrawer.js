@@ -17,6 +17,7 @@ const SideDrawer = (props) => {
     drawerClasses = "sideDrawer open";
   }
 
+
   return (
     <nav className={drawerClasses}>
       <div className="user">
@@ -50,7 +51,10 @@ const SideDrawer = (props) => {
           </Link>
         </li>
         <li>
-          <Link to="/Login" onClick={props.logout}>
+          <Link to="/Login" onClick={() => {
+            props.logout();
+            props.toggle();
+          }}>
             <BsBoxArrowLeft size="22px" /> Logg ut
           </Link>
         </li>
