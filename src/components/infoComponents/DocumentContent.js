@@ -12,6 +12,7 @@ import Pages from '../forumComponents/Pages';
 import SearchContent from './SearchContent';
 import AddDocument from './AddDocument';
 import Search from '../forumComponents/Search';
+import SortContent from './SortContent';
 
 const DocumentContent = ({ infoTopics }) => {
 
@@ -27,18 +28,23 @@ const DocumentContent = ({ infoTopics }) => {
   const [totalDocumentsPages, setTotalDocumentsPages] = useState(0)
   const [documentsSort, setDocumentsSort] = useState({ sortOrder: "Asc", sortType: "id" })
 
-  const documentsURL = `GetDocuments?infoTopicId=${infoTopic}
-    &pageNumber=${currentDocumentsPage}
-    &pageSize=${documentsPerPage}
-    &sortOrder=${documentsSort.sortOrder}
+  const documentsURL = searchFilter ? 
+    `SearchDocuments?query=${searchFilter}&?infoTopicId=${infoTopic}
+    &pageNumber=${currentDocumentsPage}&pageSize=${documentsPerPage}
+    &sortOrder=${documentsSort.sortOrder}&sortType=${documentsSort.sortType}`
+      : 
+    `GetDocuments?infoTopicId=${infoTopic}&pageNumber=${currentDocumentsPage}
+    &pageSize=${documentsPerPage}&sortOrder=${documentsSort.sortOrder}
     &sortType=${documentsSort.sortType}`
+    
+
 
   useEffect(async () => {
     const res = await fetch(host + documentsURL)
     const documentsData = await res.json()
     setDocumentContent(documentsData.data)
     setTotalDocumentsPages(documentsData.totalPages)
-  }, [infoTopic, currentDocumentsPage, documentsSort])
+  }, [infoTopic, currentDocumentsPage, documentsSort, searchFilter])
 
   const deleteDocument = async (id) => {
     const res = await fetch(host + `DeleteDocument/${id}`, {
@@ -66,7 +72,10 @@ const DocumentContent = ({ infoTopics }) => {
           <AddDocument infoTopics={infoTopics} setDocuments={setDocumentContent} />
         }
       </div>
-      <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} />
+      <div className="w-50 d-flex justify-content-start">
+        <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} />
+        <SortContent isDocument={true} setSort={setDocumentsSort} />
+      </div>
       {documentContent.map((mappedDocuments, i) => (
         <Card>
           <Card.Body>

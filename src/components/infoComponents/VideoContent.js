@@ -10,6 +10,7 @@ import Pages from '../forumComponents/Pages';
 import SearchContent from './SearchContent';
 import AddVideo from './AddVideo';
 import Search from '../forumComponents/Search';
+import SortContent from './SortContent';
 
 const VideoContent = ({ infoTopics, deletePost, addPost }) => {
 
@@ -26,14 +27,20 @@ const VideoContent = ({ infoTopics, deletePost, addPost }) => {
   const [totalVideosPages, setTotalVideosPages] = useState(0)
   const [videoSort, setVideoSort] = useState({ sortOrder: "Asc", sortType: "id" })
 
-  const videoURL = `videos?infoTopicId=${infoTopic}&pageNumber=${currentVideosPage}&pageSize=${videosPerPage}&sortOrder=${videoSort.sortOrder}&sortType=${videoSort.sortType}`
+  const videoURL = searchFilter ?
+    `videos/search?query=${searchFilter}&?infoTopicId=${infoTopic}
+    &pageNumber=${currentVideosPage}&pageSize=${videosPerPage}
+    &sortOrder=${videoSort.sortOrder}&sortType=${videoSort.sortType}`
+      :
+    `videos?infoTopicId=${infoTopic}&pageNumber=${currentVideosPage}
+    &pageSize=${videosPerPage}&sortOrder=${videoSort.sortOrder}&sortType=${videoSort.sortType}`
 
   useEffect(async () => {
     const res = await fetch(host + videoURL)
     const videosData = await res.json()
     setVideoContent(videosData.data)
     setTotalVideosPages(videosData.totalPages)
-  }, [infoTopic, currentVideosPage, videoSort])
+  }, [infoTopic, currentVideosPage, videoSort, searchFilter])
 
   const handleShow = (index) => setShow(index);
   const handleClose = () => setShow(null);
@@ -66,7 +73,10 @@ const VideoContent = ({ infoTopics, deletePost, addPost }) => {
           <AddVideo infoTopics={infoTopics} setVideos={setVideoContent} addPost={addPost} />
         }
       </div>
-      <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} />
+      <div className="w-50 d-flex justify-content-start">
+        <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} />
+        <SortContent isDocument={false} setSort={setVideoSort} />
+      </div>
       {videoContent.map((filteredVideos, i) => (
         <>
           <Card key={i}

@@ -5,6 +5,8 @@ import SearchUsers from "./SearchUsers.js"
 import './AdminPanel.css'
 import PasswordDialog from './PasswordDialog'
 import Pages from '../forumComponents/Pages'
+import Search from '../forumComponents/Search'
+import UserSort from './UserSort'
 
 const AdminPanel = () => {
 
@@ -13,20 +15,26 @@ const AdminPanel = () => {
   const [selectedUsers, setSelectedUsers] = useState([])
   const [searchFilter, setSearchFilter] = useState("");
 
-  const [sort, setSort] = useState({sortOrder: "", sortType: ""})
+  const [sort, setSort] = useState({sortOrder: "Asc", sortType: "id"})
   const [currentPage, setCurrentPage] = useState(1)
   const [usersPerPage, setUsersPerPage] = useState(10);
   const [totalPages, setTotalPages] = useState(null)
 
+  const usersURL = searchFilter ? 
+    `users/search?query=${searchFilter}&pageNumber=${currentPage}
+    &pageSize=${usersPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`
+      :
+    `users?pageNumber=${currentPage}&pageSize=${usersPerPage}
+    &sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`
+
 
   useEffect( async () => {
-    const res = await fetch(host + 
-      `users?pageNumber=${currentPage}&pageSize=${usersPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`)
+    const res = await fetch(host + usersURL)
     const resData = await res.json()
     setUsers(resData.data)
     setTotalPages(resData.totalPages)
 
-  }, [currentPage, sort])
+  }, [currentPage, sort, searchFilter])
   
 
 
@@ -89,7 +97,8 @@ const AdminPanel = () => {
     <div className="containerPanel container col-12">
       <div className="d-flex justify-content-between">
         <Button className="deletebutton" variant="danger" onClick={deleteSelectedUsers} disabled={selectedUsers.length < 1}>Slett Bruker(e)</Button>
-        <SearchUsers setSearchInput={setSearchFilter}/>
+        <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} />
+        <UserSort setSort={setSort} />
       </div>
       <Table className="usertable" striped bordered responsive>
         <thead>
