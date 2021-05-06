@@ -68,67 +68,66 @@ const UploadFile = ({
     //setValidated(true);
 
     const match = regExp.exec(id);
-    if(match){
-    const matchString = match[match.length - 1].toString();
+    if (match) {
+      const matchString = match[match.length - 1].toString();
 
-    const postData = {
-      title,
-      content: description,
-      userId: user.id,
-      subTopicId: Number(infoTopicId) + 16,
-      topicId: 5,
-    };
+      const postData = {
+        title,
+        content: description,
+        userId: user.id,
+        subTopicId: Number(infoTopicId) + 16,
+        topicId: 5,
+      };
 
-    console.log(postData);
+      console.log(postData);
 
-    const postId = await addPost(postData);
+      const postId = await addPost(postData);
 
+      const videoData = {
+        youtubeId: matchString,
+        title,
+        description,
+        userId: user.id,
+        postId,
+        infoTopicId,
+      };
 
-    const videoData = {
-      youtubeId: matchString,
-      title,
-      description,
-      userId: user.id,
-      postId,
-      infoTopicId,
-    };
+      // const data = new Object();
+      // data.youTubeId = matchString;
+      // data.title = title;
+      // data.description = description;
+      // data.userId = 8;    // SKAL IKKE VÆRE HARDKODET USERID
+      // data.infoTopicId = infoTopicId;
 
-    // const data = new Object();
-    // data.youTubeId = matchString;
-    // data.title = title;
-    // data.description = description;
-    // data.userId = 8;    // SKAL IKKE VÆRE HARDKODET USERID
-    // data.infoTopicId = infoTopicId;
+      console.log("Objektet:");
+      console.log(videoData);
 
-    console.log("Objektet:");
-    console.log(videoData);
-
-    fetch(host + "Videos", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(videoData),
-    })
-      .then((res) => {
-        return res.json();
+      fetch(host + "Videos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(videoData),
       })
-      .then((data) => {
-        console.log(data);
-        setVideos((current) => [...current, data]);
-      })
-      .catch((error) => console.log(error));
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+          setVideos((current) => [...current, data]);
+        })
+        .catch((error) => console.log(error));
 
-    // addPost({
-    //   title,
-    //   content: description,
-    //   userId: 8,
-    //   subTopicId: 1,
-    //   topicId: infoTopicId
-    // })
-    handleClose();
+      // addPost({
+      //   title,
+      //   content: description,
+      //   userId: 8,
+      //   subTopicId: 1,
+      //   topicId: infoTopicId
+      // })
+      handleClose();
     } else {
-      alert("YouTube-URL-feltet kan ikke være tomt.")
+      alert("YouTube-URL-feltet kan ikke være tomt.");
     }
   };
 
@@ -239,13 +238,13 @@ const UploadFile = ({
                 </Form.Group>
 
                 <div className="float-right">
-                  <Button variant="danger" onClick={handleClose}>
+                  <Button variant="secondary" onClick={handleClose}>
                     Avbryt
                   </Button>
                   &nbsp;
                   <Button
                     type="submit"
-                    variant="primary"
+                    variant="success"
                     onClick={handleSubmitVideo}
                   >
                     Send
@@ -279,13 +278,13 @@ const UploadFile = ({
                   </Form.Control>
                 </Form.Group>
                 <div className="float-right">
-                  <Button variant="danger" onClick={handleClose}>
+                  <Button variant="secondary" onClick={handleClose}>
                     Avbryt
                   </Button>
                   &nbsp;
                   <Button
                     type="submit"
-                    variant="primary"
+                    variant="success"
                     onClick={handleSubmitDocument}
                   >
                     Send
