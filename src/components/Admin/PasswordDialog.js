@@ -72,7 +72,7 @@ const PasswordDialog = ({ user }) => {
               variant="success"
               onClick={setNewPassword}
             >
-              OK
+              Endre
             </Button>
             <Button variant="danger" onClick={handleClose}>
               Avbryt
