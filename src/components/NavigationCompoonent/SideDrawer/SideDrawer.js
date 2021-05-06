@@ -6,11 +6,11 @@ import { BsChatDotsFill, BsBoxArrowLeft } from "react-icons/bs";
 import { BsPersonFill } from "react-icons/bs";
 import { HiAcademicCap } from "react-icons/hi";
 import { Link } from "react-router-dom";
-
+import PasswordDialog from "../../Admin/PasswordDialog";
+import UsernameDialog from "../../Admin/UsernameDialog";
 const SideDrawer = (props) => {
+  const { user } = useContext(UserContext);
 
-  const {user} = useContext(UserContext)
-  
   let drawerClasses = "sideDrawer";
 
   if (props.show) {
@@ -20,10 +20,17 @@ const SideDrawer = (props) => {
   return (
     <nav className={drawerClasses}>
       <div className="user">
-        <BsPersonFill size="50px" /><br/> <b>{user.username}</b><br/>
-        {user.firstName} {user.lastName}<br/>
-        {user.email}<br/>
+        <BsPersonFill size="50px" />
+        <br /> <b>{user.username}</b>
+        <br />
+        {user.firstName} {user.lastName}
+        <br />
+        {user.email}
+        <br />
         {user.admin && <Link to="/Admin">Administrer brukere</Link>}
+        <UsernameDialog setUsers={props.setUsers} users={props.users} />
+        <br />
+        <PasswordDialog user={user} />
       </div>
       <ul>
         <li>
@@ -47,7 +54,6 @@ const SideDrawer = (props) => {
           </Link>
         </li>
       </ul>
-      
     </nav>
   );
 };
