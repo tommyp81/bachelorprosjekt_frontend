@@ -57,7 +57,7 @@ const ToolBar = (props) => {
                   <Dropdown.Item><BsPersonFill size="20px" /> <b>{user.username}</b></Dropdown.Item>
                   <Dropdown.Item>{user.firstName} {user.lastName}</Dropdown.Item>
                   <Dropdown.Item>{user.email}</Dropdown.Item>
-                  {user.admin && <Dropdown.Item><Link to="/Admin">Administrer brukere</Link></Dropdown.Item>}
+                  {user && <Dropdown.Item><Link to="/Admin">Administrer brukere</Link></Dropdown.Item>}
                   <Dropdown.Item><UsernameDialog setUsers={props.setUsers} users={props.users} /></Dropdown.Item>
                   <Dropdown.Item><PasswordDialog user={user} /></Dropdown.Item>
                 </Dropdown.Menu>

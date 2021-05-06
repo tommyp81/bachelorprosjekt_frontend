@@ -80,16 +80,6 @@ const Forum = ({
   //   })
   //   .slice(indexOfFirstPost, indexOfLastPost);
 
-  const nextPage = () => setCurrentPage(currentPage + 1);
-  const prevPage = () => setCurrentPage(currentPage - 1);
-
-  const lastPage = currentPage === totalPages
-  const firstPage = currentPage === 1;
-
-  const goToLast = () =>
-    setCurrentPage(totalPages);
-  const goToFirst = () => setCurrentPage(1);
-
   const handleScroll = () => {
       window.scroll({top:0, behavior:"smooth"})
     }
@@ -203,11 +193,13 @@ const Forum = ({
 
             <Container className="bot">
               <div className="float-left">
-                <Pages
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                  setCurrentPage={setCurrentPage}
-                />
+                {totalPages > 1 &&
+                  <Pages
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    setCurrentPage={setCurrentPage}
+                  />
+                }
               </div>
               <div className="float-right">
                 <Dropdown>

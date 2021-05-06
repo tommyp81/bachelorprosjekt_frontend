@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import "./Forum.css"
-import { Button, Form, InputGroup } from "react-bootstrap"
+import { Button, ButtonGroup, Form, InputGroup } from "react-bootstrap"
 import { host } from '../../App'
 import { FaSearch, FaTimes } from 'react-icons/fa'
 
@@ -36,15 +36,16 @@ const SearchPosts = ({ setFilteredPosts, setSearchValue, searchValue }) => {
             onChange={e => setSearchInput(e.target.value)}
           />
           <InputGroup.Append>
-            {!searchValue ?
+            <ButtonGroup>
+              {searchValue && 
+                <Button variant="secondary" onClick={clearSearch}>
+                  <FaTimes size={18} />
+                </Button>
+              }
               <Button type="submit" disabled={searchInput.length < 1}>
                 <FaSearch size={18} />
               </Button>
-                : 
-              <Button variant="secondary" onClick={clearSearch}>
-                <FaTimes size={18} />
-              </Button>
-            }
+            </ButtonGroup>
           </InputGroup.Append>
         </InputGroup>
       </Form>

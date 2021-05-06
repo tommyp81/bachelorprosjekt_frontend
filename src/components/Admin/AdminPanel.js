@@ -29,16 +29,6 @@ const AdminPanel = () => {
   }, [currentPage, sort])
   
 
-  const nextPage = () => setCurrentPage(currentPage + 1);
-  const prevPage = () => setCurrentPage(currentPage - 1);
-
-  const lastPage = currentPage === totalPages
-  const firstPage = currentPage === 1;
-
-  const goToLast = () =>
-    setCurrentPage(totalPages);
-  const goToFirst = () => setCurrentPage(1);
-
 
   const selectUser = (e) => {
     const {id, checked} = e.target
@@ -135,15 +125,13 @@ const AdminPanel = () => {
           ))}
         </tbody>
       </Table>
-      <Pages
-        nextPage={nextPage}
-        prevPage={prevPage}
-        currentPage={currentPage}
-        firstPage={firstPage}
-        lastPage={lastPage}
-        goToFirst={goToFirst}
-        goToLast={goToLast}
-      />
+      {totalPages > 1 &&
+        <Pages
+          currentPage={currentPage}
+          totalPages={totalPages}
+          setCurrentPage={setCurrentPage}
+        />
+      }
     </div>
   )
 }
