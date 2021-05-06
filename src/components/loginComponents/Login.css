@@ -1,3 +1,7 @@
+.Register .registermobile {
+  display: none;
+}
+
 .Login {
     background-image: url(../../assets/images/badminton2.jpg);
     height: 110vh;
@@ -78,6 +82,14 @@
 
 
 @media (max-width: 768px) {
+  .Register .registermobile {
+    display: unset;
+  }
+
+  .Register .registerdesktop {
+    display: none;
+  }
+
   .Login {
     background-image: unset;
     margin-bottom: 150px;
