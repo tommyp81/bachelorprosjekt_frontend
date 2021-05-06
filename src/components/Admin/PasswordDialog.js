@@ -67,15 +67,15 @@ const PasswordDialog = ({ user }) => {
         </Modal.Body>
         <div className="float-right">
           <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Avbryt
+            </Button>
             <Button
               disabled={isDiabled}
               variant="success"
               onClick={setNewPassword}
             >
               Endre
-            </Button>
-            <Button variant="danger" onClick={handleClose}>
-              Avbryt
             </Button>
           </Modal.Footer>
         </div>

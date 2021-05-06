@@ -83,15 +83,15 @@ const UsernameDialog = ({ users, setUsers }) => {
         </Modal.Body>
         <div className="float-right">
           <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Avbryt
+            </Button>
             <Button
               disabled={isDisabled}
               variant="success"
               onClick={changeUsername}
             >
               Endre
-            </Button>
-            <Button variant="danger" onClick={handleClose}>
-              Avbryt
             </Button>
           </Modal.Footer>
         </div>
