@@ -1,8 +1,6 @@
-.Forum {
-    padding-top: 100px;
-}
-
 .Forum .body {
+    margin-top: 10rem;
+    margin-bottom: 10rem;
     background-color: #0b2c63;
     padding: 30px;
     border-radius: 10px;

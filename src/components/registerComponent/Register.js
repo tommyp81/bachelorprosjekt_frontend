@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Form, Button, Container, Col, Row } from "react-bootstrap";
+import { Form, Row, Col, Button } from 'react-bootstrap';
 import WelcomeLogo from "../loginComponents/WelcomeLogo";
 import { host } from "../../App";
-import "./Register.css";
 
 const Register = ({ setTabKey, setUsers, loginUser}) => {
 
@@ -69,11 +68,76 @@ const Register = ({ setTabKey, setUsers, loginUser}) => {
 
   return (
     <div className="Register">
+      <Row className="justify-content-md-center"> 
+          <Col md="auto" className="register">
+            <Form className="form">
+              <Form.Label>Brukernavn</Form.Label>
+              <Form.Control
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <br />
+              <Form.Label>Fornavn</Form.Label>
+              <Form.Control
+                type="text"
+                value={firstname}
+                onChange={(e) => setFirstname(e.target.value)}
+              />
+              <br/>
+              <Form.Label>Etternavn</Form.Label>
+              <Form.Control
+                type="text"
+                value={lastname}
+                onChange={(e) => setLastname(e.target.value)}
+              />
+              <br/>
+            </Form>
+            </Col>
+            <Col md="auto" className="register"> 
+            <Form className="form">
+              <Form.Label>E-post</Form.Label>
+              <Form.Control
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <br/>
+              <Form.Label>Passord</Form.Label>
+              <Form.Control
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              <br/>
+              <Form.Label>Bekreft passord</Form.Label>
+              <Form.Control
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <br/>
+            </Form>
+            </Col>
+          </Row>
+          <Row className="justify-content-md-center">
+            <Col className="register" md="auto">
+            <Button
+                variant="success"
+                type="submit"
+                disabled={isDisabled}
+                onClick={handleSubmitUser}
+              >
+                Registrer
+              </Button>
+            </Col>
+          </Row>
+     {/*
       <Container fluid="md">
         <Row>
-          {/*<Col className="logo" sm={12} >
+          <Col className="logo" sm={12} >
                         <WelcomeLogo />
-                        </Col>*/}
+                        </Col>
           <Col className="submit">
             <Form onSubmit={handleSubmitUser}>
               <Form.Group >
@@ -146,7 +210,7 @@ const Register = ({ setTabKey, setUsers, loginUser}) => {
             </Form>
           </Col>
         </Row>
-      </Container>
+      </Container>*/}
     </div>
   );
 };

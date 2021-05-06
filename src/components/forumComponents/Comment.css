@@ -1,10 +1,13 @@
 .Comment .editdelete {
     float: left;
-    margin-top: 10px;
 }
 
 .Comment .like {
     float: right;
+}
+
+.Comment .attachment {
+    margin-bottom: 10px;
 }
 
 @media (max-width: 425px) {

@@ -1,3 +1,7 @@
+.Login, html, body {
+    background-image: unset
+    }
+
 .App .btn
 .App .btn:hover,
 .App .btn:focus,

@@ -271,7 +271,7 @@ const Thread = ({
                   {post.content}
                 </div>
 
-                <div className="postattachment" style={{color: "grey"}}>
+                <div className="attachment" style={{color: "grey"}}>
                   {post.documentId ? 
                     (<p>Vedlegg: <b><FileLink fileId={post.documentId}/></b></p>) 
                   : 
