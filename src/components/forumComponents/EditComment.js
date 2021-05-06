@@ -64,27 +64,30 @@ const EditComment = ({ comment, edit }) => {
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
               />
+            </Form.Group>
+            <Form.Group>
               {comment.documentId ? (
                 <FileInfo fileId={comment.documentId} isReplaced={isReplaced} />
               ) : (
                 ""
               )}
               <FileDrop file={file} setFile={setFile} />
-              <Button variant="secondary" onClick={handleClose}>
-                Avbryt
-              </Button>
-              <Button
-                type="submit"
-                variant="success"
-                onClick={handleClose}
-                disabled={!validateForm()}
-              >
-                Send inn
-              </Button>
             </Form.Group>
           </Form>
         </Modal.Body>
-        <Modal.Footer></Modal.Footer>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Avbryt
+          </Button>
+          <Button
+            type="submit"
+            variant="success"
+            onClick={handleClose}
+            disabled={!validateForm()}
+          >
+            Send inn
+          </Button>
+        </Modal.Footer>
       </Modal>
     </>
   );
