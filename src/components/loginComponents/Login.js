@@ -104,7 +104,9 @@ const Login = ({ history, setUsers }) => {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <br/>
-              <p>Glemt brukernavn eller passord? Send e-post<br/> til admin på [E-POST]</p>
+              <div className="contact">
+                <p>Glemt brukernavn eller passord? Send e-post til admin på charlotte.stoelen@badminton.no eller ring 97180074 mellom kl. 10:00-15:00 på hverdager!</p>
+              </div>
               <Button
                 variant="success"
                 type="submit"

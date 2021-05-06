@@ -4,7 +4,8 @@
 
 .Login {
     background-image: url(../../assets/images/badminton2.jpg);
-    height: 110vh;
+    background-size: cover;
+    height: 120vh;
   }
   
 .Login .main {
@@ -16,6 +17,7 @@
   border-radius: 20px;
   width: 750px;
   background-color: #0b2c63;
+  
 }
 
 .Login .nav {
@@ -42,8 +44,9 @@
   z-index: 1;
 }
 
-.Login .toptext p, .Login .toptext h1 {
+.Login .toptext p, .Login .toptext h1, .Login .contact p  {
   text-align: center;
+  margin: 0 auto;
 }
 
 .Login .toptext h1 {
@@ -52,34 +55,27 @@
 }
 
 .Login .toptext p {
+  margin-top: 10px;
   margin-bottom: 30px;
 }
 
-.Login .login p {
-  text-align: center;
+.Login .contact p {
+  max-width: 300px;
+  margin-bottom: 15px;
 }
 
-.Login .login .btn {
+.Login .login .btn, .Register .register .btn  {
   margin-top: 15px;
   font-size: 22px;
   width: 300px;
-}
-
-.Register .register .btn {
-  margin-top: 15px;
-  font-size: 22px;
-  width: 300px;
+  display: block;
+  margin: 0 auto;
 }
 
 .Login .form-control {
   width: 300px;
   margin: 0 auto;
 }
-
-.Login .login .form-label {
-  text-indent: 10px;
-}
-
 
 @media (max-width: 768px) {
   .Register .registermobile {
@@ -92,7 +88,7 @@
 
   .Login {
     background-image: unset;
-    margin-bottom: 150px;
+    margin-bottom: 350px;
   }
 
   .Login .main {
@@ -101,11 +97,6 @@
 
   .Login .toptext h1 {
     font-size: 36px
-  }
-
-  .Register .register .btn, .Login .login .btn {
-    display: block;
-    margin: 0 auto;
   }
 
   .Login .form-label {
@@ -118,26 +109,22 @@
   .Login .form-control {
     width: 100%
   }
+
   .Register .register .btn, .Login .login .btn {
     width: 100%;
   } 
   
   .Login .toptext h1 {
     font-size: 22px;
-  }.Login .toptext p {
-    font-size: 15px;
   }
 
-  .Login {
-    margin-bottom: 350px;
+  .Login .toptext p, .Login .contact p {
+    font-size: 15px;
   }
 }
 
 @media (max-width: 335px) {
   .Login .nav-item:first-child {
     margin-bottom: 2px;
-  }
-  .Login {
-    margin-bottom: 500px;
   }
 }
