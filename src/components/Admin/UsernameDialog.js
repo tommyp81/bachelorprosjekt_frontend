@@ -88,10 +88,10 @@ const UsernameDialog = ({ users, setUsers }) => {
               variant="success"
               onClick={changeUsername}
             >
-              Bekreft
+              Endre
             </Button>
             <Button variant="danger" onClick={handleClose}>
-              Lukk
+              Avbryt
             </Button>
           </Modal.Footer>
         </div>
