@@ -9,6 +9,7 @@ import InfoTopics from './InfoTopics';
 import Pages from '../forumComponents/Pages';
 import SearchContent from './SearchContent';
 import AddVideo from './AddVideo';
+import Search from '../forumComponents/Search';
 
 const VideoContent = ({ infoTopics, deletePost, addPost }) => {
 
@@ -65,7 +66,7 @@ const VideoContent = ({ infoTopics, deletePost, addPost }) => {
           <AddVideo infoTopics={infoTopics} setVideos={setVideoContent} addPost={addPost} />
         }
       </div>
-      <SearchContent setSearchInput={setSearchFilter} placeholderText={'Søk i Videoer'} />
+      <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} />
       {videoContent.map((filteredVideos, i) => (
         <>
           <Card key={i}

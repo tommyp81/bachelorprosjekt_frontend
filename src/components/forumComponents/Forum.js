@@ -12,12 +12,13 @@ import Pages from "./Pages.js";
 import "./Forum.css";
 import moment from "moment";
 import Feed from "./Feed.js";
-import SearchPosts from "./SearchPosts.js";
+import SearchPosts from "./Search.js";
 
 import SortItems from "./SortItems";
 import { UserContext } from "../../UserContext";
 import SpinnerDiv from "./SpinnerDiv.js";
 import { host } from "../../App.js";
+import Search from "./Search.js";
 
 const Forum = ({
   addPost,
@@ -136,7 +137,7 @@ const Forum = ({
         <Row xs={1} sm={1} lg={2}>
           <Col lg={3}>
             <div className="desktop">
-              <SearchPosts setFilteredPosts={setFilteredPosts} setSearchValue={setSearchValue} searchValue={searchValue} />
+              <Search setSearchValue={setSearchValue} searchValue={searchValue} placeholderText={"Søk..."} />
             </div>
             <Topics
               topics={topics}
@@ -175,7 +176,7 @@ const Forum = ({
               </div>
 
               <div className="mobilesearch">
-                <SearchPosts setFilteredPosts={setFilteredPosts} />
+                <Search setSearchValue={setSearchValue} searchValue={searchValue} placeholderText={"Søk..."} />
               </div>
             </Container>
 

@@ -11,6 +11,7 @@ import InfoTopics from './InfoTopics';
 import Pages from '../forumComponents/Pages';
 import SearchContent from './SearchContent';
 import AddDocument from './AddDocument';
+import Search from '../forumComponents/Search';
 
 const DocumentContent = ({ infoTopics }) => {
 
@@ -26,7 +27,11 @@ const DocumentContent = ({ infoTopics }) => {
   const [totalDocumentsPages, setTotalDocumentsPages] = useState(0)
   const [documentsSort, setDocumentsSort] = useState({ sortOrder: "Asc", sortType: "id" })
 
-  const documentsURL = `GetDocuments?infoTopicId=${infoTopic}&pageNumber=${currentDocumentsPage}&pageSize=${documentsPerPage}&sortOrder=${documentsSort.sortOrder}&sortType=${documentsSort.sortType}`
+  const documentsURL = `GetDocuments?infoTopicId=${infoTopic}
+    &pageNumber=${currentDocumentsPage}
+    &pageSize=${documentsPerPage}
+    &sortOrder=${documentsSort.sortOrder}
+    &sortType=${documentsSort.sortType}`
 
   useEffect(async () => {
     const res = await fetch(host + documentsURL)
@@ -61,7 +66,7 @@ const DocumentContent = ({ infoTopics }) => {
           <AddDocument infoTopics={infoTopics} setDocuments={setDocumentContent} />
         }
       </div>
-      <SearchContent setSearchInput={setSearchFilter} placeholderText={'Søk i dokumenter'} />
+      <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} />
       {documentContent.map((mappedDocuments, i) => (
         <Card>
           <Card.Body>

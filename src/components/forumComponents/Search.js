@@ -4,7 +4,7 @@ import { Button, ButtonGroup, Form, InputGroup } from "react-bootstrap"
 import { host } from '../../App'
 import { FaSearch, FaTimes } from 'react-icons/fa'
 
-const SearchPosts = ({ setFilteredPosts, setSearchValue, searchValue }) => {
+const Search = ({ setSearchValue, searchValue, placeholderText }) => {
 
   const [searchInput, setSearchInput] = useState("")
 
@@ -31,7 +31,7 @@ const SearchPosts = ({ setFilteredPosts, setSearchValue, searchValue }) => {
         <InputGroup>
           <Form.Control
             type="text"
-            placeholder="Søk i poster..."
+            placeholder={placeholderText}
             value={searchInput}
             onChange={e => setSearchInput(e.target.value)}
           />
@@ -55,4 +55,4 @@ const SearchPosts = ({ setFilteredPosts, setSearchValue, searchValue }) => {
 
 }
 
-export default SearchPosts;
+export default Search;
