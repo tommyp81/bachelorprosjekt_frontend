@@ -27,10 +27,11 @@ const SideDrawer = (props) => {
         <br />
         {user.email}
         <br />
-        {user.admin && <Link to="/Admin">Administrer brukere</Link>}
         <UsernameDialog setUsers={props.setUsers} users={props.users} />
         <br />
         <PasswordDialog user={user} />
+        <br />
+        {user.admin && <Link to="/Admin">Administrer brukere</Link>}
       </div>
       <ul>
         <li>
