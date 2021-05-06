@@ -86,13 +86,6 @@ const App = () => {
   );
 
   useEffect(() => {
-    // fetch(host + "posts")
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setPosts(data);
-    //   })
-    //   .catch(console.log);
-
     fetch(host + "SubTopics")
       .then((res) => res.json())
       .then((data) => {
@@ -104,13 +97,6 @@ const App = () => {
       .then((res) => res.json())
       .then((data) => {
         setTopics(data);
-      })
-      .catch(console.log);
-
-    fetch(host + "Users")
-      .then((res) => res.json())
-      .then((data) => {
-        setUsers(data);
       })
       .catch(console.log);
 
@@ -155,29 +141,6 @@ const App = () => {
     }
   };
 
-  // search for specific post by id(number) in posts and returns said post
-  const getPost = (id) => {
-    return posts.find((post) => post.id == id) || {};
-  };
-
-  const updatePostInArray = (id, changes, isDelete) => {
-    if (!isDelete) {
-      const updatedPosts = posts.map((p) => {
-        if (p.id == id) {
-          const updatedPost = {
-            ...p,
-            ...changes,
-          };
-          return updatedPost;
-        }
-        return p;
-      });
-      setPosts(updatedPosts);
-    } else {
-      setPosts(posts.filter((p) => p.id != id));
-    }
-  };
-
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <div className="App">
@@ -200,22 +163,15 @@ const App = () => {
 
           <ProtectedRoute exact path="/Forum">
             <Forum
-              posts={posts}
               addPost={addPost}
               subtopics={subtopics}
               topics={topics}
-              users={users}
               history={history}
-              loading={loading}
             />{" "}
           </ProtectedRoute>
           <ProtectedRoute exact path="/Kunnskapsportalen">
             <Kunnskapsportalen
               infoTopics={infoTopics}
-              videos={videos}
-              documents={documents}
-              users={users}
-              post={posts}
               addPost={addPost}
               deletePost={deletePost}
             />{" "}
@@ -224,10 +180,7 @@ const App = () => {
             <Thread
               subtopics={subtopics}
               topics={topics}
-              users={users}
               history={history}
-              getPost={getPost}
-              updatePostInArray={updatePostInArray}
               deletePost={deletePost}
             />
           </ProtectedRoute>

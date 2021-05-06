@@ -2,12 +2,22 @@ import React from "react"
 import { Pagination } from "react-bootstrap"
 import "./Pages.css";
 
-const Pages = ({nextPage, prevPage, currentPage, firstPage, lastPage, goToFirst, goToLast}) => {
+const Pages = ({totalPages, currentPage, setCurrentPage}) => {
 
   const pageNumbers = []
   for (let i = 1; i <= currentPage + 2; i++) {
     pageNumbers.push(i);
   }
+
+  const nextPage = () => setCurrentPage(currentPage + 1);
+  const prevPage = () => setCurrentPage(currentPage - 1);
+
+  const lastPage = currentPage === totalPages
+  const firstPage = currentPage === 1;
+
+  const goToLast = () => setCurrentPage(totalPages);
+  const goToFirst = () => setCurrentPage(1);
+
 
   const handleScroll = () => {
     window.scroll({top:0,behavior:'smooth'})

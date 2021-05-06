@@ -29,9 +29,7 @@ import SortItems from "./SortItems.js";
 const Thread = ({
   subtopics,
   topics,
-  users,
   history,
-  updatePostInArray,
   deletePost,
 }) => {
   const [comments, setComments] = useState([]);
@@ -89,18 +87,6 @@ const Thread = ({
   // const threadComments = comments.filter(c => Number(postId) === c.postId).slice(0).sort((d1, d2) => moment(d2.date) - moment(d1.date))
 
 
-  
-
-  const nextPage = () => setCurrentPage(currentPage + 1);
-  const prevPage = () => setCurrentPage(currentPage - 1);
-
-  const lastPage = currentPage === totalPages;
-  const firstPage = currentPage === 1;
-
-  const goToLast = () => setCurrentPage(totalPages);
-  const goToFirst = () => setCurrentPage(1);
-
-
   const deleteThread = async () => {
     const success = deletePost(postId);
     if (success) history.push("/Forum");
@@ -131,53 +117,11 @@ const Thread = ({
     });
     const data = await res.json();
     setPost(data);
-    // updatePostInArray(post.id, data);
   };
 
   const updatePostLike = (num) => {
     setPost({ ...post, like_Count: post.like_Count + num });
-    // updatePostInArray(post.id, { like_Count: post.like_Count + num });
   };
-
-  // const editComment = async (comment, file) => {
-  //   let formData = new FormData()
-  //   if (file) {
-  //     formData.append('File', file)
-  //     formData.append('commentId', comment.id)
-  //     formData.append('userId', comment.userId)
-  //     const upres = await fetch('https://localhost:44361/UploadDocument', {
-  //       method: 'POST',
-  //       body: formData
-  //     })
-  //     const updata = await upres.json()
-  //     comment.documentId = updata.id
-  //   }
-
-  //   formData = new FormData()
-  //   for (let k in comment) {
-  //     formData.append(k, comment[k])
-  //   }
-  //   const res = await fetch(`https://localhost:44361/comments/${comment.id}`, {
-  //     method: 'PUT',
-  //     body: formData
-  //   })
-  //   const data = await res.json();
-
-  //   const updatedComments = comments.map(comment => {
-  //     if (comment.id === data.id) {
-  //       console.log("HEIIIIIIIIII")
-  //       const updateComment = {
-  //         ...comment,
-  //         content: data.content,
-  //         documentId: data.documentId
-  //       }
-  //       return updateComment
-  //     }
-  //     return comment
-  //   })
-  //   console.log("LOLOLOL")
-  //   setComments(updatedComments)
-  // }
 
   const deleteComment = async (e) => {
     let id = Number(e.target.value);
@@ -206,12 +150,10 @@ const Thread = ({
     const data = await res.json();
     setComments((current) => [...current, data]);
 
-    // updatePosts()
     setPost({ ...post, comment_Count: post.comment_Count + 1 });
-    // updatePostInArray(post.id, { comment_Count: post.comment_Count + 1 });
 
     if (totalRecords % commentsPerPage === 0) setCurrentPage(totalPages + 1);
-    else goToLast();
+    else setCurrentPage(totalPages);
   };
 
   
@@ -360,13 +302,9 @@ const Thread = ({
               <div className="d-flex justify-content-between">
                 <SortItems setSort={setSort} isPost={false} />
                 <Pages
-                  nextPage={nextPage}
-                  prevPage={prevPage}
                   currentPage={currentPage}
-                  firstPage={firstPage}
-                  lastPage={lastPage}
-                  goToFirst={goToFirst}
-                  goToLast={goToLast}
+                  totalPages={totalPages}
+                  setCurrentPage={setCurrentPage}
                 />
               </div>
             )}

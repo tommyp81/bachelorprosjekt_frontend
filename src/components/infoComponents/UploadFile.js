@@ -18,7 +18,6 @@ import { UserContext } from "../../UserContext";
 
 const UploadFile = ({
   infoTopics,
-  documents,
   setVideos,
   setDocuments,
   addPost,
@@ -32,7 +31,6 @@ const UploadFile = ({
   const [id, setId] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [userId, setUserId] = useState("");
   const [infoTopicId, setInfoTopicId] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -75,7 +73,7 @@ const UploadFile = ({
       title,
       content: description,
       userId: user.id,
-      subTopicId: Number(infoTopicId) + 16,
+      subTopicId: Number(infoTopicId) + 16, // TODO
       topicId: 5,
     };
 
@@ -119,13 +117,6 @@ const UploadFile = ({
       })
       .catch((error) => console.log(error));
 
-    // addPost({
-    //   title,
-    //   content: description,
-    //   userId: 8,
-    //   subTopicId: 1,
-    //   topicId: infoTopicId
-    // })
     handleClose();
     } else {
       alert("YouTube-URL-feltet kan ikke være tomt.")
@@ -137,9 +128,9 @@ const UploadFile = ({
   const [file, setFile] = useState();
 
   const handleSubmitDocument = (event) => {
+    event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
-      event.preventDefault();
       event.stopPropagation();
     }
     setValidated(true);
@@ -149,7 +140,7 @@ const UploadFile = ({
     }
     let formData = new FormData();
     formData.append("File", file);
-    formData.append("userId", user.id); //skal ikke være hardkodet
+    formData.append("userId", user.id);
     formData.append("infoTopicId", infoTopicId);
     fetch(host + "UploadDocument", {
       method: "POST",

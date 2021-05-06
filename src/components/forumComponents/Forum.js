@@ -38,7 +38,7 @@ const Forum = ({
   const [subTopicDesc, setSubTopicDesc] = useState("");
   const [subTopicTitle, setSubTopicTitle] = useState("");
 
-  const [searchFilter, setSearchFilter] = useState("");
+  const [searchValue, setSearchValue] = useState("")
   const { user } = useContext(UserContext);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -47,10 +47,16 @@ const Forum = ({
 
   const [sort, setSort] = useState({sortOrder: "Asc", sortType: "Date"})
 
+  const postsURL = searchValue ? 
+  `posts/search?query=${searchValue}&subTopicId=${subtopicFocus}&pageNumber=${currentPage}&pageSize=${postsPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`:
+  `posts?subTopicId=${subtopicFocus}&pageNumber=${currentPage}&pageSize=${postsPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`
 
+  // `posts?subTopicId=${subtopicFocus}&pageNumber=${currentPage}&pageSize=${postsPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`
+  // `posts/search?query=${searchInput}&subTopicId=${subtopicFocus}&pageNumber=${currentPage}&pageSize=${postsPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`
+  // posts/search?query=${searchInput}
+  // `${searchInput ? `posts/search?query=${searchInput}&` : 'posts?'}`
   useEffect( async () => {
-    const res = await fetch(host + 
-      `posts?subTopicId=${subtopicFocus}&pageNumber=${currentPage}&pageSize=${postsPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`)
+    const res = await fetch(host + postsURL)
     const posts = await res.json()
     setFilteredPosts(posts.data)
     setTotalPages(posts.totalPages)
@@ -58,7 +64,7 @@ const Forum = ({
       setFilteredPosts([])
       setTotalPages(null)
     })
-  }, [subtopicFocus, currentPage, postsPerPage, sort]);
+  }, [subtopicFocus, currentPage, postsPerPage, sort, searchValue]);
 
 
   // const currentPosts = filteredPosts
@@ -140,7 +146,7 @@ const Forum = ({
         <Row xs={1} sm={1} lg={2}>
           <Col lg={3}>
             <div className="desktop">
-              <SearchPosts setFilteredPosts={setFilteredPosts} />
+              <SearchPosts setFilteredPosts={setFilteredPosts} setSearchValue={setSearchValue} searchValue={searchValue} />
             </div>
             <Topics
               topics={topics}
@@ -198,13 +204,9 @@ const Forum = ({
             <Container className="bot">
               <div className="float-left">
                 <Pages
-                  nextPage={nextPage}
-                  prevPage={prevPage}
                   currentPage={currentPage}
-                  firstPage={firstPage}
-                  lastPage={lastPage}
-                  goToFirst={goToFirst}
-                  goToLast={goToLast}
+                  totalPages={totalPages}
+                  setCurrentPage={setCurrentPage}
                 />
               </div>
               <div className="float-right">
