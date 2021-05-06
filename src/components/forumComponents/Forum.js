@@ -137,7 +137,7 @@ const Forum = ({
         <Row xs={1} sm={1} lg={2}>
           <Col lg={3}>
             <div className="desktop">
-              <Search setSearchValue={setSearchValue} searchValue={searchValue} placeholderText={"Søk..."} />
+              <Search setSearchValue={setSearchValue} searchValue={searchValue} placeholderText={"Søk..."} setCurrentPage={setCurrentPage} />
             </div>
             <Topics
               topics={topics}
@@ -176,7 +176,7 @@ const Forum = ({
               </div>
 
               <div className="mobilesearch">
-                <Search setSearchValue={setSearchValue} searchValue={searchValue} placeholderText={"Søk..."} />
+                <Search setSearchValue={setSearchValue} searchValue={searchValue} placeholderText={"Søk..."} setCurrentPage={setCurrentPage} />
               </div>
             </Container>
 

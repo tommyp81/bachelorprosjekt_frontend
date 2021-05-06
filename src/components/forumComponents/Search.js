@@ -4,7 +4,7 @@ import { Button, ButtonGroup, Form, InputGroup } from "react-bootstrap"
 import { host } from '../../App'
 import { FaSearch, FaTimes } from 'react-icons/fa'
 
-const Search = ({ setSearchValue, searchValue, placeholderText }) => {
+const Search = ({ setSearchValue, searchValue, placeholderText, setCurrentPage }) => {
 
   const [searchInput, setSearchInput] = useState("")
 
@@ -18,6 +18,7 @@ const Search = ({ setSearchValue, searchValue, placeholderText }) => {
     // const searchData = await res.json()
     // setFilteredPosts(searchData.data)
     setSearchValue(searchInput)
+    setCurrentPage(1)
   }
 
   const clearSearch = () => {

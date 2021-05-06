@@ -97,7 +97,7 @@ const AdminPanel = () => {
     <div className="containerPanel container col-12">
       <div className="d-flex justify-content-between">
         <Button className="deletebutton" variant="danger" onClick={deleteSelectedUsers} disabled={selectedUsers.length < 1}>Slett Bruker(e)</Button>
-        <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} />
+        <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} setCurrentPage={setCurrentPage}/>
         <UserSort setSort={setSort} />
       </div>
       <Table className="usertable" striped bordered responsive>

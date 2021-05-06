@@ -25,6 +25,7 @@ import Comments from "./Comments.js";
 import { ArrowLeft } from "react-bootstrap-icons";
 import { RiArrowLeftFill } from "react-icons/ri";
 import SortItems from "./SortItems.js";
+import Search from "./Search.js";
 
 const Thread = ({
   subtopics,
@@ -50,6 +51,17 @@ const Thread = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(null)
   const [totalRecords, setTotalRecords] = useState(null)
+
+  const [searchValue, setSearchValue] = useState("")
+
+  const commentsURL = searchValue ?
+    `comments/search?query=${searchValue}&postId=${postId}
+    &pageNumber=${currentPage}&pageSize=${commentsPerPage}
+    &sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`
+      :
+    `comments?postId=${postId}&pageNumber=${currentPage}
+    &pageSize=${commentsPerPage}&sortOrder=${sort.sortOrder}
+    &sortType=${sort.sortType}`
   
   //Post
   useEffect(() => {
@@ -69,12 +81,7 @@ const Thread = ({
 
   // Comments
   useEffect(() => {
-    fetch(host + 
-      `comments?postId=${postId}
-      &pageNumber=${currentPage}
-      &pageSize=${commentsPerPage}
-      &sortOrder=${sort.sortOrder}
-      &sortType=${sort.sortType}`)
+    fetch(host + commentsURL)
       .then((res) => res.json())
       .then((data) => {
         setComments(data.data);
@@ -82,7 +89,7 @@ const Thread = ({
         setTotalRecords(data.totalRecords)
       })
       .catch(console.log);
-  }, [currentPage, sort]);
+  }, [currentPage, sort, searchValue]);
 
   // const threadComments = comments.filter(c => Number(postId) === c.postId).slice(0).sort((d1, d2) => moment(d2.date) - moment(d1.date))
 
@@ -286,11 +293,15 @@ const Thread = ({
           {/*commentCount*/}
 
           <div className="comments">
-            {post && !post.comment_Count ? (
-              <h3>Ingen kommentarer</h3>
-            ) : (
-              <h3>Kommentarer</h3>
-            )}
+            
+            <div className="d-flex justify-content-between">
+              {post && !post.comment_Count ? (
+                <h3>Ingen kommentarer</h3>
+              ) : (
+                <h3>Kommentarer</h3>
+              )}
+              <Search setSearchValue={setSearchValue} searchValue={searchValue} placeholderText={"Søk..."} setCurrentPage={setCurrentPage} />
+            </div>
             {comments.map((c) => (
               <Comment
                 key={c.id}

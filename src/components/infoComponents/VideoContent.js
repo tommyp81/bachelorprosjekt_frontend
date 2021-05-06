@@ -74,7 +74,7 @@ const VideoContent = ({ infoTopics, deletePost, addPost }) => {
         }
       </div>
       <div className="w-50 d-flex justify-content-start">
-        <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} />
+        <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} setCurrentPage={setCurrentVideosPage}/>
         <SortContent isDocument={false} setSort={setVideoSort} />
       </div>
       {videoContent.map((filteredVideos, i) => (
