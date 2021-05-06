@@ -1,3 +1,8 @@
+.Post {
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+}
+
 .Post .container {
     background-color: #0b2c63;
     padding: 30px;
