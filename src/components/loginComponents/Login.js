@@ -70,7 +70,7 @@ const Login = ({ history, setUsers }) => {
 
 
   return (
-    <div className="Login" style={{backgroundImage: `url(${Background})`, height: "110vh"}}>
+    <div className="Login">
     
       <div className="logo">
         <Image src="https://www.badminton.no/siteassets/badminton_logo.png" 

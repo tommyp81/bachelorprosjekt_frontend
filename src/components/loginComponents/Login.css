@@ -1,3 +1,8 @@
+.Login {
+    background-image: url(../../assets/images/badminton2.jpg);
+    height: 110vh;
+  }
+  
 .Login .main {
   color: white;
   margin: auto;
@@ -73,6 +78,11 @@
 
 
 @media (max-width: 768px) {
+  .Login {
+    background-image: unset;
+    margin-bottom: 150px;
+  }
+
   .Login .main {
     width: 80%;
   }
@@ -80,8 +90,6 @@
   .Login .toptext h1 {
     font-size: 36px
   }
-
-  
 
   .Register .register .btn, .Login .login .btn {
     display: block;
@@ -107,10 +115,17 @@
   }.Login .toptext p {
     font-size: 15px;
   }
+
+  .Login {
+    margin-bottom: 350px;
+  }
 }
 
 @media (max-width: 335px) {
   .Login .nav-item:first-child {
     margin-bottom: 2px;
+  }
+  .Login {
+    margin-bottom: 500px;
   }
 }
