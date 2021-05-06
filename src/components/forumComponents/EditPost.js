@@ -55,30 +55,39 @@ const EditPost = ({ post, edit }) => {
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
-            <Form.Group
-              controlId="exampleForm.ControlTextarea1"
-              onSubmit={handleSubmit}
-            >
-              <Form.Control
-                type="text"
-                rows={1}
-                name="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-              <Form.Control
-                as="textarea"
-                rows={5}
-                name="content"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-              />
-              {post.documentId ? (
-                <FileInfo fileId={post.documentId} isReplaced={isReplaced} />
-              ) : (
-                ""
-              )}
-              <FileDrop file={file} setFile={setFile} />
+            <Modal.Body>
+              <Form.Group
+                controlId="exampleForm.ControlTextarea1"
+                onSubmit={handleSubmit}
+              ></Form.Group>
+              <Form.Group>
+                {" "}
+                <Form.Label>Tittel</Form.Label>
+                <Form.Control
+                  type="text"
+                  rows={1}
+                  name="title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Control
+                  as="textarea"
+                  rows={5}
+                  name="content"
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                />
+                {post.documentId ? (
+                  <FileInfo fileId={post.documentId} isReplaced={isReplaced} />
+                ) : (
+                  ""
+                )}
+                <FileDrop file={file} setFile={setFile} />
+              </Form.Group>
+            </Modal.Body>
+            <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
                 Avbryt
               </Button>
@@ -90,10 +99,9 @@ const EditPost = ({ post, edit }) => {
               >
                 Send inn
               </Button>
-            </Form.Group>
+            </Modal.Footer>
           </Form>
         </Modal.Body>
-        <Modal.Footer></Modal.Footer>
       </Modal>
     </>
   );
