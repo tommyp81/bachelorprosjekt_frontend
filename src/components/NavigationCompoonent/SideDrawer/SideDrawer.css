@@ -1,29 +1,23 @@
+
 .sideDrawer .user {
-  position: absolute;
-  text-align: center;
-  left: 25%;
-  top: 15%;
   font-size: 1.2rem;
+  text-align: center;
+}
+
+.sideDrawer .user ul {
+  margin-top: 50px;
+  margin-bottom: 80px;
+}
+
+.sideDrawer .user ul li {
+  margin: unset;
+  margin-left: -50px;
 }
 
 .sideDrawer .user a {
   color: #007bff;
   font-size: 1.2rem;
 }
-
-@media (max-width: 425px) {
-  .sideDrawer .user, .sideDrawer .user a {
-    font-size: 1rem;
-    top: 5%;
-  }
-}
-
-@media (max-width: 320px) {
-  .sideDrawer .user {
-    left: 30px;
-  }
-}
-
 
 .sideDrawer {
   height: 100%;
@@ -46,8 +40,6 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  border-bottom: 10px solid #0b2c63;
 }
 .sideDrawer li {
   margin-bottom: 1.5rem;
