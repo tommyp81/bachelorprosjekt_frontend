@@ -83,6 +83,8 @@ const EditPost = ({ post, edit }) => {
               ) : (
                 ""
               )}
+            </Form.Group>
+            <Form.Group>
               <FileDrop file={file} setFile={setFile} />
             </Form.Group>
           </Form>

@@ -277,21 +277,23 @@ const UploadFile = ({
                     ))}
                   </Form.Control>
                 </Form.Group>
-                <div className="float-right">
-                  <Button variant="secondary" onClick={handleClose}>
-                    Avbryt
-                  </Button>
-                  &nbsp;
-                  <Button
-                    type="submit"
-                    variant="success"
-                    onClick={handleSubmitDocument}
-                  >
-                    Send
-                  </Button>
-                </div>
               </Form>
             </Modal.Body>
+            <Modal.Footer>
+              <div className="float-right">
+                <Button variant="secondary" onClick={handleClose}>
+                  Avbryt
+                </Button>
+                &nbsp;
+                <Button
+                  type="submit"
+                  variant="success"
+                  onClick={handleSubmitDocument}
+                >
+                  Send
+                </Button>
+              </div>
+            </Modal.Footer>
           </Tab>
         </Tabs>
         <Modal.Body></Modal.Body>
