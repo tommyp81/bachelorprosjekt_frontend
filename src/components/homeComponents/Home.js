@@ -3,6 +3,7 @@ import { Container, Row, Col, Image, Spinner } from "react-bootstrap";
 import Feed from "../forumComponents/Feed.js";
 import "./Home.css";
 import moment from "moment";
+import { host } from '../../App'
 
 import Footer from "../mainComponents/Footer";
 //import Header from '../mainComponents/Header'
@@ -26,7 +27,7 @@ const Home = ({ posts, topic, subtopic, users, loading }) => {
     <div className="Home">
       <Container>
         <Row className="toprow">
-          <Col>
+          <Col md={6}>
             <h3>Diskusjoner i forumet</h3>
             <div className="sortposts">
               <SortPosts
@@ -35,7 +36,6 @@ const Home = ({ posts, topic, subtopic, users, loading }) => {
               />
             </div>
           </Col>
-          <Col className="hidden"></Col>
         </Row>
         <Row md={1} lg={2}>
           <Col md={6} className="feedcol">
@@ -54,12 +54,6 @@ const Home = ({ posts, topic, subtopic, users, loading }) => {
           <Col md={6} className="textcol">
             <Link to="/Kunnskapsportalen">
               <div className="infocon">
-                {/* 
-            <Image 
-            src={ImgKunnskap}
-            width="100%"
-            height="100%">
-            </Image>*/}
                 <div className="infotext">
                   <h1>Ønsker du å lære mer?</h1>
                   <p>
@@ -73,12 +67,6 @@ const Home = ({ posts, topic, subtopic, users, loading }) => {
             </Link>
             <Link to="/Forum">
               <div className="forumcon">
-                {/* 
-            <Image 
-            src={ImgForum}
-            width="100%"
-            height="100%">
-            </Image>*/}
                 <div className="forumtext">
                   <h1>Slå av en prat</h1>
                   <p>

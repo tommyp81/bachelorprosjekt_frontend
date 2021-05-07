@@ -20,7 +20,6 @@
 
 .Forum .sortposts {
     float: right;
-    margin: 5px;
 }
 
 .Forum .main {
@@ -29,7 +28,40 @@
     background-color:white;
 }
 
+.Pages .pagination .page-item .page-link {
+    background-color: white;
+    font-size: 16px;
+    color: black;
+    margin: 1px;
+    border: none;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+
+    .Forum .top, .Forum .newpost p {
+        text-align: center;
+        word-wrap: break-word;
+    }
+
+    .Forum .body {
+        margin-top: 5rem;
+        margin-bottom: 5rem;
+    }
+
+    .Forum .newpost .btn, .Forum .sortposts .btn, .Forum .dropdown .btn, .Pages .pagination .page-item .page-link {
+        font-size: 14px;
+    }
+}
+@media (max-width: 280px) {
+
+    .Forum .dropdown {
+        display: none;
+    }
+}
+
 @media (min-width: 1024px) {
+    
     .Forum .mobilesearch {
         display: none;
     }
@@ -38,7 +70,6 @@
         margin-left: -5px;
     }
 }
-
 
 
 @media (max-width: 1023px) {
@@ -95,12 +126,8 @@
     border-radius: 10px;
 }
 
-.SearchPosts {
-    margin: 5px;
-}
-
-.NewPost {
-    margin: 5px;
+.newpost .btn, .sortposts .btn {
+    margin-bottom: 10px;
 }
 
 .NewPost p {

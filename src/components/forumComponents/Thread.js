@@ -227,7 +227,7 @@ const Thread = ({
               <RiArrowLeftFill size={20} />
               &nbsp;Tilbake til forum
             </Link>
-            <div className="float-right">
+            <div className="topictext">
               {topics
                 .filter((topics) => topics.id === post?.topicId)
                 .map((filteredTopics, i) => (

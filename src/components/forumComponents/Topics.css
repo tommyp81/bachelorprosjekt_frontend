@@ -1,6 +1,6 @@
 
 /*Desktop*/
-@media (min-width: 1024px) {
+@media (min-width: 990px) {
     .Topics .topics, .Topics .topics .tab, .Topics .topics .tab .btn, .Topics .topics .btn-primary {
         display: none;
     }
@@ -57,7 +57,7 @@
 }
 
 .Topics .accordion .imgtitle {
-    font-size: 22px;
+    font-size: 20px;
     background-color: rgba(112, 112, 112, 0.637);
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -97,27 +97,25 @@
     }
 
     .Topics .tab {
-        border-top: 1px solid rgb(209, 209, 209);
         text-align: center;
         align-content: center;
     }
 
     .Topics .desktop {
-        display:none;
+        display: none;
     }
 }
 
+
 .Topics .topics {
-    padding-bottom: 2px;
     margin: auto;
 }
 
 .Topics .topics .nav-item{
-    
     background-color: #28a745;
     color: white;
-    margin: 3px;
-    font-size: 18px;
+    margin: 2.5px;
+    font-size: 16px;
 }
 
 .Topics .topics .nav-item:hover, .Topics .topics .nav-item:focus, .Topics .topics .nav-item:target {
@@ -129,11 +127,13 @@
     padding-top: 2px;
     margin: auto; 
     padding-bottom: 10px;
+    
 }
 
 .Topics .tab .btn {
-    margin: 3px;
+    margin: 2.5px;
     background-color: #007bff;
+    font-size: 14px;
 }
 
 .Topics .tab .btn:hover, .Topics .tab .btn:focus {
