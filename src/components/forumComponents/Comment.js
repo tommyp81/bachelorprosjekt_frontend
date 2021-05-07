@@ -89,7 +89,7 @@ const Comment = ({ initComment, deleteComment }) => {
           
           <p>Postet av{" "}
           {comment.userId === null ? <b>[Slettet bruker]</b> : 
-            <b>{comment.userId}</b>} {" "}
+            <b>{comment.username}</b>} {" "}
           {moment(comment.date).calendar()}&nbsp;
           {comment.edited ? <i style={{color: "gray"}}>(Redigert {moment(comment.editDate).calendar()})</i> : ""}
           </p>

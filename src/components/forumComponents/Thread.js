@@ -206,7 +206,7 @@ const Thread = ({
                   <div className="float-left">
                   
                   <p>Postet av{" "}
-                    {post.userId === null ? <b>[Slettet bruker]</b> : <b>{post.userId}</b>}{" "}
+                    {post.userId === null ? <b>[Slettet bruker]</b> : <b>{post.username}</b>}{" "}
                     {moment(post.date).calendar()}&nbsp;
                     {post.edited ? <i style={{color: "gray"}}>(Redigert {moment(post.editDate).calendar()})</i> : ""}
                   </p>
