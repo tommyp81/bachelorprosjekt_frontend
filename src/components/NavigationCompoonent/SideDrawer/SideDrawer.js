@@ -6,23 +6,32 @@ import { BsChatDotsFill, BsBoxArrowLeft } from "react-icons/bs";
 import { BsPersonFill } from "react-icons/bs";
 import { HiAcademicCap } from "react-icons/hi";
 import { Link } from "react-router-dom";
-
+import PasswordDialog from "../../Admin/PasswordDialog";
+import UsernameDialog from "../../Admin/UsernameDialog";
 const SideDrawer = (props) => {
+  const { user } = useContext(UserContext);
 
-  const {user} = useContext(UserContext)
-  
   let drawerClasses = "sideDrawer";
 
   if (props.show) {
     drawerClasses = "sideDrawer open";
   }
 
+
   return (
     <nav className={drawerClasses}>
       <div className="user">
-        <BsPersonFill size="50px" /><br/> <b>{user.username}</b><br/>
-        {user.firstName} {user.lastName}<br/>
-        {user.email}<br/>
+        <BsPersonFill size="50px" />
+        <br /> <b>{user.username}</b>
+        <br />
+        {user.firstName} {user.lastName}
+        <br />
+        {user.email}
+        <br />
+        <UsernameDialog setUsers={props.setUsers} users={props.users} />
+        <br />
+        <PasswordDialog user={user} />
+        <br />
         {user.admin && <Link to="/Admin">Administrer brukere</Link>}
       </div>
       <ul>
@@ -42,12 +51,14 @@ const SideDrawer = (props) => {
           </Link>
         </li>
         <li>
-          <Link to="/Login" onClick={props.logout}>
+          <Link to="/Login" onClick={() => {
+            props.logout();
+            props.toggle();
+          }}>
             <BsBoxArrowLeft size="22px" /> Logg ut
           </Link>
         </li>
       </ul>
-      
     </nav>
   );
 };

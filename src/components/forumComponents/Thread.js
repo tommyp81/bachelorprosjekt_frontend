@@ -184,7 +184,7 @@ const Thread = ({
               <RiArrowLeftFill size={20} />
               &nbsp;Tilbake til forum
             </Link>
-            <div className="float-right">
+            <div className="topictext">
               {topics
                 .filter((topics) => topics.id === post?.topicId)
                 .map((filteredTopics, i) => (
@@ -223,7 +223,7 @@ const Thread = ({
                   {post.content}
                 </div>
 
-                <div className="postattachment" style={{color: "grey"}}>
+                <div className="attachment" style={{color: "grey"}}>
                   {post.documentId ? 
                     (<p>Vedlegg: <b><FileLink fileId={post.documentId}/></b></p>) 
                   : 

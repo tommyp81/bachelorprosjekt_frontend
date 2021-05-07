@@ -82,7 +82,7 @@ const App = () => {
   );
 
   const sidebar = (
-    <SideDrawer show={sideDrawerOpen} toggle={handleDrawerToggleClick} />
+    <SideDrawer show={sideDrawerOpen} toggle={handleDrawerToggleClick} logout={testlogout}/>
   );
 
   useEffect(() => {
@@ -144,6 +144,7 @@ const App = () => {
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <div className="App">
+      
         {user.loggedIn && toolbar}
         {user.loggedIn && sidebar}
         {user.loggedIn && backdrop}
@@ -190,6 +191,8 @@ const App = () => {
           <Route path="/error" component={NotFound} />
         </Switch>
         <Footer />
+        
+      
       </div>
     </UserContext.Provider>
   );

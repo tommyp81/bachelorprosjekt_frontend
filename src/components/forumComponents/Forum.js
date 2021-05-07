@@ -132,7 +132,6 @@ const Forum = ({
 
   return (
     <div className="Forum mt-5">
-      <Container></Container>
       <Container className="body">
         <Row xs={1} sm={1} lg={2}>
           <Col lg={3}>

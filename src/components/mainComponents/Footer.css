@@ -1,23 +1,9 @@
 .Footer {
+  position: relative;
   background-color: #0b2c63;
   color: white;
-  left: 0;
-  bottom: 0;
-  height: 15%;
-  padding-top: 20px;
-  font-size: 14px;
-  padding-right: 0;
-  padding-left: 0;
-  margin-top: 150px;
-  margin-right: auto;
-  margin-left: auto;
+  height: 500px;
   font-size: 16px;
-}
-
-@media (max-width: 768px) {
-  .Footer {
-    margin-top: 50px;
-  }
 }
 
 .social {

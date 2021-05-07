@@ -1,8 +1,17 @@
+.Post {
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+}
+
 .Post .container {
     background-color: #0b2c63;
     padding: 30px;
     border-radius: 10px;
     margin-top: 120px;
+}
+
+.Post .topictext {
+    float: right;
 }
 
 .Post .main .card {
@@ -52,6 +61,8 @@
 
 
 @media (max-width: 768px) {
+    
+
     .Post .card-text {
       font-size: 14px;
     }
@@ -63,6 +74,13 @@
   
 
 @media (max-width: 425px) {
+    .Post .foruminfo {
+        text-align: center;
+    }
+
+    .Post .topictext {
+        float: unset;
+    }
 
     .Post .main .card-title {
         font-size: 20px;

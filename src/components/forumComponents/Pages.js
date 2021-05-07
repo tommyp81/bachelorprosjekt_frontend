@@ -1,6 +1,6 @@
 import React from "react"
 import { Pagination } from "react-bootstrap"
-import "./Pages.css";
+import "./Forum.css";
 
 const Pages = ({totalPages, currentPage, setCurrentPage}) => {
 

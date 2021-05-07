@@ -1,5 +1,6 @@
 .Kunnskapsportalen .container {
-    margin-top: 150px;
+    margin-top: 10rem;
+    margin-bottom: 10rem;
     background-color: #0b2c63;
     border-radius: 10px;
     padding-bottom: 30px;
@@ -56,6 +57,13 @@
 
 
 /*Mobile*/
+@media (max-width: 768px) {
+    .Kunnskapsportalen .container {
+        margin-top: 5rem;
+        margin-bottom: 5rem;
+    }
+}
+
 @media (max-width: 425px) {
     .Kunnskapsportalen .card .title, .Kunnskapsportalen .card .content {
         white-space: unset;
@@ -157,6 +165,14 @@
 
     .UploadFile {
         margin-bottom: 15px;
+    }
+
+    .InfoTopics .btn {
+        font-size: 16px;
+    }
+    
+    .Kunnskapsportalen .tabs .nav-item {
+        font-size: 14px;
     }
 }
 

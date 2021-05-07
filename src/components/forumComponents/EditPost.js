@@ -58,7 +58,10 @@ const EditPost = ({ post, edit }) => {
             <Form.Group
               controlId="exampleForm.ControlTextarea1"
               onSubmit={handleSubmit}
-            >
+            ></Form.Group>
+            <Form.Group>
+              {" "}
+              <Form.Label>Tittel</Form.Label>
               <Form.Control
                 type="text"
                 rows={1}
@@ -66,6 +69,8 @@ const EditPost = ({ post, edit }) => {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
+            </Form.Group>
+            <Form.Group>
               <Form.Control
                 as="textarea"
                 rows={5}
@@ -78,22 +83,25 @@ const EditPost = ({ post, edit }) => {
               ) : (
                 ""
               )}
+            </Form.Group>
+            <Form.Group>
               <FileDrop file={file} setFile={setFile} />
-              <Button variant="secondary" onClick={handleClose}>
-                Avbryt
-              </Button>
-              <Button
-                type="submit"
-                variant="success"
-                onClick={handleClose}
-                disabled={!validateForm()}
-              >
-                Send inn
-              </Button>
             </Form.Group>
           </Form>
         </Modal.Body>
-        <Modal.Footer></Modal.Footer>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Avbryt
+          </Button>
+          <Button
+            type="submit"
+            variant="success"
+            onClick={handleClose}
+            disabled={!validateForm()}
+          >
+            Send inn
+          </Button>
+        </Modal.Footer>
       </Modal>
     </>
   );

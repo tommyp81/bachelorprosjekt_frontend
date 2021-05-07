@@ -3,6 +3,7 @@ import { Container, Row, Col, Image, Spinner } from "react-bootstrap";
 import Feed from "../forumComponents/Feed.js";
 import "./Home.css";
 import moment from "moment";
+import { host } from '../../App'
 
 import Footer from "../mainComponents/Footer";
 //import Header from '../mainComponents/Header'
@@ -12,7 +13,6 @@ import { Link } from "react-router-dom";
 import SpinnerDiv from "../forumComponents/SpinnerDiv.js";
 import SortItems from "../forumComponents/SortItems.js";
 import { ArrowLeft, ArrowRight } from "react-bootstrap-icons";
-import { host } from "../../App.js";
 
 const Home = ({ topic, subtopic, users }) => {
   const [filteredPosts, setFilteredPosts] = useState([]);
@@ -30,7 +30,7 @@ const Home = ({ topic, subtopic, users }) => {
     <div className="Home">
       <Container>
         <Row className="toprow">
-          <Col>
+          <Col md={6}>
             <h3>Diskusjoner i forumet</h3>
             <div className="sortposts">
               <SortItems
@@ -39,7 +39,6 @@ const Home = ({ topic, subtopic, users }) => {
               />
             </div>
           </Col>
-          <Col className="hidden"></Col>
         </Row>
         <Row md={1} lg={2}>
           <Col md={6} className="feedcol">
@@ -53,12 +52,6 @@ const Home = ({ topic, subtopic, users }) => {
           <Col md={6} className="textcol">
             <Link to="/Kunnskapsportalen">
               <div className="infocon">
-                {/* 
-            <Image 
-            src={ImgKunnskap}
-            width="100%"
-            height="100%">
-            </Image>*/}
                 <div className="infotext">
                   <h1>Ønsker du å lære mer?</h1>
                   <p>
@@ -72,12 +65,6 @@ const Home = ({ topic, subtopic, users }) => {
             </Link>
             <Link to="/Forum">
               <div className="forumcon">
-                {/* 
-            <Image 
-            src={ImgForum}
-            width="100%"
-            height="100%">
-            </Image>*/}
                 <div className="forumtext">
                   <h1>Slå av en prat</h1>
                   <p>

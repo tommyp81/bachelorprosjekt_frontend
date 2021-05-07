@@ -103,7 +103,7 @@ const Comment = ({ initComment, deleteComment }) => {
           </div>
           <br />
           
-          <div className="postattachment" style={{color: "grey"}}>
+          <div className="attachment" style={{color: "grey"}}>
             {comment.documentId ? 
               (<>Vedlegg: <b><FileLink fileId={comment.documentId}/></b></>) 
               : 
@@ -145,7 +145,7 @@ const Comment = ({ initComment, deleteComment }) => {
             </Modal>
           </div>
           : ""}
-          
+
           <div className="like"> 
           {comment.like_Count}&nbsp;<LikeButton id={comment.id} liked={liked} setLiked={setLiked} isPost={false} updateCommentLike={setCommentLikeCount} />
           </div>
