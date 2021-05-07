@@ -69,7 +69,7 @@ const VideoContent = ({ infoTopics, deletePost, addPost }) => {
         </Col>
       </Row>
       <div className="float-right">
-        {user &&
+        {user.admin &&
           <AddVideo infoTopics={infoTopics} setVideos={setVideoContent} addPost={addPost} />
         }
       </div>

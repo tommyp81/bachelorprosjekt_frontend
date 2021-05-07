@@ -68,7 +68,7 @@ const DocumentContent = ({ infoTopics }) => {
         </Col>
       </Row>
       <div className="float-right">
-        {user &&
+        {user.admin &&
           <AddDocument infoTopics={infoTopics} setDocuments={setDocumentContent} />
         }
       </div>
