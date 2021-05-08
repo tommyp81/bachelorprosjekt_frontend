@@ -8,6 +8,7 @@ import "./Login.css";
 import { UserContext } from "../../UserContext";
 import { host } from "../../App";
 import UsernameDialog from "../Admin/UsernameDialog";
+import Register2 from "../registerComponent/Register2";
 
 const Login = ({ history, setUsers }) => {
   
@@ -121,7 +122,7 @@ const Login = ({ history, setUsers }) => {
 
         </Tab>
         <Tab title="Registrer" eventKey="register"> 
-          <Register setTabKey={setTabKey} setUsers={setUsers} loginUser={loginUser}/>
+          <Register2 setTabKey={setTabKey} setUsers={setUsers} loginUser={loginUser}/>
         </Tab>
       </Tabs>
       </div>

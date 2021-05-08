@@ -20,10 +20,17 @@ const Home = ({ topic, subtopic, users }) => {
   const postsInFeed = 3
 
   useEffect( async () => {
+    // const timer = setTimeout( async () => {
+    //   console.log("timeout, 5 sec")
+      
+    // }, 5000)
     const res = await fetch(host + 
       `posts?pageNumber=${1}&pageSize=${postsInFeed}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`)
     const posts = await res.json()
     setFilteredPosts(posts.data)
+    
+
+    // return () => clearTimeout(timer)
   }, [sort]);
 
   return (

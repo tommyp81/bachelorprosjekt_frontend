@@ -10,14 +10,12 @@ import "./Feed.css";
 import LikeStatus from "../LikeStatus";
 import Topics from "./Topics";
 
-const Feed = ({ posts, topic, subtopic, maxLength, loading }) => {
+const Feed = ({ posts, topic, subtopic }) => {
   
   
   if (
-    posts.length === 0 &&
+    posts.length === 0
     // users.length === 0 &&
-    topic.length === 0 &&
-    subtopic.length === 0
   ) {
     return <SpinnerDiv />;
   }
