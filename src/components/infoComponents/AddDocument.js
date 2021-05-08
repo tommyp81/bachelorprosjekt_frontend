@@ -1,20 +1,19 @@
 import React, { useContext, useState } from "react";
 import {
   Button,
-  Tabs,
-  Tab,
-  Accordion,
-  Card,
-  Image,
   Modal,
-  Form,
 } from "react-bootstrap";
-import { Row, Col, Container } from "react-bootstrap";
 import "./Kunnskapsportalen.css";
 import FileDrop from "../FileDrop";
-import validator from "validator";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from 'yup';
 import { host } from "../../App";
 import { UserContext } from "../../UserContext";
+
+const schema = yup.object().shape({
+  infoTopicId: yup.string().required("Velg en kategori")
+})
 
 const AddDocument = ({
   infoTopics,
@@ -26,36 +25,18 @@ const AddDocument = ({
 
   const { user } = useContext(UserContext);
 
-  const [id, setId] = useState("");
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [infoTopicId, setInfoTopicId] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const [validated, setValidated] = useState(false);
-  //Video
-
-
-
-  //Dokument
-
   const [file, setFile] = useState();
 
-  const handleSubmitDocument = (event) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.stopPropagation();
-    }
-    setValidated(true);
-    if (infoTopicId == 0) {
-      setErrorMessage("Ikke valgt kategori");
-      return;
-    }
+  const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    resolver: yupResolver(schema)
+  })
+
+  const onSubmit = data => {
+    console.log(data)
     let formData = new FormData();
     formData.append("File", file);
     formData.append("userId", user.id);
-    formData.append("infoTopicId", infoTopicId);
+    formData.append("infoTopicId", data.infoTopicId);
     fetch(host + "UploadDocument", {
       method: "POST",
       body: formData,
@@ -67,9 +48,9 @@ const AddDocument = ({
         setDocuments((current) => [...current, data]);
       })
       .catch((error) => console.log(error));
-    console.log(infoTopicId);
     handleClose();
-  };
+    reset();
+  }
 
   return (
     <div className="UploadFile">
@@ -84,41 +65,38 @@ const AddDocument = ({
 
 
         <Modal.Body>
-          <Form noValidate validated={validated}>
-            <Form.Group>
-              <Form.Label>Velg fil</Form.Label>
+          <form onSubmit={handleSubmit(onSubmit)} >
+            <div>
+              <label>Velg fil</label>
               <FileDrop file={file} setFile={setFile} />
-              <Form.Label>Velg kategori</Form.Label>
-              <Form.Control
-                as="select"
-                onChange={(e) => {
-                  console.log(e.target.value);
-                  setInfoTopicId(e.target.value);
-                }}
-                custom
-              >
-                <option value="">Kategori...</option>
-                {infoTopics.map((mappedInfoTopics, i) => (
-                  <option key={i} value={mappedInfoTopics.id}>
+            </div>
+            <div className="form-group">
+              <label for="kategoriVelger">Velg kategori</label>
+              <select className="form-control" id="kategoriVelger" name="infoTopicId" {...register("infoTopicId")} >
+                <option value=''></option>
+                {infoTopics.map((mappedInfoTopics) => (
+                  <option key={mappedInfoTopics.id} value={mappedInfoTopics.id}>
                     {mappedInfoTopics.title}
                   </option>
                 ))}
-              </Form.Control>
-            </Form.Group>
+              </select>
+              <p className="validationError">{errors['infoTopicId']?.message}</p>
+            </div>
             <div className="float-right">
               <Button variant="danger" onClick={handleClose}>
                 Avbryt
-                  </Button>
-                  &nbsp;
-                  <Button
+              </Button>
+              &nbsp;
+              <Button
                 type="submit"
                 variant="primary"
-                onClick={handleSubmitDocument}
+                disabled={!file}
               >
                 Send
-                  </Button>
+              </Button>
             </div>
-          </Form>
+
+          </form>
         </Modal.Body>
         <Modal.Body></Modal.Body>
       </Modal>

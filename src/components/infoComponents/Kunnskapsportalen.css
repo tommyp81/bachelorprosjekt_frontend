@@ -55,6 +55,10 @@
     display: inline;
 } 
 
+.validationError {
+    color: red;
+}
+
 
 /*Mobile*/
 @media (max-width: 768px) {
