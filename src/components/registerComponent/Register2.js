@@ -10,7 +10,7 @@ import './Register.css'
 const schema = yup.object().shape({
   username: yup.string().required("må fylles ut").min(5, 'minst 5 tegn'),
   email: yup.string().email().required("må fylles ut"),
-  firstName: yup.string().required("må fylles ut").min(),
+  firstName: yup.string().required("må fylles ut"),
   lastName: yup.string().required("må fylles ut"),
   password: yup.string().required("må fylles ut").min(8, 'minst 8 tegn'),
   confirmPassword: yup.string().oneOf([yup.ref('password'), null], 'password must match').required("må fylles ut")
