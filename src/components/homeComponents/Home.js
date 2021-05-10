@@ -16,7 +16,7 @@ import { ArrowLeft, ArrowRight } from "react-bootstrap-icons";
 
 const Home = ({ topic, subtopic, users }) => {
   const [filteredPosts, setFilteredPosts] = useState([]);
-  const [sort, setSort] = useState({sortOrder: "Asc", sortType: "Date"})
+  const [sort, setSort] = useState({sortOrder: "Desc", sortType: "Date"})
   const [loading, setLoading] = useState(false)
 
   const postsInFeed = 3
@@ -58,6 +58,7 @@ const Home = ({ topic, subtopic, users }) => {
                 topic={topic}
                 subtopic={subtopic}
                 postsPerPage={postsInFeed}
+                loading={loading}
             />
           </Col>
           <Col md={6} className="textcol">
