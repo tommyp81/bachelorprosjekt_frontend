@@ -69,7 +69,7 @@ const AdminPanel = ({users, setUsers}) => {
 
   return (
     <div className="containerPanel container col-12">
-      <div className="top">
+      <div className="toppanel">
         <Button className="deletebutton" variant="danger" onClick={deleteSelectedUsers} disabled={selectedUsers.length < 1}>Slett bruker(e)</Button>
         <SearchUsers setSearchInput={setSearchFilter}/>
       </div>
