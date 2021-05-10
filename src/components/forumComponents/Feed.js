@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Card, Button, Spinner } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import moment from "moment";
 import "moment/locale/nb";
-import { FaThumbsUp, FaRegComment } from "react-icons/fa";
+import { FaRegComment } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import SpinnerDiv from "./SpinnerDiv";
 import ReadMoreReact from "../forumComponents/ReadMore";
 import "./Feed.css";
 import LikeStatus from "../LikeStatus";
-import Topics from "./Topics";
 
 
 const Feed = ({ posts, topic, subtopic, loading }) => {
@@ -16,17 +15,17 @@ const Feed = ({ posts, topic, subtopic, loading }) => {
   const [empty, setEmpty] = useState(false)
 
   useEffect(() => {
-    const timeout = setTimeout(() => {  
-      if(!loading)
+    const timeout = setTimeout(() => {
+      if (!loading)
         setEmpty(true)
     }, 2000)
-    return(() => {
+    return (() => {
       setEmpty(false)
       clearTimeout(timeout)
     })
   }, [loading])
-  
-  
+
+
   if (
     posts.length === 0
     // users.length === 0 &&
@@ -48,18 +47,18 @@ const Feed = ({ posts, topic, subtopic, loading }) => {
                 {" "}{moment(post.date).calendar()}
               </Card.Text>
             </div>
-            
+
             <br />
             <br />
             <Card.Title>{post.title}</Card.Title>
             <Card.Text>
               <ReadMoreReact text={post.content} />
             </Card.Text>
-              <Card.Text className="subtoptitle">
-                {topic.find(t => t.id === post.topicId)?.title} -{" "}
-                {subtopic.find((st) => st.id === post.subTopicId)?.title}
-              </Card.Text>
-              <div className="likecomment">
+            <Card.Text className="subtoptitle">
+              {topic.find(t => t.id === post.topicId)?.title} -{" "}
+              {subtopic.find((st) => st.id === post.subTopicId)?.title}
+            </Card.Text>
+            <div className="likecomment">
               {post.like_Count}{" "}
               <LikeStatus postId={post.id} />{" "}
               &nbsp;

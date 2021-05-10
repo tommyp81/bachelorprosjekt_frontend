@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, Row, Col, Card } from "react-bootstrap";
-import { Link } from 'react-router-dom'
 import { host } from '../../App';
 import { UserContext } from '../../UserContext';
 import FileLink from '../FileLink';
@@ -27,15 +26,15 @@ const DocumentContent = ({ infoTopics }) => {
   const [totalDocumentsPages, setTotalDocumentsPages] = useState(0)
   const [documentsSort, setDocumentsSort] = useState({ sortOrder: "Asc", sortType: "id" })
 
-  const documentsURL = searchFilter ? 
+  const documentsURL = searchFilter ?
     `SearchDocuments?query=${searchFilter}&?infoTopicId=${infoTopic}
     &pageNumber=${currentDocumentsPage}&pageSize=${documentsPerPage}
     &sortOrder=${documentsSort.sortOrder}&sortType=${documentsSort.sortType}`
-      : 
+    :
     `GetDocuments?infoTopicId=${infoTopic}&pageNumber=${currentDocumentsPage}
     &pageSize=${documentsPerPage}&sortOrder=${documentsSort.sortOrder}
     &sortType=${documentsSort.sortType}`
-    
+
 
 
   useEffect(async () => {
@@ -72,17 +71,17 @@ const DocumentContent = ({ infoTopics }) => {
         }
       </div>
       <div className="w-50 d-flex justify-content-start">
-        <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} setCurrentPage={setcurrentDocumentsPage}/>
+        <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} setCurrentPage={setcurrentDocumentsPage} />
         <SortContent isDocument={true} setSort={setDocumentsSort} />
       </div>
-      {documentContent.map((mappedDocuments, i) => (
-        <Card>
+      {documentContent.map((mappedDocuments) => (
+        <Card key={mappedDocuments.id}>
           <Card.Body>
             <Row>
               <Col>
                 <div className="content">
-                  {infoTopics.filter(infoTopics => (infoTopics.id === mappedDocuments.infoTopicId)).map((filteredTopics, i) => (
-                    <p className="toptext" style={{ color: "grey" }}>
+                  {infoTopics.filter(infoTopics => (infoTopics.id === mappedDocuments.infoTopicId)).map((filteredTopics) => (
+                    <p key={filteredTopics.id} className="toptext" style={{ color: "grey" }}>
                       Delt {moment(mappedDocuments.uploaded).calendar()} i {filteredTopics.title}
                     </p>
                   ))}

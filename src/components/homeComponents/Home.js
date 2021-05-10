@@ -1,40 +1,30 @@
-import React, { Component, useState, useEffect } from "react";
-import { Container, Row, Col, Image, Spinner } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import Feed from "../forumComponents/Feed.js";
 import "./Home.css";
-import moment from "moment";
 import { host } from '../../App'
 
-import Footer from "../mainComponents/Footer";
-//import Header from '../mainComponents/Header'
 
 import { Link } from "react-router-dom";
 
-import SpinnerDiv from "../forumComponents/SpinnerDiv.js";
 import SortItems from "../forumComponents/SortItems.js";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
-const Home = ({ topic, subtopic, users }) => {
+const Home = ({ topic, subtopic }) => {
   const [filteredPosts, setFilteredPosts] = useState([]);
-  const [sort, setSort] = useState({sortOrder: "Desc", sortType: "Date"})
+  const [sort, setSort] = useState({ sortOrder: "Desc", sortType: "Date" })
   const [loading, setLoading] = useState(false)
 
   const postsInFeed = 3
 
 
-  useEffect( async () => {
+  useEffect(async () => {
     setLoading(true)
-    // const timer = setTimeout( async () => {
-    //   console.log("timeout, 5 sec")
-      
-    // }, 5000)
-    const res = await fetch(host + 
+    const res = await fetch(host +
       `posts?pageNumber=${1}&pageSize=${postsInFeed}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`)
     const posts = await res.json()
     setFilteredPosts(posts.data)
     setLoading(false)
-
-    // return () => clearTimeout(timer)
   }, [sort]);
 
   return (
@@ -54,11 +44,11 @@ const Home = ({ topic, subtopic, users }) => {
         <Row md={1} lg={2}>
           <Col md={6} className="feedcol">
             <Feed
-                posts={filteredPosts}
-                topic={topic}
-                subtopic={subtopic}
-                postsPerPage={postsInFeed}
-                loading={loading}
+              posts={filteredPosts}
+              topic={topic}
+              subtopic={subtopic}
+              postsPerPage={postsInFeed}
+              loading={loading}
             />
           </Col>
           <Col md={6} className="textcol">
@@ -71,7 +61,7 @@ const Home = ({ topic, subtopic, users }) => {
                     videoer som lærer deg korrekte treningsteknikker som er relevante
                     for badmintonsporten.
                   </p>
-                  <h5>Til kunnskapsportalen <BsArrowRight/></h5>
+                  <h5>Til kunnskapsportalen <BsArrowRight /></h5>
                 </div>
               </div>
             </Link>
@@ -84,7 +74,7 @@ const Home = ({ topic, subtopic, users }) => {
                     dele kunnskap, opplevelser og erfaringer fra
                     badmintonsporten.
                   </p>
-                  <h5><BsArrowLeft/> Til forumet</h5>
+                  <h5><BsArrowLeft /> Til forumet</h5>
                 </div>
               </div>
             </Link>

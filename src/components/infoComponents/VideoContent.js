@@ -77,7 +77,6 @@ const VideoContent = ({ infoTopics, deletePost, addPost }) => {
         <SortContent isDocument={false} setSort={setVideoSort} />
       </div>
       {videoContent.map((filteredVideos, i) => (
-        <>
           <Card key={i}
             onClick={() => handleShow(i)}
             style={{ cursor: "pointer" }}>
@@ -85,8 +84,8 @@ const VideoContent = ({ infoTopics, deletePost, addPost }) => {
               <Row>
                 <Col md={5}>
                   <div className="content">
-                    {infoTopics.filter(infoTopics => (infoTopics.id === filteredVideos.infoTopicId)).map((filteredTopics, i) => (
-                      <p className="toptext" style={{ color: "gray" }}>Delt {moment(filteredVideos.uploaded).calendar()} i {filteredTopics.title} </p>))}
+                    {infoTopics.filter(infoTopics => (infoTopics.id === filteredVideos.infoTopicId)).map((filteredTopics) => (
+                      <p key={filteredTopics.id} className="toptext" style={{ color: "gray" }}>Delt {moment(filteredVideos.uploaded).calendar()} i {filteredTopics.title} </p>))}
                     <div className="title">{filteredVideos.title}</div><br />
                     <p>Klikk for å se video</p>
                     <div hidden={!user.admin}>
@@ -103,7 +102,6 @@ const VideoContent = ({ infoTopics, deletePost, addPost }) => {
               </Row>
             </Card.Body>
           </Card>
-        </>
       ))}
       {totalVideosPages > 1 &&
         <Pages
@@ -120,7 +118,7 @@ const VideoContent = ({ infoTopics, deletePost, addPost }) => {
 
           <Modal.Body>
             <iframe
-              allowfullscreen="allowfullscreen"
+              allowFullScreen="allowFullScreen"
               mozallowfullscreen="mozallowfullscreen"
               msallowfullscreen="msallowfullscreen"
               oallowfullscreen="oallowfullscreen"

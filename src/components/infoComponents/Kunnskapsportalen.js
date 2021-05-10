@@ -20,7 +20,7 @@ const Kunnskapsportalen = ({ infoTopics, addPost, deletePost }) => {
         <Row>
           <Col lg={12} className="maincontent">
 
-            <Tabs defaultActiveKey="videos" className="tabs" as={Button} variant="pills" activeKey={tabKey} onSelect={k => setTabKey(k)}>
+            <Tabs transition={false} defaultActiveKey="videos" className="tabs" as={Button} variant="pills" activeKey={tabKey} onSelect={k => setTabKey(k)}>
               <Tab eventKey="videos" title="Videoer" className="tab">
                 <VideoContent infoTopics={infoTopics} deletePost={deletePost} addPost={addPost} />
               </Tab>

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Breadcrumb, Card, Form, Modal } from "react-bootstrap";
+import { Card, Modal } from "react-bootstrap";
 import moment from "moment";
 import "moment/locale/nb";
 import { useParams, Link } from "react-router-dom";
@@ -7,17 +7,14 @@ import Pages from "./Pages.js";
 import "./Post.css";
 import { host } from "../../App";
 
-//import Header from '../mainComponents/Header'
-
 import { Container, Button } from "react-bootstrap";
 
 import NewComment from "./NewComment";
 import EditPost from "./EditPost";
-import EditComment from "./EditComment";
 import { UserContext } from "../../UserContext";
 import FileLink from "../FileLink";
 
-import { FaRegComment, FaThumbsUp } from "react-icons/fa";
+import { FaRegComment } from "react-icons/fa";
 import LikeButton from "../LikeButton.js";
 import Comment from "./Comment.js";
 import { RiArrowLeftFill } from "react-icons/ri";
@@ -42,7 +39,7 @@ const Thread = ({
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [sort, setSort] = useState({sortOrder: "Asc", sortType: "Date"})
+  const [sort, setSort] = useState({ sortOrder: "Asc", sortType: "Date" })
 
   const commentsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
@@ -55,11 +52,11 @@ const Thread = ({
     `comments/search?query=${searchValue}&postId=${postId}
     &pageNumber=${currentPage}&pageSize=${commentsPerPage}
     &sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`
-      :
+    :
     `comments?postId=${postId}&pageNumber=${currentPage}
     &pageSize=${commentsPerPage}&sortOrder=${sort.sortOrder}
     &sortType=${sort.sortType}`
-  
+
   //Post
   useEffect(() => {
     fetch(host + `posts/${postId}`)
@@ -135,7 +132,6 @@ const Thread = ({
     if (res.status === 200) {
       setComments(comments.filter((comment) => comment.id !== id));
       setPost({ ...post, comment_Count: post.comment_Count - 1 });
-      // updatePostInArray(post.id, { comment_Count: post.comment_Count - 1 });
     } else {
       alert("ERROR");
     }
@@ -160,7 +156,7 @@ const Thread = ({
     else setCurrentPage(totalPages);
   };
 
-  
+
 
   return (
     <div className="Post">
@@ -201,68 +197,68 @@ const Thread = ({
               <Card.Body>
                 <Card.Text>
                   <div className="float-left">
-                  
-                  <p>Postet av{" "}
-                    {post.userId === null ? <b>[Slettet bruker]</b> : <b>{post.username}</b>}{" "}
-                    {moment(post.date).calendar()}&nbsp;
-                    {post.edited ? <i style={{color: "gray"}}>(Redigert {moment(post.editDate).calendar()})</i> : ""}
-                  </p>
-                </div>
+
+                    <p>Postet av{" "}
+                      {post.userId === null ? <b>[Slettet bruker]</b> : <b>{post.username}</b>}{" "}
+                      {moment(post.date).calendar()}&nbsp;
+                    {post.edited ? <i style={{ color: "gray" }}>(Redigert {moment(post.editDate).calendar()})</i> : ""}
+                    </p>
+                  </div>
                 </Card.Text>
 
                 <Card.Title>
-                  <br/>
+                  <br />
                   {post.title}
                 </Card.Title>
 
                 <Card.Text>
-                <div className="postcontent">
-                  {post.content}
-                </div>
+                  <div className="postcontent">
+                    {post.content}
+                  </div>
 
-                <div className="attachment" style={{color: "grey"}}>
-                  {post.documentId ? 
-                    (<p>Vedlegg: <b><FileLink fileId={post.documentId}/></b></p>) 
-                  : 
-                    ("")}
-                </div>
+                  <div className="attachment" style={{ color: "grey" }}>
+                    {post.documentId ?
+                      (<p>Vedlegg: <b><FileLink fileId={post.documentId} /></b></p>)
+                      :
+                      ("")}
+                  </div>
                 </Card.Text>
-                
+
                 {((user.id === post.userId) || user.admin) ?
-                <div className="editdelete">
-                  {(user.id === post.userId) && <EditPost post={post} edit={editPost} />}&nbsp;
+                  <div className="editdelete">
+                    {(user.id === post.userId) && <EditPost post={post} edit={editPost} />}&nbsp;
                   {((user.id === post.userId) || user.admin) &&
-                    <Button
-                      variant="danger"
-                      size="sm"
-                      onClick={handleShow}
-                      value={post.id}>
-                      Slett
-                    </Button>
-                  }
-                  <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
-                      <Modal.Title>Slett Post</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      Er du sikker på at du vil slette din post?
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="secondary" onClick={handleClose}>
-                        Avbryt
-                      </Button>
                       <Button
                         variant="danger"
-                        onClick={deleteThread}
-                        value={post.id}
-                      >
+                        size="sm"
+                        onClick={handleShow}
+                        value={post.id}>
                         Slett
+                    </Button>
+                    }
+                    <Modal show={show} onHide={handleClose}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Slett Post</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        Er du sikker på at du vil slette din post?
+                    </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                          Avbryt
                       </Button>
-                    </Modal.Footer>
-                  </Modal>
-                </div> 
-                : ""}
-                
+                        <Button
+                          variant="danger"
+                          onClick={deleteThread}
+                          value={post.id}
+                        >
+                          Slett
+                      </Button>
+                      </Modal.Footer>
+                    </Modal>
+                  </div>
+                  : ""}
+
 
                 <div className="likecomment">
                   {post.comment_Count}
@@ -287,10 +283,8 @@ const Thread = ({
             </Card>
           </div>
 
-          {/*commentCount*/}
-
           <div className="comments">
-            
+
             <div className="d-flex justify-content-between">
               {post && !post.comment_Count ? (
                 <h3>Ingen kommentarer</h3>

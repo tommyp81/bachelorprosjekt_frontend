@@ -175,8 +175,9 @@ const Forum = ({
                     {postsPerPage} per side:
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                    {[10, 25, 50, 100].map((pageSize) => (
+                    {[10, 25, 50, 100].map((pageSize, i) => (
                       <Dropdown.Item
+                        key={i}
                         value={pageSize}
                         onSelect={() => { setPostsPerPage(pageSize); setCurrentPage(1); handleScroll() }}
                       >

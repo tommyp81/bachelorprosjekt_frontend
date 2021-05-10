@@ -1,5 +1,5 @@
 import moment from "moment";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Card, Button, Modal } from "react-bootstrap";
 import { UserContext } from "../../UserContext";
 import FileLink from "../FileLink";
@@ -11,7 +11,6 @@ import { host } from "../../App";
 moment.locale("nb");
 
 const Comment = ({ initComment, deleteComment }) => {
-  const initMount = useRef(true);
 
   const { user } = useContext(UserContext);
 
@@ -20,16 +19,6 @@ const Comment = ({ initComment, deleteComment }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  // useEffect( async () => {
-  //   if (initMount.current) {
-  //     initMount.current = false
-  //   } else {
-  //     const res = await fetch(`https://localhost:44361/comments/${comment.id}`)
-  //     const data = await res.json();
-  //     setComment(data)
-  //   }
-  // }, [liked])
 
   const editComment = async (comment, file) => {
     let formData = new FormData();
@@ -56,20 +45,6 @@ const Comment = ({ initComment, deleteComment }) => {
     const data = await res.json();
 
     setComment(data);
-
-    // const updatedComments = comments.map(comment => {
-    //   if (comment.id === data.id) {
-    //     const updateComment = {
-    //       ...comment,
-    //       content: data.content,
-    //       documentId: data.documentId
-    //     }
-    //     return updateComment
-    //   }
-    //   return comment
-    // })
-    // console.log("LOLOLOL")
-    // setComments(updatedComments)
   };
 
   const setCommentLikeCount = (num) => {
@@ -82,76 +57,76 @@ const Comment = ({ initComment, deleteComment }) => {
 
   return (
     <div className="Comment">
-    <Card>
-      <Card.Body>
-        <Card.Text>
-        <div className="float-left">
-          
-          <p>Postet av{" "}
-          {comment.userId === null ? <b>[Slettet bruker]</b> : 
-            <b>{comment.username}</b>} {" "}
-          {moment(comment.date).calendar()}&nbsp;
-          {comment.edited ? <i style={{color: "gray"}}>(Redigert {moment(comment.editDate).calendar()})</i> : ""}
-          </p>
-        </div>
-        </Card.Text>
-        
-        <Card.Text>
-          <br />
-          <div className="commentcontent">
-          {comment.content}
-          </div>
-          <br />
-          
-          <div className="attachment" style={{color: "grey"}}>
-            {comment.documentId ? 
-              (<>Vedlegg: <b><FileLink fileId={comment.documentId}/></b></>) 
-              : 
-              ("")}
-          </div>
+      <Card>
+        <Card.Body>
+          <Card.Text>
+            <div className="float-left">
 
-          {((user.id === comment.userId) || user.admin) ? 
-          <div className="editdelete">
-            {(user.id === comment.userId) && <EditComment comment={comment} edit={editComment} />} &nbsp;
+              <p>Postet av{" "}
+                {comment.userId === null ? <b>[Slettet bruker]</b> :
+                  <b>{comment.username}</b>} {" "}
+                {moment(comment.date).calendar()}&nbsp;
+          {comment.edited ? <i style={{ color: "gray" }}>(Redigert {moment(comment.editDate).calendar()})</i> : ""}
+              </p>
+            </div>
+          </Card.Text>
+
+          <Card.Text>
+            <br />
+            <div className="commentcontent">
+              {comment.content}
+            </div>
+            <br />
+
+            <div className="attachment" style={{ color: "grey" }}>
+              {comment.documentId ?
+                (<>Vedlegg: <b><FileLink fileId={comment.documentId} /></b></>)
+                :
+                ("")}
+            </div>
+
+            {((user.id === comment.userId) || user.admin) ?
+              <div className="editdelete">
+                {(user.id === comment.userId) && <EditComment comment={comment} edit={editComment} />} &nbsp;
             {((user.id === comment.userId) || user.admin) &&
-              <Button
-                variant="danger"
-                size="sm"
-                onClick={handleShow}
-                value={comment.id}>
-                Slett
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    onClick={handleShow}
+                    value={comment.id}>
+                    Slett
               </Button>}
-           
-            <Modal show={show} onHide={handleClose}>
-              <Modal.Header closeButton>
-                <Modal.Title>Slett kommentar</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                Er du sikker på at du vil slette din kommentar?
+
+                <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Slett kommentar</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    Er du sikker på at du vil slette din kommentar?
               </Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Avbryt
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                      Avbryt
                 </Button>
                 &nbsp;
                 <Button
-                  variant="danger"
-                  onClick={deleteComment}
-                  value={comment.id}
-                >
-                  Slett
+                      variant="danger"
+                      onClick={deleteComment}
+                      value={comment.id}
+                    >
+                      Slett
                 </Button>
-              </Modal.Footer>
-            </Modal>
-          </div>
-          : ""}
+                  </Modal.Footer>
+                </Modal>
+              </div>
+              : ""}
 
-          <div className="like"> 
-          {comment.like_Count}&nbsp;<LikeButton id={comment.id} liked={liked} setLiked={setLiked} isPost={false} updateCommentLike={setCommentLikeCount} />
-          </div>
-        </Card.Text>
-      </Card.Body>
-    </Card>
+            <div className="like">
+              {comment.like_Count}&nbsp;<LikeButton id={comment.id} liked={liked} setLiked={setLiked} isPost={false} updateCommentLike={setCommentLikeCount} />
+            </div>
+          </Card.Text>
+        </Card.Body>
+      </Card>
     </div>
   );
 };
