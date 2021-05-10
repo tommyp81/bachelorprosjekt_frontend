@@ -48,14 +48,14 @@ const EditComment = ({ comment, edit }) => {
         Rediger
       </Button>
       <Modal show={show} onHide={handleClose} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Rediger kommentar</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
+          <Modal.Header closeButton>
+            <Modal.Title>Rediger kommentar</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+
             <Form.Group
               controlId="exampleForm.ControlTextarea1"
-              onSubmit={handleSubmit}
             >
               <Form.Control
                 as="textarea"
@@ -73,21 +73,22 @@ const EditComment = ({ comment, edit }) => {
               )}
               <FileDrop file={file} setFile={setFile} />
             </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Avbryt
+
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Avbryt
           </Button>
-          <Button
-            type="submit"
-            variant="success"
-            onClick={handleClose}
-            disabled={!validateForm()}
-          >
-            Send inn
+            <Button
+              type="submit"
+              variant="success"
+              onClick={handleClose}
+              disabled={!validateForm()}
+            >
+              Send inn
           </Button>
-        </Modal.Footer>
+          </Modal.Footer>
+        </Form>
       </Modal>
     </>
   );
