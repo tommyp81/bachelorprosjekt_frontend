@@ -5,8 +5,8 @@ import SearchUsers from "./SearchUsers.js"
 import './AdminPanel.css'
 import PasswordDialog from './PasswordDialog'
 import Pages from '../forumComponents/Pages'
-import Search from '../forumComponents/Search'
 import UserSort from './UserSort'
+import Search from '../Search'
 
 const AdminPanel = () => {
 

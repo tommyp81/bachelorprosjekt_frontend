@@ -1,353 +1,122 @@
-import React, { useState } from "react";
-import { Form, Row, Col, Button } from 'react-bootstrap';
-import { host } from "../../App";
+import React from 'react'
+
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { Button, Col, Container, Row } from 'react-bootstrap';
+import { host } from '../../App';
+import './Register.css'
 
+const schema = yup.object().shape({
+  username: yup.string().required("må fylles ut").min(5, 'minst 5 tegn'),
+  email: yup.string().email().required("må fylles ut"),
+  firstName: yup.string().required("må fylles ut"),
+  lastName: yup.string().required("må fylles ut"),
+  password: yup.string().required("må fylles ut").min(8, 'minst 8 tegn'),
+  confirmPassword: yup.string().oneOf([yup.ref('password'), null], 'password must match').required("må fylles ut")
+})
 
-const Register = ({ setUsers, loginUser}) => {
+const Register = ({loginUser}) => {
 
-  // const [username, setUsername] = useState("");
-  // const [firstname, setFirstname] = useState("");
-  // const [lastname, setLastname] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [confirmPassword, setConfirmPassword] = useState("");
-
-  // var isDisabled = true;
-  // if(!username || !firstname || !lastname || !email || !password || !confirmPassword){
-  //   isDisabled = true;
-  // } else {
-  //   isDisabled = false;
-  // }
-
-  const { register, handleSubmit, errors } = useForm()
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(schema)
+  })
 
 
   const onSubmit = data => {
     console.log(data)
+    fetch(host + "users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        if(!res.ok) {
+          res.text().then(text => alert(text))
+        } else {
+          return res.json();
+        }    
+      })
+      .then(() => {
+        const formData = new FormData()
+        formData.append('username', data.username)
+        formData.append('password', data.password)
+        loginUser(formData)
+      })
+      .catch((error) => console.log(error));
   }
 
-
-  
-  // const handleSubmitUser = async (event) => {
-  //   var userExists = false;
-
-  //   event.preventDefault();
-  //   const userData = {
-  //     username: username,
-  //     firstName: firstname,
-  //     lastName: lastname,
-  //     email: email,
-  //     password: password
-  //   };
-
-  //   if(password === confirmPassword){
-  //     fetch(host + "users", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(userData),
-  //     })
-  //       .then((res) => {
-  //         if(!res.ok) {
-  //           userExists = true;
-  //           res.text().then(text => alert(text))
-  //         } else {
-  //           return res.json();
-  //         }    
-  //       })
-  //       .then((data) => {
-  //         setUsers(current => [...current, data])
-  //         const formData = new FormData()
-  //         formData.append('username', data.username)
-  //         formData.append('password', password)
-  //         loginUser(formData)
-  //       })
-  //       .catch((error) => console.log(error));
-  //     }
-
-      
-  //   if(password === confirmPassword && !userExists){
-  //     console.log("login")
-  //   } else {
-  //     alert("Passord og bekreft passord er ikke like.")
-  //   }
-  // };
-
-
   return (
-    <div className="Register">
-      <div className="registerdesktop">
-      <Row className="justify-content-md-center"> 
-        <form onSubmit={handleSubmit(onSubmit)}>
+    <Container className="text-center">
+      
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Row className="justify-content-center"> 
           <Col md="auto" className="register">
-            {/* <Form className="form">
-              <Form.Label>Brukernavn</Form.Label>
-              <Form.Control
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                // tabIndex="1"
-              />
-              {checkUsername}
-              <br />
-              <Form.Label>Fornavn</Form.Label>
-              <Form.Control
-                type="text"
-                value={firstname}
-                onChange={(e) => setFirstname(e.target.value)}
-                // tabIndex="3"
-              />
-              {checkFirstname}
-              <br/>
-              <Form.Label>Passord</Form.Label>
-              <Form.Control
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  // tabIndex="5"
-                />
-              {checkPassword}
-              <br/>
-            </Form>
-            </Col>
-            <Col md="auto" className="register"> 
-            <Form className="form">
-              <Form.Label>E-post</Form.Label>
-              <Form.Control
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                // tabIndex="2"
-              />
-              {checkEmail}
-              <br/>
-              <Form.Label>Etternavn</Form.Label>
-              <Form.Control
-                type="text"
-                value={lastname}
-                onChange={(e) => setLastname(e.target.value)}
-                // tabIndex="4"
-              />
-              {checkLastname}
-              <br/>
-              
-              <Form.Label>Bekreft passord</Form.Label>
-              <Form.Control
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                // tabIndex="6"
-              />
-              {checkConfirmPassword}
-              <br/>
-            </Form> */}
-
-              <div>
-                <label>Brukernavn</label>
-                <input name="username" type="text" ref={register} />
-              </div>
-              <div>
-                <label>Fornavn</label>
-                <input name="firstName" type="text" ref={register} />
-              </div>
-              <div>
-                <label>Passord</label>
-                <input name="password" type="password" ref={register} />
-              </div>
-
-              <div>
-                <label>E-post</label>
-                <input name="email" type="email" ref={register} />
-              </div>
-              <div>
-                <label>Etternavn</label>
-                <input name="lastName" type="text" ref={register} />
-              </div>
-              <div>
-                <label>Bekreft passord</label>
-                <input name="confirmPassword" type="password" ref={register} />
-              </div>
+            <div >
+              <label>Brukernavn</label>
+              <input className="form-control input-lg" name="username" type="text" {...register('username', { required: true })} />
+              <p className="validationError">{errors['username']?.message}</p>
+            </div>
             
-            </Col>
-            </form>
-            <Col md="auto" className="register">
-              
-            </Col>
-          
-          </Row>
-          <Row className="justify-content-md-center">
-            <Col className="register" md="auto">
-            {/* <Button
-                variant="success"
-                type="submit"
-                disabled={isDisabled}
-                onClick={handleSubmitUser}
-                // tabIndex="7"
-              >
-                Registrer
-              </Button> */}
-            </Col>
-          </Row>
-          </div>
-
-
-          <div className="registermobile">
-          {/* <Row className="justify-content-md-center"> 
+            
+          </Col >
           <Col md="auto" className="register">
-            <Form className="form">
-              <Form.Label>Brukernavn</Form.Label>
-              <Form.Control
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              {checkUsername}
-              <br />
-              <Form.Label>Fornavn</Form.Label>
-              <Form.Control
-                type="text"
-                value={firstname}
-                onChange={(e) => setFirstname(e.target.value)}
-              />
-              {checkFirstname}
-              <br/>
-              <Form.Label>Etternavn</Form.Label>
-              <Form.Control
-                type="text"
-                value={lastname}
-                onChange={(e) => setLastname(e.target.value)}
-              />
-              {checkLastname}
-              <br/>
-              
-            </Form>
-            </Col>
-            <Col md="auto" className="register"> 
-            <Form className="form">
-              <Form.Label>E-post</Form.Label>
-              <Form.Control
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              {checkEmail}
-              <br/>
-              <Form.Label>Passord</Form.Label>
-              <Form.Control
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                {checkPassword}
-              <br/>
-              <Form.Label>Bekreft passord</Form.Label>
-              <Form.Control
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-              {checkConfirmPassword}
-              <br/>
-            </Form>
-            </Col>
-          </Row>
-          <Row className="justify-content-md-center">
-            <Col className="register" md="auto">
-            <Button
-                variant="success"
-                type="submit"
-                disabled={isDisabled}
-                onClick={handleSubmitUser}
-              >
-                Registrer
-              </Button>
-            </Col>
-          </Row>*/}</div> 
-     {/*
-      <Container fluid="md">
-        <Row>
-          <Col className="logo" sm={12} >
-                        <WelcomeLogo />
-                        </Col>
-          <Col className="submit">
-            <Form onSubmit={handleSubmitUser}>
-              <Form.Group >
-                <Form.Label>Brukernavn</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Brukernavn"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </Form.Group>
-
-              <Form.Group >
-                <Form.Label>Fornavn</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Fornavn"
-                  value={firstname}
-                  onChange={(e) => setFirstname(e.target.value)}
-                />
-              </Form.Group>
-
-              <Form.Group >
-                <Form.Label>Etternavn</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Etternavn"
-                  value={lastname}
-                  onChange={(e) => setLastname(e.target.value)}
-                />
-              </Form.Group>
-
-              <Form.Group >
-                <Form.Label>E-post</Form.Label>
-                <Form.Control
-                  type="email"
-                  placeholder="email@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </Form.Group>
-
-              <Form.Group >
-                <Form.Label>Passord</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Passord"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </Form.Group>
-
-              <Form.Group >
-                <Form.Label>Bekreft passord</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Bekreft Passord"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                />
-              </Form.Group>
-
-              <Button
-                variant="success"
-                type="submit"
-                disabled={isDisabled}
-              >
-                Opprett bruker
-              </Button>
-            </Form>
+            <div >
+              <label>E-post</label>
+              <input className="form-control input-lg" name="email" type="email" {...register('email', { required: true })} />
+              <p className="validationError">{errors['email']?.message}</p>
+            </div>
           </Col>
         </Row>
-      </Container>*/}
-    </div>
-  );
-};
+        <Row className="justify-content-center ">
+          <Col md="auto" className="register">
+            <div>
+              <label >Fornavn</label>
+              <input className="form-control input-lg" name="firstName" type="text" {...register('firstName', { required: true })} />
+              <p className="validationError">{errors['firstName']?.message}</p>
+            </div>
+          </Col>
+          <Col md="auto" className="register">
+            <div className="d-flex flex-column">
+              <label>Etternavn</label>
+              <input className="form-control input-lg" name="lastName" type="text" {...register('lastName', { required: true })} />
+              <p className="validationError">{errors['lastName']?.message}</p>
+            </div>
+          </Col>
+        </Row>
+        <Row className="justify-content-center ">
+          <Col md="auto" className="register">
+            <div >
+              <label>Passord</label>
+              <input className="form-control input-lg" name="password" type="password" {...register('password', { required: true })} />
+              <p className="validationError">{errors['password']?.message}</p>
+            </div>
+          </Col>
+          <Col md="auto" className="register ">
+            <div >
+              <label>Bekreft passord</label>
+              <input className="form-control input-lg" name="confirmPassword" type="password" {...register('confirmPassword', { required: true })} />
+              <p className="validationError">{errors['confirmPassword']?.message}</p>
+            </div>
+          </Col>
+        </Row>
+        <Row className="justify-content-center mt-5">
+          <Col className="register" sm={6}>
+            <Button
+              variant="success"
+              type="submit"
+              className="w-100"
+            >
+              Registrer
+            </Button>
+          </Col>
+        </Row>
+      </form>
+      
+    </Container>
+  )
+}
 
-export default Register;
+export default Register

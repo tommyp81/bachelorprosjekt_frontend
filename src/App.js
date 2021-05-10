@@ -18,7 +18,6 @@ import Forum from "./components/forumComponents/Forum.js";
 import Thread from "./components/forumComponents/Thread.js";
 
 import Kunnskapsportalen from "./components/infoComponents/Kunnskapsportalen.js";
-import Register from "./components/registerComponent/Register";
 import { UserContext } from "./UserContext";
 import ProtectedRoute from "./ProtectedRoute";
 import Toolbar from "./components/NavigationCompoonent/Toolbar/Toolbar";
@@ -31,7 +30,7 @@ import AdminPanel from "./components/Admin/AdminPanel";
 // https://webforum.azurewebsites.net/users
 //
 
-export const host = "https://webforum.azurewebsites.net/";
+export const host = "https://localhost:44361/";
 
 const App = () => {
   const history = useHistory();
@@ -49,11 +48,7 @@ const App = () => {
 
   const [topics, setTopics] = useState([]);
   const [subtopics, setSubtopics] = useState([]);
-  const [posts, setPosts] = useState([]);
-  const [users, setUsers] = useState([]);
   const [infoTopics, setInfoTopics] = useState([]);
-  const [videos, setVideos] = useState([]);
-  const [documents, setDocuments] = useState([]);
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
 
   const testlogout = () => {
@@ -77,8 +72,6 @@ const App = () => {
     <Toolbar
       handleDrawerToggleClick={handleDrawerToggleClick}
       logout={testlogout}
-      users={users}
-      setUsers={setUsers}
     />
   );
 
@@ -125,7 +118,6 @@ const App = () => {
     });
 
     const data = await res.json();
-    setPosts((current) => [...current, data]);
 
     return data.id;
   };
@@ -135,12 +127,7 @@ const App = () => {
       method: "DELETE",
     });
 
-    if (res.status === 200) {
-      // updatePostInArray(postId, {}, true);
-      return true;
-    } else {
-      return false;
-    }
+    return res.status === 200;
   };
 
   return (
@@ -152,14 +139,12 @@ const App = () => {
         {user.loggedIn && backdrop}
         <Switch>
           <Route path="/Login">
-            <Login history={history} setUsers={setUsers} />
+            <Login history={history} />
           </Route>
           <ProtectedRoute exact path="/">
             <Home
               topic={topics}
               subtopic={subtopics}
-              users={users}
-              posts={posts}
               loading={loading}
             />{" "}
           </ProtectedRoute>
@@ -188,7 +173,7 @@ const App = () => {
             />
           </ProtectedRoute>
           <ProtectedRoute path="/Admin">
-            <AdminPanel users={users} setUsers={setUsers} />
+            <AdminPanel />
           </ProtectedRoute>
           <Route path="/error" component={NotFound} />
         </Switch>

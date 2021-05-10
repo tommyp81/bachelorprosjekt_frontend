@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import "./Forum.css"
+import "./forumComponents/Forum.css"
 import { Button, ButtonGroup, Form, InputGroup } from "react-bootstrap"
-import { host } from '../../App'
 import { FaSearch, FaTimes } from 'react-icons/fa'
 
 const Search = ({ setSearchValue, searchValue, placeholderText, setCurrentPage }) => {
@@ -10,13 +9,6 @@ const Search = ({ setSearchValue, searchValue, placeholderText, setCurrentPage }
 
   const search = (e) => {
     e.preventDefault()
-
-    // &subTopicId=1&pageNumber=1&pageSize=10&sortOrder=Asc&sortType=Date
-    
-    // const res = await fetch(host + 
-    //   `posts/search?query=${searchInput}`)
-    // const searchData = await res.json()
-    // setFilteredPosts(searchData.data)
     setSearchValue(searchInput)
     setCurrentPage(1)
   }

@@ -2,15 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { Form, Button, Container, Col, Modal, Row, Tabs, Tab, Image } from "react-bootstrap";
 import Background from "../../assets/images/badminton2.jpg"
 import { Link, useHistory } from "react-router-dom";
-import Register from "../registerComponent/Register";
+
 
 import "./Login.css";
 import { UserContext } from "../../UserContext";
 import { host } from "../../App";
 import UsernameDialog from "../Admin/UsernameDialog";
-import Register2 from "../registerComponent/Register2";
+import Register from "../registerComponent/Register";
 
-const Login = ({ history, setUsers }) => {
+const Login = ({ history }) => {
   
 
   // LOGIN / REGISTRATION HOOKS
@@ -122,7 +122,7 @@ const Login = ({ history, setUsers }) => {
 
         </Tab>
         <Tab title="Registrer" eventKey="register"> 
-          <Register2 setTabKey={setTabKey} setUsers={setUsers} loginUser={loginUser}/>
+          <Register loginUser={loginUser}/>
         </Tab>
       </Tabs>
       </div>

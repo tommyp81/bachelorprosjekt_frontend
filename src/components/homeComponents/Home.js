@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 import SpinnerDiv from "../forumComponents/SpinnerDiv.js";
 import SortItems from "../forumComponents/SortItems.js";
-import { ArrowLeft, ArrowRight } from "react-bootstrap-icons";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 const Home = ({ topic, subtopic, users }) => {
   const [filteredPosts, setFilteredPosts] = useState([]);
@@ -71,7 +71,7 @@ const Home = ({ topic, subtopic, users }) => {
                     videoer som lærer deg korrekte treningsteknikker som er relevante
                     for badmintonsporten.
                   </p>
-                  <h5>Til kunnskapsportalen <ArrowRight/></h5>
+                  <h5>Til kunnskapsportalen <BsArrowRight/></h5>
                 </div>
               </div>
             </Link>
@@ -84,7 +84,7 @@ const Home = ({ topic, subtopic, users }) => {
                     dele kunnskap, opplevelser og erfaringer fra
                     badmintonsporten.
                   </p>
-                  <h5><ArrowLeft/> Til forumet</h5>
+                  <h5><BsArrowLeft/> Til forumet</h5>
                 </div>
               </div>
             </Link>

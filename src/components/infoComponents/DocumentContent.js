@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, Row, Col, Card } from "react-bootstrap";
-import { FileEarmarkTextFill } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom'
 import { host } from '../../App';
 import { UserContext } from '../../UserContext';
@@ -9,10 +8,10 @@ import moment from 'moment'
 import "./Kunnskapsportalen.css";
 import InfoTopics from './InfoTopics';
 import Pages from '../forumComponents/Pages';
-import SearchContent from './SearchContent';
 import AddDocument from './AddDocument';
-import Search from '../forumComponents/Search';
+import Search from '../Search';
 import SortContent from './SortContent';
+import { BsFileEarmarkText } from 'react-icons/bs';
 
 const DocumentContent = ({ infoTopics }) => {
 
@@ -88,7 +87,7 @@ const DocumentContent = ({ infoTopics }) => {
                     </p>
                   ))}
                   <div className="title">
-                    <FileEarmarkTextFill className="iconmobile" />{" "}
+                    <BsFileEarmarkText className="iconmobile" />{" "}
                     <FileLink fileId={mappedDocuments.id} />
                   </div><br />
                   <p>Klikk for å laste ned</p>
@@ -97,7 +96,7 @@ const DocumentContent = ({ infoTopics }) => {
                   </div>
                 </div>
               </Col>
-              <Col className="desktop"><FileEarmarkTextFill style={{ height: "150px", width: "150px" }} className="icon" />
+              <Col className="desktop"><BsFileEarmarkText style={{ height: "150px", width: "150px" }} className="icon" />
 
               </Col>
             </Row>

@@ -36,7 +36,7 @@ const SideDrawer = (props) => {
           {user.email}
         </li>
         <li>
-          <UsernameDialog setUsers={props.setUsers} users={props.users} />
+          <UsernameDialog />
         </li>
         <li>
           <PasswordDialog user={user} />

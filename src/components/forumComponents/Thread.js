@@ -19,13 +19,10 @@ import FileLink from "../FileLink";
 
 import { FaRegComment, FaThumbsUp } from "react-icons/fa";
 import LikeButton from "../LikeButton.js";
-import Post from "./Post.js";
 import Comment from "./Comment.js";
-import Comments from "./Comments.js";
-import { ArrowLeft } from "react-bootstrap-icons";
 import { RiArrowLeftFill } from "react-icons/ri";
 import SortItems from "./SortItems.js";
-import Search from "./Search.js";
+import Search from "../Search";
 
 const Thread = ({
   subtopics,

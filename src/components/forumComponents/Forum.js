@@ -12,13 +12,12 @@ import Pages from "./Pages.js";
 import "./Forum.css";
 import moment from "moment";
 import Feed from "./Feed.js";
-import SearchPosts from "./Search.js";
 
 import SortItems from "./SortItems";
 import { UserContext } from "../../UserContext";
 import SpinnerDiv from "./SpinnerDiv.js";
 import { host } from "../../App.js";
-import Search from "./Search.js";
+import Search from "../Search";
 
 const Forum = ({
   addPost,
@@ -28,7 +27,6 @@ const Forum = ({
   history,
 }) => {
 
-  // const [posts, setPosts] = useState([...props.posts]);
   const [filteredPosts, setFilteredPosts] = useState([]);
 
   const [topicFocus, setTopicFocus] = useState("");
@@ -45,49 +43,31 @@ const Forum = ({
   const [postsPerPage, setPostsPerPage] = useState(10);
   const [totalPages, setTotalPages] = useState(null)
 
-  const [sort, setSort] = useState({sortOrder: "Desc", sortType: "Date"})
+  const [sort, setSort] = useState({ sortOrder: "Desc", sortType: "Date" })
 
   const [loading, setLoading] = useState(false);
 
-  const postsURL = searchValue ? 
-  `posts/search?query=${searchValue}&subTopicId=${subtopicFocus}&pageNumber=${currentPage}&pageSize=${postsPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`:
-  `posts?subTopicId=${subtopicFocus}&pageNumber=${currentPage}&pageSize=${postsPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`
+  const postsURL = searchValue ?
+    `posts/search?query=${searchValue}&subTopicId=${subtopicFocus}&pageNumber=${currentPage}&pageSize=${postsPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}` :
+    `posts?subTopicId=${subtopicFocus}&pageNumber=${currentPage}&pageSize=${postsPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`
 
-  // `posts?subTopicId=${subtopicFocus}&pageNumber=${currentPage}&pageSize=${postsPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`
-  // `posts/search?query=${searchInput}&subTopicId=${subtopicFocus}&pageNumber=${currentPage}&pageSize=${postsPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`
-  // posts/search?query=${searchInput}
-  // `${searchInput ? `posts/search?query=${searchInput}&` : 'posts?'}`
-  useEffect( async () => {
+  useEffect(async () => {
     setLoading(true)
     const res = await fetch(host + postsURL)
     const posts = await res.json()
     setFilteredPosts(posts.data)
     setTotalPages(posts.totalPages)
     setLoading(false)
-    return(() => {
+    return (() => {
       setFilteredPosts([])
       setTotalPages(null)
     })
   }, [subtopicFocus, currentPage, postsPerPage, sort, searchValue]);
 
-
-  // const currentPosts = filteredPosts
-  //   .filter((post) => {
-  //     if (searchFilter === "") {
-  //       return post;
-  //     } else if (
-  //       post.title.toLowerCase().includes(searchFilter.toLowerCase()) 
-  //       // users.username.toLowerCase().includes(searchFilter.toLowerCase())
-  //     ) {
-  //       return post; 
-  //     }
-  //   })
-  //   .slice(indexOfFirstPost, indexOfLastPost);
-
   const handleScroll = () => {
-      window.scroll({top:0, behavior:"smooth"})
-    }
-  
+    window.scroll({ top: 0, behavior: "smooth" })
+  }
+
   const onTopClick = (key) => {
     if (key) {
       setTopicFocus(key);
@@ -99,17 +79,8 @@ const Forum = ({
         setSubTopicFocus("");
         setSubTopicTitle("");
         setSubTopicDesc("");
-        // setFilteredPosts(
-        //   posts.slice(0).sort((d1, d2) => moment(d2.date) - moment(d1.date))
-        // );
       } else {
         let value = topics.find((t) => t.id === Number(key))?.title;
-        // setFilteredPosts(
-        //   posts
-        //     .filter((fp) => fp.topicId === Number(key))
-        //     .slice(0)
-        //     .sort((d1, d2) => moment(d2.date) - moment(d1.date))
-        // );
         setTopicTitle(value);
       }
       setCurrentPage(1);
@@ -123,12 +94,6 @@ const Forum = ({
     setSubTopicTitle(title);
     setSubTopicFocus(subTop);
     setSubTopicDesc(desc);
-    // setFilteredPosts(
-    //   posts
-    //     .filter((fp) => fp.subTopicId === Number(subTop))
-    //     .slice(0)
-    //     .sort((d1, d2) => moment(d2.date) - moment(d1.date))
-    // );
     setCurrentPage(1);
   };
 
@@ -183,8 +148,7 @@ const Forum = ({
             </Container>
 
             <Container className="main">
-              {/* {renderPosts} */}
-              {filteredPosts && 
+              {filteredPosts &&
                 <Feed
                   topic={topics}
                   subtopic={subtopics}
@@ -214,7 +178,7 @@ const Forum = ({
                     {[10, 25, 50, 100].map((pageSize) => (
                       <Dropdown.Item
                         value={pageSize}
-                        onSelect={(e) => {setPostsPerPage(pageSize); setCurrentPage(1); handleScroll()}}
+                        onSelect={() => { setPostsPerPage(pageSize); setCurrentPage(1); handleScroll() }}
                       >
                         Vis {pageSize} poster per side
                       </Dropdown.Item>

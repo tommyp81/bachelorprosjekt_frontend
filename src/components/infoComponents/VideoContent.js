@@ -7,9 +7,8 @@ import moment from 'moment'
 import "./Kunnskapsportalen.css";
 import InfoTopics from './InfoTopics';
 import Pages from '../forumComponents/Pages';
-import SearchContent from './SearchContent';
 import AddVideo from './AddVideo';
-import Search from '../forumComponents/Search';
+import Search from '../Search';
 import SortContent from './SortContent';
 
 const VideoContent = ({ infoTopics, deletePost, addPost }) => {
