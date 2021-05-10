@@ -96,14 +96,14 @@ function NewPost({ subtopicTitle, subtopic, topicFocus, add, history }) {
       )}
 
       <Modal show={show} onHide={handleClose} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Ny post i {subtopicTitle}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
+          <Modal.Header closeButton>
+            <Modal.Title>Ny post i {subtopicTitle}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+
             <Form.Group
               controlId="exampleForm.ControlTextarea1"
-              onSubmit={handleSubmit}
             >
               <Form.Label>Tittel</Form.Label>
               <Form.Control
@@ -134,21 +134,22 @@ function NewPost({ subtopicTitle, subtopic, topicFocus, add, history }) {
               </Dropzone> */}
               <FileDrop file={file} setFile={setFile} />
             </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Avbryt
+
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Avbryt
           </Button>
-          <Button
-            type="submit"
-            variant="success"
-            onClick={handleClose}
-            disabled={!validateForm()}
-          >
-            Send inn
+            <Button
+              type="submit"
+              variant="success"
+              onClick={handleClose}
+              disabled={!validateForm()}
+            >
+              Send inn
           </Button>
-        </Modal.Footer>
+          </Modal.Footer>
+        </Form>
       </Modal>
     </div>
   );
