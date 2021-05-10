@@ -3,6 +3,15 @@ td, th {
   vertical-align: middle;
 }
 
+.top {
+  display: inline-flex;
+  
+}
+
+.top .SearchUsers {
+  margin-left: 10px;
+}
+
 .usertable {
   background-color: white;
 }
@@ -17,4 +26,19 @@ td, th {
 
 .deletebutton {
   height: 40px;
+}
+
+@media (max-width: 425px) {
+
+  .top {
+    display: unset;
+  }
+
+  .top .btn-danger {
+    margin-bottom: 10px;
+  }
+
+  .top .SearchUsers {
+    margin-left: unset;
+  }
 }

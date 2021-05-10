@@ -69,8 +69,8 @@ const AdminPanel = ({users, setUsers}) => {
 
   return (
     <div className="containerPanel container col-12">
-      <div className="d-flex justify-content-between">
-        <Button className="deletebutton" variant="danger" onClick={deleteSelectedUsers} disabled={selectedUsers.length < 1}>Slett Bruker(e)</Button>
+      <div className="top">
+        <Button className="deletebutton" variant="danger" onClick={deleteSelectedUsers} disabled={selectedUsers.length < 1}>Slett bruker(e)</Button>
         <SearchUsers setSearchInput={setSearchFilter}/>
       </div>
       <Table className="usertable" striped bordered responsive>

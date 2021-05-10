@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { Form } from "react-bootstrap"
 import './AdminPanel.css'
 
-const SearchPosts = ({ setSearchInput }) => {
+const SearchUsers = ({ setSearchInput }) => {
 
   return (
-    <div className="SearchPosts">
+    <div className="SearchUsers">
       <Form onSubmit={e => e.preventDefault()}>
         <Form.Group>
           <Form.Control style={{width: "250px"}}
@@ -19,4 +19,4 @@ const SearchPosts = ({ setSearchInput }) => {
 
 }
 
-export default SearchPosts;
+export default SearchUsers;
