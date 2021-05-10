@@ -1,4 +1,4 @@
-.AdminPanel td, th {
+.AdminPanel td, .AdminPanel th {
   text-align: center;
   vertical-align: middle;
 }
@@ -11,7 +11,7 @@
   margin-left: 10px;
 }
 
-.AdminPanel .usertable {
+.usertable {
   background-color: white;
 }
 
