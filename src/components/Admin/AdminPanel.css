@@ -1,44 +1,43 @@
-td, th {
+.AdminPanel td, th {
   text-align: center;
   vertical-align: middle;
 }
 
-.top {
+.AdminPanel .top {
   display: inline-flex;
-  
 }
 
-.top .SearchUsers {
+.AdminPanel .top .SearchUsers {
   margin-left: 10px;
 }
 
-.usertable {
+.AdminPanel .usertable {
   background-color: white;
 }
 
-.containerPanel {
+.AdminPanel .containerPanel {
   margin-top: 150px;
 }
 
-.btn-link:hover {
+.AdminPanel .btn-link:hover {
   cursor: pointer;
 }
 
-.deletebutton {
+.AdminPanel .deletebutton {
   height: 40px;
 }
 
 @media (max-width: 425px) {
 
-  .top {
+  .AdminPanel .top {
     display: unset;
   }
 
-  .top .btn-danger {
+  .AdminPanel .top .btn-danger {
     margin-bottom: 10px;
   }
 
-  .top .SearchUsers {
+  .AdminPanel .top .SearchUsers {
     margin-left: unset;
   }
 }
