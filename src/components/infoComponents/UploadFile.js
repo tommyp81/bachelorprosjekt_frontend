@@ -165,6 +165,9 @@ const UploadFile = ({
     handleClose();
   };
 
+  var outColor = 'red'
+  validated ? outColor = 'green' : outColor = 'red'
+
   return (
     <div className="UploadFile">
       <Button onClick={handleShow} variant="primary">
@@ -190,7 +193,7 @@ const UploadFile = ({
                     onChange={(e) => twoMethods(e.target.value)}
                   />
                   <span
-                    style={{ fontSize: 11, fontWeight: "bold", color: "red" }}
+                    style={{ fontSize: 11, fontWeight: "bold", color: outColor }}
                   >
                     {errorMessage}
                   </span>
