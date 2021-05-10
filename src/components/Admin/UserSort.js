@@ -28,8 +28,8 @@ const UserSort = ({setSort}) => {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item href="" onClick={() => sortByIdAsc()}       >id Høy/lav</Dropdown.Item>
-        <Dropdown.Item href="" onClick={() => sortByIdDesc()}       >id Lav/høy</Dropdown.Item>
+        <Dropdown.Item href="" onClick={() => sortByIdAsc()}       >id Lav/høy</Dropdown.Item>
+        <Dropdown.Item href="" onClick={() => sortByIdDesc()}       >id Høy/lav</Dropdown.Item>
         <Dropdown.Item href="" onClick={() => sortByUsername()}       >Brukernavn</Dropdown.Item>
         <Dropdown.Item href="" onClick={() => sortByAdmin()}       >Admin</Dropdown.Item>
       </Dropdown.Menu>

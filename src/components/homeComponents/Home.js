@@ -17,9 +17,13 @@ import { ArrowLeft, ArrowRight } from "react-bootstrap-icons";
 const Home = ({ topic, subtopic, users }) => {
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [sort, setSort] = useState({sortOrder: "Asc", sortType: "Date"})
+  const [loading, setLoading] = useState(false)
+
   const postsInFeed = 3
 
+
   useEffect( async () => {
+    setLoading(true)
     // const timer = setTimeout( async () => {
     //   console.log("timeout, 5 sec")
       
@@ -28,7 +32,7 @@ const Home = ({ topic, subtopic, users }) => {
       `posts?pageNumber=${1}&pageSize=${postsInFeed}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`)
     const posts = await res.json()
     setFilteredPosts(posts.data)
-    
+    setLoading(false)
 
     // return () => clearTimeout(timer)
   }, [sort]);

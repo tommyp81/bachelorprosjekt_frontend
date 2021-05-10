@@ -26,7 +26,6 @@ const Forum = ({
   subtopics,
   users,
   history,
-  loading,
 }) => {
 
   // const [posts, setPosts] = useState([...props.posts]);
@@ -46,7 +45,9 @@ const Forum = ({
   const [postsPerPage, setPostsPerPage] = useState(10);
   const [totalPages, setTotalPages] = useState(null)
 
-  const [sort, setSort] = useState({sortOrder: "Asc", sortType: "Date"})
+  const [sort, setSort] = useState({sortOrder: "Desc", sortType: "Date"})
+
+  const [loading, setLoading] = useState(false);
 
   const postsURL = searchValue ? 
   `posts/search?query=${searchValue}&subTopicId=${subtopicFocus}&pageNumber=${currentPage}&pageSize=${postsPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`:
@@ -57,10 +58,12 @@ const Forum = ({
   // posts/search?query=${searchInput}
   // `${searchInput ? `posts/search?query=${searchInput}&` : 'posts?'}`
   useEffect( async () => {
+    setLoading(true)
     const res = await fetch(host + postsURL)
     const posts = await res.json()
     setFilteredPosts(posts.data)
     setTotalPages(posts.totalPages)
+    setLoading(false)
     return(() => {
       setFilteredPosts([])
       setTotalPages(null)
@@ -187,6 +190,7 @@ const Forum = ({
                   subtopic={subtopics}
                   // maxLength={currentPosts.length}
                   posts={filteredPosts}
+                  loading={loading}
                 />
               }
             </Container>

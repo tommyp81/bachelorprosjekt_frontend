@@ -70,7 +70,7 @@ const PasswordDialog = ({ user }) => {
   return (
     <>
       <span className="btn-link" onClick={handleShow}>
-        Endre Passord
+        Endre passord
       </span>
       <Modal animation={false} show={show} onHide={handleClose}>
         <form onSubmit={handleSubmit(onSubmit)} >

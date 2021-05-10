@@ -136,8 +136,8 @@
     margin-bottom: 20px;
     
 }
-
 .InfoTopics .btn-primary  {
+    justify-content: center;
     margin: 2.5px;
     background-color: #28a745;
     color: white;

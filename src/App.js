@@ -112,6 +112,7 @@ const App = () => {
 
   // sends post to api/database and updates posts with new post
   const addPost = async (post, file) => {
+    console.log("HALLO")
     const formData = new FormData();
     if (file) formData.append("File", file);
     for (let k in post) {

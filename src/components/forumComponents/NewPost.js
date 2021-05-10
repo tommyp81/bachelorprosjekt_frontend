@@ -57,6 +57,7 @@ function NewPost({ subtopicTitle, subtopic, topicFocus, add, history }) {
   }
 
   async function handleSubmit(event) {
+    console.log("1")
     event.preventDefault();
 
     submitPost();
@@ -67,11 +68,11 @@ function NewPost({ subtopicTitle, subtopic, topicFocus, add, history }) {
   }
 
   const submitPost = async () => {
+    console.log("2")
     let postId = await add(
       {
         title,
         content,
-        date: moment().toISOString(),
         userId: user.id,
         subTopicId: Number(subtopic),
         topicId: topicFocus,
@@ -96,14 +97,14 @@ function NewPost({ subtopicTitle, subtopic, topicFocus, add, history }) {
       )}
 
       <Modal show={show} onHide={handleClose} centered>
+        <Form onSubmit={handleSubmit}>
         <Modal.Header closeButton>
           <Modal.Title>Ny post i {subtopicTitle}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit}>
+          
             <Form.Group
               controlId="exampleForm.ControlTextarea1"
-              onSubmit={handleSubmit}
             >
               <Form.Label>Tittel</Form.Label>
               <Form.Control
@@ -134,7 +135,7 @@ function NewPost({ subtopicTitle, subtopic, topicFocus, add, history }) {
               </Dropzone> */}
               <FileDrop file={file} setFile={setFile} />
             </Form.Group>
-          </Form>
+          
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -149,6 +150,7 @@ function NewPost({ subtopicTitle, subtopic, topicFocus, add, history }) {
             Send inn
           </Button>
         </Modal.Footer>
+        </Form>
       </Modal>
     </div>
   );

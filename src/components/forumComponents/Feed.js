@@ -10,14 +10,28 @@ import "./Feed.css";
 import LikeStatus from "../LikeStatus";
 import Topics from "./Topics";
 
-const Feed = ({ posts, topic, subtopic }) => {
+
+const Feed = ({ posts, topic, subtopic, loading }) => {
+
+  const [empty, setEmpty] = useState(false)
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {  
+      if(!loading)
+        setEmpty(true)
+    }, 2000)
+    return(() => {
+      setEmpty(false)
+      clearTimeout(timeout)
+    })
+  }, [loading])
   
   
   if (
     posts.length === 0
     // users.length === 0 &&
   ) {
-    return <SpinnerDiv />;
+    return empty ? <h1>Ingen Poster</h1> : <SpinnerDiv />;
   }
 
   const renderPosts = () => (

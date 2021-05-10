@@ -70,6 +70,11 @@
     .Post .likecomment {
       font-size: 14px;
     } 
+
+    .Post {
+        margin-top: 5rem;
+        margin-bottom: 5rem;
+    }
   }
   
 

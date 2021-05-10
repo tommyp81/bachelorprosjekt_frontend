@@ -77,6 +77,7 @@ const Register = ({ setUsers, loginUser}) => {
   //   }
   // };
 
+
   return (
     <div className="Register">
       <div className="registerdesktop">
@@ -91,6 +92,7 @@ const Register = ({ setUsers, loginUser}) => {
                 onChange={(e) => setUsername(e.target.value)}
                 // tabIndex="1"
               />
+              {checkUsername}
               <br />
               <Form.Label>Fornavn</Form.Label>
               <Form.Control
@@ -99,6 +101,7 @@ const Register = ({ setUsers, loginUser}) => {
                 onChange={(e) => setFirstname(e.target.value)}
                 // tabIndex="3"
               />
+              {checkFirstname}
               <br/>
               <Form.Label>Passord</Form.Label>
               <Form.Control
@@ -107,6 +110,7 @@ const Register = ({ setUsers, loginUser}) => {
                   onChange={(e) => setPassword(e.target.value)}
                   // tabIndex="5"
                 />
+              {checkPassword}
               <br/>
             </Form>
             </Col>
@@ -119,6 +123,7 @@ const Register = ({ setUsers, loginUser}) => {
                 onChange={(e) => setEmail(e.target.value)}
                 // tabIndex="2"
               />
+              {checkEmail}
               <br/>
               <Form.Label>Etternavn</Form.Label>
               <Form.Control
@@ -127,6 +132,7 @@ const Register = ({ setUsers, loginUser}) => {
                 onChange={(e) => setLastname(e.target.value)}
                 // tabIndex="4"
               />
+              {checkLastname}
               <br/>
               
               <Form.Label>Bekreft passord</Form.Label>
@@ -136,6 +142,7 @@ const Register = ({ setUsers, loginUser}) => {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 // tabIndex="6"
               />
+              {checkConfirmPassword}
               <br/>
             </Form> */}
 
@@ -198,6 +205,7 @@ const Register = ({ setUsers, loginUser}) => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
+              {checkUsername}
               <br />
               <Form.Label>Fornavn</Form.Label>
               <Form.Control
@@ -205,6 +213,7 @@ const Register = ({ setUsers, loginUser}) => {
                 value={firstname}
                 onChange={(e) => setFirstname(e.target.value)}
               />
+              {checkFirstname}
               <br/>
               <Form.Label>Etternavn</Form.Label>
               <Form.Control
@@ -212,6 +221,7 @@ const Register = ({ setUsers, loginUser}) => {
                 value={lastname}
                 onChange={(e) => setLastname(e.target.value)}
               />
+              {checkLastname}
               <br/>
               
             </Form>
@@ -224,6 +234,7 @@ const Register = ({ setUsers, loginUser}) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
+              {checkEmail}
               <br/>
               <Form.Label>Passord</Form.Label>
               <Form.Control
@@ -231,6 +242,7 @@ const Register = ({ setUsers, loginUser}) => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                {checkPassword}
               <br/>
               <Form.Label>Bekreft passord</Form.Label>
               <Form.Control
@@ -238,6 +250,7 @@ const Register = ({ setUsers, loginUser}) => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
+              {checkConfirmPassword}
               <br/>
             </Form>
             </Col>

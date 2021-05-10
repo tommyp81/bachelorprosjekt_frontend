@@ -87,12 +87,12 @@ const UsernameDialog = ({ users, setUsers }) => {
   return (
     <>
       <span className="btn-link" onClick={handleShow}>
-        Endre Brukernavn
+        Endre brukernavn
       </span>
       <Modal animation={false} show={show} onHide={handleClose}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Modal.Header closeButton={true}>
-          <Modal.Title>Sett nytt Brukernavn for: {user.username}</Modal.Title>
+          <Modal.Title>Sett nytt brukernavn for {user.username}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         

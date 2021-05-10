@@ -1,6 +1,14 @@
-td, th {
+ td, th {
   text-align: center;
   vertical-align: middle;
+}
+
+.toppanel {
+  display: inline-flex;
+}
+
+.toppanel .SearchUsers {
+  margin-left: 10px;
 }
 
 .usertable {
@@ -11,10 +19,25 @@ td, th {
   margin-top: 150px;
 }
 
-.btn-link:hover {
+ .btn-link:hover {
   cursor: pointer;
 }
 
 .deletebutton {
   height: 40px;
+}
+
+@media (max-width: 425px) {
+
+  .toppanel{
+    display: unset;
+  }
+
+  .toppanel .btn-danger {
+    margin-bottom: 10px;
+  }
+
+  .toppanel .SearchUsers {
+    margin-left: unset;
+  }
 }

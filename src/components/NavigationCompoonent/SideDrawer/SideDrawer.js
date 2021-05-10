@@ -20,19 +20,29 @@ const SideDrawer = (props) => {
 
   return (
     <nav className={drawerClasses}>
+      
       <div className="user">
-        <BsPersonFill size="50px" />
-        <br /> <b>{user.username}</b>
-        <br />
-        {user.firstName} {user.lastName}
-        <br />
-        {user.email}
-        <br />
-        <UsernameDialog setUsers={props.setUsers} users={props.users} />
-        <br />
-        <PasswordDialog user={user} />
-        <br />
-        {user.admin && <Link to="/Admin">Administrer brukere</Link>}
+      <ul>
+        <li>
+          <BsPersonFill size="50px" />
+        </li>
+        <li>
+           <b>{user.username}</b>
+        </li>
+        <li>
+          {user.firstName} {user.lastName}
+        </li>
+        <li>
+          {user.email}
+        </li>
+        <li>
+          <UsernameDialog setUsers={props.setUsers} users={props.users} />
+        </li>
+        <li>
+          <PasswordDialog user={user} />
+        </li>
+        {user.admin && <li><Link to="/Admin">Administrer brukere</Link></li>}
+        </ul>
       </div>
       <ul>
         <li>
