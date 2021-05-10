@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
   Col,
+  Button,
   Container,
   Dropdown,
   Row,
@@ -11,20 +12,20 @@ import Pages from "./Pages.js";
 import "./Forum.css";
 import moment from "moment";
 import Feed from "./Feed.js";
-import SearchPosts from "./SearchPosts.js";
+import SearchPosts from "./Search.js";
 
-import SortPosts from "./SortPosts";
+import SortItems from "./SortItems";
 import { UserContext } from "../../UserContext";
 import SpinnerDiv from "./SpinnerDiv.js";
+import { host } from "../../App.js";
+import Search from "./Search.js";
 
 const Forum = ({
-  posts,
   addPost,
   topics,
   subtopics,
   users,
   history,
-  loading,
 }) => {
 
   // const [posts, setPosts] = useState([...props.posts]);
@@ -37,43 +38,51 @@ const Forum = ({
   const [subTopicDesc, setSubTopicDesc] = useState("");
   const [subTopicTitle, setSubTopicTitle] = useState("");
 
-  const [searchFilter, setSearchFilter] = useState("");
+  const [searchValue, setSearchValue] = useState("")
   const { user } = useContext(UserContext);
-
-  useEffect(() => {
-    setFilteredPosts(
-      posts.slice(0).sort((d1, d2) => moment(d2.date) - moment(d1.date))
-    );
-  }, [posts]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(10);
+  const [totalPages, setTotalPages] = useState(null)
 
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = filteredPosts
-    .filter((post) => {
-      if (searchFilter === "") {
-        return post;
-      } else if (
-        post.title.toLowerCase().includes(searchFilter.toLowerCase()) 
-        // users.username.toLowerCase().includes(searchFilter.toLowerCase())
-      ) {
-        return post; 
-      }
+  const [sort, setSort] = useState({sortOrder: "Desc", sortType: "Date"})
+
+  const [loading, setLoading] = useState(false);
+
+  const postsURL = searchValue ? 
+  `posts/search?query=${searchValue}&subTopicId=${subtopicFocus}&pageNumber=${currentPage}&pageSize=${postsPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`:
+  `posts?subTopicId=${subtopicFocus}&pageNumber=${currentPage}&pageSize=${postsPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`
+
+  // `posts?subTopicId=${subtopicFocus}&pageNumber=${currentPage}&pageSize=${postsPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`
+  // `posts/search?query=${searchInput}&subTopicId=${subtopicFocus}&pageNumber=${currentPage}&pageSize=${postsPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`
+  // posts/search?query=${searchInput}
+  // `${searchInput ? `posts/search?query=${searchInput}&` : 'posts?'}`
+  useEffect( async () => {
+    setLoading(true)
+    const res = await fetch(host + postsURL)
+    const posts = await res.json()
+    setFilteredPosts(posts.data)
+    setTotalPages(posts.totalPages)
+    setLoading(false)
+    return(() => {
+      setFilteredPosts([])
+      setTotalPages(null)
     })
-    .slice(indexOfFirstPost, indexOfLastPost);
+  }, [subtopicFocus, currentPage, postsPerPage, sort, searchValue]);
 
-  const nextPage = () => setCurrentPage(currentPage + 1);
-  const prevPage = () => setCurrentPage(currentPage - 1);
 
-  const lastPage =
-    currentPosts.length !== postsPerPage || indexOfLastPost === posts.length;
-  const firstPage = currentPage === 1;
-
-  const goToLast = () =>
-    setCurrentPage(Math.ceil(filteredPosts.length / postsPerPage));
-  const goToFirst = () => setCurrentPage(1);
+  // const currentPosts = filteredPosts
+  //   .filter((post) => {
+  //     if (searchFilter === "") {
+  //       return post;
+  //     } else if (
+  //       post.title.toLowerCase().includes(searchFilter.toLowerCase()) 
+  //       // users.username.toLowerCase().includes(searchFilter.toLowerCase())
+  //     ) {
+  //       return post; 
+  //     }
+  //   })
+  //   .slice(indexOfFirstPost, indexOfLastPost);
 
   const handleScroll = () => {
       window.scroll({top:0, behavior:"smooth"})
@@ -90,17 +99,17 @@ const Forum = ({
         setSubTopicFocus("");
         setSubTopicTitle("");
         setSubTopicDesc("");
-        setFilteredPosts(
-          posts.slice(0).sort((d1, d2) => moment(d2.date) - moment(d1.date))
-        );
+        // setFilteredPosts(
+        //   posts.slice(0).sort((d1, d2) => moment(d2.date) - moment(d1.date))
+        // );
       } else {
         let value = topics.find((t) => t.id === Number(key))?.title;
-        setFilteredPosts(
-          posts
-            .filter((fp) => fp.topicId === Number(key))
-            .slice(0)
-            .sort((d1, d2) => moment(d2.date) - moment(d1.date))
-        );
+        // setFilteredPosts(
+        //   posts
+        //     .filter((fp) => fp.topicId === Number(key))
+        //     .slice(0)
+        //     .sort((d1, d2) => moment(d2.date) - moment(d1.date))
+        // );
         setTopicTitle(value);
       }
       setCurrentPage(1);
@@ -114,14 +123,15 @@ const Forum = ({
     setSubTopicTitle(title);
     setSubTopicFocus(subTop);
     setSubTopicDesc(desc);
-    setFilteredPosts(
-      posts
-        .filter((fp) => fp.subTopicId === Number(subTop))
-        .slice(0)
-        .sort((d1, d2) => moment(d2.date) - moment(d1.date))
-    );
+    // setFilteredPosts(
+    //   posts
+    //     .filter((fp) => fp.subTopicId === Number(subTop))
+    //     .slice(0)
+    //     .sort((d1, d2) => moment(d2.date) - moment(d1.date))
+    // );
     setCurrentPage(1);
   };
+
 
   return (
     <div className="Forum mt-5">
@@ -129,7 +139,7 @@ const Forum = ({
         <Row xs={1} sm={1} lg={2}>
           <Col lg={3}>
             <div className="desktop">
-              <SearchPosts setSearchInput={setSearchFilter} />
+              <Search setSearchValue={setSearchValue} searchValue={searchValue} placeholderText={"Søk..."} setCurrentPage={setCurrentPage} />
             </div>
             <Topics
               topics={topics}
@@ -161,43 +171,39 @@ const Forum = ({
               </div>
 
               <div className="sortposts">
-                <SortPosts
-                  post={filteredPosts}
-                  setFilteredPosts={setFilteredPosts}
+                <SortItems
+                  setSort={setSort}
+                  isPost={true}
                 />
               </div>
 
               <div className="mobilesearch">
-                <SearchPosts setSearchInput={setSearchFilter} />
+                <Search setSearchValue={setSearchValue} searchValue={searchValue} placeholderText={"Søk..."} setCurrentPage={setCurrentPage} />
               </div>
             </Container>
 
             <Container className="main">
               {/* {renderPosts} */}
-              {loading ? (
-                <SpinnerDiv />
-              ) : (
+              {filteredPosts && 
                 <Feed
-                  posts={currentPosts}
-                  users={users}
                   topic={topics}
                   subtopic={subtopics}
-                  maxLength={currentPosts.length}
+                  // maxLength={currentPosts.length}
+                  posts={filteredPosts}
+                  loading={loading}
                 />
-              )}
+              }
             </Container>
 
             <Container className="bot">
               <div className="float-left">
-                <Pages
-                  nextPage={nextPage}
-                  prevPage={prevPage}
-                  currentPage={currentPage}
-                  firstPage={firstPage}
-                  lastPage={lastPage}
-                  goToFirst={goToFirst}
-                  goToLast={goToLast}
-                />
+                {totalPages > 1 &&
+                  <Pages
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    setCurrentPage={setCurrentPage}
+                  />
+                }
               </div>
               <div className="float-right">
                 <Dropdown>

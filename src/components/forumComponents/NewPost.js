@@ -57,6 +57,7 @@ function NewPost({ subtopicTitle, subtopic, topicFocus, add, history }) {
   }
 
   async function handleSubmit(event) {
+    console.log("1")
     event.preventDefault();
 
     submitPost();
@@ -67,11 +68,11 @@ function NewPost({ subtopicTitle, subtopic, topicFocus, add, history }) {
   }
 
   const submitPost = async () => {
+    console.log("2")
     let postId = await add(
       {
         title,
         content,
-        date: moment().toISOString(),
         userId: user.id,
         subTopicId: Number(subtopic),
         topicId: topicFocus,

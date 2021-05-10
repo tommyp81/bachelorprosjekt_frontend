@@ -8,6 +8,7 @@ import "./Login.css";
 import { UserContext } from "../../UserContext";
 import { host } from "../../App";
 import UsernameDialog from "../Admin/UsernameDialog";
+import Register2 from "../registerComponent/Register2";
 
 const Login = ({ history, setUsers }) => {
   
@@ -121,58 +122,12 @@ const Login = ({ history, setUsers }) => {
 
         </Tab>
         <Tab title="Registrer" eventKey="register"> 
-          <Register setTabKey={setTabKey} setUsers={setUsers} loginUser={loginUser}/>
+          <Register2 setTabKey={setTabKey} setUsers={setUsers} loginUser={loginUser}/>
         </Tab>
       </Tabs>
       </div>
       </div>
   )
-    {/** 
-    <div className="Login">
-      
-      <Container>
-        <Row xs={1} sm={1} lg={2}>
-          <Col className="logo" lg={7}>
-            <WelcomeLogo />
-          </Col>
-          <Col className="login" lg={5}>
-            <h2>Logg inn / Registrer deg</h2>
-            <Tabs transition={false} activeKey={tabKey} onSelect={k => setTabKey(k)}>
-              <Tab eventKey="login" title="login">
-                <Form onSubmit={handleSubmit}>
-                  <Form.Label>Innlogging</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Brukernavn/epost"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                  />
-                
-                  <Form.Control 
-                    type="password"
-                    placeholder="Passord"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                  
-                  <Button
-                    variant="success"
-                      type="submit"
-                      disabled={!validateForm()}
-                  >
-                    Logg inn
-                  </Button>
-                </Form>
-              </Tab>
-              <Tab eventKey="register" title="register">
-                <Register setTabKey={setTabKey} setUsers={setUsers} loginUser={loginUser}/>
-              </Tab>
-            </Tabs>
-          </Col>
-        </Row>
-      </Container>
-    </div>
-  );*/}
 };
 
 export default Login;

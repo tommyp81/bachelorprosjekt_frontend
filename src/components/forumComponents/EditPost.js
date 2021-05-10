@@ -87,7 +87,6 @@ const EditPost = ({ post, edit }) => {
             <Form.Group>
               <FileDrop file={file} setFile={setFile} />
             </Form.Group>
-
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>

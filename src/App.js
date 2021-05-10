@@ -29,8 +29,9 @@ import AdminPanel from "./components/Admin/AdminPanel";
 // https://webforum.azurewebsites.net/posts
 // https://webforum.azurewebsites.net/answers
 // https://webforum.azurewebsites.net/users
+//
 
-export const host = "https://webforum.azurewebsites.net/";
+export const host = "https://localhost:44361/";
 
 const App = () => {
   const history = useHistory();
@@ -86,13 +87,6 @@ const App = () => {
   );
 
   useEffect(() => {
-    fetch(host + "posts")
-      .then((res) => res.json())
-      .then((data) => {
-        setPosts(data);
-      })
-      .catch(console.log);
-
     fetch(host + "SubTopics")
       .then((res) => res.json())
       .then((data) => {
@@ -107,13 +101,6 @@ const App = () => {
       })
       .catch(console.log);
 
-    fetch(host + "Users")
-      .then((res) => res.json())
-      .then((data) => {
-        setUsers(data);
-      })
-      .catch(console.log);
-
     fetch(host + "InfoTopics")
       .then((res) => res.json())
       .then((data) => {
@@ -121,30 +108,12 @@ const App = () => {
       })
       .catch(console.log);
 
-    fetch(host + "Videos")
-      .then((res) => res.json())
-      .then((data) => {
-        setVideos(data);
-      })
-      .catch(console.log);
-
-    fetch(host + "getdocuments")
-      .then((res) => res.json())
-      .then((data) => {
-        setDocuments(data);
-      })
-      .catch(console.log);
     // setLoading(false)
   }, []);
 
-  // const updatePosts = async () => {
-  //   const res = await fetch("https://localhost:44361/posts");
-  //   const data = await res.json();
-  //   setPosts(data);
-  // };
-
   // sends post to api/database and updates posts with new post
   const addPost = async (post, file) => {
+    console.log("HALLO")
     const formData = new FormData();
     if (file) formData.append("File", file);
     for (let k in post) {
@@ -167,33 +136,10 @@ const App = () => {
     });
 
     if (res.status === 200) {
-      updatePostInArray(postId, {}, true);
+      // updatePostInArray(postId, {}, true);
       return true;
     } else {
       return false;
-    }
-  };
-
-  // search for specific post by id(number) in posts and returns said post
-  const getPost = (id) => {
-    return posts.find((post) => post.id == id) || {};
-  };
-
-  const updatePostInArray = (id, changes, isDelete) => {
-    if (!isDelete) {
-      const updatedPosts = posts.map((p) => {
-        if (p.id == id) {
-          const updatedPost = {
-            ...p,
-            ...changes,
-          };
-          return updatedPost;
-        }
-        return p;
-      });
-      setPosts(updatedPosts);
-    } else {
-      setPosts(posts.filter((p) => p.id != id));
     }
   };
 
@@ -220,22 +166,15 @@ const App = () => {
 
           <ProtectedRoute exact path="/Forum">
             <Forum
-              posts={posts}
               addPost={addPost}
               subtopics={subtopics}
               topics={topics}
-              users={users}
               history={history}
-              loading={loading}
             />{" "}
           </ProtectedRoute>
           <ProtectedRoute exact path="/Kunnskapsportalen">
             <Kunnskapsportalen
               infoTopics={infoTopics}
-              videos={videos}
-              documents={documents}
-              users={users}
-              post={posts}
               addPost={addPost}
               deletePost={deletePost}
             />{" "}
@@ -244,10 +183,7 @@ const App = () => {
             <Thread
               subtopics={subtopics}
               topics={topics}
-              users={users}
               history={history}
-              getPost={getPost}
-              updatePostInArray={updatePostInArray}
               deletePost={deletePost}
             />
           </ProtectedRoute>

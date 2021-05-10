@@ -24,13 +24,13 @@ import Comment from "./Comment.js";
 import Comments from "./Comments.js";
 import { ArrowLeft } from "react-bootstrap-icons";
 import { RiArrowLeftFill } from "react-icons/ri";
+import SortItems from "./SortItems.js";
+import Search from "./Search.js";
 
 const Thread = ({
   subtopics,
   topics,
-  users,
   history,
-  updatePostInArray,
   deletePost,
 }) => {
   const [comments, setComments] = useState([]);
@@ -44,6 +44,25 @@ const Thread = ({
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [sort, setSort] = useState({sortOrder: "Asc", sortType: "Date"})
+
+  const commentsPerPage = 5;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(null)
+  const [totalRecords, setTotalRecords] = useState(null)
+
+  const [searchValue, setSearchValue] = useState("")
+
+  const commentsURL = searchValue ?
+    `comments/search?query=${searchValue}&postId=${postId}
+    &pageNumber=${currentPage}&pageSize=${commentsPerPage}
+    &sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`
+      :
+    `comments?postId=${postId}&pageNumber=${currentPage}
+    &pageSize=${commentsPerPage}&sortOrder=${sort.sortOrder}
+    &sortType=${sort.sortType}`
+  
   //Post
   useEffect(() => {
     fetch(host + `posts/${postId}`)
@@ -62,15 +81,18 @@ const Thread = ({
 
   // Comments
   useEffect(() => {
-    fetch(host + "comments")
+    fetch(host + commentsURL)
       .then((res) => res.json())
       .then((data) => {
-        setComments(data.filter((c) => Number(postId) === c.postId));
+        setComments(data.data);
+        setTotalPages(data.totalPages)
+        setTotalRecords(data.totalRecords)
       })
       .catch(console.log);
-  }, []);
+  }, [currentPage, sort, searchValue]);
 
   // const threadComments = comments.filter(c => Number(postId) === c.postId).slice(0).sort((d1, d2) => moment(d2.date) - moment(d1.date))
+
 
   const deleteThread = async () => {
     const success = deletePost(postId);
@@ -102,53 +124,11 @@ const Thread = ({
     });
     const data = await res.json();
     setPost(data);
-    updatePostInArray(post.id, data);
   };
 
   const updatePostLike = (num) => {
     setPost({ ...post, like_Count: post.like_Count + num });
-    updatePostInArray(post.id, { like_Count: post.like_Count + num });
   };
-
-  // const editComment = async (comment, file) => {
-  //   let formData = new FormData()
-  //   if (file) {
-  //     formData.append('File', file)
-  //     formData.append('commentId', comment.id)
-  //     formData.append('userId', comment.userId)
-  //     const upres = await fetch('https://localhost:44361/UploadDocument', {
-  //       method: 'POST',
-  //       body: formData
-  //     })
-  //     const updata = await upres.json()
-  //     comment.documentId = updata.id
-  //   }
-
-  //   formData = new FormData()
-  //   for (let k in comment) {
-  //     formData.append(k, comment[k])
-  //   }
-  //   const res = await fetch(`https://localhost:44361/comments/${comment.id}`, {
-  //     method: 'PUT',
-  //     body: formData
-  //   })
-  //   const data = await res.json();
-
-  //   const updatedComments = comments.map(comment => {
-  //     if (comment.id === data.id) {
-  //       console.log("HEIIIIIIIIII")
-  //       const updateComment = {
-  //         ...comment,
-  //         content: data.content,
-  //         documentId: data.documentId
-  //       }
-  //       return updateComment
-  //     }
-  //     return comment
-  //   })
-  //   console.log("LOLOLOL")
-  //   setComments(updatedComments)
-  // }
 
   const deleteComment = async (e) => {
     let id = Number(e.target.value);
@@ -158,7 +138,7 @@ const Thread = ({
     if (res.status === 200) {
       setComments(comments.filter((comment) => comment.id !== id));
       setPost({ ...post, comment_Count: post.comment_Count - 1 });
-      updatePostInArray(post.id, { comment_Count: post.comment_Count - 1 });
+      // updatePostInArray(post.id, { comment_Count: post.comment_Count - 1 });
     } else {
       alert("ERROR");
     }
@@ -177,36 +157,13 @@ const Thread = ({
     const data = await res.json();
     setComments((current) => [...current, data]);
 
-    // updatePosts()
     setPost({ ...post, comment_Count: post.comment_Count + 1 });
-    updatePostInArray(post.id, { comment_Count: post.comment_Count + 1 });
 
-    if (comments.length % commentsPerPage === 0) setCurrentPage(last + 1);
-    else goToLast();
+    if (totalRecords % commentsPerPage === 0) setCurrentPage(totalPages + 1);
+    else setCurrentPage(totalPages);
   };
 
-  const commentsPerPage = 5;
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const indexOfLastComment = currentPage * commentsPerPage;
-  const indexOfFirstComment = indexOfLastComment - commentsPerPage;
-  const currentComments = comments.slice(
-    indexOfFirstComment,
-    indexOfLastComment
-  );
-
-  const paginate = (pageNum) => setCurrentPage(pageNum);
-  const nextPage = () => setCurrentPage(currentPage + 1);
-  const prevPage = () => setCurrentPage(currentPage - 1);
-
-  const lastPage =
-    currentComments.length !== commentsPerPage ||
-    indexOfLastComment === comments.length;
-  const firstPage = currentPage === 1;
-
-  const last = Math.ceil(comments.length / commentsPerPage);
-  const goToLast = () => setCurrentPage(last);
-  const goToFirst = () => setCurrentPage(1);
+  
 
   return (
     <div className="Post">
@@ -249,12 +206,7 @@ const Thread = ({
                   <div className="float-left">
                   
                   <p>Postet av{" "}
-                  {post.userId === null ? <b>[Slettet bruker]</b> : 
-                    <b>
-                      {users &&
-                        users.length &&
-                        users.find((u) => u.id === post.userId)?.username}
-                    </b>}{" "}
+                    {post.userId === null ? <b>[Slettet bruker]</b> : <b>{post.username}</b>}{" "}
                     {moment(post.date).calendar()}&nbsp;
                     {post.edited ? <i style={{color: "gray"}}>(Redigert {moment(post.editDate).calendar()})</i> : ""}
                   </p>
@@ -341,32 +293,29 @@ const Thread = ({
           {/*commentCount*/}
 
           <div className="comments">
-            {post && !post.comment_Count ? (
-              <h3>Ingen kommentarer</h3>
-            ) : (
-              <h3>Kommentarer</h3>
-            )}
-            {currentComments.map((c) => (
+            
+            <div className="d-flex justify-content-between">
+              {post && !post.comment_Count ? (
+                <h3>Ingen kommentarer</h3>
+              ) : (
+                <h3>Kommentarer</h3>
+              )}
+              <Search setSearchValue={setSearchValue} searchValue={searchValue} placeholderText={"Søk..."} setCurrentPage={setCurrentPage} />
+            </div>
+            {comments.map((c) => (
               <Comment
                 key={c.id}
                 initComment={c}
-                users={users}
                 deleteComment={deleteComment}
               />
             ))}
             {post.comment_Count > 0 && (
-              <div className="float-right">
+              <div className="d-flex justify-content-between">
+                <SortItems setSort={setSort} isPost={false} />
                 <Pages
-                  postsPerPage={commentsPerPage}
-                  paginate={paginate}
-                  totalPosts={comments.length}
-                  nextPage={nextPage}
-                  prevPage={prevPage}
                   currentPage={currentPage}
-                  firstPage={firstPage}
-                  lastPage={lastPage}
-                  goToFirst={goToFirst}
-                  goToLast={goToLast}
+                  totalPages={totalPages}
+                  setCurrentPage={setCurrentPage}
                 />
               </div>
             )}

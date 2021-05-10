@@ -1,14 +1,40 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Form, Table } from 'react-bootstrap'
 import { host } from '../../App'
 import SearchUsers from "./SearchUsers.js"
 import './AdminPanel.css'
 import PasswordDialog from './PasswordDialog'
+import Pages from '../forumComponents/Pages'
+import Search from '../forumComponents/Search'
+import UserSort from './UserSort'
 
-const AdminPanel = ({users, setUsers}) => {
+const AdminPanel = () => {
+
+  const [users, setUsers] = useState([])
 
   const [selectedUsers, setSelectedUsers] = useState([])
   const [searchFilter, setSearchFilter] = useState("");
+
+  const [sort, setSort] = useState({sortOrder: "Asc", sortType: "id"})
+  const [currentPage, setCurrentPage] = useState(1)
+  const [usersPerPage, setUsersPerPage] = useState(10);
+  const [totalPages, setTotalPages] = useState(null)
+
+  const usersURL = searchFilter ? 
+    `users/search?query=${searchFilter}&pageNumber=${currentPage}
+    &pageSize=${usersPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`
+      :
+    `users?pageNumber=${currentPage}&pageSize=${usersPerPage}
+    &sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`
+
+
+  useEffect( async () => {
+    const res = await fetch(host + usersURL)
+    const resData = await res.json()
+    setUsers(resData.data)
+    setTotalPages(resData.totalPages)
+
+  }, [currentPage, sort, searchFilter])
   
 
 
@@ -52,26 +78,27 @@ const AdminPanel = ({users, setUsers}) => {
     }))
   }
 
-  const currentUsers = users
-    .filter((users) => {
-      if (searchFilter === "") {
-        return users;
-      } else if (
-        users.username.toLowerCase().includes(searchFilter.toLowerCase()) ||
-        users.firstName.toLowerCase().includes(searchFilter.toLowerCase()) ||
-        users.lastName.toLowerCase().includes(searchFilter.toLowerCase()) ||
-        users.email.toLowerCase().includes(searchFilter.toLowerCase())
-      ) {
-        return users;
-      }
-    })
+  // const currentUsers = users
+  //   .filter((users) => {
+  //     if (searchFilter === "") {
+  //       return users;
+  //     } else if (
+  //       users.username.toLowerCase().includes(searchFilter.toLowerCase()) ||
+  //       users.firstName.toLowerCase().includes(searchFilter.toLowerCase()) ||
+  //       users.lastName.toLowerCase().includes(searchFilter.toLowerCase()) ||
+  //       users.email.toLowerCase().includes(searchFilter.toLowerCase())
+  //     ) {
+  //       return users;
+  //     }
+  //   })
 
 
   return (
     <div className="containerPanel container col-12">
-      <div className="toppanel">
-        <Button className="deletebutton" variant="danger" onClick={deleteSelectedUsers} disabled={selectedUsers.length < 1}>Slett bruker(e)</Button>
-        <SearchUsers setSearchInput={setSearchFilter}/>
+      <div className="d-flex justify-content-between">
+        <Button className="deletebutton" variant="danger" onClick={deleteSelectedUsers} disabled={selectedUsers.length < 1}>Slett Bruker(e)</Button>
+        <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} setCurrentPage={setCurrentPage}/>
+        <UserSort setSort={setSort} />
       </div>
       <Table className="usertable" striped bordered responsive>
         <thead>
@@ -87,7 +114,7 @@ const AdminPanel = ({users, setUsers}) => {
           </tr>
         </thead>
         <tbody>
-          {currentUsers.map((u) => (
+          {users.map((u) => (
             <tr key={u.id} >
               <td width={50}><Form.Check onChange={e => selectUser(e)} id={u.id} disabled={u.id === 1} type="checkbox" custom/></td>
               <td width={50}>{u.id}</td>
@@ -107,6 +134,13 @@ const AdminPanel = ({users, setUsers}) => {
           ))}
         </tbody>
       </Table>
+      {totalPages > 1 &&
+        <Pages
+          currentPage={currentPage}
+          totalPages={totalPages}
+          setCurrentPage={setCurrentPage}
+        />
+      }
     </div>
   )
 }
