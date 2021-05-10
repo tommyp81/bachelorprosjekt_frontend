@@ -54,14 +54,14 @@ const SortContent = ({setSort, isDocument}) => {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item href="" onClick={() => sortByIdAsc()}       >id Høy/lav</Dropdown.Item>
-        <Dropdown.Item href="" onClick={() => sortByIdDesc()}       >id Lav/høy</Dropdown.Item>
+        <Dropdown.Item href="" onClick={() => sortByIdAsc()}       >id Stigende</Dropdown.Item>
+        <Dropdown.Item href="" onClick={() => sortByIdDesc()}       >id Synkende</Dropdown.Item>
         <Dropdown.Item href="" onClick={() => sortByTopic()}       >Kategori</Dropdown.Item>
         {!isDocument && <Dropdown.Item href="" onClick={() => sortByTitle()}       >Tittel</Dropdown.Item>}
         {isDocument && <Dropdown.Item href="" onClick={() => sortByNewest()}       >Nyeste til eldste</Dropdown.Item>}
         {isDocument && <Dropdown.Item href="" onClick={() => sortByOldest()}       >Eldste til nyeste</Dropdown.Item>}
-        {isDocument && <Dropdown.Item href="" onClick={() => sortByFileSizeDesc()}    >filStørelse Høy/lav</Dropdown.Item>}
-        {isDocument && <Dropdown.Item href="" onClick={() => sortByFileSizeAsc()}   >filStørelse Lav/høy</Dropdown.Item>}
+        {isDocument && <Dropdown.Item href="" onClick={() => sortByFileSizeDesc()}    >filStørelse Synkende</Dropdown.Item>}
+        {isDocument && <Dropdown.Item href="" onClick={() => sortByFileSizeAsc()}   >filStørelse Stigende</Dropdown.Item>}
         {isDocument && <Dropdown.Item href="" onClick={() => sortByFileType()} >Filtype</Dropdown.Item>} 
         {isDocument && <Dropdown.Item href="" onClick={() => sortByFileName()}>Filnavn</Dropdown.Item>} 
       </Dropdown.Menu>
