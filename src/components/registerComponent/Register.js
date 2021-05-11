@@ -8,11 +8,11 @@ import { host } from "../../App";
 import "./Register.css";
 
 const schema = yup.object().shape({
-  username: yup.string().required("Må fylles ut").min(5, "minst 5 tegn"),
+  username: yup.string().required("Må fylles ut").min(5, "Minst 5 tegn"),
   email: yup.string().email().required("Må fylles ut"),
   firstName: yup.string().required("Må fylles ut"),
   lastName: yup.string().required("Må fylles ut"),
-  password: yup.string().required("Må fylles ut").min(8, "minst 8 tegn"),
+  password: yup.string().required("Må fylles ut").min(8, "Minst 8 tegn"),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref("password"), null], "Passordet må stemme overens")
