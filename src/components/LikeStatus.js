@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { FaThumbsUp } from 'react-icons/fa'
 import { host } from '../App'
-import { UserContext } from '../UserContext'
+import { UserContext } from '../App'
 
 const LikeStatus = ({postId}) => {
 

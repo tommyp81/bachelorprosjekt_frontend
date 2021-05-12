@@ -14,7 +14,7 @@ import moment from "moment";
 import Feed from "./Feed.js";
 
 import SortItems from "./SortItems";
-import { UserContext } from "../../UserContext";
+import { UserContext } from "../../App";
 import SpinnerDiv from "./SpinnerDiv.js";
 import { host } from "../../App.js";
 import Search from "../Search";

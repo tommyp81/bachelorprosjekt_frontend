@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 import SortItems from "../forumComponents/SortItems.js";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
-import { UserContext } from "../../UserContext.js";
+import { UserContext } from "../../App";
 
 const Home = ({ topic, subtopic }) => {
 

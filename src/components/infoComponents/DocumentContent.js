@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, Row, Col, Card } from "react-bootstrap";
 import { host } from '../../App';
-import { UserContext } from '../../UserContext';
+import { UserContext } from '../../App';
 import FileLink from '../FileLink';
 import moment from 'moment'
 import "./Kunnskapsportalen.css";

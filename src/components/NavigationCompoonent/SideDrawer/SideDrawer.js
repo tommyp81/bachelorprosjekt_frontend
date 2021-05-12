@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./SideDrawer.css";
-import { UserContext } from "../../../UserContext";
+import { UserContext } from "../../../App";
 import { AiFillHome } from "react-icons/ai";
 import { BsChatDotsFill, BsBoxArrowLeft } from "react-icons/bs";
 import { BsPersonFill } from "react-icons/bs";

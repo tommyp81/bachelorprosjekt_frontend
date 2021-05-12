@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { Redirect, Route } from "react-router"
-import { UserContext } from "./UserContext"
+import { UserContext } from "./App"
 
 const ProtectedRoute = ({ children,  ...rest }) => {
 

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, createContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { Switch, Route, useHistory } from "react-router-dom";
@@ -19,7 +19,7 @@ import Forum from "./components/forumComponents/Forum.js";
 import Thread from "./components/forumComponents/Thread.js";
 
 import Kunnskapsportalen from "./components/infoComponents/Kunnskapsportalen.js";
-import { UserContext } from "./UserContext";
+
 import ProtectedRoute from "./ProtectedRoute";
 import Toolbar from "./components/NavigationCompoonent/Toolbar/Toolbar";
 import SideDrawer from "./components/NavigationCompoonent/SideDrawer/SideDrawer";
@@ -32,6 +32,8 @@ import AdminPanel from "./components/Admin/AdminPanel";
 //
 
 export const host = "https://localhost:44361/";
+
+export const UserContext = createContext(null);
 
 const App = () => {
   const history = useHistory();
@@ -197,30 +199,30 @@ const App = () => {
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/Forum">
-            <Forum
+            {initialized &&<Forum
               addPost={addPost}
               subtopics={subtopics}
               topics={topics}
               history={history}
-            />{" "}
+            />}{" "}
           </ProtectedRoute>
           <ProtectedRoute exact path="/Kunnskapsportalen">
-            <Kunnskapsportalen
+            {initialized && <Kunnskapsportalen
               infoTopics={infoTopics}
               addPost={addPost}
               deletePost={deletePost}
-            />{" "}
+            />}{" "}
           </ProtectedRoute>
           <ProtectedRoute exact path="/Forum/:postId">
-            <Thread
+            {initialized && <Thread
               subtopics={subtopics}
               topics={topics}
               history={history}
               deletePost={deletePost}
-            />
+            />}
           </ProtectedRoute>
           <ProtectedRoute path="/Admin">
-            <AdminPanel />
+            {initialized && <AdminPanel />}
           </ProtectedRoute>
           <Route path="/error" component={NotFound} />
         </Switch>

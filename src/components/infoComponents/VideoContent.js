@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Button, Row, Col, Card, Image, Modal } from "react-bootstrap";
 import { Link } from 'react-router-dom'
 import { host } from '../../App';
-import { UserContext } from '../../UserContext';
+import { UserContext } from '../../App';
 import moment from 'moment'
 import "./Kunnskapsportalen.css";
 import InfoTopics from './InfoTopics';

@@ -11,7 +11,7 @@ import { Container, Button } from "react-bootstrap";
 
 import NewComment from "./NewComment";
 import EditPost from "./EditPost";
-import { UserContext } from "../../UserContext";
+import { UserContext } from "../../App";
 import FileLink from "../FileLink";
 
 import { FaRegComment } from "react-icons/fa";

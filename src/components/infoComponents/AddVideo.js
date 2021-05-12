@@ -5,7 +5,7 @@ import {
 } from "react-bootstrap";
 import "./Kunnskapsportalen.css";
 import { host } from "../../App";
-import { UserContext } from "../../UserContext";
+import { UserContext } from "../../App";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";

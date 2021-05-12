@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react'
+import { Button } from 'react-bootstrap'
 import {host} from '../App'
-import { UserContext } from '../UserContext'
+import { UserContext } from '../App'
 
 const FileLink = ({fileId}) => {
 
@@ -18,9 +19,25 @@ const FileLink = ({fileId}) => {
     setFileInfo(data)
   }, [fileId])
 
+  const downloadFile = async () => {
+    const res = await fetch(host + `GetDocument/${fileId}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      },
+    })
+    const data = await res.blob()
+    let url = URL.createObjectURL(data)
+    let a = document.createElement('a')
+    a.href = url;
+    a.download = fileInfo.fileName
+    a.click()
+  }
+
 
   return (
-    <a href={host+`GetDocument/${fileId}`} >{fileInfo.fileName}</a>
+    // <a href={host+`GetDocument/${fileId}`} >{fileInfo.fileName}</a>
+    <Button variant="link" onClick={downloadFile}>{fileInfo.fileName}</Button>
   )
 }
 

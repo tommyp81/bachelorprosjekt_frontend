@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "./Toolbar.css";
 import logo from "../../../assets/images/BadmintonClubLogo.png";
 import ToggleButton from "../SideDrawer/ToggleButton";
-import { UserContext } from "../../../UserContext";
+import { UserContext } from "../../../App";
 import { AiFillHome } from "react-icons/ai";
 import { BsBoxArrowLeft, BsChatDotsFill } from "react-icons/bs";
 import { BsPersonFill } from "react-icons/bs";

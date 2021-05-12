@@ -1,7 +1,7 @@
 import moment from "moment";
 import React, { useContext, useState } from "react";
 import { Card, Button, Modal } from "react-bootstrap";
-import { UserContext } from "../../UserContext";
+import { UserContext } from "../../App";
 import FileLink from "../FileLink";
 import LikeButton from "../LikeButton";
 import EditComment from "./EditComment";

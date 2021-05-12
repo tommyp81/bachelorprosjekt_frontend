@@ -2,7 +2,7 @@ import React, { useContext, useState, useMemo } from "react";
 import { Form, Button, Container, Modal, Dropdown } from "react-bootstrap";
 import moment from "moment";
 import "./Forum.css";
-import { UserContext } from "../../UserContext";
+import { UserContext } from "../../App";
 
 import Dropzone from "react-dropzone";
 import FileDrop from "../FileDrop";

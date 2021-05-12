@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from 'yup';
 import { host } from "../../App";
-import { UserContext } from "../../UserContext";
+import { UserContext } from "../../App";
 
 const schema = yup.object().shape({
   infoTopicId: yup.string().required("Velg en kategori")

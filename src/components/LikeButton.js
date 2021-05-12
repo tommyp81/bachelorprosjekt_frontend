@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { FaThumbsUp } from 'react-icons/fa'
-import { UserContext } from '../UserContext'
+import { UserContext } from '../App'
 
 import { host } from '../App'
 

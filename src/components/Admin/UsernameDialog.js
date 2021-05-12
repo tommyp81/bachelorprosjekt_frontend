@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { host } from "../../App";
-import { UserContext } from "../../UserContext";
+import { UserContext } from "../../App";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';

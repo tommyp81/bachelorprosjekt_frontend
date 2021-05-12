@@ -7,7 +7,7 @@ import PasswordDialog from './PasswordDialog'
 import Pages from '../forumComponents/Pages'
 import UserSort from './UserSort'
 import Search from '../Search'
-import { UserContext } from '../../UserContext'
+import { UserContext } from '../../App'
 
 const AdminPanel = () => {
 
