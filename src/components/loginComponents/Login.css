@@ -13,28 +13,56 @@
   margin: auto;
   position: relative;
   top: -70px;
-  padding: 50px 20px 60px 20px;
+  padding: 40px 20px 40px 20px;
   border-radius: 20px;
   width: 750px;
   background-color: #0b2c63;
-  
 }
+
+
 
 .Login .nav {
   justify-content: center;
+  width: 100%;
+  border-bottom: unset;
 }
 
 .Login .nav-item {
-  color: white;
-  margin: 2.5px 10px 30px 10px;
-  background-color: #007bff;
-} 
+  justify-content: center;
+  background-color: white;
+  font-weight: 600;
+  color: black;
+  z-index: 100;
+}
+
+.Login .nav-item:first-child {
+  border-top-left-radius: 10px;
+  border-top-right-radius: unset;
+}
+
+.Login .nav-item:last-child {
+  border-top-right-radius: 10px;
+  border-top-left-radius: unset;
+}
 
 .Login .nav-item:hover,
-.Login .nav-item:focus,
-.Login .nav-item:target { 
-  background-color: #005fc4;
+.Login .nav-item:active,
+.Login .nav-item:focus{
+  background-color: unset;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  border-top: 1px solid white;
+  border-bottom: 1px solid #0b2c63;
+  color: white;
 }
+
+
+.Login .form, .Register .form {
+  border-top: 1px solid white;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 
 .Login .logo {
   position: relative;
@@ -61,13 +89,11 @@
 
 .Login .contact p {
   max-width: 300px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
-.Login .login .btn, .Register .register .btn  {
-  margin-top: 15px;
-  font-size: 22px;
-  width: 300px;
+.Login .login .submitbtn, .Register .register .submitbtn  {
+  width: 70%;
   display: block;
   margin: 0 auto;
 }
@@ -77,15 +103,14 @@
   margin: 0 auto;
 }
 
+
+.Register .validationError {
+  text-align: center;
+  font-size: 14px;
+  color: red;
+}
+
 @media (max-width: 768px) {
-  .Register .registermobile {
-    display: unset;
-  }
-
-  .Register .registerdesktop {
-    display: none;
-  }
-
   .Login {
     height: 100%;
     background-image: unset;
@@ -110,7 +135,7 @@
     width: 100%
   }
 
-  .Register .register .btn, .Login .login .btn {
+  .Login .login .submitbtn, .Register .register .submitbtn  {
     width: 100%;
   } 
   
@@ -124,7 +149,7 @@
 }
 
 @media (max-width: 335px) {
-  .Login .nav-item:first-child {
-    margin-bottom: 2px;
+  .Login .nav {
+    font-size: 12px;
   }
 }

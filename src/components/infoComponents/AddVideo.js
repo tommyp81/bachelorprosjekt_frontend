@@ -98,16 +98,16 @@ const AddVideo = ({
   return (
     <div className="UploadFile">
       <Button onClick={handleShow} variant="primary">
-        Last opp
+        Last opp video
       </Button>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Legg inn Youtube video</Modal.Title>
+          <Modal.Title>Last opp video</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
-              <label>YouTube URL</label>
+              <label>YouTube-URL</label>
               <input className="form-control input-lg" name="youtubeId" type="text" {...register("youtubeId", { required: true })} />
               <p className="validationError">{errors['youtubeId']?.message}</p>
             </div>

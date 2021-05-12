@@ -1,29 +1,4 @@
-.Register .submit {
-  /* display: flex; */
-  flex-direction: column;
-  justify-content: center;
-  background-color: #0b2c63;
-  border-radius: 10px;
-  color: white;
-  text-align: left;
-  align-content: center;
-  padding: 20px;
-}
-
-#registerHeading {
-  text-align: center;
-}
-.Register form {
-  padding-bottom: 15px;
-  margin: auto;
-  align-content: center;
-  width: 60%;
-}
-.Register a {
-  text-align: center;
-  color: white;
-}
-
-.validationError {
+.Register .validationError {
+  font-size: 14px;
   color: red;
 }

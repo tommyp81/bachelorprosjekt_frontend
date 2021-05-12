@@ -55,7 +55,7 @@ const AddDocument = ({
   return (
     <div className="UploadFile">
       <Button onClick={handleShow} variant="primary">
-        Last opp
+        Last opp dokument
       </Button>
 
       <Modal show={show} onHide={handleClose} centered>

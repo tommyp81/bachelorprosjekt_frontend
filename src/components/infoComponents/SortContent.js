@@ -1,5 +1,5 @@
 import React from 'react'
-
+import "./Kunnskapsportalen.css"
 import { Dropdown } from "react-bootstrap";
 
 const SortContent = ({setSort, isDocument}) => {
@@ -47,6 +47,7 @@ const SortContent = ({setSort, isDocument}) => {
   
 
   return (
+    <div className="SortContent">
     <Dropdown>
           
       <Dropdown.Toggle variant="primary" id="dropdown-basic">
@@ -54,20 +55,21 @@ const SortContent = ({setSort, isDocument}) => {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item href="" onClick={() => sortByIdAsc()}       >id Stigende</Dropdown.Item>
-        <Dropdown.Item href="" onClick={() => sortByIdDesc()}       >id Synkende</Dropdown.Item>
+        <Dropdown.Item href="" onClick={() => sortByIdAsc()}       >Id Stigende</Dropdown.Item>
+        <Dropdown.Item href="" onClick={() => sortByIdDesc()}       >Id Synkende</Dropdown.Item>
         <Dropdown.Item href="" onClick={() => sortByTopic()}       >Kategori</Dropdown.Item>
         {!isDocument && <Dropdown.Item href="" onClick={() => sortByTitle()}       >Tittel</Dropdown.Item>}
         {isDocument && <Dropdown.Item href="" onClick={() => sortByNewest()}       >Nyeste til eldste</Dropdown.Item>}
         {isDocument && <Dropdown.Item href="" onClick={() => sortByOldest()}       >Eldste til nyeste</Dropdown.Item>}
-        {isDocument && <Dropdown.Item href="" onClick={() => sortByFileSizeDesc()}    >filStørelse Synkende</Dropdown.Item>}
-        {isDocument && <Dropdown.Item href="" onClick={() => sortByFileSizeAsc()}   >filStørelse Stigende</Dropdown.Item>}
+        {isDocument && <Dropdown.Item href="" onClick={() => sortByFileSizeDesc()}    >Filstørrelse synkende</Dropdown.Item>}
+        {isDocument && <Dropdown.Item href="" onClick={() => sortByFileSizeAsc()}   >Filstørrelse stigende</Dropdown.Item>}
         {isDocument && <Dropdown.Item href="" onClick={() => sortByFileType()} >Filtype</Dropdown.Item>} 
         {isDocument && <Dropdown.Item href="" onClick={() => sortByFileName()}>Filnavn</Dropdown.Item>} 
       </Dropdown.Menu>
 
 
     </Dropdown>
+    </div>
   )
 }
 

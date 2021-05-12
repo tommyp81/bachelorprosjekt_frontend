@@ -6,18 +6,13 @@
     }
 }
 
-.Topics .desktop {
-    margin-top: 20px;
-}
-
 /*Alle kategorier*/
 .Topics .accordion .btn-pills {
     background-color: #28a745;
     text-align: center;
-    justify-content: center;
-    width: 95%;
+    width: 100%;
     color: white;
-    margin: 2.5px 0px 2.5px 6px;
+    margin-bottom: 5px;
     font-size: 22px;
 }
 
@@ -29,24 +24,22 @@
 
 /*Bildeknapper*/
 .Topics .accordion .imgbtn {
-    background-color: unset;
+    padding: unset;
+    background: unset;
     border: none;
-    border-radius: 10px;
     color: white;
 }
 
 .Topics .accordion .topicimg {
-    position: relative;
-    margin-top: 2.5px;
-    margin-bottom: 2.5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     width: 100%;
     filter: opacity(45%);
 }
 
 .topicimgActive {
-    position: relative;
-    margin-top: 2.5px;
-    margin-bottom: 2.5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     width: 100%;
     filter: opacity(100%);
 }
@@ -57,7 +50,7 @@
 }
 
 .Topics .accordion .imgtitle {
-    font-size: 20px;
+    font-size: 21px;
     background-color: rgba(112, 112, 112, 0.637);
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -73,7 +66,8 @@
 /*Tilhørende knapper*/
 .Topics .accordion .btn-primary {
     font-size: 15px;
-    margin: 2.5px 0px 2.5px 6px;
+    margin-right: 2.5px;
+    margin-bottom: 5px;
     background-color: #007bff;
 }
 

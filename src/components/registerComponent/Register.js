@@ -1,22 +1,18 @@
 import React from "react";
-
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Form, Button, Col, Container, Row } from "react-bootstrap";
 import { host } from "../../App";
-import "./Register.css";
+import "../loginComponents/Login.css";
 
 const schema = yup.object().shape({
-  username: yup.string().required("Må fylles ut").min(5, "Minst 5 tegn"),
-  email: yup.string().email().required("Må fylles ut"),
-  firstName: yup.string().required("Må fylles ut"),
-  lastName: yup.string().required("Må fylles ut"),
-  password: yup.string().required("Må fylles ut").min(8, "Minst 8 tegn"),
-  confirmPassword: yup
-    .string()
-    .oneOf([yup.ref("password"), null], "Passordet må stemme overens")
-    .required("Må fylles ut"),
+  username: yup.string().required("Brukernavn må fylles ut").min(5, "Brukernavn må være minst 5 tegn"),
+  email: yup.string().email("E-posten er ikke gyldig").required("E-post må fylles ut"),
+  firstName: yup.string().required("Fornavn må fylles ut"),
+  lastName: yup.string().required("Etternavn må fylles ut"),
+  password: yup.string().required("Passord må fylles ut").min(8, "Passord må være minst 8 tegn"),
+  confirmPassword: yup.string().oneOf([yup.ref("password"), null], "Passord og bekreft passord er ikke like").required("Bekreft passord må fylles ut"),
 });
 
 const Register = ({ loginUser }) => {
@@ -54,13 +50,14 @@ const Register = ({ loginUser }) => {
   };
 
   return (
-    <Container className="text-center">
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <div className="Register">
+    <Container>
+      <Form onSubmit={handleSubmit(onSubmit)} className="form">
         <Row className="justify-content-center">
           <Col md="auto" className="register">
             <div>
-              <label>Brukernavn</label>
-              <input
+              <Form.Label>Brukernavn</Form.Label>
+              <Form.Control
                 className="form-control input-lg"
                 name="username"
                 type="text"
@@ -71,8 +68,8 @@ const Register = ({ loginUser }) => {
           </Col>
           <Col md="auto" className="register">
             <div>
-              <label>E-post</label>
-              <input
+              <Form.Label>E-post</Form.Label>
+              <Form.Control
                 className="form-control input-lg"
                 name="email"
                 type="email"
@@ -82,11 +79,11 @@ const Register = ({ loginUser }) => {
             </div>
           </Col>
         </Row>
-        <Row className="justify-content-center ">
+        <Row className="justify-content-center">
           <Col md="auto" className="register">
             <div>
-              <label>Fornavn</label>
-              <input
+              <Form.Label>Fornavn</Form.Label>
+              <Form.Control
                 className="form-control input-lg"
                 name="firstName"
                 type="text"
@@ -97,8 +94,8 @@ const Register = ({ loginUser }) => {
           </Col>
           <Col md="auto" className="register">
             <div className="d-flex flex-column">
-              <label>Etternavn</label>
-              <input
+              <Form.Label>Etternavn</Form.Label>
+              <Form.Control
                 className="form-control input-lg"
                 name="lastName"
                 type="text"
@@ -111,8 +108,8 @@ const Register = ({ loginUser }) => {
         <Row className="justify-content-center ">
           <Col md="auto" className="register">
             <div>
-              <label>Passord</label>
-              <input
+              <Form.Label>Passord</Form.Label>
+              <Form.Control
                 className="form-control input-lg"
                 name="password"
                 type="password"
@@ -123,8 +120,8 @@ const Register = ({ loginUser }) => {
           </Col>
           <Col md="auto" className="register ">
             <div>
-              <label>Bekreft passord</label>
-              <input
+              <Form.Label>Bekreft passord</Form.Label>
+              <Form.Control
                 className="form-control input-lg"
                 name="confirmPassword"
                 type="password"
@@ -138,13 +135,14 @@ const Register = ({ loginUser }) => {
         </Row>
         <Row className="justify-content-center mt-5">
           <Col className="register" sm={6}>
-            <Button variant="success" type="submit" className="w-100">
+            <Button variant="success" size="lg" type="submit" className="submitbtn">
               Registrer
             </Button>
           </Col>
         </Row>
-      </form>
+      </Form>
     </Container>
+    </div>
   );
 };
 

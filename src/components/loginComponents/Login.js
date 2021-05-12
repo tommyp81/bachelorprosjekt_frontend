@@ -83,7 +83,7 @@ const Login = ({ history }) => {
           <p>Kunnskapsportal og kommunikasjonsplattform for badmintonspillere over hele landet</p>
         </div>
 
-        <Tabs variant="pills" transition={false} activeKey={tabKey} onSelect={k => setTabKey(k)}>
+        <Tabs transition={false} activeKey={tabKey} onSelect={k => setTabKey(k)}>
           <Tab title="Logg inn" eventKey="login">
             <Row className="justify-content-md-center">
               <Col className="login" md="auto">
@@ -108,11 +108,13 @@ const Login = ({ history }) => {
                   <Button
                     variant="success"
                     type="submit"
+                    size="lg"
                     disabled={!validateForm()}
                     onClick={handleSubmit}
+                    className="submitbtn"
                   >
                     Logg inn
-              </Button>
+                  </Button>
                 </Form>
               </Col>
             </Row>
