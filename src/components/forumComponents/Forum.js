@@ -160,7 +160,7 @@ const Forum = ({
             </Container>
 
             <Container className="bot">
-              <div className="float-left">
+              <div className="pages">
                 {totalPages > 1 &&
                   <Pages
                     currentPage={currentPage}
@@ -169,7 +169,7 @@ const Forum = ({
                   />
                 }
               </div>
-              <div className="float-right">
+              <div className="postsperpage">
                 <Dropdown>
                   <Dropdown.Toggle variant="primary" id="dropdown-basic">
                     {postsPerPage} per side:

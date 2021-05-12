@@ -24,7 +24,7 @@ const Pages = ({totalPages, currentPage, setCurrentPage}) => {
   }
 
   return (
-    <div className="Pages" style={{marginTop:"20px"}}>
+    <div className="Pages">
       <Pagination>
         <Pagination.Item
         onClick={() => {goToFirst(); handleScroll()}}

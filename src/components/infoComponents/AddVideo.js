@@ -17,7 +17,7 @@ const schema = yup.object().shape({
   youtubeId: yup.string().required("Må fylles ut").matches(
     regExp,
     {
-      message: 'Ikke en gyldig YouTube URL',
+      message: 'Ikke en gyldig YouTube-URL',
       excludeEmptyString: true
     }
   ),
@@ -96,7 +96,7 @@ const AddVideo = ({
   }
 
   return (
-    <div className="UploadFile">
+    <div className="AddVideo">
       <Button onClick={handleShow} variant="primary">
         Last opp video
       </Button>
@@ -127,8 +127,7 @@ const AddVideo = ({
 
             <div className="form-group">
               <label for="kategoriVelger">Velg kategori</label>
-              <select className="form-control" id="kategoriVelger" name="infoTopicId" {...register("infoTopicId")} >
-                <option value=''></option>
+              <select className="form-control" id="kategoriVelger" name="infoTopicId" {...register("infoTopicId")}>
                 {infoTopics.map((mappedInfoTopics) => (
                   <option key={mappedInfoTopics.id} value={mappedInfoTopics.id}>
                     {mappedInfoTopics.title}

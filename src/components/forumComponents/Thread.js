@@ -284,15 +284,19 @@ const Thread = ({
           </div>
 
           <div className="comments">
-
-            <div className="d-flex justify-content-between">
-              {post && !post.comment_Count ? (
-                <h3>Ingen kommentarer</h3>
-              ) : (
-                <h3>Kommentarer</h3>
-              )}
-              <Search setSearchValue={setSearchValue} searchValue={searchValue} placeholderText={"Søk..."} setCurrentPage={setCurrentPage} />
-            </div>
+            <div className="commenttop">
+                {post && !post.comment_Count ? (
+                  <h3>Ingen kommentarer</h3>
+                ) : (
+                  <h3>Kommentarer</h3>
+                )}
+                <div className="searchcomments">
+                  <Search setSearchValue={setSearchValue} searchValue={searchValue} placeholderText={"Søk..."} setCurrentPage={setCurrentPage} />
+                </div>
+                <div className="sortcomments">
+                  <SortItems setSort={setSort} isPost={false} />
+                </div>
+              </div>
             {comments.map((c) => (
               <Comment
                 key={c.id}
@@ -301,14 +305,11 @@ const Thread = ({
               />
             ))}
             {post.comment_Count > 0 && (
-              <div className="d-flex justify-content-between">
-                <SortItems setSort={setSort} isPost={false} />
                 <Pages
                   currentPage={currentPage}
                   totalPages={totalPages}
                   setCurrentPage={setCurrentPage}
                 />
-              </div>
             )}
           </div>
           <div className="newcomment">

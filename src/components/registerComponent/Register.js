@@ -17,17 +17,15 @@ const schema = yup.object().shape({
     .required("E-post må fylles ut"),
   firstName: yup
     .string()
-    .required("Fornavn må fylles ut")
-    .min(3, "Fornavn må være minst 3 tegn"),
+    .required("Fornavn må fylles ut"),
   lastName: yup
     .string()
-    .required("Etternavn må fylles ut")
-    .min(3, "Etternavn må være minst 3 tegn"),
+    .required("Etternavn må fylles ut"),
   password: yup
     .string()
     .required("Passord må fylles ut")
     .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
       "Minst 8 tegn, en stor, en små bokstav og et tall"
     ),
   confirmPassword: yup

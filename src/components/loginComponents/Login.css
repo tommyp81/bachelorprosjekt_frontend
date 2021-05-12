@@ -19,14 +19,34 @@
   background-color: #0b2c63;
 }
 
-
-
 .Login .nav {
   justify-content: center;
   width: 100%;
   border-bottom: unset;
+  background-color: #0b2c63;
 }
 
+.Login .nav-tabs .nav-item.show .nav-link, .Login .nav-tabs .nav-link.active {
+  color: unset;
+  background-color: unset;
+  border: unset;
+}
+
+.Login .nav-item {
+  background-color: #0b2c63;
+  font-weight: 600;
+  border: none
+}
+
+
+.Login .nav-item:hover,
+.Login .nav-item:active,
+.Login .nav-item:focus {
+  background-color: #0b2c63;
+  color: white;
+}
+
+/*
 .Login .nav-item {
   justify-content: center;
   background-color: white;
@@ -45,20 +65,9 @@
   border-top-left-radius: unset;
 }
 
-.Login .nav-item:hover,
-.Login .nav-item:active,
-.Login .nav-item:focus{
-  background-color: unset;
-  border-left: 1px solid white;
-  border-right: 1px solid white;
-  border-top: 1px solid white;
-  border-bottom: 1px solid #0b2c63;
-  color: white;
-}
-
+*/
 
 .Login .form, .Register .form {
-  border-top: 1px solid white;
   padding-top: 20px;
   padding-bottom: 20px;
 }
@@ -150,6 +159,6 @@
 
 @media (max-width: 335px) {
   .Login .nav {
-    font-size: 12px;
+    font-size: 14px;
   }
 }

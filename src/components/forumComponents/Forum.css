@@ -9,6 +9,10 @@
     border-radius: 10px;
 }
 
+.VideoContent .card, .DocumentContent .card{
+    margin-bottom: 10px;
+}
+
 
 .Forum .desktopsearch {
     margin-bottom: 10px;
@@ -28,6 +32,18 @@
 }
 
 .Forum .sortposts {
+    float: right;
+}
+
+.Forum .bot {
+    margin-top: 10px;
+}
+
+.Forum .pages {
+    float: left;
+}
+
+.Forum .postsperpage {
     float: right;
 }
 
@@ -67,7 +83,7 @@
 }
 @media (max-width: 355px) {
 
-    .Forum .dropdown {
+    .Forum .postsperpage {
         display: none;
     }
 

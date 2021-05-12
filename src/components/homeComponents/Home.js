@@ -41,7 +41,7 @@ const Home = ({ topic, subtopic }) => {
             </div>
           </Col>
         </Row>
-        <Row md={1} lg={2}>
+        <Row>
           <Col md={6} className="feedcol">
             <Feed
               posts={filteredPosts}

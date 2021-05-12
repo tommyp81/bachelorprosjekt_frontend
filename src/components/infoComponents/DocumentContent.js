@@ -72,8 +72,13 @@ const DocumentContent = ({ infoTopics }) => {
         }
       </div>
       <div className="w-50 d-flex justify-content-start">
-        <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} setCurrentPage={setcurrentDocumentsPage} />
+        <div className="searchcontent">
+          <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} setCurrentPage={setcurrentDocumentsPage} />
+        </div>
         <SortContent isDocument={true} setSort={setDocumentsSort} />
+      </div>
+      <div className="searchmobile">
+        <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} setCurrentPage={setcurrentDocumentsPage} />
       </div>
       {documentContent.map((mappedDocuments) => (
         <Card key={mappedDocuments.id}>

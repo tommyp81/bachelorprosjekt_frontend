@@ -94,11 +94,13 @@ const AdminPanel = () => {
 
 
   return (
+    <div className="AdminPanel">
     <div className="containerPanel container col-12">
-      <div className="d-flex justify-content-between">
+      <div className="searchsort">
+        <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} setCurrentPage={setCurrentPage}/><UserSort setSort={setSort} />
+      </div>
+      <div className="deleteusers">
         <Button className="deletebutton" variant="danger" onClick={deleteSelectedUsers} disabled={selectedUsers.length < 1}>Slett Bruker(e)</Button>
-        <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} setCurrentPage={setCurrentPage}/>
-        <UserSort setSort={setSort} />
       </div>
       <Table className="usertable" striped bordered responsive>
         <thead>
@@ -141,6 +143,7 @@ const AdminPanel = () => {
           setCurrentPage={setCurrentPage}
         />
       }
+    </div>
     </div>
   )
 }
