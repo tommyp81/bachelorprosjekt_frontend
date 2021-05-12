@@ -28,7 +28,10 @@ const Comment = ({ initComment, deleteComment }) => {
       formData.append("userId", comment.userId);
       const upres = await fetch(host + "UploadDocument", {
         method: "POST",
-        body: formData,
+        headers: {
+          Authorization: `Bearer ${user.token}`
+        },
+        body: formData
       });
       const updata = await upres.json();
       comment.documentId = updata.id;
@@ -40,7 +43,10 @@ const Comment = ({ initComment, deleteComment }) => {
     }
     const res = await fetch(host + `comments/${comment.id}`, {
       method: "PUT",
-      body: formData,
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      },
+      body: formData
     });
     const data = await res.json();
 

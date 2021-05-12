@@ -4,13 +4,13 @@ import { UserContext } from "./UserContext"
 
 const ProtectedRoute = ({ children,  ...rest }) => {
 
-  const {user} = useContext(UserContext)
+  const user = localStorage.getItem('user')
 
   return (
     <Route
       {...rest}
       render={() =>
-        user.loggedIn ? (
+        user ? (
           children
         ) : (
           <Redirect to={'/Login'} />

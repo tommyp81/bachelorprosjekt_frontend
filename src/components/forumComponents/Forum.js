@@ -53,7 +53,11 @@ const Forum = ({
 
   useEffect(async () => {
     setLoading(true)
-    const res = await fetch(host + postsURL)
+    const res = await fetch(host + postsURL, {
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      }
+    })
     const posts = await res.json()
     setFilteredPosts(posts.data)
     setTotalPages(posts.totalPages)

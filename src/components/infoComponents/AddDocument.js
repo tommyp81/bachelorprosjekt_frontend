@@ -39,7 +39,10 @@ const AddDocument = ({
     formData.append("infoTopicId", data.infoTopicId);
     fetch(host + "UploadDocument", {
       method: "POST",
-      body: formData,
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      },
+      body: formData
     })
       .then((res) => {
         return res.json();

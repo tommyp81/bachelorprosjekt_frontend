@@ -31,6 +31,7 @@ const LikeButton = ({id, liked, setLiked, isPost, updatePostLike, updateCommentL
     const res = await fetch(host+'GetLike', {
       method: 'POST',
       headers: {
+        Authorization: `Bearer ${user.token}`,
         'content-type': 'application/json'
       },
       body: JSON.stringify(likeInfo())
@@ -49,6 +50,7 @@ const LikeButton = ({id, liked, setLiked, isPost, updatePostLike, updateCommentL
     const res = await fetch(host+'AddLike', {
       method: 'POST',
       headers: {
+        Authorization: `Bearer ${user.token}`,
         'content-type': 'application/json'
       }, 
       body: JSON.stringify(likeInfo())
@@ -67,6 +69,7 @@ const LikeButton = ({id, liked, setLiked, isPost, updatePostLike, updateCommentL
     const res = await fetch(host+'DeleteLike', {
       method: 'DELETE',
       headers: {
+        Authorization: `Bearer ${user.token}`,
         'content-type': 'application/json'
       }, 
       body: JSON.stringify(likeInfo())

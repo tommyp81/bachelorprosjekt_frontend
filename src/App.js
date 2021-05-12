@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { Switch, Route, useHistory } from "react-router-dom";
+import jwt_decode from 'jwt-decode'
 
 //Importing main components.
 
@@ -35,25 +36,52 @@ export const host = "https://localhost:44361/";
 const App = () => {
   const history = useHistory();
 
-  const [user, setUser] = useState(() => {
-    const localUser = localStorage.getItem("user");
-    return localUser ? JSON.parse(localUser) : {};
-  });
+  const [user, setUser] = useState(false)
+  const [tokenTimer, setTokenTimer] = useState()
 
-  useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(user));
-  }, [user]);
+  const [initialized, setInitialized] = useState(false)
 
-  const [loading, setLoading] = useState(false);
 
   const [topics, setTopics] = useState([]);
   const [subtopics, setSubtopics] = useState([]);
   const [infoTopics, setInfoTopics] = useState([]);
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
 
-  const testlogout = () => {
-    setUser({});
-  };
+  const login = useCallback((user) => {
+    setUser(user)
+    const tt = jwt_decode(user.token).exp * 1000; //- 3540000
+    setTokenTimer(tt)
+    localStorage.setItem('user', JSON.stringify({ ...user, exp: tt }))
+    setInitialized(true)
+  }, [])
+
+  const logout = useCallback(() => {
+    console.log("YO")
+    localStorage.clear();
+    setUser(null);
+    setTokenTimer(null)
+
+  }, [])
+
+  useEffect(() => {
+    console.log("TTTTTTT")
+    const localuser = JSON.parse(localStorage.getItem('user'))
+    if (localuser) {
+      console.log("mmmmmmmm")
+      login(localuser)
+    }
+  }, [login])
+
+  useEffect(() => {
+    let logoutTimer
+    if (user?.token && tokenTimer) {
+      const tokenTimeLeft = tokenTimer - new Date().getTime()
+      logoutTimer = setTimeout(logout, tokenTimeLeft)
+    } else {
+      clearTimeout(logoutTimer)
+    }
+  }, [tokenTimer, logout])
+
 
   const handleDrawerToggleClick = () => {
     setSideDrawerOpen((prevDrawerState) => !prevDrawerState);
@@ -71,38 +99,52 @@ const App = () => {
   const toolbar = (
     <Toolbar
       handleDrawerToggleClick={handleDrawerToggleClick}
-      logout={testlogout}
     />
   );
 
   const sidebar = (
-    <SideDrawer show={sideDrawerOpen} toggle={handleDrawerToggleClick} logout={testlogout}/>
+    <SideDrawer show={sideDrawerOpen} toggle={handleDrawerToggleClick} />
   );
 
   useEffect(() => {
-    fetch(host + "SubTopics")
-      .then((res) => res.json())
-      .then((data) => {
-        setSubtopics(data);
+    if (user) {
+      fetch(host + "SubTopics", {
+        headers: {
+          Authorization: `Bearer ${user.token}`
+        }
       })
-      .catch(console.log);
+        .then((res) => res.json())
+        .then((data) => {
+          setSubtopics(data);
+        })
+        .catch(console.log);
 
-    fetch(host + "Topics")
-      .then((res) => res.json())
-      .then((data) => {
-        setTopics(data);
+      fetch(host + "Topics", {
+        headers: {
+          Authorization: `Bearer ${user.token}`
+        }
       })
-      .catch(console.log);
+        .then((res) => res.json())
+        .then((data) => {
+          setTopics(data);
+        })
+        .catch(console.log);
 
-    fetch(host + "InfoTopics")
-      .then((res) => res.json())
-      .then((data) => {
-        setInfoTopics(data);
+      fetch(host + "InfoTopics", {
+        headers: {
+          Authorization: `Bearer ${user.token}`
+        }
       })
-      .catch(console.log);
+        .then((res) => res.json())
+        .then((data) => {
+          setInfoTopics(data);
+        })
+        .catch(console.log);
+    }
+
 
     // setLoading(false)
-  }, []);
+  }, [initialized]);
 
   // sends post to api/database and updates posts with new post
   const addPost = async (post, file) => {
@@ -114,6 +156,9 @@ const App = () => {
     }
     const res = await fetch(host + "posts", {
       method: "POST",
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      },
       body: formData,
     });
 
@@ -125,28 +170,30 @@ const App = () => {
   const deletePost = async (postId) => {
     const res = await fetch(host + `posts/${postId}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      }
     });
 
     return res.status === 200;
   };
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, login, logout }}>
       <div className="App">
-      
-        {user.loggedIn && toolbar}
-        {user.loggedIn && sidebar}
-        {user.loggedIn && backdrop}
+
+        {user && toolbar}
+        {user && sidebar}
+        {user && backdrop}
         <Switch>
           <Route path="/Login">
             <Login history={history} />
           </Route>
           <ProtectedRoute exact path="/">
-            <Home
+            {initialized && <Home
               topic={topics}
               subtopic={subtopics}
-              loading={loading}
-            />{" "}
+            />}{" "}
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/Forum">
@@ -178,8 +225,8 @@ const App = () => {
           <Route path="/error" component={NotFound} />
         </Switch>
         <Footer />
-        
-      
+
+
       </div>
     </UserContext.Provider>
   );

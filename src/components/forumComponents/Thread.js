@@ -59,7 +59,11 @@ const Thread = ({
 
   //Post
   useEffect(() => {
-    fetch(host + `posts/${postId}`)
+    fetch(host + `posts/${postId}`, {
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      }
+    })
       .then((res) => {
         if (res.ok) return res.json();
         throw res;
@@ -75,7 +79,11 @@ const Thread = ({
 
   // Comments
   useEffect(() => {
-    fetch(host + commentsURL)
+    fetch(host + commentsURL, {
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      }
+    })
       .then((res) => res.json())
       .then((data) => {
         setComments(data.data);
@@ -102,7 +110,10 @@ const Thread = ({
       formData.append("userId", post.userId);
       const upres = await fetch(host + "UploadDocument", {
         method: "POST",
-        body: formData,
+        headers: {
+          Authorization: `Bearer ${user.token}`
+        },
+        body: formData
       });
       const updata = await upres.json();
       post.documentId = updata.id;
@@ -114,7 +125,10 @@ const Thread = ({
     }
     const res = await fetch(host + `posts/${post.id}`, {
       method: "PUT",
-      body: formData,
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      },
+      body: formData
     });
     const data = await res.json();
     setPost(data);
@@ -128,6 +142,9 @@ const Thread = ({
     let id = Number(e.target.value);
     const res = await fetch(host + `comments/${id}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      }
     });
     if (res.status === 200) {
       setComments(comments.filter((comment) => comment.id !== id));
@@ -145,7 +162,10 @@ const Thread = ({
     }
     const res = await fetch(host + "comments", {
       method: "POST",
-      body: formData,
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      },
+      body: formData
     });
     const data = await res.json();
     setComments((current) => [...current, data]);

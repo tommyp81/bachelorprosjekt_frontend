@@ -35,7 +35,11 @@ const VideoContent = ({ infoTopics, deletePost, addPost }) => {
     &pageSize=${videosPerPage}&sortOrder=${videoSort.sortOrder}&sortType=${videoSort.sortType}`
 
   useEffect(async () => {
-    const res = await fetch(host + videoURL)
+    const res = await fetch(host + videoURL, {
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      }
+    })
     const videosData = await res.json()
     setVideoContent(videosData.data)
     setTotalVideosPages(videosData.totalPages)
@@ -45,7 +49,10 @@ const VideoContent = ({ infoTopics, deletePost, addPost }) => {
   const handleClose = () => setShow(null);
   const deleteVideo = async (videoId, postId) => {
     const res = await fetch(host + `videos/${videoId}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      }
     })
     if (res.ok) {
       setVideoContent(videoContent.filter(v => v.id != videoId))

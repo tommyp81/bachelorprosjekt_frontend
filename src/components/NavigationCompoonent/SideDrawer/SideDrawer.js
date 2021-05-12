@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import PasswordDialog from "../../Admin/PasswordDialog";
 import UsernameDialog from "../../Admin/UsernameDialog";
 const SideDrawer = (props) => {
-  const { user } = useContext(UserContext);
+  const { user, logout } = useContext(UserContext);
 
   let drawerClasses = "sideDrawer";
 
@@ -20,28 +20,27 @@ const SideDrawer = (props) => {
 
   return (
     <nav className={drawerClasses}>
-      
       <div className="user">
-      <ul>
-        <li>
-          <BsPersonFill size="50px" />
-        </li>
-        <li>
-           <b>{user.username}</b>
-        </li>
-        <li>
-          {user.firstName} {user.lastName}
-        </li>
-        <li>
-          {user.email}
-        </li>
-        <li>
-          <UsernameDialog />
-        </li>
-        <li>
-          <PasswordDialog user={user} />
-        </li>
-        {user.admin && <li><Link to="/Admin">Administrer brukere</Link></li>}
+        <ul>
+          <li>
+            <BsPersonFill size="50px" />
+          </li>
+          <li>
+            <b>{user.username}</b>
+          </li>
+          <li>
+            {user.firstName} {user.lastName}
+          </li>
+          <li>
+            {user.email}
+          </li>
+          <li>
+            <UsernameDialog />
+          </li>
+          <li>
+            <PasswordDialog user={user} />
+          </li>
+          {user.admin && <li><Link to="/Admin">Administrer brukere</Link></li>}
         </ul>
       </div>
       <ul>
@@ -61,8 +60,8 @@ const SideDrawer = (props) => {
           </Link>
         </li>
         <li>
-          <Link to="/Login" onClick={() => {
-            props.logout();
+          <Link to="#" onClick={() => {
+            logout();
             props.toggle();
           }}>
             <BsBoxArrowLeft size="22px" /> Logg ut

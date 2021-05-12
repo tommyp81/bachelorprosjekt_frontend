@@ -30,6 +30,7 @@ const UsernameDialog = () => {
     const res = await fetch(host + `users/${user.id}`, {
       method: "PUT",
       headers: {
+        Authorization: `Bearer ${user.token}`,
         "content-type": "application/json",
       },
       body: JSON.stringify({ ...user, username: data.username, password: data.password })

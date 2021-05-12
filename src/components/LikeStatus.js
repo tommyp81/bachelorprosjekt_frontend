@@ -15,6 +15,7 @@ const LikeStatus = ({postId}) => {
     const res = await fetch(host+'GetLike', {
       method: 'POST',
       headers: {
+        Authorization: `Bearer ${user.token}`,
         'content-type': 'application/json'
       },
       body: JSON.stringify({
