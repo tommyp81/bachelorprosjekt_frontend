@@ -304,7 +304,7 @@ const Thread = ({
                 deleteComment={deleteComment}
               />
             ))}
-            {post.comment_Count > 0 && (
+            {totalPages > 1 && (
                 <Pages
                   currentPage={currentPage}
                   totalPages={totalPages}
