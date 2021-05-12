@@ -1,13 +1,22 @@
+
+
 .Forum .body {
     margin-top: 10rem;
     margin-bottom: 10rem;
     background-color: #0b2c63;
-    padding: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     border-radius: 10px;
 }
 
+
+.Forum .desktopsearch {
+    margin-bottom: 10px;
+}
+
 .Forum .top {
-    padding-bottom: 60px;
+    padding-bottom: 40px;
+    margin-bottom: 10px;
 }
 
 .Forum .topictext {
@@ -20,12 +29,6 @@
 
 .Forum .sortposts {
     float: right;
-}
-
-.Forum .main {
-    border: 1px solid rgb(209, 209, 209);
-    border-radius: 10px;
-    background-color:white;
 }
 
 .Pages .pagination .page-item .page-link {
@@ -42,6 +45,10 @@
     .Forum .top, .Forum .newpost p {
         text-align: center;
         word-wrap: break-word;
+        
+    }
+    .Forum .NewPost p {
+        margin-bottom: 20px;
     }
 
     .Forum .body {
@@ -49,14 +56,23 @@
         margin-bottom: 5rem;
     }
 
+    .Forum {
+        margin-top: 15px;
+    }
+
     .Forum .newpost .btn, .Forum .sortposts .btn, .Forum .dropdown .btn, .Pages .pagination .page-item .page-link {
         font-size: 14px;
     }
+
 }
-@media (max-width: 280px) {
+@media (max-width: 355px) {
 
     .Forum .dropdown {
         display: none;
+    }
+
+    .NewPost {
+        margin-bottom: 10px;
     }
 }
 
@@ -65,21 +81,12 @@
     .Forum .mobilesearch {
         display: none;
     }
-    
-    .NewPost p {
-        margin-left: -5px;
-    }
 }
 
 
 @media (max-width: 1023px) {
-    .Forum .desktop {
+    .Forum .desktopsearch {
         display: none;
-    }
-    .Forum .main {
-    border-radius: 0px;
-    border: none;
-    border-top: 1px solid rgb(209, 209, 209);
     }
 
     .Forum .topictext { 
@@ -89,10 +96,6 @@
     .Forum .topictext h2 { 
         
         font-size: 20px;
-    }
-
-    .Forum .topictext p {
-        text-indent: unset;
     }
 
     .Forum .sortposts {
@@ -121,17 +124,9 @@
     margin-top: 20px;
 }
 
-.Forum .main {
-    border: 1px solid rgb(209, 209, 209);
-    border-radius: 10px;
-}
-
-.newpost .btn, .sortposts .btn {
-    margin-bottom: 10px;
-}
-
 .NewPost p {
     color: white;
     text-align: left;
 }
+
 
