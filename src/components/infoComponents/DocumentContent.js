@@ -10,7 +10,8 @@ import Pages from '../forumComponents/Pages';
 import AddDocument from './AddDocument';
 import Search from '../Search';
 import SortContent from './SortContent';
-import { BsFileEarmarkText } from 'react-icons/bs';
+import { BsFileEarmark, BsFileEarmarkText } from 'react-icons/bs';
+import { RiFileTextFill, RiFileTextLine } from 'react-icons/ri';
 
 const DocumentContent = ({ infoTopics }) => {
 
@@ -78,8 +79,13 @@ const DocumentContent = ({ infoTopics }) => {
         }
       </div>
       <div className="w-50 d-flex justify-content-start">
-        <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} setCurrentPage={setcurrentDocumentsPage} />
+        <div className="searchcontent">
+          <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} setCurrentPage={setcurrentDocumentsPage} />
+        </div>
         <SortContent isDocument={true} setSort={setDocumentsSort} />
+      </div>
+      <div className="searchmobile">
+        <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} setCurrentPage={setcurrentDocumentsPage} />
       </div>
       {documentContent.map((mappedDocuments) => (
         <Card key={mappedDocuments.id}>

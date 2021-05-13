@@ -56,14 +56,14 @@ const AddDocument = ({
   }
 
   return (
-    <div className="UploadFile">
+    <div className="AddDocument">
       <Button onClick={handleShow} variant="primary">
-        Last opp
+        Last opp fil
       </Button>
 
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Last opp dokument</Modal.Title>
+          <Modal.Title>Last opp fil</Modal.Title>
         </Modal.Header>
 
 
@@ -76,7 +76,6 @@ const AddDocument = ({
             <div className="form-group">
               <label for="kategoriVelger">Velg kategori</label>
               <select className="form-control" id="kategoriVelger" name="infoTopicId" {...register("infoTopicId")} >
-                <option value=''></option>
                 {infoTopics.map((mappedInfoTopics) => (
                   <option key={mappedInfoTopics.id} value={mappedInfoTopics.id}>
                     {mappedInfoTopics.title}

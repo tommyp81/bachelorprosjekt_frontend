@@ -8,12 +8,11 @@
 .Home .container {
     background-color: #0b2c63;
     border-radius: 10px;
-    padding: 40px;
+    padding: 30px;
 }
 
 .Home .toprow h3 {
     float: left;
-    font-size: 24px;
 }
 
 .Home .sortposts {
@@ -21,14 +20,15 @@
 }
 
 .Home .feedcol {
-    border: 1px solid rgb(209, 209, 209);
-    border-radius: 10px;
-    background-color: white;
+    margin-top: 10px;
+}
+
+.Home .textcol {
+    margin: auto;
 }
 
 .Home .textcol a {
     color: white;
-
 }
 
 .Home .textcol a:hover {
@@ -36,14 +36,15 @@
 }
 
 .Home .infocon {
-    margin: 20px;
+    margin: 10px;
     text-align: right;
 }
 
-.Home .textcol {
-    margin: auto;
-    padding-left: 20px;
+.Home .forumcon {
+    margin-top: 20px
 }
+
+
 
 .Home .textcol p {
     font-size: 18px;
@@ -55,46 +56,37 @@
         margin-bottom: 5rem;
     }
 
-    .Home .feedcol {
-        border-radius: 10px;
-        border: none;
-        border-top: 1px solid rgb(209, 209, 209);
+    .Home .textcol {
+        margin-top: 30px;
     }
 
-    .Home h3 {
-        font-size: 20px;
-    }
-
-    .Home .hidden, .Home .sortposts {
+    .Home .hidden {
         display: none;
     }
-
+}
     
-@media (max-width: 320px) {
+@media (max-width: 355px) {
     .Home h3 {
         font-size: 20px;
     }
     
-    .Home .textcol {
-        margin: auto;
-        padding-left: unset;
-    }
-
-    .Home .infocon {
-        margin: unset;
-        margin-top: 20px;
-    }
-}
-}
-
-
-@media (max-width: 1025px) {
+    .Home .sortposts {
+        display: none;
+    } 
+    
     .Home .textcol h1 {
         font-size: 24px;
     }
 
     .Home .textcol p {
         font-size: 16px;
+    }
+}
+
+
+@media (max-width: 1025px) {
+    .Home .toprow h3 {
+        font-size: 20px;
     }
 }
 

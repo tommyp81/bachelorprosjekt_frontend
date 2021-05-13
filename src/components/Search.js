@@ -19,7 +19,7 @@ const Search = ({ setSearchValue, searchValue, placeholderText, setCurrentPage }
   }
 
   return (
-    <div className="SearchPosts">
+    <div className="Search">
       <Form onSubmit={search}>
         <InputGroup>
           <Form.Control
@@ -42,7 +42,7 @@ const Search = ({ setSearchValue, searchValue, placeholderText, setCurrentPage }
           </InputGroup.Append>
         </InputGroup>
       </Form>
-      {searchValue && <p className="text-info">Klikk på "X" for å fjærne "søkemodus"</p>}
+      {searchValue && <p className="text-info">Trykk på "X" for å avbryte søk</p>}
     </div>
   )
 

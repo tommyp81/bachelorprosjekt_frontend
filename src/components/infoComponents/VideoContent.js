@@ -58,7 +58,7 @@ const VideoContent = ({ infoTopics, deletePost, addPost }) => {
       setVideoContent(videoContent.filter(v => v.id != videoId))
       deletePost(postId)
     } else {
-      alert("Feil ved sletting av Video")
+      alert("Feil ved sletting av video")
     }
 
   }
@@ -80,20 +80,24 @@ const VideoContent = ({ infoTopics, deletePost, addPost }) => {
         }
       </div>
       <div className="w-50 d-flex justify-content-start">
+        <div className="searchcontent">
         <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} setCurrentPage={setCurrentVideosPage}/>
+        </div>
         <SortContent isDocument={false} setSort={setVideoSort} />
       </div>
+      <div className="searchmobile">
+        <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} setCurrentPage={setCurrentVideosPage}/>
+      </div>
       {videoContent.map((filteredVideos, i) => (
-          <Card key={i}
-            onClick={() => handleShow(i)}
-            style={{ cursor: "pointer" }}>
+          <Card key={i}>
             <Card.Body>
               <Row>
                 <Col md={5}>
+                  
                   <div className="content">
                     {infoTopics.filter(infoTopics => (infoTopics.id === filteredVideos.infoTopicId)).map((filteredTopics) => (
                       <p key={filteredTopics.id} className="toptext" style={{ color: "gray" }}>Delt {moment(filteredVideos.uploaded).calendar()} i {filteredTopics.title} </p>))}
-                    <div className="title">{filteredVideos.title}</div><br />
+                    <div className="title"><Link onClick={() => handleShow(i)} style={{textDecoration: "none", color: "black"}}>{filteredVideos.title}</Link></div><br />
                     <p>Klikk for å se video</p>
                     <div hidden={!user.admin}>
                       <Button variant="danger" size="sm" value={filteredVideos.id} onClick={() => deleteVideo(filteredVideos.id, filteredVideos.postId)}>Slett</Button>
@@ -101,7 +105,7 @@ const VideoContent = ({ infoTopics, deletePost, addPost }) => {
                   </div>
                 </Col>
                 <Col md={7}>
-                  <div className="contentimg">
+                  <div className="contentimg" onClick={() => handleShow(i)} style={{cursor: "pointer"}}>
                     <Image src={`https://img.youtube.com/vi/${filteredVideos.youTubeId}/0.jpg`} />
 
                   </div>

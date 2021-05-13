@@ -36,6 +36,15 @@
     color: white;
 }
 
+.Post .commenttop {
+    margin-bottom: 10px;
+}
+
+.Post .searchcomments {
+    float: left;
+    margin-right: 10px;
+}
+
 .Post .comments .card {
     margin-bottom: 10px;
 }
@@ -60,9 +69,9 @@
 }
 
 
-@media (max-width: 768px) {
-    
 
+
+@media (max-width: 768px) {
     .Post .card-text {
       font-size: 14px;
     }
@@ -99,4 +108,14 @@
         float: unset;
         margin-bottom: 15px;
     }
+    
+    .Post .searchcomments {
+        margin-right: unset;
+        float: unset;
+    }
+
+    .Post .sortcomments {
+        display: none;
+    }
+
 }

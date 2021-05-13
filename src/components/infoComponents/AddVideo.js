@@ -17,7 +17,7 @@ const schema = yup.object().shape({
   youtubeId: yup.string().required("Må fylles ut").matches(
     regExp,
     {
-      message: 'Ikke en gyldig YouTube URL',
+      message: 'Ikke en gyldig YouTube-URL',
       excludeEmptyString: true
     }
   ),
@@ -97,18 +97,18 @@ const AddVideo = ({
   }
 
   return (
-    <div className="UploadFile">
+    <div className="AddVideo">
       <Button onClick={handleShow} variant="primary">
-        Last opp
+        Last opp video
       </Button>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Legg inn Youtube video</Modal.Title>
+          <Modal.Title>Last opp video</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
-              <label>YouTube URL</label>
+              <label>YouTube-URL</label>
               <input className="form-control input-lg" name="youtubeId" type="text" {...register("youtubeId", { required: true })} />
               <p className="validationError">{errors['youtubeId']?.message}</p>
             </div>
@@ -128,8 +128,7 @@ const AddVideo = ({
 
             <div className="form-group">
               <label for="kategoriVelger">Velg kategori</label>
-              <select className="form-control" id="kategoriVelger" name="infoTopicId" {...register("infoTopicId")} >
-                <option value=''></option>
+              <select className="form-control" id="kategoriVelger" name="infoTopicId" {...register("infoTopicId")}>
                 {infoTopics.map((mappedInfoTopics) => (
                   <option key={mappedInfoTopics.id} value={mappedInfoTopics.id}>
                     {mappedInfoTopics.title}

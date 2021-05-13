@@ -1,3 +1,13 @@
+@media (min-width: 768px) {
+    .Kunnskapsportalen .searchmobile {
+        display: none;
+    }
+}
+
+.VideoContent .card, .DocumentContent .card{
+    margin-bottom: 10px;
+}
+
 .Kunnskapsportalen .container {
     margin-top: 10rem;
     margin-bottom: 10rem;
@@ -11,28 +21,21 @@
     color: white;
     text-align: center;
 }
-.Kunnskapsportalen .topictitle {
-    margin-bottom: 20px;
+.InfoTopics .topictitle {
+    margin-top: 20px;
+    margin-bottom: 10px;
     font-weight: 600;
     font-size: 30px;
 }
 
-.Kunnskapsportalen .desc {
-    margin-bottom: 20px;
+.InfoTopics .desc {
+    margin-bottom: 40px;
 }
 
 .Kunnskapsportalen .top {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-}
-
-.Kunnskapsportalen .videocol {
-    float: left;
-}
-
-.Kunnskapsportalen .documentcol {
-    float: right;
 }
 
 .Kunnskapsportalen .card {
@@ -59,9 +62,22 @@
     color: red;
 }
 
+.Kunnskapsportalen .searchcontent {
+    margin-right: 10px;
+}
 
 /*Mobile*/
 @media (max-width: 768px) {
+    .Kunnskapsportalen .searchcontent {
+        display: none;
+    }
+    .Kunnskapsportalen .card .desktop {
+            display: none;
+        }
+    .Kunnskapsportalen .searchmobile {
+        margin-top: 10px;
+    }
+
     .Kunnskapsportalen .container {
         margin-top: 5rem;
         margin-bottom: 5rem;
@@ -90,9 +106,7 @@
         max-width: 100%;
     }    
 
-    .Kunnskapsportalen .card .desktop {
-        display: none;
-    }
+    
 
     .Kunnskapsportalen .card .title {
         font-size: 24px;
@@ -116,28 +130,12 @@
 
 .Kunnskapsportalen .tabs {
     justify-content: center;
-    margin-bottom: 30px;
+    margin-bottom: 2.5px;
 }
 
 .Kunnskapsportalen .tabs .nav-item {
     color: white;
     font-size: 15px;
-    margin: 2.5px 0px 2.5px 6px;
-    background-color: #007bff;
-}
-
-.Kunnskapsportalen .tabs .nav-item:hover,
-.Kunnskapsportalen .tabs .nav-item:focus,
-.Kunnskapsportalen .tabs .nav-item:target { 
-    background-color: #005fc4;
-}
-
-.Kunnskapsportalen .tab {
-    margin-bottom: 20px;
-    
-}
-.InfoTopics .btn-primary  {
-    justify-content: center;
     margin: 2.5px;
     background-color: #28a745;
     color: white;
@@ -145,38 +143,40 @@
     border: unset;
 }
 
-.InfoTopics .btn:hover,
-.InfoTopics .btn:focus, 
-.InfoTopics .btn:target, 
-.InfoTopics .btn:not(:disabled):not(.disabled).active,
-.InfoTopics .btn-primary:not(:disabled):not(.disabled):active {
+.Kunnskapsportalen .tabs .nav-item:hover,
+.Kunnskapsportalen .tabs .nav-item:focus,
+.Kunnskapsportalen .tabs .nav-item:target { 
     background-color: #1b8b35;
+}
+
+
+.InfoTopics .btn-primary  {
+    justify-content: center;
+    margin: 2.5px 0px 2.5px 6px;
+    background-color: #007bff;
     border: unset;
 }
 
-.UploadFile {
-    margin-left: 15px;
-}
-
-.SearchContent {
-    width: 250px;
+.InfoTopics .btn:hover,
+.InfoTopics .btn:focus,
+.InfoTopics .btn:active,
+.InfoTopics .btn:target {
+    background-color: #005fc4;
+    border: unset;
 }
 
 @media (max-width: 575px) {
-    .SearchContent{
-        width: 100%;
-    }    
-
-    .UploadFile {
-        margin-bottom: 15px;
-    }
 
     .InfoTopics .btn {
-        font-size: 16px;
+        font-size: 14px;
+    }
+
+    .SortContent .dropdown .btn, .AddVideo .btn, .AddDocument .btn {
+        font-size: 14px;
     }
     
     .Kunnskapsportalen .tabs .nav-item {
-        font-size: 14px;
+        font-size: 16px;
     }
 }
 

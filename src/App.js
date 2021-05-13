@@ -8,7 +8,6 @@ import jwt_decode from 'jwt-decode'
 
 //Header og footer kan dere bare ignorere for nå
 import Footer from "./components/mainComponents/Footer.js";
-import Header from "./components/mainComponents/Header.js";
 
 import Login from "./components/loginComponents/Login.js";
 import Home from "./components/homeComponents/Home.js";
@@ -54,7 +53,7 @@ const App = () => {
 
   const login = user => {
     setUser(user)
-    const tt = jwt_decode(user.token).exp * 1000 - 3540000; //- 3540000
+    const tt = jwt_decode(user.token).exp * 1000; //- 3540000
     setTokenTimer(tt)
     localStorage.setItem('token', user.token)
     setInitialized(true)
@@ -171,7 +170,7 @@ const App = () => {
 
   // sends post to api/database and updates posts with new post
   const addPost = async (post, file) => {
-    console.log("HALLO")
+    console.log("HALLO");
     const formData = new FormData();
     if (file) formData.append("File", file);
     for (let k in post) {

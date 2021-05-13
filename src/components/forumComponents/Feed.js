@@ -30,7 +30,7 @@ const Feed = ({ posts, topic, subtopic, loading }) => {
     posts.length === 0
     // users.length === 0 &&
   ) {
-    return empty ? <h1>Ingen Poster</h1> : <SpinnerDiv />;
+    return empty ? <h3 style={{color: "white"}}>Ingen poster</h3> : <SpinnerDiv />;
   }
 
   const renderPosts = () => (

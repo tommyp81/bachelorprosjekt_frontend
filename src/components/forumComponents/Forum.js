@@ -107,7 +107,7 @@ const Forum = ({
       <Container className="body">
         <Row xs={1} sm={1} lg={2}>
           <Col lg={3}>
-            <div className="desktop">
+            <div className="desktopsearch">
               <Search setSearchValue={setSearchValue} searchValue={searchValue} placeholderText={"Søk..."} setCurrentPage={setCurrentPage} />
             </div>
             <Topics
@@ -164,7 +164,7 @@ const Forum = ({
             </Container>
 
             <Container className="bot">
-              <div className="float-left">
+              <div className="pages">
                 {totalPages > 1 &&
                   <Pages
                     currentPage={currentPage}
@@ -173,7 +173,7 @@ const Forum = ({
                   />
                 }
               </div>
-              <div className="float-right">
+              <div className="postsperpage">
                 <Dropdown>
                   <Dropdown.Toggle variant="primary" id="dropdown-basic">
                     {postsPerPage} per side:

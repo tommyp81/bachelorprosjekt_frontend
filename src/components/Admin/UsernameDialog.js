@@ -7,8 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 const schema = yup.object().shape({
-  username: yup.string().required("må fylles ut").min(5, 'minst 5 tegn'),
-  password: yup.string().required("må fylles ut")
+  username: yup.string().required("må fylles ut").min(5, 'minst 5 tegn')
 })
 
 const UsernameDialog = () => {
@@ -27,13 +26,16 @@ const UsernameDialog = () => {
 
   const onSubmit = async data => {
     console.log(data)
-    const res = await fetch(host + `users/${user.id}`, {
-      method: "PUT",
+    const formData = new FormData()
+    formData.append('id', user.id)
+    formData.append('username', data.username)
+    const res = await fetch(host + `SetUsername`, {
+      method: "POST",
       headers: {
         Authorization: `Bearer ${user.token}`,
         "content-type": "application/json",
       },
-      body: JSON.stringify({ ...user, username: data.username, password: data.password })
+      body: formData
     })
     if (res.ok) {
       const resData = await res.json()
@@ -57,17 +59,10 @@ const UsernameDialog = () => {
             <Modal.Title>Sett nytt brukernavn for {user.username}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-
             <div>
               <label>Nytt brukernavn</label>
               <input className="form-control input-lg" type="text" name="username" {...register('username')} />
               <p className="validationError">{errors['username']?.message}</p>
-            </div>
-            <br />
-            <div>
-              <label>Passord</label>
-              <input className="form-control input-lg" type="password" name="password" {...register('password')} />
-              <p className="validationError">{errors['password']?.message}</p>
             </div>
           </Modal.Body>
           <div className="float-right w-100">
