@@ -27,6 +27,7 @@ const Thread = ({
   history,
   deletePost,
 }) => {
+  
   const [comments, setComments] = useState([]);
 
   const { postId } = useParams();

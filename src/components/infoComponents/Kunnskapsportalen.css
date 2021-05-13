@@ -4,6 +4,10 @@
     }
 }
 
+.VideoContent .card, .DocumentContent .card{
+    margin-bottom: 10px;
+}
+
 .Kunnskapsportalen .container {
     margin-top: 10rem;
     margin-bottom: 10rem;
@@ -67,7 +71,9 @@
     .Kunnskapsportalen .searchcontent {
         display: none;
     }
-
+    .Kunnskapsportalen .card .desktop {
+            display: none;
+        }
     .Kunnskapsportalen .searchmobile {
         margin-top: 10px;
     }
@@ -100,9 +106,7 @@
         max-width: 100%;
     }    
 
-    .Kunnskapsportalen .card .desktop {
-        display: none;
-    }
+    
 
     .Kunnskapsportalen .card .title {
         font-size: 24px;

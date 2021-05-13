@@ -95,13 +95,20 @@ const AdminPanel = () => {
 
   return (
     <div className="AdminPanel">
-    <div className="containerPanel container col-12">
-      <div className="searchsort">
-        <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} setCurrentPage={setCurrentPage}/><UserSort setSort={setSort} />
+    <div className="toppanel">
+      <div className="searchusersdesktop">
+        <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} setCurrentPage={setCurrentPage}/>
+      </div>
+      <div className="sortusers">
+        <UserSort setSort={setSort} />
       </div>
       <div className="deleteusers">
-        <Button className="deletebutton" variant="danger" onClick={deleteSelectedUsers} disabled={selectedUsers.length < 1}>Slett Bruker(e)</Button>
+        <Button className="deletebutton" variant="danger" onClick={deleteSelectedUsers} disabled={selectedUsers.length < 1}>Slett bruker(e)</Button>
       </div>
+      <div className="searchusersmobile">
+        <Search setSearchValue={setSearchFilter} searchValue={searchFilter} placeholderText={"Søk..."} setCurrentPage={setCurrentPage}/>
+      </div>
+    </div>
       <Table className="usertable" striped bordered responsive>
         <thead>
           <tr>
@@ -143,7 +150,6 @@ const AdminPanel = () => {
           setCurrentPage={setCurrentPage}
         />
       }
-    </div>
     </div>
   )
 }

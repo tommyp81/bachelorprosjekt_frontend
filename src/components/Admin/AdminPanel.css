@@ -1,14 +1,37 @@
+ .AdminPanel {
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+  padding: 10px;
+ }
+ 
+.AdminPanel .searchusersmobile {
+  display: none;
+}
+
  .AdminPanel td, th {
   text-align: center;
   vertical-align: middle;
 }
 
 .AdminPanel .toppanel {
-  display: inline-flex;
+  padding-bottom: 50px;
 }
 
-.AdminPanel .toppanel .SearchUsers {
-  margin-left: 10px;
+.AdminPanel .searchusersdesktop, .AdminPanel .sortusers {
+  display: inline;
+  float: left;
+}
+
+.AdminPanel .searchusersdesktop {
+  margin-right: 5px;
+}
+
+.AdminPanel .sortusers {
+  margin-right: 5px;
+}
+
+.AdminPanel .deleteusers {
+  float: right;
 }
 
 .AdminPanel .usertable {
@@ -23,21 +46,29 @@
   cursor: pointer;
 }
 
-.AdminPanel .deletebutton {
-  height: 40px;
-}
 
-@media (max-width: 425px) {
+@media (max-width: 485px) {
+  .AdminPanel {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+   }
 
-  .AdminPanel .toppanel{
+  .AdminPanel .searchusersmobile {
     display: unset;
+    margin-top: 10px;
   }
 
-  .AdminPanel .toppanel .btn-danger {
+  .AdminPanel .searchusersdesktop {
+    display: none;
+  }
+
+  .AdminPanel .toppanel {
+    padding-bottom: 10px;
+  }
+
+  .AdminPanel .deleteusers .btn, .AdminPanel .sortusers .btn {
+    font-size: 14px;
     margin-bottom: 10px;
   }
 
-  .AdminPanel .toppanel .SearchUsers {
-    margin-left: unset;
-  }
 }
