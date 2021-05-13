@@ -26,6 +26,7 @@ import SideDrawer from "./components/NavigationCompoonent/SideDrawer/SideDrawer"
 import Backdrop from "./components/NavigationCompoonent/Backdrop/Backdrop";
 import NotFound from "./components/NotFound";
 import AdminPanel from "./components/Admin/AdminPanel";
+import SpinnerDiv from "./components/forumComponents/SpinnerDiv";
 // https://webforum.azurewebsites.net/posts
 // https://webforum.azurewebsites.net/answers
 // https://webforum.azurewebsites.net/users
@@ -39,6 +40,7 @@ const App = () => {
   const history = useHistory();
 
   const [user, setUser] = useState(false)
+  // const [token, setToken] = useState(null)
   const [tokenTimer, setTokenTimer] = useState()
 
   const [initialized, setInitialized] = useState(false)
@@ -49,40 +51,59 @@ const App = () => {
   const [infoTopics, setInfoTopics] = useState([]);
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
 
+
   const login = useCallback((user) => {
     setUser(user)
-    const tt = jwt_decode(user.token).exp * 1000; //- 3540000
+    const tt = jwt_decode(user.token).exp * 1000 - 3540000; //- 3540000
     setTokenTimer(tt)
-    localStorage.setItem('user', JSON.stringify({ ...user, exp: tt }))
+    localStorage.setItem('token', user.token)
     setInitialized(true)
   }, [])
 
-  const logout = useCallback(() => {
+  const logout = () => {
     console.log("YO")
     localStorage.clear();
     setUser(null);
     setTokenTimer(null)
 
+  }
+
+  const autoLogout = () => {
+    alert("Tilgangstokenet ditt har utløpt, logg inn på nytt")
+    logout()
+  }
+
+  useEffect(async() => {
+    console.log("TTTTTTT")
+    const token = localStorage.getItem('token')
+    if (token) {
+      const userId = jwt_decode(token).nameid
+      const user = await getUser(userId, token)
+      console.log("mmmmmmmm")
+      if(user)
+        login({...user, token})
+    }
   }, [])
 
   useEffect(() => {
-    console.log("TTTTTTT")
-    const localuser = JSON.parse(localStorage.getItem('user'))
-    if (localuser) {
-      console.log("mmmmmmmm")
-      login(localuser)
-    }
-  }, [login])
-
-  useEffect(() => {
+    console.log("???????")
     let logoutTimer
     if (user?.token && tokenTimer) {
-      const tokenTimeLeft = tokenTimer - new Date().getTime()
-      logoutTimer = setTimeout(logout, tokenTimeLeft)
+      logoutTimer = setTimeout(autoLogout, tokenTimer - new Date().getTime())
     } else {
       clearTimeout(logoutTimer)
     }
-  }, [tokenTimer, logout])
+  }, [tokenTimer])
+
+  const getUser = async (id, token) => {
+    const res = await fetch(host + `users/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    const user = await res.json()
+    return user;
+  }
 
 
   const handleDrawerToggleClick = () => {
@@ -180,6 +201,9 @@ const App = () => {
     return res.status === 200;
   };
 
+  // if(!initialized)
+  //   return <SpinnerDiv />
+
   return (
     <UserContext.Provider value={{ user, setUser, login, logout }}>
       <div className="App">
@@ -190,43 +214,44 @@ const App = () => {
         <Switch>
           <Route path="/Login">
             <Login history={history} />
+            <Footer />
           </Route>
           <ProtectedRoute exact path="/">
-            {initialized && <Home
+            {initialized ? <Home
               topic={topics}
               subtopic={subtopics}
-            />}{" "}
+            /> : <SpinnerDiv />}
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/Forum">
-            {initialized &&<Forum
+            {initialized ? <Forum
               addPost={addPost}
               subtopics={subtopics}
               topics={topics}
               history={history}
-            />}{" "}
+            /> : <SpinnerDiv />}
           </ProtectedRoute>
           <ProtectedRoute exact path="/Kunnskapsportalen">
-            {initialized && <Kunnskapsportalen
+            {initialized ? <Kunnskapsportalen
               infoTopics={infoTopics}
               addPost={addPost}
               deletePost={deletePost}
-            />}{" "}
+            /> : <SpinnerDiv />}
           </ProtectedRoute>
           <ProtectedRoute exact path="/Forum/:postId">
-            {initialized && <Thread
+            {initialized ? <Thread
               subtopics={subtopics}
               topics={topics}
               history={history}
               deletePost={deletePost}
-            />}
+            /> : <SpinnerDiv />}
           </ProtectedRoute>
           <ProtectedRoute path="/Admin">
-            {initialized && <AdminPanel />}
+            {initialized ? <AdminPanel /> : <SpinnerDiv />}
           </ProtectedRoute>
           <Route path="/error" component={NotFound} />
         </Switch>
-        <Footer />
+        {initialized && <Footer />}
 
 
       </div>
