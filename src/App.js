@@ -26,6 +26,7 @@ import Backdrop from "./components/NavigationCompoonent/Backdrop/Backdrop";
 import NotFound from "./components/NotFound";
 import AdminPanel from "./components/Admin/AdminPanel";
 import SpinnerDiv from "./components/forumComponents/SpinnerDiv";
+import moment from "moment";
 // https://webforum.azurewebsites.net/posts
 // https://webforum.azurewebsites.net/answers
 // https://webforum.azurewebsites.net/users
@@ -53,7 +54,7 @@ const App = () => {
 
   const login = user => {
     setUser(user)
-    const tt = jwt_decode(user.token).exp * 1000; //- 3540000
+    const tt = jwt_decode(user.token).exp * 1000 - 3540000; //- 3540000
     setTokenTimer(tt)
     localStorage.setItem('token', user.token)
     setInitialized(true)
@@ -88,7 +89,7 @@ const App = () => {
     console.log("???????")
     let logoutTimer
     if (user?.token && tokenTimer) {
-      logoutTimer = setTimeout(autoLogout, tokenTimer - new Date().getTime())
+      logoutTimer = setTimeout(autoLogout, tokenTimer - moment().valueOf())
     } else {
       clearTimeout(logoutTimer)
     }
