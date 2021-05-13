@@ -52,13 +52,13 @@ const App = () => {
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
 
 
-  const login = useCallback((user) => {
+  const login = user => {
     setUser(user)
     const tt = jwt_decode(user.token).exp * 1000 - 3540000; //- 3540000
     setTokenTimer(tt)
     localStorage.setItem('token', user.token)
     setInitialized(true)
-  }, [])
+  }
 
   const logout = () => {
     console.log("YO")
