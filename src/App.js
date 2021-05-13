@@ -7,7 +7,6 @@ import { Switch, Route, useHistory } from "react-router-dom";
 
 //Header og footer kan dere bare ignorere for nå
 import Footer from "./components/mainComponents/Footer.js";
-import Header from "./components/mainComponents/Header.js";
 
 import Login from "./components/loginComponents/Login.js";
 import Home from "./components/homeComponents/Home.js";
@@ -76,7 +75,11 @@ const App = () => {
   );
 
   const sidebar = (
-    <SideDrawer show={sideDrawerOpen} toggle={handleDrawerToggleClick} logout={testlogout}/>
+    <SideDrawer
+      show={sideDrawerOpen}
+      toggle={handleDrawerToggleClick}
+      logout={testlogout}
+    />
   );
 
   useEffect(() => {
@@ -106,7 +109,7 @@ const App = () => {
 
   // sends post to api/database and updates posts with new post
   const addPost = async (post, file) => {
-    console.log("HALLO")
+    console.log("HALLO");
     const formData = new FormData();
     if (file) formData.append("File", file);
     for (let k in post) {
@@ -133,7 +136,6 @@ const App = () => {
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <div className="App">
-      
         {user.loggedIn && toolbar}
         {user.loggedIn && sidebar}
         {user.loggedIn && backdrop}
@@ -142,11 +144,7 @@ const App = () => {
             <Login history={history} />
           </Route>
           <ProtectedRoute exact path="/">
-            <Home
-              topic={topics}
-              subtopic={subtopics}
-              loading={loading}
-            />{" "}
+            <Home topic={topics} subtopic={subtopics} loading={loading} />{" "}
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/Forum">
@@ -178,8 +176,6 @@ const App = () => {
           <Route path="/error" component={NotFound} />
         </Switch>
         <Footer />
-        
-      
       </div>
     </UserContext.Provider>
   );
