@@ -1,16 +1,16 @@
 import { useContext } from "react"
 import { Redirect, Route } from "react-router"
-import { UserContext } from "./UserContext"
+import { UserContext } from "./App"
 
 const ProtectedRoute = ({ children,  ...rest }) => {
 
-  const {user} = useContext(UserContext)
+  const token = localStorage.getItem('token')
 
   return (
     <Route
       {...rest}
       render={() =>
-        user.loggedIn ? (
+        token ? (
           children
         ) : (
           <Redirect to={'/Login'} />

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "./Toolbar.css";
 import logo from "../../../assets/images/BadmintonClubLogo.png";
 import ToggleButton from "../SideDrawer/ToggleButton";
-import { UserContext } from "../../../UserContext";
+import { UserContext } from "../../../App";
 import { AiFillHome } from "react-icons/ai";
 import { BsBoxArrowLeft, BsChatDotsFill } from "react-icons/bs";
 import { BsPersonFill } from "react-icons/bs";
@@ -13,7 +13,8 @@ import PasswordDialog from "../../Admin/PasswordDialog";
 import UsernameDialog from "../../Admin/UsernameDialog";
 
 const ToolBar = (props) => {
-  const {user} = useContext(UserContext)
+  const {user, logout} = useContext(UserContext)
+  
   return (
     <header className="toolbar">
       <nav className="tnavigation">
@@ -48,7 +49,7 @@ const ToolBar = (props) => {
            
             <div className="uNavItems">
             <ul className="user">
-             {user.loggedIn ? 
+             {user ? 
               <Dropdown>
                 <Dropdown.Toggle>
                   <BsPersonFill size="20px" /> {user.username}
@@ -66,8 +67,8 @@ const ToolBar = (props) => {
               ""
              }
             <li className="userItem">
-              {user.loggedIn ? 
-                <Link to="#" onClick={props.logout}>
+              {user ? 
+                <Link to="#" onClick={logout}>
                   <BsBoxArrowLeft size="22px" /> Logg ut
                 </Link>
               :

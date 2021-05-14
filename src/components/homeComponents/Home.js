@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Feed from "../forumComponents/Feed.js";
 import "./Home.css";
@@ -9,8 +9,12 @@ import { Link } from "react-router-dom";
 
 import SortItems from "../forumComponents/SortItems.js";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import { UserContext } from "../../App";
 
 const Home = ({ topic, subtopic }) => {
+
+  const { user } = useContext(UserContext)
+
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [sort, setSort] = useState({ sortOrder: "Desc", sortType: "Date" })
   const [loading, setLoading] = useState(false)
@@ -21,7 +25,11 @@ const Home = ({ topic, subtopic }) => {
   useEffect(async () => {
     setLoading(true)
     const res = await fetch(host +
-      `posts?pageNumber=${1}&pageSize=${postsInFeed}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`)
+      `posts?pageNumber=${1}&pageSize=${postsInFeed}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`, {
+        headers: {
+          Authorization: `Bearer ${user.token}`
+        }
+      })
     const posts = await res.json()
     setFilteredPosts(posts.data)
     setLoading(false)

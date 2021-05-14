@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { host } from "../../App";
-import { UserContext } from "../../UserContext";
+import { UserContext } from "../../App";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -31,6 +31,10 @@ const UsernameDialog = () => {
     formData.append('username', data.username)
     const res = await fetch(host + `SetUsername`, {
       method: "POST",
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+        "content-type": "application/json",
+      },
       body: formData
     })
     if (res.ok) {

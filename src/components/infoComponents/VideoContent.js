@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Button, Row, Col, Card, Image, Modal } from "react-bootstrap";
 import { Link } from 'react-router-dom'
 import { host } from '../../App';
-import { UserContext } from '../../UserContext';
+import { UserContext } from '../../App';
 import moment from 'moment'
 import "./Kunnskapsportalen.css";
 import InfoTopics from './InfoTopics';
@@ -35,7 +35,11 @@ const VideoContent = ({ infoTopics, deletePost, addPost }) => {
     &pageSize=${videosPerPage}&sortOrder=${videoSort.sortOrder}&sortType=${videoSort.sortType}`
 
   useEffect(async () => {
-    const res = await fetch(host + videoURL)
+    const res = await fetch(host + videoURL, {
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      }
+    })
     const videosData = await res.json()
     setVideoContent(videosData.data)
     setTotalVideosPages(videosData.totalPages)
@@ -45,7 +49,10 @@ const VideoContent = ({ infoTopics, deletePost, addPost }) => {
   const handleClose = () => setShow(null);
   const deleteVideo = async (videoId, postId) => {
     const res = await fetch(host + `videos/${videoId}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      }
     })
     if (res.ok) {
       setVideoContent(videoContent.filter(v => v.id != videoId))

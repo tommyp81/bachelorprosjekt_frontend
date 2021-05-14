@@ -5,7 +5,7 @@ import {
 } from "react-bootstrap";
 import "./Kunnskapsportalen.css";
 import { host } from "../../App";
-import { UserContext } from "../../UserContext";
+import { UserContext } from "../../App";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -76,7 +76,8 @@ const AddVideo = ({
     fetch(host + "Videos", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(videoData),
     })
