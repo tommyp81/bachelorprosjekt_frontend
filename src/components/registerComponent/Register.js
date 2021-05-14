@@ -57,7 +57,7 @@ const Register = ({ loginUser }) => {
     })
       .then((res) => {
         if (!res.ok) {
-          res.text().then((text) => alert(text));
+          throw res
         } else {
           return res.json();
         }
@@ -68,7 +68,10 @@ const Register = ({ loginUser }) => {
         formData.append("password", data.password);
         loginUser(formData);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        error.text()
+        .then((text) => alert(text))
+      });
   };
 
   return (
