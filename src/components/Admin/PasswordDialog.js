@@ -6,7 +6,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 const schema = yup.object().shape({
-  password: yup.string().required("må fylles ut").min(8, 'minst 8 tegn'),
+  password: yup.string()
+  .required("Passord må fylles ut")
+  .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, "Minst 8 tegn, en stor og en liten bokstav og et tall"),
   confirmPassword: yup.string().oneOf([yup.ref('password'), null], 'passord stemmer ikke').required("må fylles ut")
 })
 

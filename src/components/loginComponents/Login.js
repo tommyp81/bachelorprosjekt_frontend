@@ -72,6 +72,7 @@ const Login = ({ history }) => {
 
       <div className="logo">
         <Image src="https://www.badminton.no/siteassets/badminton_logo.png"
+          alt="Norges Badmintonforbund Logo"
           width="225px"
           style={{ backgroundColor: "white", borderRadius: "50%", padding: "10px" }}
           className="logo" />
@@ -88,15 +89,19 @@ const Login = ({ history }) => {
             <Row className="justify-content-md-center">
               <Col className="login" md="auto">
                 <Form className="form">
-                  <Form.Label>Brukernavn/E-post</Form.Label>
+                  <Form.Label htmlFor="username">Brukernavn/E-post</Form.Label>
                   <Form.Control
+                    id="username"
+                    role="loginusername"
                     type="text"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                   />
                   <br />
-                  <Form.Label>Passord</Form.Label>
+                  <Form.Label htmlFor="password">Passord</Form.Label>
                   <Form.Control
+                    id="password"
+                    role="loginpassword"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -106,6 +111,7 @@ const Login = ({ history }) => {
                     <p>Glemt brukernavn eller passord? Send e-post til admin på charlotte.stoelen@badminton.no eller ring 97180074 mellom kl. 10:00-15:00 på hverdager!</p>
                   </div>
                   <Button
+                    role="submitloginbutton"
                     variant="success"
                     type="submit"
                     size="lg"

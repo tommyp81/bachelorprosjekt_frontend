@@ -34,6 +34,7 @@
 
 .Login .nav-item {
   background-color: #0b2c63;
+  color:rgb(62, 162, 255);
   font-weight: 600;
   border: none
 }
@@ -42,30 +43,8 @@
 .Login .nav-item:hover,
 .Login .nav-item:active,
 .Login .nav-item:focus {
-  background-color: #0b2c63;
   color: white;
 }
-
-/*
-.Login .nav-item {
-  justify-content: center;
-  background-color: white;
-  font-weight: 600;
-  color: black;
-  z-index: 100;
-}
-
-.Login .nav-item:first-child {
-  border-top-left-radius: 10px;
-  border-top-right-radius: unset;
-}
-
-.Login .nav-item:last-child {
-  border-top-right-radius: 10px;
-  border-top-left-radius: unset;
-}
-
-*/
 
 .Login .form, .Register .form {
   padding-top: 20px;

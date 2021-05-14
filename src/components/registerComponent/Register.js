@@ -26,7 +26,7 @@ const schema = yup.object().shape({
     .required("Passord må fylles ut")
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-      "Minst 8 tegn, en stor, en små bokstav og et tall"
+      "Minst 8 tegn, en stor og en liten bokstav og et tall"
     ),
   confirmPassword: yup
     .string()
@@ -78,8 +78,10 @@ const Register = ({ loginUser }) => {
           <Row className="justify-content-center">
             <Col md="auto" className="register">
               <div>
-                <Form.Label>Brukernavn</Form.Label>
+                <Form.Label htmlFor="regUsername">Brukernavn</Form.Label>
                 <Form.Control
+                  id="regUsername"
+                  role="regiserusername"
                   className="form-control input-lg"
                   name="username"
                   type="text"
@@ -90,8 +92,10 @@ const Register = ({ loginUser }) => {
             </Col>
             <Col md="auto" className="register">
               <div>
-                <Form.Label>E-post</Form.Label>
+                <Form.Label htmlFor="email">E-post</Form.Label>
                 <Form.Control
+                  id="email"
+                  role="registeremail"
                   className="form-control input-lg"
                   name="email"
                   type="text"
@@ -104,8 +108,10 @@ const Register = ({ loginUser }) => {
           <Row className="justify-content-center">
             <Col md="auto" className="register">
               <div>
-                <Form.Label>Fornavn</Form.Label>
+                <Form.Label htmlFor="firstname">Fornavn</Form.Label>
                 <Form.Control
+                  id="firstname"
+                  role="registerfirstname"
                   className="form-control input-lg"
                   name="firstName"
                   type="text"
@@ -118,8 +124,10 @@ const Register = ({ loginUser }) => {
             </Col>
             <Col md="auto" className="register">
               <div className="d-flex flex-column">
-                <Form.Label>Etternavn</Form.Label>
+                <Form.Label htmlFor="lastname">Etternavn</Form.Label>
                 <Form.Control
+                  id="lastname"
+                  role="registerlastname"
                   className="form-control input-lg"
                   name="lastName"
                   type="text"
@@ -132,8 +140,10 @@ const Register = ({ loginUser }) => {
           <Row className="justify-content-center ">
             <Col md="auto" className="register">
               <div>
-                <Form.Label>Passord</Form.Label>
+                <Form.Label htmlFor="regPassword">Passord</Form.Label>
                 <Form.Control
+                  id="regPassword"
+                  role="registerpassword"
                   className="form-control input-lg"
                   name="password"
                   type="password"
@@ -144,8 +154,10 @@ const Register = ({ loginUser }) => {
             </Col>
             <Col md="auto" className="register ">
               <div>
-                <Form.Label>Bekreft passord</Form.Label>
+                <Form.Label htmlFor="confirmpassword">Bekreft passord</Form.Label>
                 <Form.Control
+                  id="confirmpassword"
+                  role="registerconfirmpassword"
                   className="form-control input-lg"
                   name="confirmPassword"
                   type="password"
@@ -160,6 +172,7 @@ const Register = ({ loginUser }) => {
           <Row className="justify-content-center mt-5">
             <Col className="register" sm={6}>
               <Button
+                role="submitregisterbutton"
                 variant="success"
                 size="lg"
                 type="submit"

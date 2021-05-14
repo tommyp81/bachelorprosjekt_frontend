@@ -2,13 +2,6 @@
     background-image: unset
     }
 
-.App .btn,
-.App .btn:hover,
-.App .btn:focus,
-.App .btn:active,
-.App .btn:target {
-    box-shadow: unset;
-}
 
 @media (max-width: 768px) {
     .App {
