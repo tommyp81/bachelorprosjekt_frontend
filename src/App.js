@@ -32,7 +32,7 @@ import moment from "moment";
 // https://webforum.azurewebsites.net/users
 //
 
-export const host = "https://localhost:44361/";
+export const host = "https://webforum.azurewebsites.net/";
 
 export const UserContext = createContext(null);
 
