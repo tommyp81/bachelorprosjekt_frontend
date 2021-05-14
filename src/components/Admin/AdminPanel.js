@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Button, Form, Table } from 'react-bootstrap'
 import { host } from '../../App'
 import SearchUsers from "./SearchUsers.js"
@@ -7,8 +7,11 @@ import PasswordDialog from './PasswordDialog'
 import Pages from '../forumComponents/Pages'
 import UserSort from './UserSort'
 import Search from '../Search'
+import { UserContext } from '../../App'
 
 const AdminPanel = () => {
+
+  const {user} = useContext(UserContext)
 
   const [users, setUsers] = useState([])
 
@@ -29,7 +32,11 @@ const AdminPanel = () => {
 
 
   useEffect( async () => {
-    const res = await fetch(host + usersURL)
+    const res = await fetch(host + usersURL ,{
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      }
+    })
     const resData = await res.json()
     setUsers(resData.data)
     setTotalPages(resData.totalPages)
@@ -52,7 +59,10 @@ const AdminPanel = () => {
     await Promise.all(
       selectedUsers.map(async u => {
         await fetch(host+`users/${u.id}`, {
-          method: 'DELETE'
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${user.token}`
+          }
         })
       })
     )
@@ -67,6 +77,9 @@ const AdminPanel = () => {
     formData.append('admin', Boolean(value))
     const res = await fetch(host+'setAdmin', {
       method: 'POST',
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      },
       body: formData
     })
     const data = await res.json()

@@ -14,7 +14,7 @@ import moment from "moment";
 import Feed from "./Feed.js";
 
 import SortItems from "./SortItems";
-import { UserContext } from "../../UserContext";
+import { UserContext } from "../../App";
 import SpinnerDiv from "./SpinnerDiv.js";
 import { host } from "../../App.js";
 import Search from "../Search";
@@ -53,7 +53,11 @@ const Forum = ({
 
   useEffect(async () => {
     setLoading(true)
-    const res = await fetch(host + postsURL)
+    const res = await fetch(host + postsURL, {
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      }
+    })
     const posts = await res.json()
     setFilteredPosts(posts.data)
     setTotalPages(posts.totalPages)

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Form, Button, Tabs, Tab } from "react-bootstrap";
 import moment from 'moment'
 import "./Post.css";
-import { UserContext } from "../../UserContext";
+import { UserContext } from "../../App";
 import FileDrop from '../FileDrop'
 
 function NewComment({createNew, pId}) {

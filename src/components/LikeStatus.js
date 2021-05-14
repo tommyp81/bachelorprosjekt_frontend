@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { FaThumbsUp } from 'react-icons/fa'
 import { host } from '../App'
-import { UserContext } from '../UserContext'
+import { UserContext } from '../App'
 
 const LikeStatus = ({postId}) => {
 
@@ -15,6 +15,7 @@ const LikeStatus = ({postId}) => {
     const res = await fetch(host+'GetLike', {
       method: 'POST',
       headers: {
+        Authorization: `Bearer ${user.token}`,
         'content-type': 'application/json'
       },
       body: JSON.stringify({

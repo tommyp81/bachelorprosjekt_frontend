@@ -3,7 +3,7 @@ import { Form, Button, Col, Row, Tabs, Tab, Image } from "react-bootstrap";
 
 
 import "./Login.css";
-import { UserContext } from "../../UserContext";
+import { UserContext } from "../../App";
 import { host } from "../../App";
 import Register from "../registerComponent/Register";
 
@@ -18,7 +18,7 @@ const Login = ({ history }) => {
 
 
   // USER HANDLING
-  const { setUser } = useContext(UserContext);
+  const { login } = useContext(UserContext);
 
 
   function validateForm() {
@@ -54,7 +54,7 @@ const Login = ({ history }) => {
 
     if (res.ok) {
       const data = await res.json()
-      setUser({ ...data, loggedIn: true });
+      login(data);
       console.log("Success")
     } else {
       const resText = await res.text()

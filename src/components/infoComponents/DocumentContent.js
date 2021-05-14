@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, Row, Col, Card } from "react-bootstrap";
 import { host } from '../../App';
-import { UserContext } from '../../UserContext';
+import { UserContext } from '../../App';
 import FileLink from '../FileLink';
 import moment from 'moment'
 import "./Kunnskapsportalen.css";
@@ -39,7 +39,11 @@ const DocumentContent = ({ infoTopics }) => {
 
 
   useEffect(async () => {
-    const res = await fetch(host + documentsURL)
+    const res = await fetch(host + documentsURL, {
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      }
+    })
     const documentsData = await res.json()
     setDocumentContent(documentsData.data)
     setTotalDocumentsPages(documentsData.totalPages)
@@ -47,7 +51,10 @@ const DocumentContent = ({ infoTopics }) => {
 
   const deleteDocument = async (id) => {
     const res = await fetch(host + `DeleteDocument/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      }
     })
     if (res.ok)
       setDocumentContent(documentContent.filter(d => d.id != id))
