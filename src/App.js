@@ -34,7 +34,7 @@ import PasswordDialog from "./components/Admin/PasswordDialog";
 // https://webforum.azurewebsites.net/users
 //
 
-export const host = "https://webforum.azurewebsites.net/";
+export const host = "https://badmintonbackend.azurewebsites.net/";
 
 export const UserContext = createContext(null);
 
