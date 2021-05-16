@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Container, Form, Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import { host } from "../../App";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -13,40 +13,40 @@ const schema = yup.object().shape({
   confirmPassword: yup.string().oneOf([yup.ref('password'), null], 'Passord og bekreft passord er ikke like').required("Bekreft passord må fylles ut")
 })
 
-const PasswordDialog = ({ user }) => {
+const AdminPasswordDialog = ({ user }) => {
 
 
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => {
-    setShow(true);
-  };
-
-  const { register, handleSubmit, formState: { errors }, reset } = useForm({
-    resolver: yupResolver(schema)
-  })
-
-  const onSubmit = async data => {
-    console.log(data)
-
-    const res = await fetch(host + `users/${user.id}`, {
-      method: "PUT",
-      headers: {
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => {
+      setShow(true);
+    };
+  
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+      resolver: yupResolver(schema)
+    })
+  
+    const onSubmit = async data => {
+      console.log(data)
+  
+      const res = await fetch(host + `users/${user.id}`, {
+        method: "PUT",
+        headers: {
         Authorization: `Bearer ${user.token}`,
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ ...user, password: data.password }),
-    });
-    if (res.ok) {
-      handleClose();
-      alert("Passordet er endret!");
-      reset();
-    } else {
-      const text = await res.text();
-      alert(text);
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ ...user, password: data.password }),
+      });
+      if (res.ok) {
+        handleClose();
+        alert("Passordet er endret!");
+        reset();
+      } else {
+        const text = await res.text();
+        alert(text);
+      }
+  
     }
-
-  }
 
 
   // const setNewPassword = async (e) => {
@@ -72,34 +72,7 @@ const PasswordDialog = ({ user }) => {
   // };
 
   return (
-    <div className="PasswordDialog">
-    <Container>
-        <h3>Endre passord for {user.username}</h3>
-        <br/>
-        <Form onSubmit={handleSubmit(onSubmit)} >
-          <Form.Label>
-            Nytt passord
-          </Form.Label>
-          <Form.Control type="password" name="password" {...register('password')} />
-          <p className="validationError">{errors['password']?.message}</p>
-          
-          <Form.Label>
-            Bekreft passord
-          </Form.Label>
-          <Form.Control type="password" name="confirmPassword" {...register('confirmPassword')} />
-          <p className="validationError">{errors['confirmPassword']?.message}</p>
-          <Button
-            variant="success"
-            type="submit"
-          >
-            Bekreft
-          </Button>
-      </Form>
-    </Container>
-    </div>
-
-    /* 
-    <>
+    <div className="AdminPasswordDialog">
       <span className="btn-link" onClick={handleShow}>
         Endre passord
       </span>
@@ -138,7 +111,7 @@ const PasswordDialog = ({ user }) => {
               value={password2}
               onChange={(e) => setPassword2(e.target.value)}
             />
-          </Form.Group> 
+          </Form.Group> */}
           </Modal.Body>
           <div className="float-right w-100">
             <Modal.Footer>
@@ -155,8 +128,8 @@ const PasswordDialog = ({ user }) => {
           </div>
         </form>
       </Modal>
-    </>*/
+    </div>
   );
 };
 
-export default PasswordDialog;
+export default AdminPasswordDialog;

@@ -3,7 +3,7 @@ import { Button, Form, Table } from 'react-bootstrap'
 import { host } from '../../App'
 import SearchUsers from "./SearchUsers.js"
 import './AdminPanel.css'
-import PasswordDialog from './PasswordDialog'
+import AdminPasswordDialog from './AdminPasswordDialog'
 import Pages from '../forumComponents/Pages'
 import UserSort from './UserSort'
 import Search from '../Search'
@@ -151,7 +151,7 @@ const AdminPanel = () => {
                 </Form.Control>
                 {/* {String(u.admin)} */}
               </td>
-              <td width={125}><PasswordDialog user={u}/></td>
+              <td width={125}><AdminPasswordDialog user={u}/></td>
             </tr>
           ))}
         </tbody>
