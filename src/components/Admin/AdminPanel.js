@@ -151,7 +151,7 @@ const AdminPanel = () => {
                 </Form.Control>
                 {/* {String(u.admin)} */}
               </td>
-              <td width={125}><AdminPasswordDialog user={u}/></td>
+              <td width={125}><AdminPasswordDialog selectedUser={u}/></td>
             </tr>
           ))}
         </tbody>

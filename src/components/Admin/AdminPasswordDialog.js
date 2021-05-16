@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { host } from "../../App";
+import { host, UserContext } from "../../App";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -13,8 +13,9 @@ const schema = yup.object().shape({
   confirmPassword: yup.string().oneOf([yup.ref('password'), null], 'Passord og bekreft passord er ikke like').required("Bekreft passord må fylles ut")
 })
 
-const AdminPasswordDialog = ({ user }) => {
+const AdminPasswordDialog = ({ selectedUser }) => {
 
+    const { user } = useContext(UserContext)
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -29,13 +30,13 @@ const AdminPasswordDialog = ({ user }) => {
     const onSubmit = async data => {
       console.log(data)
   
-      const res = await fetch(host + `users/${user.id}`, {
+      const res = await fetch(host + `users/${selectedUser.id}`, {
         method: "PUT",
         headers: {
         Authorization: `Bearer ${user.token}`,
           "content-type": "application/json",
         },
-        body: JSON.stringify({ ...user, password: data.password }),
+        body: JSON.stringify({ ...selectedUser, password: data.password }),
       });
       if (res.ok) {
         handleClose();
@@ -79,7 +80,7 @@ const AdminPasswordDialog = ({ user }) => {
       <Modal animation={false} show={show} onHide={handleClose}>
         <form onSubmit={handleSubmit(onSubmit)} >
           <Modal.Header closeButton={true}>
-            <Modal.Title>Sett nytt passord for {user.username}</Modal.Title>
+            <Modal.Title>Sett nytt passord for {selectedUser.username}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
 
