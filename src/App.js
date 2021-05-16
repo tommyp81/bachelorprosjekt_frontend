@@ -65,11 +65,11 @@ const App = () => {
     localStorage.clear();
     setUser(null);
     setTokenTimer(null)
-
+    setInitialized(false)
   }
 
   const autoLogout = () => {
-    alert("Tilgangstokenet ditt har utløpt, logg inn på nytt")
+    alert("Din tilgang har utløpt, vennligst logg inn på nytt")
     logout()
   }
 
@@ -207,7 +207,6 @@ const App = () => {
   return (
     <UserContext.Provider value={{ user, setUser, login, logout }}>
       <div className="App">
-
         {user && toolbar}
         {user && sidebar}
         {user && backdrop}

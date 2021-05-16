@@ -96,7 +96,7 @@ const VideoContent = ({ infoTopics, deletePost, addPost }) => {
                   
                   <div className="content">
                     {infoTopics.filter(infoTopics => (infoTopics.id === filteredVideos.infoTopicId)).map((filteredTopics) => (
-                      <p key={filteredTopics.id} className="toptext" style={{ color: "gray" }}>Delt {moment(filteredVideos.uploaded).calendar()} i {filteredTopics.title} </p>))}
+                      <p key={filteredTopics.id} className="toptext" style={{ color: "rgb(75, 75, 75)" }}>Delt {moment(filteredVideos.uploaded).calendar()} i {filteredTopics.title} </p>))}
                     <div className="title"><Link onClick={() => handleShow(i)} style={{textDecoration: "none", color: "black"}}>{filteredVideos.title}</Link></div><br />
                     <p>Klikk for å se video</p>
                     <div hidden={!user.admin}>
@@ -106,7 +106,7 @@ const VideoContent = ({ infoTopics, deletePost, addPost }) => {
                 </Col>
                 <Col md={7}>
                   <div className="contentimg" onClick={() => handleShow(i)} style={{cursor: "pointer"}}>
-                    <Image src={`https://img.youtube.com/vi/${filteredVideos.youTubeId}/0.jpg`} />
+                    <Image src={`https://img.youtube.com/vi/${filteredVideos.youTubeId}/0.jpg`} alt={filteredVideos.title + " thumbnail"}/>
 
                   </div>
                 </Col>

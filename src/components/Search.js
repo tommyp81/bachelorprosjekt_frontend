@@ -24,6 +24,8 @@ const Search = ({ setSearchValue, searchValue, placeholderText, setCurrentPage }
         <InputGroup>
           <Form.Control
             type="text"
+            style={{zIndex: "100"}}
+            alt="Search bar"
             placeholder={placeholderText}
             value={searchInput}
             onChange={e => setSearchInput(e.target.value)}

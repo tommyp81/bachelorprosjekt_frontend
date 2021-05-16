@@ -247,8 +247,9 @@ const Thread = ({
 
                 {((user.id === post.userId) || user.admin) ?
                   <div className="editdelete">
-                    {(user.id === post.userId) && <EditPost post={post} edit={editPost} />}&nbsp;
-                  {((user.id === post.userId) || user.admin) &&
+                    {(user.id === post.userId) && <EditPost post={post} edit={editPost}/>}
+                    &nbsp;
+                    {((user.id === post.userId) || user.admin) &&
                       <Button
                         variant="danger"
                         size="sm"
@@ -259,7 +260,7 @@ const Thread = ({
                     }
                     <Modal show={show} onHide={handleClose}>
                       <Modal.Header closeButton>
-                        <Modal.Title>Slett Post</Modal.Title>
+                        <Modal.Title>Slett post</Modal.Title>
                       </Modal.Header>
                       <Modal.Body>
                         Er du sikker på at du vil slette din post?
@@ -305,12 +306,13 @@ const Thread = ({
           </div>
 
           <div className="comments">
-            <div className="commenttop">
+            
                 {post && !post.comment_Count ? (
                   <h3>Ingen kommentarer</h3>
                 ) : (
                   <h3>Kommentarer</h3>
                 )}
+          <div className="commenttop">
                 <div className="searchcomments">
                   <Search setSearchValue={setSearchValue} searchValue={searchValue} placeholderText={"Søk..."} setCurrentPage={setCurrentPage} />
                 </div>

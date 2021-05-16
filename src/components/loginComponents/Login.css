@@ -24,17 +24,21 @@
   width: 100%;
   border-bottom: unset;
   background-color: #0b2c63;
+  margin-bottom: 10px;
 }
 
 .Login .nav-tabs .nav-item.show .nav-link, .Login .nav-tabs .nav-link.active {
   color: unset;
   background-color: unset;
   border: unset;
+  padding-bottom: unset;
+  border-bottom: 2px solid white;
 }
 
 .Login .nav-item {
   background-color: #0b2c63;
   color:rgb(62, 162, 255);
+  font-size: 20px;
   font-weight: 600;
   border: none
 }
@@ -137,7 +141,7 @@
 }
 
 @media (max-width: 335px) {
-  .Login .nav {
+  .Login .nav-item {
     font-size: 14px;
   }
 }

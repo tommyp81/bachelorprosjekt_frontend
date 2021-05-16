@@ -89,7 +89,7 @@ function NewPost({ subtopicTitle, subtopic, topicFocus, add, history }) {
   return (
     <div className="NewPost">
       {!subtopicTitle ? (
-        <p>Velg en underkategori for å opprette en ny post.</p>
+        <p>Velg en kategori og underkategori for å opprette en ny post.</p>
       ) : (
         <Button variant="primary" onClick={handleShow} disabled={!subtopic}>
           + Ny post

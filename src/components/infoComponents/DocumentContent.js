@@ -94,12 +94,12 @@ const DocumentContent = ({ infoTopics }) => {
               <Col>
                 <div className="content">
                   {infoTopics.filter(infoTopics => (infoTopics.id === mappedDocuments.infoTopicId)).map((filteredTopics) => (
-                    <p key={filteredTopics.id} className="toptext" style={{ color: "grey" }}>
+                    <p key={filteredTopics.id} className="toptext" style={{ color: "rgb(75, 75, 75)" }}>
                       Delt {moment(mappedDocuments.uploaded).calendar()} i {filteredTopics.title}
                     </p>
                   ))}
                   <div className="title">
-                    <BsFileEarmarkText className="iconmobile" />{" "}
+                    <BsFileEarmarkText className="iconmobile" />
                     <FileLink fileId={mappedDocuments.id} />
                   </div><br />
                   <p>Klikk for å laste ned</p>

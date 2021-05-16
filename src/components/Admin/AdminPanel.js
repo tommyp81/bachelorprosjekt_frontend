@@ -125,7 +125,7 @@ const AdminPanel = () => {
       <Table className="usertable" striped bordered responsive>
         <thead>
           <tr>
-            <th></th>
+            <th>Velg bruker(e)</th>
             <th>ID</th>
             <th>Brukernavn</th>
             <th className="d-none d-xl-table-cell">Fornavn</th>

@@ -51,7 +51,7 @@
     max-width: 200px;
 }
 
-.Kunnskapsportalen .card .title {
+.Kunnskapsportalen .card .title, .Kunnskapsportalen .card .title .btn {
     font-weight: 600;
     font-size: 30px;
     white-space: nowrap;
@@ -85,7 +85,8 @@
 }
 
 @media (max-width: 425px) {
-    .Kunnskapsportalen .card .title, .Kunnskapsportalen .card .content {
+    .Kunnskapsportalen .card .title, .Kunnskapsportalen .card .title .btn, .Kunnskapsportalen .card .content {
+        
         white-space: unset;
     }
 }
@@ -108,7 +109,7 @@
 
     
 
-    .Kunnskapsportalen .card .title {
+    .Kunnskapsportalen .card .title, .Kunnskapsportalen .card .title .btn {
         font-size: 24px;
     }    
    
@@ -119,14 +120,6 @@
         max-width: 100%
     }    
 }
-
-@media (min-width: 769px) {
-    .Kunnskapsportalen .card .iconmobile {
-        display: none;
-    }
-    
-}
-
 
 .Kunnskapsportalen .tabs {
     justify-content: center;

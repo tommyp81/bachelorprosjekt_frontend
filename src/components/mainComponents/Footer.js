@@ -16,7 +16,7 @@ function Footer() {
               <p><b>Badminton</b><br /></p>
               <a className="facebook" href='https://www.facebook.com/badmintonnorge/' target="_blank"><SiFacebook size={22} /></a>
               <a className="twitter" href='https://twitter.com/badmintonnorge' target="_blank"><RiTwitterFill size={22} /></a>
-              <a className="instagran" href='https://www.instagram.com/badmintonnorge/' target="_blank"><RiInstagramLine size={22} /></a>
+              <a className="instagram" href='https://www.instagram.com/badmintonnorge/' target="_blank"><RiInstagramLine size={22} /></a>
             </div>
           </Col>
         </Row>

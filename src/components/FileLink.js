@@ -37,7 +37,7 @@ const FileLink = ({fileId}) => {
 
   return (
     // <a href={host+`GetDocument/${fileId}`} >{fileInfo.fileName}</a>
-    <Button variant="link" onClick={downloadFile}>{fileInfo.fileName}</Button>
+    <Button variant="link" style={{padding: "unset"}} onClick={downloadFile}>{fileInfo.fileName}</Button>
   )
 }
 

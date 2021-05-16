@@ -22,11 +22,11 @@
 .Feed .float-left {
   margin: 0;
   font-size: 16px;
-  color: grey;
+  color: rgb(75, 75, 75)
 }
 
 .Feed .subtoptitle {
-  color: grey;
+  color: rgb(75, 75, 75);
   float: left;
 }
 

@@ -40,6 +40,7 @@ const Topics = ({ topics, subtopics, topClick, subClick, topicFocus, subtopicFoc
 							<Image
 								src={host + topics.imageUrl}
 								className={topicFocus === topics.id ? 'topicimgActive' : 'topicimg'}
+								alt={topics.title + " topic image"}
 							/>
 							<div className="imgtitle">{topics.title}</div>
 						</Accordion.Toggle>
