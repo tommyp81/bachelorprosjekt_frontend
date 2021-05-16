@@ -27,6 +27,8 @@ import NotFound from "./components/NotFound";
 import AdminPanel from "./components/Admin/AdminPanel";
 import SpinnerDiv from "./components/forumComponents/SpinnerDiv";
 import moment from "moment";
+import UsernameDialog from "./components/Admin/UsernameDialog";
+import PasswordDialog from "./components/Admin/PasswordDialog";
 // https://webforum.azurewebsites.net/posts
 // https://webforum.azurewebsites.net/answers
 // https://webforum.azurewebsites.net/users
@@ -215,12 +217,21 @@ const App = () => {
             <Login history={history} />
             <Footer />
           </Route>
+          
           <ProtectedRoute exact path="/">
             {initialized ? <Home
               topic={topics}
               subtopic={subtopics}
             /> : <SpinnerDiv />}
           </ProtectedRoute>
+         
+          <ProtectedRoute exact path="/UsernameDialog">
+            {initialized ? <UsernameDialog/> : <SpinnerDiv />}
+          </ProtectedRoute> 
+
+          <ProtectedRoute exact path="/PasswordDialog">
+            {initialized ? <PasswordDialog user={user}/> : <SpinnerDiv />}
+          </ProtectedRoute> 
 
           <ProtectedRoute exact path="/Forum">
             {initialized ? <Forum
@@ -230,6 +241,7 @@ const App = () => {
               history={history}
             /> : <SpinnerDiv />}
           </ProtectedRoute>
+
           <ProtectedRoute exact path="/Kunnskapsportalen">
             {initialized ? <Kunnskapsportalen
               infoTopics={infoTopics}
@@ -237,6 +249,7 @@ const App = () => {
               deletePost={deletePost}
             /> : <SpinnerDiv />}
           </ProtectedRoute>
+
           <ProtectedRoute exact path="/Forum/:postId">
             {initialized ? <Thread
               subtopics={subtopics}
@@ -245,9 +258,11 @@ const App = () => {
               deletePost={deletePost}
             /> : <SpinnerDiv />}
           </ProtectedRoute>
+
           <ProtectedRoute path="/Admin">
             {initialized ? <AdminPanel /> : <SpinnerDiv />}
           </ProtectedRoute>
+
           <Route path="/error" component={NotFound} />
         </Switch>
         {initialized && <Footer />}

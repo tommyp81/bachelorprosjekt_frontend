@@ -6,8 +6,7 @@ import { BsChatDotsFill, BsBoxArrowLeft } from "react-icons/bs";
 import { BsPersonFill } from "react-icons/bs";
 import { HiAcademicCap } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import PasswordDialog from "../../Admin/PasswordDialog";
-import UsernameDialog from "../../Admin/UsernameDialog";
+
 const SideDrawer = (props) => {
   const { user, logout } = useContext(UserContext);
 
@@ -35,10 +34,10 @@ const SideDrawer = (props) => {
             {user.email}
           </li>
           <li>
-            <UsernameDialog />
+            <Link to="/UsernameDialog">Endre brukernavn</Link>
           </li>
           <li>
-            <PasswordDialog user={user} />
+            <Link to="/PasswordDialog">Endre passord</Link>
           </li>
           {user.admin && <li><Link to="/Admin">Administrer brukere</Link></li>}
         </ul>

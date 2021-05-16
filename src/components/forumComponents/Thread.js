@@ -219,7 +219,7 @@ const Thread = ({
                 <Card.Text>
                   <div className="float-left">
 
-                    <p>Postet av{" "}
+                    <p style={{color: "rgb(75, 75, 75)"}}>Postet av{" "}
                       {post.userId === null ? <b>[Slettet bruker]</b> : <b>{post.username}</b>}{" "}
                       {moment(post.date).calendar()}&nbsp;
                     {post.edited ? <i style={{ color: "gray" }}>(Redigert {moment(post.editDate).calendar()})</i> : ""}
@@ -239,7 +239,7 @@ const Thread = ({
 
                   <div className="attachment" style={{ color: "grey" }}>
                     {post.documentId ?
-                      (<p>Vedlegg: <b><FileLink fileId={post.documentId} /></b></p>)
+                      (<p style={{color: "rgb(75, 75, 75)"}}>Vedlegg: <b><FileLink fileId={post.documentId} /></b></p>)
                       :
                       ("")}
                   </div>

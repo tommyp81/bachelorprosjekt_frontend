@@ -68,7 +68,7 @@ const Comment = ({ initComment, deleteComment }) => {
           <Card.Text>
             <div className="float-left">
 
-              <p>Postet av{" "}
+              <p style={{color: "rgb(75, 75, 75)"}}>Postet av{" "}
                 {comment.userId === null ? <b>[Slettet bruker]</b> :
                   <b>{comment.username}</b>} {" "}
                 {moment(comment.date).calendar()}&nbsp;
@@ -84,7 +84,7 @@ const Comment = ({ initComment, deleteComment }) => {
             </div>
             <br />
 
-            <div className="attachment" style={{ color: "grey" }}>
+            <div className="attachment" style={{color: "rgb(75, 75, 75)"}}>
               {comment.documentId ?
                 (<>Vedlegg: <b><FileLink fileId={comment.documentId} /></b></>)
                 :

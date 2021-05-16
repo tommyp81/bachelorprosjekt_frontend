@@ -1,3 +1,20 @@
+ .UsernameDialog, .PasswordDialog {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 500px;
+  margin-top: 10rem;
+  margin-bottom: 20rem;
+ }
+ 
+ @media (max-width: 768px) {
+  .UsernameDialog, .PasswordDialog {
+    margin-bottom: 10rem;
+    color: white;
+  }
+
+
+ }
+ 
  .AdminPanel {
   margin-top: 10rem;
   margin-bottom: 10rem;

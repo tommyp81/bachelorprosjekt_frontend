@@ -9,14 +9,13 @@ import { BsPersonFill } from "react-icons/bs";
 import { HiAcademicCap } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
-import PasswordDialog from "../../Admin/PasswordDialog";
-import UsernameDialog from "../../Admin/UsernameDialog";
 
 const ToolBar = (props) => {
   const {user, logout} = useContext(UserContext)
-  
+
+
   return (
-    <header className="toolbar">
+    <header className="toolbar" style={{zIndex: "120"}}>
       <nav className="tnavigation">
         <div className="t-toggle-btn">
           <ToggleButton click={props.handleDrawerToggleClick} />
@@ -58,9 +57,10 @@ const ToolBar = (props) => {
                   <Dropdown.Item><BsPersonFill size="20px" /> <b>{user.username}</b></Dropdown.Item>
                   <Dropdown.Item>{user.firstName} {user.lastName}</Dropdown.Item>
                   <Dropdown.Item>{user.email}</Dropdown.Item>
-                  {user.admin && <Dropdown.Item><Link to="/Admin">Administrer brukere</Link></Dropdown.Item>}
-                  <Dropdown.Item><UsernameDialog /></Dropdown.Item>
-                  <Dropdown.Item><PasswordDialog user={user} /></Dropdown.Item>
+                  <Dropdown.Divider/>
+                  {user.admin && <Dropdown.Item href="/Admin"><Link to="/Admin">Administrer brukere</Link></Dropdown.Item>}
+                  <Dropdown.Item href="/UsernameDialog"><Link to="/UsernameDialog">Endre brukernavn</Link></Dropdown.Item>
+                  <Dropdown.Item href="/PasswordDialog"><Link to="/PasswordDialog">Endre passord</Link></Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
               :
