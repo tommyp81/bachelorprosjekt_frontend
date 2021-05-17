@@ -1,32 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  Col,
-  Button,
-  Container,
-  Dropdown,
-  Row,
-} from "react-bootstrap";
+import { Col, Container, Dropdown, Row } from "react-bootstrap";
 import Topics from "./Topics.js";
 import NewPost from "./NewPost.js";
 import Pages from "./Pages.js";
 import "./Forum.css";
-import moment from "moment";
 import Feed from "./Feed.js";
 
 import SortItems from "./SortItems";
 import { UserContext } from "../../App";
-import SpinnerDiv from "./SpinnerDiv.js";
 import { host } from "../../App.js";
 import Search from "../Search";
 
-const Forum = ({
-  addPost,
-  topics,
-  subtopics,
-  users,
-  history,
-}) => {
-
+const Forum = ({ addPost, topics, subtopics, users, history }) => {
   const [filteredPosts, setFilteredPosts] = useState([]);
 
   const [topicFocus, setTopicFocus] = useState("");
@@ -36,41 +21,41 @@ const Forum = ({
   const [subTopicDesc, setSubTopicDesc] = useState("");
   const [subTopicTitle, setSubTopicTitle] = useState("");
 
-  const [searchValue, setSearchValue] = useState("")
+  const [searchValue, setSearchValue] = useState("");
   const { user } = useContext(UserContext);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(10);
-  const [totalPages, setTotalPages] = useState(null)
+  const [totalPages, setTotalPages] = useState(null);
 
-  const [sort, setSort] = useState({ sortOrder: "Desc", sortType: "Date" })
+  const [sort, setSort] = useState({ sortOrder: "Desc", sortType: "Date" });
 
   const [loading, setLoading] = useState(false);
 
-  const postsURL = searchValue ?
-    `posts/search?query=${searchValue}&subTopicId=${subtopicFocus}&pageNumber=${currentPage}&pageSize=${postsPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}` :
-    `posts?subTopicId=${subtopicFocus}&pageNumber=${currentPage}&pageSize=${postsPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`
+  const postsURL = searchValue
+    ? `posts/search?query=${searchValue}&subTopicId=${subtopicFocus}&pageNumber=${currentPage}&pageSize=${postsPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`
+    : `posts?subTopicId=${subtopicFocus}&pageNumber=${currentPage}&pageSize=${postsPerPage}&sortOrder=${sort.sortOrder}&sortType=${sort.sortType}`;
 
   useEffect(async () => {
-    setLoading(true)
+    setLoading(true);
     const res = await fetch(host + postsURL, {
       headers: {
-        Authorization: `Bearer ${user.token}`
-      }
-    })
-    const posts = await res.json()
-    setFilteredPosts(posts.data)
-    setTotalPages(posts.totalPages)
-    setLoading(false)
-    return (() => {
-      setFilteredPosts([])
-      setTotalPages(null)
-    })
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+    const posts = await res.json();
+    setFilteredPosts(posts.data);
+    setTotalPages(posts.totalPages);
+    setLoading(false);
+    return () => {
+      setFilteredPosts([]);
+      setTotalPages(null);
+    };
   }, [subtopicFocus, currentPage, postsPerPage, sort, searchValue]);
 
   const handleScroll = () => {
-    window.scroll({ top: 0, behavior: "smooth" })
-  }
+    window.scroll({ top: 0, behavior: "smooth" });
+  };
 
   const onTopClick = (key) => {
     if (key) {
@@ -101,14 +86,18 @@ const Forum = ({
     setCurrentPage(1);
   };
 
-
   return (
     <div className="Forum mt-5">
       <Container className="body">
         <Row xs={1} sm={1} lg={2}>
           <Col lg={3}>
-            <div className="desktopsearch">
-              <Search setSearchValue={setSearchValue} searchValue={searchValue} placeholderText={"Søk..."} setCurrentPage={setCurrentPage} />
+            <div className="desktopsearch" role="search">
+              <Search
+                setSearchValue={setSearchValue}
+                searchValue={searchValue}
+                placeholderText={"Søk..."}
+                setCurrentPage={setCurrentPage}
+              />
             </div>
             <Topics
               topics={topics}
@@ -121,7 +110,7 @@ const Forum = ({
 
           <Col lg={9}>
             <Container className="top">
-              <div className="topictext">
+              <div className="topictext" role="topic">
                 <h2>
                   {!topicTitle ? "Alle kategorier" : topicTitle}
                   {!subTopicTitle ? "" : <>&nbsp;-&nbsp;{subTopicTitle}</>}
@@ -129,7 +118,7 @@ const Forum = ({
                 <p>{!subTopicDesc ? "" : subTopicDesc}</p>
               </div>
 
-              <div className="newpost">
+              <div className="newpost" role="newpost">
                 <NewPost
                   subtopicTitle={subTopicTitle}
                   subtopic={subtopicFocus}
@@ -139,41 +128,42 @@ const Forum = ({
                 />
               </div>
 
-              <div className="sortposts">
-                <SortItems
-                  setSort={setSort}
-                  isPost={true}
-                />
+              <div className="sortposts" role="sortposts">
+                <SortItems setSort={setSort} isPost={true} />
               </div>
 
-              <div className="mobilesearch">
-                <Search setSearchValue={setSearchValue} searchValue={searchValue} placeholderText={"Søk..."} setCurrentPage={setCurrentPage} />
+              <div className="mobilesearch" role="searchposts">
+                <Search
+                  setSearchValue={setSearchValue}
+                  searchValue={searchValue}
+                  placeholderText={"Søk..."}
+                  setCurrentPage={setCurrentPage}
+                />
               </div>
             </Container>
 
-            <Container className="main">
-              {filteredPosts &&
+            <Container className="main" role="feed">
+              {filteredPosts && (
                 <Feed
                   topic={topics}
                   subtopic={subtopics}
-                  // maxLength={currentPosts.length}
                   posts={filteredPosts}
                   loading={loading}
                 />
-              }
+              )}
             </Container>
 
             <Container className="bot">
-              <div className="pages">
-                {totalPages > 1 &&
+              <div className="pages" role="pages">
+                {totalPages > 1 && (
                   <Pages
                     currentPage={currentPage}
                     totalPages={totalPages}
                     setCurrentPage={setCurrentPage}
                   />
-                }
+                )}
               </div>
-              <div className="postsperpage">
+              <div className="postsperpage" role="postsperpage">
                 <Dropdown>
                   <Dropdown.Toggle variant="primary" id="dropdown-basic">
                     {postsPerPage} per side:
@@ -183,7 +173,11 @@ const Forum = ({
                       <Dropdown.Item
                         key={i}
                         value={pageSize}
-                        onSelect={() => { setPostsPerPage(pageSize); setCurrentPage(1); handleScroll() }}
+                        onSelect={() => {
+                          setPostsPerPage(pageSize);
+                          setCurrentPage(1);
+                          handleScroll();
+                        }}
                       >
                         Vis {pageSize} poster per side
                       </Dropdown.Item>

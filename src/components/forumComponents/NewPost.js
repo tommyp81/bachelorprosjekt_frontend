@@ -57,7 +57,7 @@ function NewPost({ subtopicTitle, subtopic, topicFocus, add, history }) {
   }
 
   async function handleSubmit(event) {
-    console.log("1")
+    console.log("1");
     event.preventDefault();
 
     submitPost();
@@ -68,7 +68,7 @@ function NewPost({ subtopicTitle, subtopic, topicFocus, add, history }) {
   }
 
   const submitPost = async () => {
-    console.log("2")
+    console.log("2");
     let postId = await add(
       {
         title,
@@ -91,7 +91,7 @@ function NewPost({ subtopicTitle, subtopic, topicFocus, add, history }) {
       {!subtopicTitle ? (
         <p>Velg en kategori og underkategori for å opprette en ny post.</p>
       ) : (
-        <Button variant="primary" onClick={handleShow} disabled={!subtopic}>
+        <Button variant="primary" onClick={handleShow} disabled={!subtopic} role="newpost">
           + Ny post
         </Button>
       )}
@@ -102,53 +102,47 @@ function NewPost({ subtopicTitle, subtopic, topicFocus, add, history }) {
             <Modal.Title>Ny post i {subtopicTitle}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-
-            <Form.Group
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label>Tittel</Form.Label>
+            <Form.Group controlId="exampleForm.ControlTextarea1">
+              <Form.Label htmlFor="title">Tittel</Form.Label>
               <Form.Control
                 type="text"
                 rows={1}
                 name="title"
+                id="title"
+                role="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
             </Form.Group>
             <Form.Group>
+              <Form.Label htmlFor="content">Innhold</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={5}
                 name="content"
+                id="content"
+                role="content"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
               />
             </Form.Group>
             <Form.Group>
-              {/* <Dropzone onDrop={handleDrop} maxFiles={1} onDropAccepted={handleAccept}>
-                {({ getRootProps, getInputProps }) => (
-                  <div {...getRootProps({ style })}>
-                    <input {...getInputProps()} />
-                    {file ? <p>{file.name} &#10003;</p> : <p>Drag'n'drop fil, eller klikk for å velge en fil.</p> }
-                  </div>
-                )}
-              </Dropzone> */}
               <FileDrop file={file} setFile={setFile} />
             </Form.Group>
-
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant="secondary" onClick={handleClose} role="cancel">
               Avbryt
-          </Button>
+            </Button>
             <Button
+              role="confirm"
               type="submit"
               variant="success"
               onClick={handleClose}
               disabled={!validateForm()}
             >
               Send inn
-          </Button>
+            </Button>
           </Modal.Footer>
         </Form>
       </Modal>

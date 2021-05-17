@@ -63,7 +63,6 @@ const App = () => {
   }
 
   const logout = () => {
-    console.log("YO")
     localStorage.clear();
     setUser(null);
     setTokenTimer(null)
@@ -76,19 +75,16 @@ const App = () => {
   }
 
   useEffect(async() => {
-    console.log("TTTTTTT")
     const token = localStorage.getItem('token')
     if (token) {
       const userId = jwt_decode(token).nameid
       const user = await getUser(userId, token)
-      console.log("mmmmmmmm")
       if(user)
         login({...user, token})
     }
   }, [])
 
   useEffect(() => {
-    console.log("???????")
     let logoutTimer
     if (user?.token && tokenTimer) {
       logoutTimer = setTimeout(autoLogout, tokenTimer - moment().valueOf())

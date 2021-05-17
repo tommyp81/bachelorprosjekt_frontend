@@ -28,8 +28,8 @@ function NewComment({createNew, pId}) {
   return (
     <div className="NewComment">
       <Form onSubmit={submitComment}>
-        <Tabs defaultActiveKey="1" >
-          <Tab eventKey="1" title="Kommentar" className="tab">
+        <Tabs defaultActiveKey="1">
+          <Tab eventKey="1" title="Kommentar" className="tab" role="newcomment">
             <Form.Group >
               <Form.Control as="textarea" rows={3} name="comment" value={content} placeholder="Legg til en kommentar..." onChange={e => setContent(e.target.value)}/>
               {!file ? "" : 
@@ -37,12 +37,12 @@ function NewComment({createNew, pId}) {
               }
             </Form.Group>
           </Tab>
-          <Tab eventKey="2" title="Vedlegg">
+          <Tab eventKey="2" title="Vedlegg" role="attachment">
             <FileDrop file={file} setFile={setFile}/>
           </Tab>
         </Tabs>
         <Form.Group>
-          <Button disabled={!validateForm()} type="submit" className="float-right" variant="success" >Send inn</Button>
+          <Button disabled={!validateForm()} type="submit" className="float-right" variant="success" role="confirm">Send inn</Button>
         </Form.Group>
       </Form>
     </div>

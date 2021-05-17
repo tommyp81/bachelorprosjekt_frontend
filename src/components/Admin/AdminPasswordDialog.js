@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { host, UserContext } from "../../App";
+import { Link } from "react-router-dom"
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -74,9 +75,9 @@ const AdminPasswordDialog = ({ selectedUser }) => {
 
   return (
     <div className="AdminPasswordDialog">
-      <span className="btn-link" onClick={handleShow}>
+      <Link onClick={handleShow}>
         Endre passord
-      </span>
+      </Link>
       <Modal animation={false} show={show} onHide={handleClose}>
         <form onSubmit={handleSubmit(onSubmit)} >
           <Modal.Header closeButton={true}>
@@ -85,14 +86,14 @@ const AdminPasswordDialog = ({ selectedUser }) => {
           <Modal.Body>
 
             <div>
-              <label>Passord</label>
-              <input className="form-control input-lg" type="password" name="password" {...register('password')} />
+              <label htmlFor="password">Passord</label>
+              <input className="form-control input-lg" id="password" type="password" name="password" {...register('password')} />
               <p className="validationError">{errors['password']?.message}</p>
             </div>
             <br />
             <div>
-              <label>Bekreft passord</label>
-              <input className="form-control input-lg" type="password" name="confirmPassword" {...register('confirmPassword')} />
+              <label htmlFor="confirmpassword">Bekreft passord</label>
+              <input className="form-control input-lg" id="confirmpassword" type="password" name="confirmPassword" {...register('confirmPassword')} />
               <p className="validationError">{errors['confirmPassword']?.message}</p>
             </div>
 

@@ -44,22 +44,22 @@ const EditComment = ({ comment, edit }) => {
 
   return (
     <>
-      <Button variant="primary" size="sm" onClick={handleShow}>
+      <Button variant="primary" size="sm" onClick={handleShow} role="editcomment">
         Rediger
       </Button>
-      <Modal show={show} onHide={handleClose} centered>
+      <Modal show={show} onHide={handleClose} role="editcomment" centered>
         <Form onSubmit={handleSubmit}>
           <Modal.Header closeButton>
             <Modal.Title>Rediger kommentar</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-
-            <Form.Group
-              controlId="exampleForm.ControlTextarea1"
-            >
+            <Form.Group controlId="exampleForm.ControlTextarea1">
+              <Form.Label htmlFor="content">Innhold</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={5}
+                id="content"
+                role="content"
                 name="content"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
@@ -73,20 +73,20 @@ const EditComment = ({ comment, edit }) => {
               )}
               <FileDrop file={file} setFile={setFile} />
             </Form.Group>
-
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant="secondary" onClick={handleClose} role="cancel">
               Avbryt
-          </Button>
+            </Button>
             <Button
               type="submit"
               variant="success"
+              role="confirm"
               onClick={handleClose}
               disabled={!validateForm()}
             >
               Send inn
-          </Button>
+            </Button>
           </Modal.Footer>
         </Form>
       </Modal>

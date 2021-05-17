@@ -16,7 +16,6 @@ const SideDrawer = (props) => {
     drawerClasses = "sideDrawer open";
   }
 
-
   return (
     <nav className={drawerClasses}>
       <div className="user">
@@ -30,39 +29,47 @@ const SideDrawer = (props) => {
           <li>
             {user.firstName} {user.lastName}
           </li>
+          <li>{user.email}</li>
           <li>
-            {user.email}
+            <Link to="/UsernameDialog" role="changeusername">
+              Endre brukernavn
+            </Link>
           </li>
           <li>
-            <Link to="/UsernameDialog">Endre brukernavn</Link>
+            <Link to="/PasswordDialog" role="changepassword">Endre passord</Link>
           </li>
-          <li>
-            <Link to="/PasswordDialog">Endre passord</Link>
-          </li>
-          {user.admin && <li><Link to="/Admin">Administrer brukere</Link></li>}
+          {user.admin && (
+            <li>
+              <Link to="/Admin" role="administerusers">Administrer brukere</Link>
+            </li>
+          )}
         </ul>
       </div>
       <ul>
         <li>
-          <Link to="/" onClick={props.toggle}>
+          <Link to="/" onClick={props.toggle} role="home">
             <AiFillHome size="22px" /> Hjem
           </Link>
         </li>
         <li>
-          <Link to="/Forum" onClick={props.toggle}>
+          <Link to="/Forum" onClick={props.toggle} role="forum">
             <BsChatDotsFill size="21px" /> Forum
           </Link>
         </li>
         <li>
-          <Link to="/Kunnskapsportalen" onClick={props.toggle}>
+          <Link to="/Kunnskapsportalen" onClick={props.toggle} role="kunnskapsportalen">
             <HiAcademicCap size="22px" /> Kunnskapsportalen
           </Link>
         </li>
         <li>
-          <Link to="#" onClick={() => {
-            logout();
-            props.toggle();
-          }}>
+          <Link
+            role="logout"
+            to="#"
+            onClick={() => {
+              logout();
+              props.toggle();
+            }}
+          >
             <BsBoxArrowLeft size="22px" /> Logg ut
           </Link>
         </li>

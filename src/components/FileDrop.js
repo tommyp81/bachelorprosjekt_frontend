@@ -8,7 +8,7 @@ const dropStyle = {
   borderColor: "#eeeeee",
   borderStyle: "dashed",
   backgroundColor: "#fafafa",
-  color: "#bdbdbd",
+  color: "rgb(75, 75, 75)",
   marginBottom: "20px",
   borderRadius: "3px",
 };

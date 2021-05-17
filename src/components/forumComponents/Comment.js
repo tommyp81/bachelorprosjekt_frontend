@@ -5,13 +5,12 @@ import { UserContext } from "../../App";
 import FileLink from "../FileLink";
 import LikeButton from "../LikeButton";
 import EditComment from "./EditComment";
-import "./Comment.css"
+import "./Comment.css";
 import { host } from "../../App";
 
 moment.locale("nb");
 
 const Comment = ({ initComment, deleteComment }) => {
-
   const { user } = useContext(UserContext);
 
   const [comment, setComment] = useState(initComment);
@@ -29,9 +28,9 @@ const Comment = ({ initComment, deleteComment }) => {
       const upres = await fetch(host + "UploadDocument", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${user.token}`
+          Authorization: `Bearer ${user.token}`,
         },
-        body: formData
+        body: formData,
       });
       const updata = await upres.json();
       comment.documentId = updata.id;
@@ -44,9 +43,9 @@ const Comment = ({ initComment, deleteComment }) => {
     const res = await fetch(host + `comments/${comment.id}`, {
       method: "PUT",
       headers: {
-        Authorization: `Bearer ${user.token}`
+        Authorization: `Bearer ${user.token}`,
       },
-      body: formData
+      body: formData,
     });
     const data = await res.json();
 
@@ -67,68 +66,101 @@ const Comment = ({ initComment, deleteComment }) => {
         <Card.Body>
           <Card.Text>
             <div className="float-left">
-
-              <p style={{color: "rgb(75, 75, 75)"}}>Postet av{" "}
-                {comment.userId === null ? <b>[Slettet bruker]</b> :
-                  <b>{comment.username}</b>} {" "}
+              <p style={{ color: "rgb(75, 75, 75)" }} role="userinfo">
+                Postet av{" "}
+                {comment.userId === null ? (
+                  <b>[Slettet bruker]</b>
+                ) : (
+                  <b>{comment.username}</b>
+                )}{" "}
                 {moment(comment.date).calendar()}&nbsp;
-          {comment.edited ? <i style={{ color: "gray" }}>(Redigert {moment(comment.editDate).calendar()})</i> : ""}
+                {comment.edited ? (
+                  <i style={{ color: "gray" }}>
+                    (Redigert {moment(comment.editDate).calendar()})
+                  </i>
+                ) : (
+                  ""
+                )}
               </p>
             </div>
           </Card.Text>
 
           <Card.Text>
             <br />
-            <div className="commentcontent">
+            <div className="commentcontent" role="commentcontent">
               {comment.content}
             </div>
             <br />
 
-            <div className="attachment" style={{color: "rgb(75, 75, 75)"}}>
-              {comment.documentId ?
-                (<>Vedlegg: <b><FileLink fileId={comment.documentId} /></b></>)
-                :
-                ("")}
+            <div
+              className="attachment"
+              style={{ color: "rgb(75, 75, 75)" }}
+              role="attachment"
+            >
+              {comment.documentId ? (
+                <>
+                  Vedlegg:{" "}
+                  <b>
+                    <FileLink fileId={comment.documentId}/>
+                  </b>
+                </>
+              ) : (
+                ""
+              )}
             </div>
 
-            {((user.id === comment.userId) || user.admin) ?
-              <div className="editdelete">
-                {(user.id === comment.userId) && <EditComment comment={comment} edit={editComment} />} &nbsp;
-            {((user.id === comment.userId) || user.admin) &&
+            {user.id === comment.userId || user.admin ? (
+              <div className="editdelete" role="editdelete">
+                {user.id === comment.userId && (
+                  <EditComment comment={comment} edit={editComment} />
+                )}
+                &nbsp;
+                {(user.id === comment.userId || user.admin) && (
                   <Button
                     variant="danger"
                     size="sm"
                     onClick={handleShow}
-                    value={comment.id}>
+                    value={comment.id}
+                  >
                     Slett
-              </Button>}
-
-                <Modal show={show} onHide={handleClose}>
+                  </Button>
+                )}
+                <Modal show={show} onHide={handleClose} role="confirmdelete">
                   <Modal.Header closeButton>
                     <Modal.Title>Slett kommentar</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
                     Er du sikker på at du vil slette din kommentar?
-              </Modal.Body>
+                  </Modal.Body>
                   <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={handleClose} role="cancel">
                       Avbryt
-                </Button>
-                &nbsp;
-                <Button
+                    </Button>
+                    &nbsp;
+                    <Button
                       variant="danger"
                       onClick={deleteComment}
                       value={comment.id}
+                      role="delete"
                     >
                       Slett
-                </Button>
+                    </Button>
                   </Modal.Footer>
                 </Modal>
               </div>
-              : ""}
+            ) : (
+              ""
+            )}
 
-            <div className="like">
-              {comment.like_Count}&nbsp;<LikeButton id={comment.id} liked={liked} setLiked={setLiked} isPost={false} updateCommentLike={setCommentLikeCount} />
+            <div className="like" role="likebutton">
+              {comment.like_Count}&nbsp;
+              <LikeButton
+                id={comment.id}
+                liked={liked}
+                setLiked={setLiked}
+                isPost={false}
+                updateCommentLike={setCommentLikeCount}
+              />
             </div>
           </Card.Text>
         </Card.Body>

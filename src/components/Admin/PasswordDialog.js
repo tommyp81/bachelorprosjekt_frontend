@@ -77,16 +77,16 @@ const PasswordDialog = ({ user }) => {
         <h3>Endre passord for {user.username}</h3>
         <br/>
         <Form onSubmit={handleSubmit(onSubmit)} >
-          <Form.Label>
+          <Form.Label htmlFor="password">
             Nytt passord
           </Form.Label>
-          <Form.Control type="password" name="password" {...register('password')} />
+          <Form.Control type="password" id="password" name="password" {...register('password')} />
           <p className="validationError">{errors['password']?.message}</p>
           
-          <Form.Label>
+          <Form.Label htmlFor="confirmpassword">
             Bekreft passord
           </Form.Label>
-          <Form.Control type="password" name="confirmPassword" {...register('confirmPassword')} />
+          <Form.Control type="password" id="confirmpassword" name="confirmPassword" {...register('confirmPassword')} />
           <p className="validationError">{errors['confirmPassword']?.message}</p>
           <Button
             variant="success"

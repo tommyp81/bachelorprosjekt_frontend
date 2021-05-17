@@ -8,21 +8,29 @@
   z-index: 100;
 }
 .tlogo {
+  display: inline-flex;
   margin-left: 1rem;
 }
-.tlogo a {
+
+.tlogoname {
+  margin-top: 12px;
+  vertical-align: middle;
+}
+
+.tlogoname a {
   color: white;
   text-decoration: none;
   font-size: 6mm;
-  font-weight: bold;
+  font-weight: 650;
+  margin-top: 50%;
 }
 
 .tlogo img {
   margin: 8px;
   background: white;
-  width: 40px;
+  width: 50px;
   left: 0;
-  border-radius: 18px;
+  border-radius: 50%;
 }
 
 .tnavigation {
@@ -98,7 +106,6 @@
 .uNavItems .dropdown-item,
 .uNavItems .dropdown-item:hover,
 .uNavItems .dropdown-item:active {
-  color: black;
   background-color: white;
   cursor: unset;
 }
@@ -111,11 +118,37 @@
   .t-toggle-btn {
     margin-right: 15px;
   }
-  .tlogo a {
-    font-size: 5mm;
+  
+}
+
+@media (max-width: 450px) {
+
+  .tlogo {
+    margin-left: unset;
   }
-  .tlogo img {
-    width: 35px;
+
+  .tlogoname {
+    margin-top: 14px;
+  }
+  
+  .tlogoname a {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 365px) {
+.tlogoname {
+  margin-top: 4px;
+}
+}
+
+@media (max-width: 340px) {
+  .tlogoname {
+    margin-top: 6px;
+  }
+
+  .tlogoname a { 
+    font-size: 16px;
   }
 }
 

@@ -41,7 +41,7 @@ const Home = ({ topic, subtopic }) => {
         <Row className="toprow">
           <Col md={6}>
             <h3>Diskusjoner i forumet</h3>
-            <div className="sortposts">
+            <div className="sortposts" role="sortposts">
               <SortItems
                 setSort={setSort}
                 isPost={true}
