@@ -3,6 +3,7 @@ import "./Kunnskapsportalen.css";
 import { Dropdown } from "react-bootstrap";
 
 const SortContent = ({ setSort, isDocument }) => {
+  
   // video and document
   const sortByTopic = () => {
     setSort({ sortOrder: "Asc", sortType: "infoTopicId" });

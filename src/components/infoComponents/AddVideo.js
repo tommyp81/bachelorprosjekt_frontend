@@ -8,7 +8,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-// ^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$
 const regExp =
   /(.+?)(\/)(watch\x3Fv=)?(embed\/watch\x3Ffeature\=player_embedded\x26v=)?([a-zA-Z0-9_-]{11})/;
 const schema = yup.object().shape({
@@ -47,7 +46,7 @@ const AddVideo = ({ infoTopics, setVideos, addPost }) => {
       title: data.title,
       content: data.description,
       userId: user.id,
-      subTopicId: Number(data.infoTopicId) + 16, // TODO
+      subTopicId: Number(data.infoTopicId) + 16, 
       topicId: 5,
     };
 

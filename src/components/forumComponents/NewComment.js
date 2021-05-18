@@ -24,7 +24,6 @@ function NewComment({createNew, pId}) {
     
   }
 
-
   return (
     <div className="NewComment">
       <Form onSubmit={submitComment}>

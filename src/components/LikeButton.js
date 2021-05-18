@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { FaThumbsUp } from 'react-icons/fa'
 import { UserContext } from '../App'
 
@@ -42,7 +42,6 @@ const LikeButton = ({id, liked, setLiked, isPost, updatePostLike, updateCommentL
       
     } catch (error) {
       console.log(error)
-      // setLiked(false)
     }
   }, [])
 
@@ -83,8 +82,6 @@ const LikeButton = ({id, liked, setLiked, isPost, updatePostLike, updateCommentL
     }
       
   }
-
-  
 
   return (
     <span onClick={toggle} >

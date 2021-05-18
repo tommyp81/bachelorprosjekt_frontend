@@ -11,7 +11,7 @@ import { UserContext } from "../../App";
 import { host } from "../../App.js";
 import Search from "../Search";
 
-const Forum = ({ addPost, topics, subtopics, users, history }) => {
+const Forum = ({ addPost, topics, subtopics, history }) => {
   const [filteredPosts, setFilteredPosts] = useState([]);
 
   const [topicFocus, setTopicFocus] = useState("");

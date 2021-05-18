@@ -94,9 +94,6 @@ const Thread = ({
       .catch(console.log);
   }, [currentPage, sort, searchValue]);
 
-  // const threadComments = comments.filter(c => Number(postId) === c.postId).slice(0).sort((d1, d2) => moment(d2.date) - moment(d1.date))
-
-
   const deleteThread = async () => {
     const success = deletePost(postId);
     if (success) history.push("/Forum");

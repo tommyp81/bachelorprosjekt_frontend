@@ -10,7 +10,8 @@ const schema = yup.object().shape({
   username: yup
     .string()
     .required("Brukernavn må fylles ut")
-    .min(5, "Brukernavn må være minst 5 tegn"),
+    .min(5, "Brukernavn må være minst 5 tegn")
+    .max(30, "Brukernavn må være maks 30 tegn"),
   email: yup
     .string()
     .email("E-posten er ikke gyldig")

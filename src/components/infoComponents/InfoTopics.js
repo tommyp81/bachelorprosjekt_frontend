@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Button, Tabs, Tab, Accordion, Form } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button } from "react-bootstrap";
 import "./Kunnskapsportalen.css";
 
 const InfoTopics = ({ infoTopics, setInfoTopic }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
-  // useEffect(() => {
-  //   return(() => allContent())
-  // })
 
   const filterContent = (e) => {
     let value = e.target.value;

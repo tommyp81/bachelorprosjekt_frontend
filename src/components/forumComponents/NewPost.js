@@ -1,33 +1,11 @@
-import React, { useContext, useState, useMemo } from "react";
-import { Form, Button, Container, Modal, Dropdown } from "react-bootstrap";
-import moment from "moment";
+import React, { useContext, useState } from "react";
+import { Form, Button, Modal } from "react-bootstrap";
 import "./Forum.css";
 import { UserContext } from "../../App";
 
-import Dropzone from "react-dropzone";
 import FileDrop from "../FileDrop";
 
-// const dropStyle = {
-//   textAlign: 'center',
-//   padding: '10px',
-//   borderWidth: '3px',
-//   borderColor: '#eeeeee',
-//   borderStyle: 'dashed',
-//   backgroundColor: '#fafafa',
-//   color: '#bdbdbd',
-//   margin: '5px'
-// }
-
-// const acceptDropStyle = {
-//   color: '#00e676'
-// }
-
 function NewPost({ subtopicTitle, subtopic, topicFocus, add, history }) {
-  // const [fileAccepted, setFileAccepted] = useState(false)
-  // const style = useMemo(() => ({
-  //   ...dropStyle,
-  //   ...fileAccepted ? acceptDropStyle : {}
-  // }), [fileAccepted])
 
   const { user } = useContext(UserContext);
 
@@ -37,7 +15,6 @@ function NewPost({ subtopicTitle, subtopic, topicFocus, add, history }) {
   const [content, setContent] = useState("");
   const [show, setShow] = useState(false);
   const handleClose = () => {
-    // setFileAccepted(false)
     setShow(false);
   };
   const handleShow = () => {

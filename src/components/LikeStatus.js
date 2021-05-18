@@ -29,7 +29,6 @@ const LikeStatus = ({postId}) => {
       
     } catch (error) {
       console.log(error)
-      // setLiked(false)
     }
   }, [])
 

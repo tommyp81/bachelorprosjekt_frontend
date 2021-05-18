@@ -1,24 +1,15 @@
 import { useState, useEffect, useCallback, createContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import moment from "moment";
 import { Switch, Route, useHistory } from "react-router-dom";
 import jwt_decode from 'jwt-decode'
-
-//Importing main components.
-
-//Header og footer kan dere bare ignorere for nå
 import Footer from "./components/mainComponents/Footer.js";
-
 import Login from "./components/loginComponents/Login.js";
 import Home from "./components/homeComponents/Home.js";
-
-//Importing forum components
-//Bruk disse hver for seg!
 import Forum from "./components/forumComponents/Forum.js";
 import Thread from "./components/forumComponents/Thread.js";
-
 import Kunnskapsportalen from "./components/infoComponents/Kunnskapsportalen.js";
-
 import ProtectedRoute from "./ProtectedRoute";
 import Toolbar from "./components/NavigationCompoonent/Toolbar/Toolbar";
 import SideDrawer from "./components/NavigationCompoonent/SideDrawer/SideDrawer";
@@ -26,7 +17,6 @@ import Backdrop from "./components/NavigationCompoonent/Backdrop/Backdrop";
 import NotFound from "./components/NotFound";
 import AdminPanel from "./components/Admin/AdminPanel";
 import SpinnerDiv from "./components/forumComponents/SpinnerDiv";
-import moment from "moment";
 import UsernameDialog from "./components/Admin/UsernameDialog";
 import PasswordDialog from "./components/Admin/PasswordDialog";
 // https://webforum.azurewebsites.net/posts
@@ -42,7 +32,6 @@ const App = () => {
   const history = useHistory();
 
   const [user, setUser] = useState(false)
-  // const [token, setToken] = useState(null)
   const [tokenTimer, setTokenTimer] = useState()
 
   const [initialized, setInitialized] = useState(false)
@@ -56,7 +45,7 @@ const App = () => {
 
   const login = user => {
     setUser(user)
-    const tt = jwt_decode(user.token).exp * 1000 - 3540000; //- 3540000
+    const tt = jwt_decode(user.token).exp * 1000 - 3540000;
     setTokenTimer(tt)
     localStorage.setItem('token', user.token)
     setInitialized(true)
@@ -169,7 +158,6 @@ const App = () => {
 
   // sends post to api/database and updates posts with new post
   const addPost = async (post, file) => {
-    console.log("HALLO");
     const formData = new FormData();
     if (file) formData.append("File", file);
     for (let k in post) {
@@ -198,9 +186,6 @@ const App = () => {
 
     return res.status === 200;
   };
-
-  // if(!initialized)
-  //   return <SpinnerDiv />
 
   return (
     <UserContext.Provider value={{ user, setUser, login, logout }}>

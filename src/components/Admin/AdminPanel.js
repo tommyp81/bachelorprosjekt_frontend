@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Button, Form, Table } from 'react-bootstrap'
 import { host } from '../../App'
-import SearchUsers from "./SearchUsers.js"
 import './AdminPanel.css'
 import AdminPasswordDialog from './AdminPasswordDialog'
 import Pages from '../forumComponents/Pages'
@@ -91,21 +90,6 @@ const AdminPanel = () => {
     }))
   }
 
-  // const currentUsers = users
-  //   .filter((users) => {
-  //     if (searchFilter === "") {
-  //       return users;
-  //     } else if (
-  //       users.username.toLowerCase().includes(searchFilter.toLowerCase()) ||
-  //       users.firstName.toLowerCase().includes(searchFilter.toLowerCase()) ||
-  //       users.lastName.toLowerCase().includes(searchFilter.toLowerCase()) ||
-  //       users.email.toLowerCase().includes(searchFilter.toLowerCase())
-  //     ) {
-  //       return users;
-  //     }
-  //   })
-
-
   return (
     <div className="AdminPanel">
     <div className="toppanel">
@@ -149,7 +133,6 @@ const AdminPanel = () => {
                   <option value={true}>true</option>
                   <option value={false}>false</option>
                 </Form.Control>
-                {/* {String(u.admin)} */}
               </td>
               <td width={125}><AdminPasswordDialog selectedUser={u}/></td>
             </tr>

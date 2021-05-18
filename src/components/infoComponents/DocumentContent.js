@@ -10,8 +10,7 @@ import Pages from "../forumComponents/Pages";
 import AddDocument from "./AddDocument";
 import Search from "../Search";
 import SortContent from "./SortContent";
-import { BsFileEarmark, BsFileEarmarkText } from "react-icons/bs";
-import { RiFileTextFill, RiFileTextLine } from "react-icons/ri";
+import { BsFileEarmarkText } from "react-icons/bs";
 
 const DocumentContent = ({ infoTopics }) => {
   const { user } = useContext(UserContext);

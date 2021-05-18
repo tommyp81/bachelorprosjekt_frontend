@@ -13,7 +13,6 @@ const FileInfo = ({fileId, isReplaced}) => {
   }, [])
 
   return (
-    // <a id="link" download={fileInfo.fileName}>{fileInfo.fileName}</a>
     <p hidden={isReplaced}>Vedlegg: {fileInfo.fileName}</p>
   )
 }
