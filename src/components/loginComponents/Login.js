@@ -6,6 +6,8 @@ import "./Login.css";
 import { UserContext } from "../../App";
 import { host } from "../../App";
 import Register from "../registerComponent/Register";
+import SpinnerDiv from "../forumComponents/SpinnerDiv";
+import Footer from "../mainComponents/Footer";
 
 const Login = ({ history }) => {
 
@@ -15,6 +17,8 @@ const Login = ({ history }) => {
   const [password, setPassword] = useState("");
 
   const [tabKey, setTabKey] = useState('login')
+
+  const [loading, setLoading] = useState(false)
 
 
   // USER HANDLING
@@ -31,6 +35,7 @@ const Login = ({ history }) => {
   }
 
   function handleSubmit(event) {
+    setLoading(true)
     event.preventDefault();
     const formData = new FormData();
 
@@ -56,8 +61,10 @@ const Login = ({ history }) => {
       const data = await res.json()
       login(data);
       console.log("Success")
+      setLoading(false)
     } else {
       const resText = await res.text()
+      setLoading(false)
       alert(resText)
       return;
     }
@@ -65,6 +72,9 @@ const Login = ({ history }) => {
 
     history.push("./");
   };
+
+  if(loading)
+    return <SpinnerDiv />
 
 
   return (
@@ -131,6 +141,7 @@ const Login = ({ history }) => {
           </Tab>
         </Tabs>
       </div>
+      <Footer />
     </div>
   )
 };
