@@ -233,6 +233,7 @@ const Thread = ({
                   <div className="postcontent">
                     {post.content}
                   </div>
+                  <br/>
 
                   <div className="attachment" style={{ color: "grey" }}>
                     {post.documentId ?
