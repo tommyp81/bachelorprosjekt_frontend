@@ -19,7 +19,6 @@ const UsernameDialog = () => {
   })
 
   const onSubmit = async data => {
-    console.log(data)
     const formData = new FormData()
     formData.append('id', user.id)
     formData.append('username', data.username)

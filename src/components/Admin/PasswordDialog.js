@@ -20,7 +20,6 @@ const PasswordDialog = ({ user }) => {
   })
 
   const onSubmit = async data => {
-    console.log(data)
 
     const res = await fetch(host + `users/${user.id}`, {
       method: "PUT",

@@ -60,7 +60,6 @@ const Login = ({ history }) => {
     if (res.ok) {
       const data = await res.json()
       login(data);
-      console.log("Success")
       setLoading(false)
     } else {
       const resText = await res.text()

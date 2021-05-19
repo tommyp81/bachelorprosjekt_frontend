@@ -48,7 +48,6 @@ const Register = ({ loginUser }) => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
     fetch(host + "users", {
       method: "POST",
       headers: {

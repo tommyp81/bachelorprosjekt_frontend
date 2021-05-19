@@ -31,7 +31,6 @@ const AddDocument = ({ infoTopics, setDocuments }) => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
     let formData = new FormData();
     formData.append("File", file);
     formData.append("userId", user.id);

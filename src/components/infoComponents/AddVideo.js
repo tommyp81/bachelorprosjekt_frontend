@@ -37,10 +37,8 @@ const AddVideo = ({ infoTopics, setVideos, addPost }) => {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
     const match = regExp.exec(data.youtubeId);
     const matchString = match[match.length - 1].toString();
-    console.log(matchString);
 
     const postData = {
       title: data.title,
@@ -50,7 +48,6 @@ const AddVideo = ({ infoTopics, setVideos, addPost }) => {
       topicId: 5,
     };
 
-    console.log(postData);
 
     const postId = await addPost(postData);
 
@@ -62,9 +59,6 @@ const AddVideo = ({ infoTopics, setVideos, addPost }) => {
       postId,
       infoTopicId: data.infoTopicId,
     };
-
-    console.log("Objektet:");
-    console.log(videoData);
 
     fetch(host + "Videos", {
       method: "POST",
@@ -78,7 +72,6 @@ const AddVideo = ({ infoTopics, setVideos, addPost }) => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         setVideos((current) => [...current, data]);
       })
       .catch((error) => console.log(error));

@@ -29,7 +29,6 @@ const AdminPasswordDialog = ({ selectedUser }) => {
     })
   
     const onSubmit = async data => {
-      console.log(data)
   
       const res = await fetch(host + `users/${selectedUser.id}`, {
         method: "PUT",

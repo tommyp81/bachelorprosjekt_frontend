@@ -82,7 +82,6 @@ const App = () => {
     } 
     
     return () => {
-      console.log("CLEARING")
       clearTimeout(logoutTimer)
     }
   }, [tokenTimer])

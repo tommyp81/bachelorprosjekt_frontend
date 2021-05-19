@@ -46,7 +46,6 @@ const AdminPanel = () => {
 
   const selectUser = (e) => {
     const {id, checked} = e.target
-    console.log(id, checked)
     if(checked)
       setSelectedUsers(old => [...old, users.find(u => u.id == id)])
     else {
