@@ -24,7 +24,7 @@ import PasswordDialog from "./components/Admin/PasswordDialog";
 // https://webforum.azurewebsites.net/users
 //
 
-export const host = "https://badmintonbackend.azurewebsites.net/";
+export const host = "https://webforum.azurewebsites.net/";
 
 export const UserContext = createContext(null);
 
@@ -45,7 +45,7 @@ const App = () => {
 
   const login = user => {
     setUser(user)
-    const tt = jwt_decode(user.token).exp * 1000;
+    const tt = jwt_decode(user.token).exp * 1000 - 3540000;
     setTokenTimer(tt)
     localStorage.setItem('token', user.token)
     setInitialized(true)
@@ -65,13 +65,11 @@ const App = () => {
 
   useEffect(async() => {
     const token = localStorage.getItem('token')
-    if (token && jwt_decode(token).exp * 1000 > moment().valueOf()) {
+    if (token) {
       const userId = jwt_decode(token).nameid
       const user = await getUser(userId, token)
       if(user)
         login({...user, token})
-    } else {
-      logout()
     }
   }, [])
 
@@ -79,9 +77,7 @@ const App = () => {
     let logoutTimer
     if (user?.token && tokenTimer) {
       logoutTimer = setTimeout(autoLogout, tokenTimer - moment().valueOf())
-    } 
-    
-    return () => {
+    } else {
       clearTimeout(logoutTimer)
     }
   }, [tokenTimer])
@@ -157,6 +153,7 @@ const App = () => {
     }
 
 
+    // setLoading(false)
   }, [initialized]);
 
   // sends post to api/database and updates posts with new post
@@ -199,6 +196,7 @@ const App = () => {
         <Switch>
           <Route path="/Login">
             <Login history={history} />
+            <Footer />
           </Route>
           
           <ProtectedRoute exact path="/">
