@@ -19,12 +19,9 @@ import AdminPanel from "./components/Admin/AdminPanel";
 import SpinnerDiv from "./components/forumComponents/SpinnerDiv";
 import UsernameDialog from "./components/Admin/UsernameDialog";
 import PasswordDialog from "./components/Admin/PasswordDialog";
-// https://webforum.azurewebsites.net/posts
-// https://webforum.azurewebsites.net/answers
-// https://webforum.azurewebsites.net/users
-//
 
-export const host = "https://webforum.azurewebsites.net/";
+// Her må linken til backend-systemet limes inn.
+export const host = "https://example.com/";
 
 export const UserContext = createContext(null);
 
